@@ -1,12 +1,17 @@
   /* ============================================
    ESTILOS DEL HEADER
    ============================================ */
-        header {
+#header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Importante: No le pongas overflow: hidden a este div */
+}   
+   header {
             background-color: #1a2a3a;
             color: #fff;
             padding: 15px 0;
-            position: sticky; /* Se mantiene en la parte superior al scrollear */
-            top: 0;
             z-index: 1000;
         }
         
