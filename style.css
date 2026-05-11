@@ -1,8 +1,8 @@
 /* =========================================
    ESTILOS GENERALES (Reset y tipografía)
    ========================================= */
-@import "header.css";
-@import "footer.css";
+@import "/header.css";
+@import "/footer.css";
 * {
     margin: 0;
     padding: 0;
