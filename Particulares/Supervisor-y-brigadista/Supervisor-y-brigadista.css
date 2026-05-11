@@ -5,10 +5,14 @@
             --border-color: #eee;
         }
 
-        .course-page { padding: 40px 0; background: #fff; }
+        .course-page { 
+            padding: 40px 20px;
+             background: #fff; 
+            }
         
         .hero-course { 
-            background: linear-gradient(rgba(26, 42, 58, 0.9), rgba(26, 42, 58, 0.9)), url('assets/curso-incendio.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/assets/brigadista-contra-incendios.jpg');
+
             background-size: cover; 
             background-position: center;
             color: white; 
