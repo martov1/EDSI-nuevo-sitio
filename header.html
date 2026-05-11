@@ -1,0 +1,52 @@
+<header>
+    <div class="container nav-container">
+        <!-- LOGO: Se muestra en desktop como "EDSI | Escuela de Seguridad Industrial" -->
+        <!-- En móvil solo aparece "EDSI" (desktop-logo se oculta) -->
+        <a href="/">
+            <div class="logo">EDSI <span class="desktop-logo"> <span style="color: #e74c3c;">|</span> Escuela de Seguridad Industrial</span></div>
+        </a>
+        
+        <nav>
+            <!-- HAMBURGER: Ícono de 3 líneas que abre el menú en móvil -->
+            <!-- onclick="toggleMenu()" alterna entre abrir/cerrar el menú -->
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <!-- MENÚ PRINCIPAL DE NAVEGACIÓN -->
+            <!-- Se desliza desde la derecha en móvil (cuando tiene clase 'active') -->
+            <ul id="nav-menu">
+                <!-- DROPDOWN: Capacitaciones -->
+                <!-- En desktop: se abre con hover usando CSS -->
+                <!-- En móvil: se abre con clic usando handleMobileClick() -->
+                <!-- id="dropdown-cap" permite controlarlo desde JS -->
+                <li class="dropdown" id="dropdown-cap">
+                    <!-- Link que abre/cierra el dropdown en móvil -->
+                    <!-- class="dropdown-toggle" lo identifica para no cerrar el menú al clickear -->
+                    <!-- onclick="handleMobileClick(event)" maneja el comportamiento en móvil -->
+                    <a href="javascript:void(0)" class="dropdown-toggle" onclick="handleMobileClick(event)">
+                        Capacitaciones <span class="arrow-down"></span>
+                    </a>
+                    <!-- Submenú: opciones de capacitaciones -->
+                    <!-- Se muestra/oculta según hover (desktop) o clase 'open' (móvil) -->
+                    <ul class="dropdown-menu">
+                        <li><a href="capacitacion-empresas.html">Para Empresas</a></li>
+                        <li><a href="capacitacion-particulares.html">Para Particulares</a></li>
+                    </ul>
+                </li>
+                
+                <!-- LINKS DIRECTOS DEL MENÚ -->
+                <!-- Tienen class="nav-link" para identificarlos en JS -->
+                <li><a href="#quienes-somos" class="nav-link">Nosotros</a></li>
+                <li><a href="#validar" class="nav-link">Validar Certificado</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- OVERLAY: Fondo oscuro que aparece detrás del menú en móvil -->
+    <!-- onclick="closeMenu()" permite cerrar el menú al clickear en el overlay -->
+    <div class="mobile-overlay" id="overlay" onclick="closeMenu()"></div>
+</header>
