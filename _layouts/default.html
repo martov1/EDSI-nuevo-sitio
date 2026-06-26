@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ site.baseurl }}/style.css">
+  {% if page.css %}
+  <link rel="stylesheet" href="{{ site.baseurl }}{{ page.css }}">
+  {% endif %}
+</head>
+<body>
+  {% include header.html %}
+  {{ content }}
+  {% include footer.html %}
+  <script src="{{ site.baseurl }}/script.js"></script>
+  {% if page.js %}
+  <script src="{{ site.baseurl }}{{ page.js }}"></script>
+  {% endif %}
+</body>
+</html>

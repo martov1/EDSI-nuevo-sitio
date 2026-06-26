@@ -1,0 +1,366 @@
+/* =========================================
+   ESTILOS GENERALES (Reset y tipografía)
+   ========================================= */
+@import "./header.css";
+@import "./footer.css";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   SECCIÓN HERO (Banner principal)
+   ========================================= */
+.hero {
+    background-image: url('assets/fondo-hero.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+.hero h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+.btn-primary {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 700;
+    display: inline-block;
+    transition: background 0.3s;
+}
+.btn-primary:hover {
+    background-color: #c0392b;
+}
+
+/* =========================================
+   SECCIÓN SERVICIOS (Categorías)
+   ========================================= */
+.servicios {
+    padding: 60px 0;
+    text-align: center;
+}
+.section-title {
+    font-size: 2rem;
+    color: #1a2a3a;
+    margin-bottom: 40px;
+    position: relative;
+}
+.section-title::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background-color: #e74c3c;
+    display: block;
+    margin: 10px auto 0;
+}
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+}
+.card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.card h3 {
+    color: #1a2a3a;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   SECCIÓN QUIÉNES SOMOS (Instructores)
+   ========================================= */
+.quienes-somos {
+    background-color: #fff;
+    padding: 60px 0;
+}
+
+/* 1. Añadimos Flexbox al contenedor */
+.instructor-card {
+    background: #f4f6f8;
+    padding: 25px;
+    border-radius: 8px;
+    text-align: left;
+    border-left: 4px solid #1a2a3a;
+    display: flex; /* Alineación horizontal */
+    gap: 25px;    /* Espacio entre imagen y texto */
+    align-items: flex-start;
+}
+
+/* 2. Quitamos estilos en línea y fijamos tamaño */
+.instructor-card img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+/* 3. Nuevo contenedor para el texto */
+.instructor-info {
+    flex: 1;
+}
+
+.instructor-card h4 {
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.instructor-card ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+/* 4. Comportamiento en móviles (mínimo necesario) */
+@media (max-width: 600px) {
+    .instructor-card {
+        flex-direction: column; /* Apilado vertical */
+        align-items: center;
+        text-align: left;
+    }
+}
+
+
+/* =========================================
+   SECCIÓN nuestros clientes
+   ========================================= */
+
+/* Estilo del contenedor principal */
+
+ 
+    .logos-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Centra los logos horizontalmente */
+        align-items: center;     /* Alinea los logos verticalmente por su centro */
+        gap: 30px 50px;          /* Espacio: 30px arriba/abajo, 50px a los lados */
+        max-width: 1200px;
+        margin: 40px auto;       /* Margen superior e inferior de 40px */
+        padding: 0 20px;
+    }
+
+    /* Estilo uniforme para todas las imágenes */
+    .logos-grid img {
+        width: 140px;            /* Ancho constante para uniformidad */
+                 /* Alto constante para crear la cuadrícula */
+        object-fit: contain;     /* Mantiene la proporción original sin deformar */
+        filter: grayscale(100%); /* Efecto profesional (escala de grises) */
+        opacity: 0.6;            /* Sutil transparencia */
+        transition: all 0.3s ease;
+    }
+
+    /* Efecto al pasar el mouse */
+    .logos-grid img:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.1);   /* Ligero zoom */
+    }
+
+    /* Ajuste para celulares */
+    @media (max-width: 600px) {
+        .logos-grid {
+            gap: 20px 30px;
+        }
+        .logos-grid img {
+            width: 100px;
+            height: 50px;
+        }
+    }
+
+
+/* =========================================
+   FOOTER Y CONTACTO
+   ========================================= */
+
+    /* Estilos específicos para la página de empresas */
+        .hero-empresas {
+            background: linear-gradient(rgba(26, 42, 58, 0.8), rgba(26, 42, 58, 0.8)), url('/assets/cursos-para-empresas.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+         .hero-particulares {
+            background: linear-gradient(rgba(26, 42, 58, 0.8), rgba(26, 42, 58, 0.8)), 
+                        url('./assets/cursos-para-particulares.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+            /* Example: If the person's face is in the top right area */
+            background-position: 50% 10%;            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        .category-title {
+            border-bottom: 3px solid #e74c3c;
+            display: inline-block;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            color: #1a2a3a;
+        }
+        .curso-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .curso-card {
+            background: #fff;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid #1a2a3a;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        .curso-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .curso-card > div {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .curso-card h3 {
+            color: #e74c3c;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .curso-card p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+        .curso-card .btn-primary {
+            margin: 0 25px 25px 25px;
+            width: calc(100% - 50px);
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .badge-teorico { background: #e3f2fd; color: #1976d2; }
+        .badge-practico { background: #fff3e0; color: #f57c00; }
+        
+        .cta-box {
+            background: #f4f6f8;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* =========================================
+   ESTILOS DE CHIPS (Navegación Rápida)
+   ========================================= */
+.quick-nav {
+    padding: 30px 0 10px;
+    background-color: #f9f9f9;
+}
+
+.chips-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.chip {
+    background-color: #fff;
+    color: #1a2a3a;
+    padding: 10px 20px;
+    border-radius: 50px; /* Forma de píldora */
+    border: 2px solid #e0e0e0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.chip-icon {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.chip:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
+}
+
+/* Ajuste para móviles */
+@media (max-width: 600px) {
+    .chips-container {
+        gap: 10px;
+    }
+    .chip {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        width: 100%; /* En móviles pequeños se apilan */
+        justify-content: center;
+    }
+}

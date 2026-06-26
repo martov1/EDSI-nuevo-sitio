@@ -1,0 +1,29 @@
+<header>
+    <div class="container nav-container">
+        <a href="{{ site.baseurl }}/index.html">
+            <div class="logo">EDSI <span class="desktop-logo"> <span style="color: #e74c3c;">|</span> Escuela de Seguridad Industrial</span></div>
+        </a>
+        <nav>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li class="dropdown" id="dropdown-cap">
+                    <a href="javascript:void(0)" class="dropdown-toggle" onclick="handleMobileClick(event)">
+                        Capacitaciones <span class="arrow-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ site.baseurl }}/capacitacion-empresas.html">Para Empresas</a></li>
+                        <li><a href="{{ site.baseurl }}/capacitacion-particulares.html">Para Particulares</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ site.baseurl }}/index.html#quienes-somos" class="nav-link">Nosotros</a></li>
+                <li><a href="{{ site.baseurl }}/validar-certificado.html" class="nav-link">Validar Certificado</a></li>
+                <li><a href="{{ site.baseurl }}/index.html#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="mobile-overlay" id="overlay" onclick="closeMenu()"></div>
+</header>

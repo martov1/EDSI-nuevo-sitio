@@ -1,0 +1,34 @@
+:root {
+    --primary-dark: #1a2a3a;
+    --accent-red: #e74c3c;
+    --bg-light: #f4f6f8;
+    --border-color: #eee;
+}
+
+.course-page { padding: 40px 20px; background: #fff; }
+.hero-course { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)); background-size: cover; background-position: center; color: white; padding: 60px 20px; border-radius: 8px; margin-bottom: 40px; border-left: 10px solid var(--accent-red); }
+.hero-course-lineas { background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('/assets/uso-de-lineas-de-ataque.png'); }
+.hero-course h1 { font-size: 2.5rem; margin-bottom: 15px; line-height: 1.2; }
+.tag-corporativo { background: var(--accent-red); color: #fff; padding: 6px 16px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; display: inline-block; margin-bottom: 20px; }
+
+.grid-container { display: grid; grid-template-columns: 1fr 350px; gap: 40px; }
+.section-card { margin-bottom: 24px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.03); }
+.section-card h2 { color: var(--primary-dark); margin-bottom: 20px; font-size: 1.6rem; display:flex; align-items:center; gap:10px; border-bottom:2px solid var(--accent-red); padding-bottom:5px; width:fit-content; }
+.description-box { line-height:1.7; color:#444; margin-bottom:30px; }
+.description-box p { margin-bottom:15px }
+.temario-clase { background:#f9f9f9; padding:20px; border-radius:8px; margin-bottom:20px; border:1px solid var(--border-color); }
+.temario-clase ol { padding-left:20px }
+.temario-clase ol li { margin-bottom:10px; line-height:1.6 }
+.temario-clase ol li ol { list-style-type: lower-alpha; padding-left:18px; margin-top:8px }
+.temario-clase ol li::marker { color: var(--accent-red); font-weight:700 }
+.description-box ul { list-style: disc; margin-left:1.1rem; padding-left:1.1rem }
+.description-box ul li { margin-bottom:8px; padding-right:14px }
+.description-box ul li::marker { color: var(--accent-red) }
+.sidebar-info { background: var(--bg-light); padding:25px; border-radius:8px; position:sticky; top:100px; border:1px solid #e0e0e0 }
+.info-row { display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #ddd }
+.inscription-box { margin-top:25px; text-align:center }
+.btn-payment { background:#009ee3; color:white; padding:12px; border-radius:5px; display:block; margin-top:10px; font-weight:bold; text-decoration:none }
+.btn-whatsapp { background:#25d366; color:white; padding:12px; border-radius:5px; display:block; font-weight:bold; text-decoration:none }
+.eval-box { background:#e3f2fd; padding:25px; border-radius:8px; border-left:6px solid #1976d2 }
+
+@media (max-width: 992px) { .grid-container { grid-template-columns: 1fr } .sidebar-info { position: static } .main-content { order:2 } .sidebar { order:1 } }

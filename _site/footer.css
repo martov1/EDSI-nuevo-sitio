@@ -1,0 +1,30 @@
+/* =========================================
+   FOOTER Y CONTACTO
+   ========================================= */
+footer {
+    background-color: #1a2a3a;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+.footer-info {
+    margin-bottom: 20px;
+}
+.footer-info p {
+    margin: 5px 0;
+}
+.whatsapp-btn {
+    background-color: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    transition: opacity 0.3s;
+}
+.whatsapp-btn:hover {
+    opacity: 0.9;
+}
