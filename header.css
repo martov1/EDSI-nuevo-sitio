@@ -207,7 +207,7 @@
                 position: static;     /* No usa position absolute como en desktop */
                 visibility: hidden;
                 opacity: 0;
-                max-height: 0;        /* Altura colapsada */
+                height: 0;            /* Altura colapsada */
                 overflow: hidden;
                 background-color: rgba(255,255,255,0.05);
                 box-shadow: none;
@@ -215,7 +215,7 @@
                 border: none;
                 padding: 0;
                 width: 100%;
-                transition: all 0.3s ease;
+                transition: height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
                 pointer-events: auto;
             }
 
@@ -223,7 +223,6 @@
             .dropdown.open .dropdown-menu {
                 visibility: visible;
                 opacity: 1;
-                max-height: 300px;    /* Se expande al abrir */
                 margin-top: 10px;
                 padding: 5px 0;
             }
