@@ -9,16 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ============================================
    FUNCIONES HELPER - Acceso rápido a elementos
    ============================================ */
-// Retorna el elemento del menú principal (lista de navegación)
+// Devuelve el elemento del menú principal (lista de navegación)
 const navMenu = () => document.getElementById('nav-menu');
 
-// Retorna el ícono del hamburger (menú móvil)
+// Devuelve el ícono del hamburger (menú móvil)
 const hamburger = () => document.querySelector('.hamburger');
 
-// Retorna el overlay oscuro que aparece detrás del menú en móvil
+// Devuelve el overlay oscuro que aparece detrás del menú en móvil
 const overlay = () => document.querySelector('.mobile-overlay');
 
-// Retorna el contenedor del dropdown de "Capacitaciones"
+// Devuelve el contenedor del dropdown de "Capacitaciones"
 const dropdownCap = () => document.getElementById('dropdown-cap');
 const dropdownMenu = () => dropdownCap()?.querySelector('.dropdown-menu');
 
