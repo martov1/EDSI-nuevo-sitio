@@ -22,7 +22,7 @@
 }
 
 .hero-course-agentes {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/assets/uso-de-agentes-extintores.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('../assets/uso-de-agentes-extintores.png');
 }
 
 .hero-course h1 {

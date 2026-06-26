@@ -224,7 +224,7 @@ a {
 
     /* Estilos específicos para la página de empresas */
         .hero-empresas {
-            background: linear-gradient(rgba(26, 42, 58, 0.8), rgba(26, 42, 58, 0.8)), url('/assets/cursos-para-empresas.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(26, 42, 58, 0.8), rgba(26, 42, 58, 0.8)), url('assets/cursos-para-empresas.jpg') no-repeat center center/cover;
             color: white;
             padding: 100px 0 60px;
             text-align: center;

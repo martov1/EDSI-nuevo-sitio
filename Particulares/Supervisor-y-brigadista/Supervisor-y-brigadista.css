@@ -11,7 +11,7 @@
             }
         
         .hero-course { 
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/assets/brigadista-contra-incendios.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('../../assets/brigadista-contra-incendios.jpg');
 
             background-size: cover; 
             background-position: center;
