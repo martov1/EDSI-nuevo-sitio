@@ -32,6 +32,10 @@
         .description-box { line-height: 1.6; color: #444; margin-bottom: 30px; }
         .description-box p { margin-bottom: 15px; }
 
+        .cronograma-section { margin-bottom: 20px; }
+        .cronograma-list { list-style: disc; list-style-position: inside; padding: 0; margin: 0; display: grid; gap: 6px; }
+        .cronograma-list li { padding: 4px 0 4px 18px; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.5; }
+
         .highlights-list { background: #fff8f7; border: 1px solid #ffe4e1; padding: 20px; border-radius: 8px; margin: 20px 0; }
         .highlights-list ul { list-style: none; padding: 0; }
         .highlights-list li { margin-bottom: 10px; position: relative; padding-left: 25px; }
@@ -59,6 +63,21 @@
         .qr-mock { width: 80px; height: 80px; background: #eee; position: absolute; bottom: 20px; right: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; border: 1px solid #ccc; }
 
         @media (max-width: 992px) { 
-            .grid-container { grid-template-columns: 1fr; } 
-            .sidebar-info { position: static; } 
+        .grid-container { 
+            display: grid; /* Asegura que mantenga el comportamiento de grid */
+            grid-template-columns: 1fr; 
+        } 
+        
+        .sidebar-info { 
+            position: static; 
+        } 
+
+        /* Nuevas reglas para invertir el orden en mobile */
+        .main-content {
+            order: 2; /* Pasa a estar en segundo lugar */
         }
+
+        .sidebar {
+            order: 1; /* Sube al primer lugar */
+        }
+}
