@@ -1,5 +1,5 @@
 title: EDSI - Escuela de Seguridad Industrial
-description: Capacitación en seguridad e higiene, lucha contra incendios, primeros auxilios para empresas y particulares.
+description: Capacitación en seguridad e higiene, lucha contra incendios y primeros auxilios para empresas y particulares.
 
 url: "https://www.edsi.com.ar"
 baseurl: ""
@@ -25,8 +25,7 @@ social:
     - https://www.instagram.com/edsi.ar/
     - https://www.linkedin.com/company/escuela-de-seguridad-industrial/?viewAsMember=true
 
-# Si usás Google Search Console
-# google_site_verification: "TU_CODIGO"
+
 
 # Excluir cosas del build
 exclude:
