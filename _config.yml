@@ -34,3 +34,8 @@ exclude:
   - node_modules
   - vendor
   - README.md
+
+whatsapp_phone: "5491170616594"
+whatsapp_message: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios."
+email: "info@edsi.com.ar"
+email_subject: "WEB - Consulta sobre servicios de capacitación"

@@ -28,9 +28,13 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDD268SJ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
   {% include header.html %}
   {{ content }}
+
   {% include footer.html %}
+  {% include email-flotante.html %}
+  {% include whatsapp-flotante.html %}
   <script src="{{ site.baseurl }}/script.js"></script>
   {% if page.js %}
   <script src="{{ site.baseurl }}{{ page.js }}"></script>
