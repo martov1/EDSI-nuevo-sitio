@@ -22,7 +22,7 @@
 }
 
 .hero-course-intro {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('../assets/introduccion-a-la-lucha-contra-incendios.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('..//assets/introduccion-a-la-lucha-contra-incendios.png');
 }
 
 .hero-course h1 {

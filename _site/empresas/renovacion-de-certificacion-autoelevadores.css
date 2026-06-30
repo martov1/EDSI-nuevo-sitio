@@ -7,7 +7,7 @@
 
 .course-page { padding: 40px 20px; background: #fff; }
 .hero-course { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)); background-size: cover; background-position: center 35%; color: white; padding: 60px 20px; border-radius: 8px; margin-bottom: 40px; border-left: 10px solid var(--accent-red); }
-.hero-course-renovacion { background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('../assets/placeholder-autoelevadores.png'); }
+.hero-course-renovacion { background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('..//assets/placeholder-autoelevadores.png'); }
 .hero-course h1 { font-size: 2.5rem; margin-bottom: 15px; line-height: 1.2; }
 .tag-corporativo { background: var(--accent-red); color: #fff; padding: 6px 16px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; display: inline-block; margin-bottom: 20px; }
 

@@ -6,6 +6,7 @@ baseurl: ""
 
 lang: es_AR
 locale: es_AR
+permalink: pretty
 
 # Build settings
 markdown: kramdown
@@ -14,6 +15,7 @@ highlighter: rouge
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
 # SEO plugin settings (opcional pero útil)
 author: EDSI

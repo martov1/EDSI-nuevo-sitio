@@ -22,7 +22,7 @@
 }
 
 .hero-course-combate {
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('../assets/combate-tactico-de-incendios.png');
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('..//assets/combate-tactico-de-incendios.png');
 }
 
 .hero-course h1 {
