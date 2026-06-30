@@ -1,0 +1,31 @@
+---
+permalink: /404.html
+layout: default
+title: Error 404
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página no encontrada</title>
+
+    </head>
+<body>
+    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+        <h2>Lo sentimos, la página que buscas no existe.</h2>
+        <p>Redirigiéndote a la página de inicio en unos segundos...</p>
+    </div>
+
+    <script type="text/javascript">
+        // El evento 'load' asegura que TODA la página (incluido GTM) se haya cargado
+        window.addEventListener('load', function() {
+            
+            // Esperamos 2 segundos para dar tiempo a que GTM registre la visita
+            setTimeout(function() {
+                window.location.href = "{{ '/' | relative_url }}";
+            }, 2000); 
+            
+        });
+    </script>
+</body>
+</html>
