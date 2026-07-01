@@ -40,4 +40,12 @@ exclude:
 whatsapp_phone: "5491170616594"
 whatsapp_message: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios."
 email: "info@edsi.com.ar"
-email_subject: "WEB - Consulta sobre servicios de capacitación"
+email_subject: "Consulta sobre servicios de capacitación - WEB"
+email_subject_particular: "Consulta sobre servicios de capacitación - WEB - Particular"
+email_subject_empresa: "Consulta sobre servicios de capacitación - WEB - Empresa"
+
+whatsapp_message_particular: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios, Soy un particular."
+whatsapp_message_empresa: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios. Soy una empresa."
+whatsapp_message_empresa_incendio: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de capacitación contra incendios. Soy una empresa."
+whatsapp_message_empresa_autoelevadores: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de capacitación para autoelevadores. Soy una empresa."
+

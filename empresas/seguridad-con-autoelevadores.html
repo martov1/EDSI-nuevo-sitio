@@ -143,8 +143,8 @@ css: /empresas/seguridad-con-autoelevadores.css
                     <div class="info-row"><strong>Capacidad máxima:</strong> <span>15 participantes</span></div>
 
                     <div class="inscription-box">
-                        <a href="https://wa.me/{{ site.whatsapp_phone }}?text={{ site.whatsapp_message | url_encode }}" target="_blank" class="btn-whatsapp">Consultar por WhatsApp</a>
-                        <a href="mailto:info@edsi.com.ar" class="btn-payment">Enviar consulta por email</a>
+                        <a href="https://wa.me/{{ site.whatsapp_phone }}?text={{ site.whatsapp_message_empresa_autoelevadores | uri_encode }}" target="_blank" class="btn-whatsapp">Consultar por WhatsApp</a>
+                        <a href="mailto:{{ site.email }}?subject={{ site.email_subject_empresa | uri_escape }}" class="btn-payment">Enviar consulta por email</a>
                     </div>
 
                     <p style="font-size:0.85rem; color:#666; margin-top:15px;">* Podemos adaptar el contenido al riesgo específico de su actividad y al tamaño de su equipo.</p>
