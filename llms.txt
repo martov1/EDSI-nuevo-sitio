@@ -1,0 +1,56 @@
+---
+layout: null
+permalink: /llms.txt
+---
+# EDSI - Escuela de Seguridad Industrial
+
+## Resumen del sitio
+EDSI es una escuela de capacitación en seguridad industrial, higiene, prevención y combate de incendios, y primeros auxilios. El sitio está orientado a empresas y personas particulares en Buenos Aires, Argentina, con enfoque en formación práctica, presencial e in-company en el caso de empresas, y formacion virtual sincronica en caso de particulares.
+
+## Propósito del sitio
+El sitio tiene tres funciones principales:
+- Presentar la propuesta de valor de EDSI y sus capacitaciones.
+- Mostrar cursos y fichas técnicas para empresas y particulares.
+- Permitir la validación de certificados emitidos mediante un buscador por DNI.
+
+## Público objetivo
+- Empresas que necesitan capacitación corporativa y formación específica para su personal.
+- Personas particulares que requieren formación en seguridad, brigadismo y uso de extintores.
+
+## Temas y servicios principales
+- Capacitación contra incendios.
+- Brigadas de incendio y respuesta ante emergencias.
+- Uso de extintores.
+- Uso de líneas de ataque.
+- Seguridad con autoelevadores.
+- Renovación de certificación para autoelevadores.
+- Formación a medida según el riesgo y la actividad de cada organización.
+
+## Páginas principales
+- Inicio: /
+- Capacitación para empresas: /capacitacion-empresas
+- Capacitación para particulares: /capacitacion-particulares
+- Validación de certificados: /validar-certificado
+- Sitemap: /sitemap.xml
+
+## Cursos destacados
+- /empresas/introduccion-al-combate-y-prevencion-de-incendios
+- /empresas/uso-de-agentes-extintores
+- /empresas/combate-de-incendios
+- /empresas/uso-de-lineas-de-ataque
+- /empresas/seguridad-con-autoelevadores
+- /empresas/renovacion-de-certificacion-autoelevadores
+- /Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista
+- /Particulares/Uso-de-extintores-basico/Uso-de-extintores-con-certificado-para-habilitaciones
+
+## Información útil para asistentes o agentes
+- Marca: EDSI - Escuela de Seguridad Industrial.
+- Contacto: info@edsi.com.ar
+- WhatsApp: +54 9 11 7061-6594
+- El sitio incluye un validador de certificados que consulta un Google Sheet por DNI y permite descargar diplomas.
+- El contenido presenta a los instructores como profesionales con experiencia técnica y operativa en seguridad e incendios.
+
+## Notas de contenido
+- El tono del sitio es institucional, profesional y formativo.
+- Se priorizan contenidos prácticos, presenciales y orientados a la prevención de riesgos.
+- El sitio está bien estructurado para captar interesados en capacitación y para respaldar la validación de certificaciones.
