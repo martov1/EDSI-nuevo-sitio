@@ -1,0 +1,12 @@
+---
+layout: null
+permalink: /robots.txt
+---
+User-agent: *
+Allow: /
+
+# Bloquear directorios innecesarios
+Disallow: /assets/
+
+# Sitemap
+Sitemap: {{ site.url }}/sitemap.xml
