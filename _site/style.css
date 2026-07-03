@@ -76,6 +76,18 @@ a {
     background-color: #c0392b;
 }
 
+/* WhatsApp / button icon sizing */
+.btn-whatsapp img,
+.btn-primary img,
+.btn-whatsapp svg,
+.btn-primary svg {
+    width: 30px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 8px;
+    display: inline-block;
+}
+
 /* =========================================
    SECCIÓN SERVICIOS (Categorías)
    ========================================= */
