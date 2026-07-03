@@ -45,7 +45,9 @@ email_subject_particular: "Consulta sobre servicios de capacitación - WEB - Par
 email_subject_empresa: "Consulta sobre servicios de capacitación - WEB - Empresa"
 
 whatsapp_message_particular: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios, Soy un particular."
+whatsapp_message_particular_brigadista: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información sobre el *curso de Supervisor y Brigadista contra incendios para particulares*"
+
 whatsapp_message_empresa: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios. Soy una empresa."
-whatsapp_message_empresa_incendio: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de capacitación contra incendios. Soy una empresa."
-whatsapp_message_empresa_autoelevadores: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de capacitación para autoelevadores. Soy una empresa."
+whatsapp_message_empresa_incendio: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación contra incendios*. Soy una empresa."
+whatsapp_message_empresa_autoelevadores: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación para autoelevadores*. Soy una empresa."
 
