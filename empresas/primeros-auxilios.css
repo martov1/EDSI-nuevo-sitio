@@ -19,10 +19,10 @@
   margin-bottom: 40px;
   border-left: 10px solid var(--accent-red);
 }
-.hero-course-lineas {
+.hero-course-focus {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
-    url("..//assets/uso-de-lineas-de-ataque.png");
+    url("..//assets/primeros-auxilios.png");
 }
 .hero-course h1 {
   font-size: 2.5rem;
