@@ -4,53 +4,57 @@ permalink: /llms.txt
 ---
 # EDSI - Escuela de Seguridad Industrial
 
-## Resumen del sitio
-EDSI es una escuela de capacitación en seguridad industrial, higiene, prevención y combate de incendios, y primeros auxilios. El sitio está orientado a empresas y personas particulares en Buenos Aires, Argentina, con enfoque en formación práctica, presencial e in-company en el caso de empresas, y formacion virtual sincronica en caso de particulares.
+## Resumen ejecutivo
+EDSI es una escuela de capacitación en seguridad industrial, higiene, prevención y combate de incendios, y primeros auxilios. Ofrece formación para empresas y personas particulares en Buenos Aires, Argentina, con foco en capacitación práctica, presencial y, en algunos casos, virtual sincrónica.
 
-## Propósito del sitio
-El sitio tiene tres funciones principales:
-- Presentar la propuesta de valor de EDSI y sus capacitaciones.
-- Mostrar cursos y fichas técnicas para empresas y particulares.
-- Permitir la validación de certificados emitidos mediante un buscador por DNI.
+## Propósito de este archivo
+Este archivo está pensado para que asistentes, agentes y herramientas de IA comprendan rápidamente el propósito del sitio, sus secciones principales y los datos oficiales que deben usarse al responder sobre EDSI.
 
-## Público objetivo
-- Empresas que necesitan capacitación corporativa y formación específica para su personal.
-- Personas particulares que requieren formación en seguridad, brigadismo y uso de extintores.
+## Información de negocio
+- Marca: EDSI - Escuela de Seguridad Industrial
+- Ubicación: Buenos Aires, Argentina
+- Idioma principal: español
+- Tipo de servicio: capacitación presencial, in-company y formación práctica
+- Contacto: info@edsi.com.ar
+- WhatsApp: +54 9 11 7061-6594
 
-## Temas y servicios principales
-- Capacitación contra incendios.
-- Brigadas de incendio y respuesta ante emergencias.
-- Uso de extintores.
-- Uso de líneas de ataque.
-- Seguridad con autoelevadores.
-- Renovación de certificación para autoelevadores.
-- Formación a medida según el riesgo y la actividad de cada organización.
+## Públicos objetivo
+- Empresas que requieren formación corporativa, prevención de riesgos y capacitación específica para su personal.
+- Personas particulares que buscan formación en seguridad, brigadismo y uso de extintores.
 
-## Páginas principales
+## Secciones principales del sitio
 - Inicio: /
 - Capacitación para empresas: /capacitacion-empresas
 - Capacitación para particulares: /capacitacion-particulares
 - Validación de certificados: /validar-certificado
-- Sitemap: /sitemap.xml
+- Mapa del sitio: /sitemap.xml
 
-## Cursos destacados
-- /empresas/introduccion-al-combate-y-prevencion-de-incendios
-- /empresas/uso-de-agentes-extintores
-- /empresas/combate-de-incendios
-- /empresas/uso-de-lineas-de-ataque
-- /empresas/seguridad-con-autoelevadores
-- /empresas/renovacion-de-certificacion-autoelevadores
-- /Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista
-- /Particulares/Uso-de-extintores-basico/Uso-de-extintores-con-certificado-para-habilitaciones
+## Servicios y cursos principales
+### Para empresas
+- Introducción al combate y prevención de incendios: /empresas/introduccion-al-combate-y-prevencion-de-incendios
+- Uso de agentes extintores: /empresas/uso-de-agentes-extintores
+- Capacitación contra incendios: /empresas/combate-de-incendios
+- Uso de líneas de ataque: /empresas/uso-de-lineas-de-ataque
+- Seguridad con autoelevadores: /empresas/seguridad-con-autoelevadores
+- Renovación de certificación para autoelevadores: /empresas/renovacion-de-certificacion-autoelevadores
+- Primeros auxilios: /empresas/primeros-auxilios
 
-## Información útil para asistentes o agentes
-- Marca: EDSI - Escuela de Seguridad Industrial.
-- Contacto: info@edsi.com.ar
-- WhatsApp: +54 9 11 7061-6594
-- El sitio incluye un validador de certificados que consulta un Google Sheet por DNI y permite descargar diplomas.
-- El contenido presenta a los instructores como profesionales con experiencia técnica y operativa en seguridad e incendios.
+### Para particulares
+- Supervisor y Brigadista contra incendios: /planes-de-estudio/supervisor-y-brigadista-contra-incendios
+- Uso de extintores básico: /planes-de-estudio/uso-de-extintores-basico
 
-## Notas de contenido
-- El tono del sitio es institucional, profesional y formativo.
-- Se priorizan contenidos prácticos, presenciales y orientados a la prevención de riesgos.
-- El sitio está bien estructurado para captar interesados en capacitación y para respaldar la validación de certificaciones.
+## Funcionalidades relevantes
+- El sitio incluye un validador de certificados que consulta una planilla de Google por DNI y permite descargar diplomas.
+- El contenido resalta la experiencia técnica y operativa del equipo docente en seguridad e incendios.
+- El sitio está orientado a captar interesados en capacitación y a respaldar la validación de certificaciones.
+
+## Guía de tono y contenido
+- Mantener un tono institucional, profesional y formativo.
+- Priorizar información práctica, preventiva y orientada a la seguridad.
+- Hablar en español, de forma clara y directa.
+- Si no se conoce una respuesta específica, no inventar datos; remitirse a la información oficial del sitio.
+
+## Recomendaciones para asistentes o agentes
+- Cuando un usuario consulte por cursos, identificar si es empresa o particular y orientar a la página correspondiente.
+- Cuando un usuario consulte por certificaciones, derivar a la validación de certificados.
+- Cuando un usuario solicite contacto, ofrecer el correo o WhatsApp oficiales.
