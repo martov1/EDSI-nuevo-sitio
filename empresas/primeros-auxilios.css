@@ -79,6 +79,20 @@
   margin-bottom: 20px;
   border: 1px solid var(--border-color);
 }
+.temario-clase h3 {
+  color: var(--accent-red);
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+.temario-clase ul {
+  margin: 0;
+  padding-left: 1.4rem;
+  list-style-position: outside;
+}
+.temario-clase ul li {
+  line-height: 1.6;
+}
 .temario-clase ol {
   padding-left: 20px;
 }
