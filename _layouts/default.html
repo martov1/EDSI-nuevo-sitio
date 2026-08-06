@@ -1,43 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es-AR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
-  <title>{{ page.title | default: site.title }}</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ site.baseurl }}/style.css">
-  {% if page.css %}
-  <link rel="stylesheet" href="{{ site.baseurl }}{{ page.css }}">
-  {% endif %}
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KDD268SJ');</script>
-  <!-- End Google Tag Manager -->
-  
-{% seo %}
-</head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDD268SJ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16.png"
+    />
+    <title>{{ page.title | default: site.title }}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ site.baseurl }}/style.css" />
+    {% if page.css %}
+    <link rel="stylesheet" href="{{ site.baseurl }}{{ page.css }}" />
+    {% endif %}
+    <link
+      rel="alternate"
+      hreflang="es-AR"
+      href="{{ page.url | absolute_url }}"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="{{ page.url | absolute_url }}"
+    />
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KDD268SJ");
+    </script>
+    <!-- End Google Tag Manager -->
 
-  {% include header.html %}
-  {{ content }}
+    {% seo %}
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KDD268SJ"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-  {% include footer.html %}
-  {% include email-flotante.html %}
-  {% include whatsapp-flotante.html %}
-  <script src="{{ site.baseurl }}/script.js"></script>
-  {% if page.js %}
-  <script src="{{ site.baseurl }}{{ page.js }}"></script>
-  {% endif %}
-</body>
+    {% include header.html %} {{ content }} {% include footer.html %} {% include
+    email-flotante.html %} {% include whatsapp-flotante.html %}
+    <script src="{{ site.baseurl }}/script.js"></script>
+    {% if page.js %}
+    <script src="{{ site.baseurl }}{{ page.js }}"></script>
+    {% endif %}
+  </body>
 </html>
