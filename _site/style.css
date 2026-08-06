@@ -371,6 +371,13 @@ a {
   font-size: 1.1rem;
 }
 
+.chip-icon img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin: auto;
+}
+
 .chip:hover {
   border-color: #e74c3c;
   color: #e74c3c;
