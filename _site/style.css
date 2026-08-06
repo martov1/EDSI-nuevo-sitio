@@ -387,7 +387,8 @@ a {
 
 /* Ajuste para móviles */
 @media (max-width: 768px) {
-  .curso-grid {
+  .curso-grid,
+  .curso-grid.single-card {
     grid-template-columns: 1fr;
   }
 }
