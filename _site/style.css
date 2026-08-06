@@ -31,13 +31,23 @@ a {
    SECCIÓN HERO (Banner principal)
    ========================================= */
 .hero {
-  background-image: url("/assets/fondo-hero.png");
-  background-size: cover;
-  background-position: center;
   color: #fff;
   text-align: center;
   padding: 100px 20px;
   position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 .hero::before {
   content: "";
@@ -52,6 +62,7 @@ a {
 .hero .container {
   position: relative;
   z-index: 2;
+  width: 100%;
 }
 .hero h1 {
   font-size: 2.8rem;
@@ -234,7 +245,7 @@ a {
 /* Estilos específicos para la página de empresas */
 .hero-empresas {
   background:
-    linear-gradient(rgba(26, 42, 58, 0.8), rgba(26, 42, 58, 0.8)),
+    linear-gradient(rgba(26, 42, 58, 0.9), rgba(26, 42, 58, 0.9)),
     url("/assets/cursos-para-empresas.jpg") no-repeat center center/cover;
   color: white;
   padding: 100px 0 60px;
