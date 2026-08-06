@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Manija del botiquín -->
+  <path d="M38 25 A 1 1 0 0 1 62 25" stroke="#E53E3E" stroke-width="6" fill="none" stroke-linecap="round" />
+  <!-- Cuerpo del botiquín -->
+  <rect x="10" y="25" width="80" height="60" rx="10" fill="#E53E3E" />
+  <!-- Cruz blanca central -->
+  <path d="M43 40 h14 v11 h11 v14 h-11 v11 h-14 v-11 h-11 v-14 h11 z" fill="#FFFFFF" />
+</svg>
