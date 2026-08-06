@@ -27,8 +27,6 @@ social:
     - https://www.instagram.com/edsi.ar/
     - https://www.linkedin.com/company/escuela-de-seguridad-industrial/?viewAsMember=true
 
-
-
 # Excluir cosas del build
 exclude:
   - Gemfile
@@ -50,4 +48,4 @@ whatsapp_message_particular_brigadista: "¡Hola!, Vi su *sitio web* y me gustar�
 whatsapp_message_empresa: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios. Soy una empresa."
 whatsapp_message_empresa_incendio: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación contra incendios*. Soy una empresa."
 whatsapp_message_empresa_autoelevadores: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación para autoelevadores*. Soy una empresa."
-
+whatsapp_message_empresa_primeros_auxilios: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación en primeros auxilios*. Soy una empresa."
