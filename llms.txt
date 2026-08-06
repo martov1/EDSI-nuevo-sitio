@@ -4,56 +4,60 @@ permalink: /llms.txt
 ---
 # EDSI - Escuela de Seguridad Industrial
 
-> EDSI es una escuela de capacitación en seguridad industrial, prevención y combate de incendios, uso de extintores, brigadas, autoelevadores y primeros auxilios, orientada a empresas y particulares en Buenos Aires, Argentina.
-
-EDSI ofrece formación práctica y teórica con instructores expertos. Para empresas: capacitaciones presenciales e in-company. Para particulares: cursos virtuales sincrónicos con certificado.
+> EDSI es una escuela argentina de capacitación práctica en seguridad industrial, prevención y combate de incendios, brigadas, uso de extintores, autoelevadores (Resolución 960/2015) y primeros auxilios adaptados a riesgos reales de planta. Opera en Buenos Aires con formación presencial/in-company para empresas y virtual sincrónica para particulares.
 
 ## Propósito del sitio
 - Presentar la propuesta de valor y el equipo de instructores.
-- Mostrar catálogo de cursos con fichas técnicas detalladas.
-- Permitir la validación de certificados emitidos (búsqueda por DNI).
+- Exhibir catálogo completo de cursos con fichas técnicas detalladas (cronograma, temario, requisitos materiales y consideraciones de seguridad).
+- Permitir la validación pública de certificados emitidos mediante búsqueda por DNI (sin puntos ni espacios) y descarga de diplomas con QR.
 
 ## Público objetivo
-- Empresas que requieren capacitación corporativa, brigadas de incendio y cumplimiento normativo (Resolución 960/2015, etc.).
-- Personas particulares que buscan certificaciones para habilitaciones municipales, aseguradoras o desarrollo profesional.
+- Empresas e industrias que necesitan capacitación corporativa, formación de brigadas, cumplimiento de Resolución 960/2015 y respuesta ante emergencias personalizada según riesgos de planta.
+- Particulares, supervisores, encargados de comercios, profesionales de seguridad e higiene y emprendedores que requieren certificaciones para habilitaciones municipales, aseguradoras o desarrollo profesional.
 
 ## Instructores
-- Lic. José Luis Bandin: Licenciado en Tecnología Industrial de los Alimentos, Técnico Superior en Seguridad, Higiene y Control Ambiental Industrial (Mat. THS-007008 PBA), docente universitario, experiencia en R&D y procesos químicos.
-- Prof. Joaquín Brandan: Profesor y Técnico Superior en Sistemas e Instalaciones Electromecánicas, TEM-B/EMT-B, bombero voluntario con 10 años de experiencia, docente técnico-profesional.
+- **Lic. José Luis Bandin**: Licenciado en Tecnología Industrial de los Alimentos. Técnico Superior en Seguridad, Higiene y Control Ambiental Industrial (Matrícula THS-007008 PBA). Docente universitario. Amplia experiencia industrial en R&D y procesos químicos.
+- **Prof. Joaquín Brandan**: Profesor y Técnico Superior en Sistemas e Instalaciones Electromecánicas. TEM-B / EMT-B. Bombero voluntario con 10 años de experiencia. Docente de educación técnico-profesional en áreas de diseño eléctrico.
+
+## Modalidades
+- **Empresas**: Presencial e in-company. Niveles avanzados incluyen visita previa de diagnóstico al inmueble para personalizar contenidos y escenarios.
+- **Particulares**: Virtual sincrónico con evaluaciones online y certificado con código QR validable por DNI.
 
 ## Páginas principales
-- [Inicio](https://www.edsi.com.ar/): Presentación general y equipo.
-- [Capacitación para empresas](https://www.edsi.com.ar/capacitacion-empresas/): Cursos in-company de incendios, autoelevadores y primeros auxilios.
-- [Capacitación para particulares](https://www.edsi.com.ar/capacitacion-particulares/): Cursos virtuales sincrónicos.
-- [Validar certificado](https://www.edsi.com.ar/validar-certificado/): Consulta por DNI (sin puntos ni espacios) y descarga de diplomas.
+- [Inicio](https://www.edsi.com.ar/)
+- [Capacitación para empresas](https://www.edsi.com.ar/capacitacion-empresas/)
+- [Capacitación para particulares](https://www.edsi.com.ar/capacitacion-particulares/)
+- [Validar certificado](https://www.edsi.com.ar/validar-certificado/)
 - [Sitemap](https://www.edsi.com.ar/sitemap.xml)
 
-## Cursos destacados para empresas
-- [Introducción al combate y prevención de incendios](https://www.edsi.com.ar/empresas/introduccion-al-combate-y-prevencion-de-incendios/) (Nivel 1 – teórico)
-- [Uso de agentes extintores](https://www.edsi.com.ar/empresas/uso-de-agentes-extintores/) (Nivel 2 – práctico)
-- [Combate de incendios](https://www.edsi.com.ar/empresas/combate-de-incendios/) (Nivel 3 – brigadas)
-- [Uso de líneas de ataque](https://www.edsi.com.ar/empresas/uso-de-lineas-de-ataque/) (Nivel 4 – práctico)
-- [Seguridad con autoelevadores (Res. 960/2015)](https://www.edsi.com.ar/empresas/seguridad-con-autoelevadores/)
+## Cursos para empresas (presencial / in-company)
+- [Introducción al combate y prevención de incendios](https://www.edsi.com.ar/empresas/introduccion-al-combate-y-prevencion-de-incendios/) – Nivel 1 teórico (~2:30 hs). Personal general.
+- [Uso de agentes extintores](https://www.edsi.com.ar/empresas/uso-de-agentes-extintores/) – Nivel 2 práctico con quema controlada real.
+- [Combate de incendios](https://www.edsi.com.ar/empresas/combate-de-incendios/) – Nivel 3 teórico para aspirantes a brigadistas (incluye visita previa y personalización de riesgos).
+- [Uso de líneas de ataque](https://www.edsi.com.ar/empresas/uso-de-lineas-de-ataque/) – Nivel 4 práctico avanzado con nichos, tramos y quema controlada (máx. 15 participantes).
+- [Seguridad con autoelevadores (Res. 960/2015)](https://www.edsi.com.ar/empresas/seguridad-con-autoelevadores/) – 10 hs teórico-práctico + informe completo para auditorías.
 - [Renovación de certificación autoelevadores](https://www.edsi.com.ar/empresas/renovacion-de-certificacion-autoelevadores/)
-- [Primeros auxilios adaptado a riesgos de planta](https://www.edsi.com.ar/empresas/primeros-auxilios/)
+- [Primeros auxilios adaptado a riesgos de planta](https://www.edsi.com.ar/empresas/primeros-auxilios/) – Diseño a medida según relevamiento de riesgos (módulos: hemorragias, quemaduras/eléctrico, traumatismos, ofidios, OVACE, etc.). Incluye simulacro in-situ. RCP/DEA se dictan por separado.
 
-## Cursos destacados para particulares
-- [Supervisor y brigadista contra incendios](https://www.edsi.com.ar/Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista/) (virtual sincrónico 15 hs)
-- [Uso de extintores con certificado para habilitaciones](https://www.edsi.com.ar/Particulares/Uso-de-extintores-basico/Uso-de-extintores-con-certificado-para-habilitaciones/) (virtual sincrónico 2:30 hs)
+## Cursos para particulares (virtual sincrónico)
+- [Supervisor y Brigadista contra incendios](https://www.edsi.com.ar/planes-de-estudio/supervisor-y-brigadista-contra-incendios/) – 15 hs en 5 clases. Temario avanzado (riesgo eléctrico, sistemas de protección, plan de evacuación, materiales peligrosos, Guía CIQUIME).
+- [Uso de extintores con certificado para habilitaciones](https://www.edsi.com.ar/planes-de-estudio/uso-de-extintores-basico/) – 2:30 hs. Orientado a locales comerciales y exigencias municipales/aseguradoras.
 
 ## Información de contacto y operación
 - Email: info@edsi.com.ar
 - WhatsApp: +54 9 11 7061-6594
 - Ubicación: Buenos Aires, República Argentina
-- Idioma del sitio: Español
-- El validador de certificados consulta un Google Sheet por DNI y permite descargar diplomas.
+- Idioma: Español
+- Capacidad habitual: hasta 15 participantes por curso
+- El validador de certificados consulta un Google Sheet por DNI y permite descargar diplomas con QR.
 
-## Notas para asistentes / agentes
-- Tono: institucional, profesional, práctico y orientado a la prevención de riesgos.
-- Priorizar contenidos prácticos, presenciales/in-company para empresas y virtuales sincrónicos para particulares.
-- Los cursos de empresas se adaptan a la actividad y riesgos específicos de cada planta.
-- Capacitación a medida disponible bajo solicitud.
+## Notas para asistentes y agentes
+- Tono institucional, profesional, práctico y orientado a la prevención de riesgos reales.
+- Los cursos de empresas se adaptan a la actividad, riesgos específicos y material disponible de cada planta.
+- En prácticas con fuego real se requiere notificación previa a bomberos y enfermería.
+- Se prioriza la formación práctica y la documentación respaldatoria para auditorías y habilitaciones.
+- Capacitación a medida disponible bajo solicitud a info@edsi.com.ar.
 
 ## Optional
-- Páginas de fichas técnicas individuales (pueden omitirse si el contexto es limitado).
-- Sitemap completo.
+- Fichas técnicas individuales de cada curso (cronogramas, temarios completos y requisitos materiales detallados).
+- Páginas de planes de estudio de particulares.
