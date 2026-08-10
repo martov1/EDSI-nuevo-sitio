@@ -11,7 +11,12 @@ css: /equipamiento/equipamiento.css
       Todo lo necesario para equipar brigadas de incendio en fábricas y plantas
       industriales.
     </p>
-    <a href="#cotizacion" class="btn-primary">Solicitar cotización</a>
+    <a
+      href="https://wa.me/{{ site.whatsapp_phone }}?text={{ site.whatsapp_message_empresa_equipamiento | url_encode }}"
+      target="_blank"
+      class="btn-primary"
+      >Solicitar cotización</a
+    >
   </div>
 </section>
 
@@ -67,9 +72,9 @@ css: /equipamiento/equipamiento.css
         <h3>Herramientas y rescate</h3>
       </div>
       <p>
-        Contamos con herramientas eléctricas y de mano: taladros, sierras,
-        amoladoras, hachas, palas y barretas. Incluye equipos para apertura,
-        corte y rescate rápido en emergencias industriales.
+        Equipamos a tu industria con insumos de primeros auxilios y soporte
+        vital —desfibriladores (DEA), botiquines y material para RCP— y
+        herramientas manuales o eléctricas de rescate, corte y apertura.
       </p>
     </div>
   </div>
@@ -106,8 +111,11 @@ css: /equipamiento/equipamiento.css
         adecuadas, cumpliendo con las normativas y optimizando tu inversión.
       </p>
     </div>
-    <div>
-      <a href="{{ site.baseurl }}/index#contacto" class="btn-primary"
+    <div style="margin-top: 32px">
+      <a
+        href="https://wa.me/{{ site.whatsapp_phone }}?text={{ site.whatsapp_message_empresa_equipamiento | url_encode }}"
+        target="_blank"
+        class="btn-primary"
         >Contactar a ventas</a
       >
     </div>

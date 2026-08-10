@@ -37,7 +37,7 @@
 }
 
 ..cards-grid {
-  margin-top: 40px;
+  margin-top: 56px;
 }
 
 .card-heading {
@@ -90,6 +90,7 @@
 
 .card {
   padding: 30px;
+  margin-top: 20px;
 }
 
 .quienes-somos {
