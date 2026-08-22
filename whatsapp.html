@@ -1,0 +1,26 @@
+---
+layout: null
+permalink: /whatsapp/
+---
+
+{% assign full_msg = site.whatsapp_message_particular_brigadista | url_encode %}
+{% assign wa_url = "https://wa.me/" | append: site.whatsapp_phone | append:
+"?text=" | append: full_msg %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url={{ wa_url }}" />
+    <link rel="canonical" href="{{ wa_url }}" />
+    <title>Redirigiendo a WhatsApp...</title>
+    <script>
+      window.location.href = "{{ wa_url }}";
+    </script>
+  </head>
+  <body>
+    <p>
+      Redirigiendo... Si no abre automáticamente,
+      <a href="{{ wa_url }}">haz clic aquí</a>.
+    </p>
+  </body>
+</html>
