@@ -218,12 +218,34 @@
   border-radius: 18px;
   background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
   border: 1px solid rgba(17, 34, 51, 0.08);
-  text-align: center;
+  text-align: left;
+}
+
+.cert-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  margin-bottom: 22px;
+}
+
+.cert-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #2eaf68;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .cert-card strong {
   display: block;
-  margin-bottom: 10px;
   color: #102030;
   font-size: 1.25rem;
 }
