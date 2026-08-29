@@ -159,7 +159,8 @@
   padding: 25px;
   border-radius: 8px;
   position: sticky;
-  top: 100px;
+  top: 10px;
+  align-self: start;
   border: 1px solid #e0e0e0;
 }
 .info-row {
@@ -186,10 +187,17 @@
   margin-top: 10px;
   font-weight: bold;
   text-decoration: none;
-  transition: opacity 0.3s;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+  transform: translateY(0) scale(1);
 }
 .btn-payment:hover {
-  opacity: 0.9;
+  background-color: #0089c8;
+  transform: translateY(0) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 158, 227, 0.28);
 }
 .btn-primary {
   background: #25d366;
@@ -199,6 +207,17 @@
   display: block;
   font-weight: bold;
   text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+  transform: translateY(0) scale(1);
+}
+.btn-primary:hover {
+  background-color: #1fba5c;
+  transform: translateY(0) scale(1.02);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.28);
 }
 
 .note-box {
