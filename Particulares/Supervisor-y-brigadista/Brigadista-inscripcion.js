@@ -1,3 +1,4 @@
+// Configuración editable del formulario.
 const FORM_CONFIG = {
   scriptUrl:
     "https://script.google.com/macros/s/AKfycbywWyr--LYMyWh2ycccccFnwaTVvdZiJkXbxZkELE--phCDnCeA9hEm2pOWALjLDjit/exec",
@@ -7,6 +8,7 @@ const FORM_CONFIG = {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Elementos del formulario y del flujo de pago.
   const form = document.getElementById("enrollment-form");
   const paymentStep = document.getElementById("payment-step");
   const submitButton = document.getElementById("show-payment");
@@ -14,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const transferDetails = document.getElementById("transfer-details");
   const phone = document.getElementById("telefono");
   const phoneConfirmation = document.getElementById("telefono-confirmacion");
+
+  // Evita avanzar cuando los teléfonos ingresados no coinciden.
   function validatePhoneConfirmation() {
     const phonesMatch = phone.value.trim() === phoneConfirmation.value.trim();
     phoneConfirmation.setCustomValidity(
@@ -21,15 +25,18 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
+  // Muestra el importe y las alternativas de pago luego del envío exitoso.
   function showPaymentStep() {
     paymentStep.hidden = false;
     submitButton.hidden = true;
     paymentStep.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  // Valida nuevamente la confirmación mientras la persona escribe.
   phone.addEventListener("input", validatePhoneConfirmation);
   phoneConfirmation.addEventListener("input", validatePhoneConfirmation);
 
+  // Envía los datos al Apps Script y habilita el paso de pago.
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
     validatePhoneConfirmation();
@@ -53,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = await response.json();
 
       if (result.result !== "success") {
-        throw new Error(result.error || "No se pudo enviar el formulario.");
+        throw new Error(result.error || FORM_CONFIG.errorMessage);
       }
 
       alert("¡Formulario enviado con éxito!");
@@ -68,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Despliega u oculta los datos de la cuenta bancaria.
   transferButton.addEventListener("click", function () {
     transferDetails.hidden = !transferDetails.hidden;
   });
