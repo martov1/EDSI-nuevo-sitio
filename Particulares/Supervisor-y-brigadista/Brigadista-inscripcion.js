@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Elementos del formulario y del flujo de pago.
   const form = document.getElementById("enrollment-form");
   const paymentStep = document.getElementById("payment-step");
+  const totalPayment = document.getElementById("total-payment");
   const submitButton = document.getElementById("show-payment");
   const transferButton = document.getElementById("show-transfer");
   const transferDetails = document.getElementById("transfer-details");
@@ -29,7 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function showPaymentStep() {
     form.hidden = true;
     paymentStep.hidden = false;
-    paymentStep.scrollIntoView({ behavior: "smooth", block: "start" });
+    requestAnimationFrame(function () {
+      totalPayment.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
   }
 
   // Valida nuevamente la confirmación mientras la persona escribe.
@@ -78,6 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Despliega u oculta los datos de la cuenta bancaria.
   transferButton.addEventListener("click", function () {
-    transferDetails.hidden = !transferDetails.hidden;
+    const isOpening = transferDetails.hidden;
+    transferDetails.hidden = !isOpening;
+
+    if (isOpening) {
+      transferDetails.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 });
