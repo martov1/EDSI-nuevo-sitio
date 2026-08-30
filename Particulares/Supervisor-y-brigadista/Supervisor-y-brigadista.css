@@ -219,6 +219,11 @@
   transform: translateY(0) scale(1.02);
   box-shadow: 0 6px 18px rgba(37, 211, 102, 0.28);
 }
+.enrollment-cta {
+  max-width: 280px;
+  margin-top: 20px;
+  text-align: center;
+}
 
 .note-box {
   background: #fff3cd;
