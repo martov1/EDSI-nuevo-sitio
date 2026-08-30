@@ -3,6 +3,7 @@ layout: default
 title: "Supervisor y Brigadista contra Incendios - Curso Virtual"
 description: "Curso virtual sincrónico de 15 horas para formarte como brigadista o supervisor de emergencias. Ideal para encargados, profesionales de seguridad e higiene y líderes de brigada."
 css: /Particulares/Supervisor-y-brigadista/Brigadista-inscripcion.css
+js: /Particulares/Supervisor-y-brigadista/Brigadista-inscripcion.js
 redirect_from:
   - /capacitaciones/particulares/brigadista-contra-incendios
   - /Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista.html
@@ -20,15 +21,62 @@ redirect_from:
         <section class="section-card enrollment-section" id="inscripcion">
             <h2>Inscripción al curso</h2>
             <p>Completá el formulario para reservar tu lugar. Al finalizar, seleccioná el medio de pago que prefieras.</p>
-            <div class="form-wrapper">
-                <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSfOjhegJrVJ6smMlFlcfKH7_kTVY2Iag8CZmTVyOfNmSM-1HQ/viewform?embedded=true"
-                    title="Formulario de inscripción al curso Supervisor y Brigadista contra Incendios"
-                    loading="lazy">
-                    Cargando el formulario de inscripción...
-                </iframe>
-            </div>
-            <button type="button" class="btn-next" id="show-payment">Siguiente</button>
+            <form class="enrollment-form" id="enrollment-form">
+                <div class="form-fields">
+                    <div class="form-field">
+                        <label for="nombre">Nombre <span aria-hidden="true">*</span></label>
+                        <input type="text" id="nombre" name="nombre" autocomplete="given-name" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="apellido">Apellido <span aria-hidden="true">*</span></label>
+                        <input type="text" id="apellido" name="apellido" autocomplete="family-name" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="dni">DNI <span aria-hidden="true">*</span></label>
+                        <input type="text" id="dni" name="dni" inputmode="numeric" autocomplete="off" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Correo electrónico de contacto <span aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="telefono">Teléfono de contacto <span aria-hidden="true">*</span></label>
+                        <input type="tel" id="telefono" name="telefono" autocomplete="tel" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="telefono-confirmacion">Teléfono de contacto otra vez <span aria-hidden="true">*</span></label>
+                        <input type="tel" id="telefono-confirmacion" name="telefono-confirmacion" autocomplete="tel" required>
+                    </div>
+                </div>
+
+                <fieldset class="choice-group">
+                    <legend>¿Tiene experiencia o conocimientos previos en la prevención o lucha contra incendios? <span aria-hidden="true">*</span></legend>
+                    <label><input type="radio" name="experiencia" value="mucha" required> Mucha experiencia y conocimientos (fui bombero voluntario o similar)</label>
+                    <label><input type="radio" name="experiencia" value="alguna"> Tengo experiencia o conocimientos (alguna formación académica o experiencia como brigadista)</label>
+                    <label><input type="radio" name="experiencia" value="minima"> Tengo una mínima experiencia o conocimientos (curso corto de extintores o similar)</label>
+                    <label><input type="radio" name="experiencia" value="ninguna"> No tengo experiencia ni conocimientos</label>
+                </fieldset>
+
+                <fieldset class="choice-group choice-group-inline">
+                    <legend>¿Es o fue bombero voluntario? <span aria-hidden="true">*</span></legend>
+                    <label><input type="radio" name="bombero" value="si" required> Sí</label>
+                    <label><input type="radio" name="bombero" value="no"> No</label>
+                </fieldset>
+
+                <fieldset class="choice-group choice-group-inline">
+                    <legend>¿Es profesional de seguridad e higiene? <span aria-hidden="true">*</span></legend>
+                    <label><input type="radio" name="seguridad-higiene" value="si" required> Sí</label>
+                    <label><input type="radio" name="seguridad-higiene" value="no"> No</label>
+                </fieldset>
+
+                <fieldset class="choice-group">
+                    <legend>¿Participará de forma sincrónica? <span aria-hidden="true">*</span></legend>
+                    <label><input type="radio" name="modalidad" value="sincronica" required> Sí, me conectaré en los días y horarios programados</label>
+                    <label><input type="radio" name="modalidad" value="asincronica"> No, necesito participar de forma asincrónica</label>
+                </fieldset>
+
+                <button type="submit" class="btn-next" id="show-payment">Siguiente</button>
+            </form>
 
             <div class="payment-step" id="payment-step" hidden>
                 <div class="total-box">
@@ -65,21 +113,5 @@ redirect_from:
         </div>
 
     </main>
-    <script>
-        const showPaymentButton = document.getElementById('show-payment');
-        const paymentStep = document.getElementById('payment-step');
-        const showTransferButton = document.getElementById('show-transfer');
-        const transferDetails = document.getElementById('transfer-details');
-
-        showPaymentButton.addEventListener('click', function () {
-            paymentStep.hidden = false;
-            showPaymentButton.hidden = true;
-            paymentStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        showTransferButton.addEventListener('click', function () {
-            transferDetails.hidden = !transferDetails.hidden;
-        });
-    </script>
 </body>
 </html>

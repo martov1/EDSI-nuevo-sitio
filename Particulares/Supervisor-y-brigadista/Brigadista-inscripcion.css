@@ -76,18 +76,83 @@
   border-radius: 8px;
   padding: 28px;
 }
-.form-wrapper {
-  overflow: hidden;
+.enrollment-form {
   margin: 24px 0;
+  padding: 24px;
   border: 1px solid #d7dde1;
   border-radius: 6px;
   background: #fff;
 }
-.form-wrapper iframe {
-  display: block;
+.form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.form-field label,
+.choice-group legend {
+  color: var(--primary-dark);
+  font-weight: bold;
+}
+.form-field label span,
+.choice-group legend span {
+  color: var(--accent-red);
+}
+.form-field input {
   width: 100%;
-  min-height: 900px;
-  border: 0;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid #cbd3d8;
+  border-radius: 4px;
+  color: #333;
+  font: inherit;
+  background: #fff;
+}
+.form-field input:focus {
+  outline: 2px solid rgba(231, 76, 60, 0.25);
+  border-color: var(--accent-red);
+}
+.choice-group {
+  display: grid;
+  gap: 11px;
+  margin: 26px 0 0;
+  padding: 18px;
+  border: 1px solid #e0e5e8;
+  border-radius: 5px;
+}
+.choice-group legend {
+  padding: 0 6px;
+  line-height: 1.4;
+}
+.choice-group label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #444;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.choice-group input[type="radio"] {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: var(--accent-red);
+}
+.choice-group-inline {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 28px;
+}
+.choice-group-inline legend {
+  flex: 0 0 100%;
+}
+.enrollment-form .btn-next {
+  margin-top: 26px;
 }
 .btn-next,
 .payment-option {
@@ -374,8 +439,11 @@
   .enrollment-section {
     padding: 20px 16px;
   }
-  .form-wrapper iframe {
-    min-height: 1050px;
+  .enrollment-form {
+    padding: 18px 14px;
+  }
+  .form-fields {
+    grid-template-columns: 1fr;
   }
   .payment-options {
     flex-direction: column;
