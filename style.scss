@@ -310,6 +310,18 @@ a {
   display: flex;
   flex-direction: column;
 }
+.inscription-status {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  background: #2ecc71;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 .curso-card h3 {
   color: #e74c3c;
   font-size: 1.2rem;
