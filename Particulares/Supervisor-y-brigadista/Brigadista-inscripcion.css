@@ -203,7 +203,7 @@
 }
 .payment-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 .transfer-option {
@@ -217,6 +217,15 @@
 }
 .mercado-option:hover {
   background: #0089c8;
+}
+.payment-help {
+  margin: 12px 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+.payment-help a {
+  color: var(--primary-dark);
+  font-weight: bold;
 }
 .transfer-details {
   max-width: 560px;

@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // Muestra el importe y las alternativas de pago luego del envío exitoso.
+  // Oculta el formulario y muestra el importe y las alternativas de pago.
   function showPaymentStep() {
+    form.hidden = true;
     paymentStep.hidden = false;
-    submitButton.hidden = true;
     paymentStep.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error(result.error || FORM_CONFIG.errorMessage);
       }
 
-      alert("¡Formulario enviado con éxito!");
       showPaymentStep();
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
