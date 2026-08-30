@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     submitButton.disabled = true;
+    submitButton.classList.add("is-loading");
     submitButton.textContent = "Enviando...";
 
     const formData = Object.fromEntries(new FormData(form));
@@ -70,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `${FORM_CONFIG.errorMessage}\n\nComunicate con nosotros al ${FORM_CONFIG.companyPhone}.`,
       );
       submitButton.disabled = false;
+      submitButton.classList.remove("is-loading");
       submitButton.textContent = "Siguiente";
     }
   });

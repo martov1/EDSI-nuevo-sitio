@@ -179,6 +179,25 @@
 .btn-next:hover {
   background: #c0392b;
 }
+.btn-next.is-loading {
+  gap: 10px;
+  cursor: wait;
+  opacity: 0.85;
+}
+.btn-next.is-loading::before {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  border-radius: 50%;
+  content: "";
+  animation: form-spinner 0.75s linear infinite;
+}
+@keyframes form-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .payment-step {
   margin-top: 28px;
   padding-top: 24px;
