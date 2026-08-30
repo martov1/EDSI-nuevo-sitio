@@ -1,7 +1,7 @@
 // Configuración editable del formulario.
 const FORM_CONFIG = {
   scriptUrl:
-    "https://script.google.com/macros/s/AKfycbywWyr--LYMyWh2ycccccFnwaTVvdZiJkXbxZkELE--phCDnCeA9hEm2pOWALjLDjit/exec",
+    "https://script.google.com/macros/s/AKfycbzCyeYd_4ihk1vBgRFfh7ieiGCq6M5ACUTggDm6O0RhuqbjHY2X57Z2qO77JbzmdY1r/exec",
   errorMessage:
     "No se pudo crear el formulario. Por favor, intentá nuevamente.",
   companyPhone: "11 7061-6594",
