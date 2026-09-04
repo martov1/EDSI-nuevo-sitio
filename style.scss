@@ -304,6 +304,9 @@ a {
   object-fit: cover;
   display: block;
 }
+.curso-card img.autoelevadores-image {
+  object-position: 50% 65%;
+}
 .curso-card > div {
   padding: 25px;
   flex: 1;
