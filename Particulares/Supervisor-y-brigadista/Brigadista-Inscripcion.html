@@ -80,15 +80,16 @@ redirect_from:
                 <button type="submit" class="btn-next" id="show-payment">Siguiente</button>
             </form>
 
-            <div class="payment-step" id="payment-step" hidden>
+            <div class="payment-step" id="payment-step" hidden >
                 <div class="total-box" id="total-payment">
                     <span>Total a abonar</span>
                     <strong>$100.000</strong>
                 </div>
                 <p class="payment-prompt">Elegí cómo querés realizar el pago:</p>
                 <div class="payment-options">
-                    <button type="button" class="payment-option transfer-option" id="show-transfer">Transferencia</button>
-                    <a class="payment-option mercado-option" href="https://mpago.la/1GXUYu9" target="_blank" rel="noopener noreferrer">Mercado Pago</a>
+                    <button type="button" class="payment-option transfer-option" id="show-transfer"><span class="bank-icon" aria-hidden="true">🏛️</span>Transferencia</button>
+                    <a class="payment-option mercado-option" href="https://mpago.li/1cH2YJ8" target="_blank" rel="noopener noreferrer"><img class="mercado-logo" src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg" alt="" width="180" height="73">3 cuotas sin interés</a>
+                    <a class="payment-option cuotas-option" href="https://wa.me/{{ site.whatsapp_phone }}?text=Hola%2C%20quiero%20consultar%20por%20cuotas%20sin%20tarjeta%20para%20el%20curso%20Supervisor%20y%20Brigadista%20contra%20incendios" target="_blank" rel="noopener noreferrer"><img src="/assets/whatsapp-icon.svg" alt="" width="28" height="28">Cuotas sin tarjeta</a>
                 </div>
                 <p class="payment-help"><em>Si tenés dificultades no dudes en contactarnos vía WhatsApp <a href="https://wa.me/{{ site.whatsapp_phone }}?text=%C2%BFDificultades%3F%20%C2%A1Contactanos%21" target="_blank" rel="noopener noreferrer">haciendo click aquí</a>.</em></p>
 

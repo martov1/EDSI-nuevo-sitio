@@ -233,16 +233,35 @@
   gap: 12px;
 }
 .transfer-option {
+  gap: 8px;
   background: var(--primary-dark);
 }
+.bank-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
 .mercado-option {
+  gap: 8px;
   background: #009ee3;
+}
+.mercado-logo {
+  flex: 0 0 180px;
+  width: 180px;
+  height: 73px;
+  object-fit: contain;
 }
 .transfer-option:hover {
   background: #253d54;
 }
 .mercado-option:hover {
   background: #0089c8;
+}
+.cuotas-option {
+  gap: 8px;
+  background: #25d366;
+}
+.cuotas-option:hover {
+  background: #1da851;
 }
 .payment-help {
   margin: 12px 0 0;
