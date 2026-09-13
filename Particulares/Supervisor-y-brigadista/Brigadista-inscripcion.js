@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const depositNote = document.getElementById("deposit-note");
   const mercadoPayment = document.getElementById("mercado-payment");
   const mercadoPaymentLabel = document.getElementById("mercado-payment-label");
+  const gocuotasPayment = document.getElementById("gocuotas-payment");
   const whatsappPayment = document.getElementById("whatsapp-payment");
   const whatsappPaymentLabel = document.getElementById(
     "whatsapp-payment-label",
@@ -71,6 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
     whatsappPayment.href = isDeposit
       ? whatsappPayment.dataset.depositUrl
       : whatsappPayment.dataset.fullUrl;
+    gocuotasPayment.hidden = isDeposit;
+    gocuotasPayment.classList.toggle("is-hidden", isDeposit);
     receiptButton.href = isDeposit
       ? receiptButton.dataset.depositUrl
       : receiptButton.dataset.fullUrl;

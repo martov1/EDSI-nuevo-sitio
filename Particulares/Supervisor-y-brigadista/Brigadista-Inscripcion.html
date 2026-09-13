@@ -81,7 +81,7 @@ redirect_from:
                 <button type="submit" class="btn-next" id="show-payment">Siguiente</button>
             </form>
 
-            <div class="payment-step" id="payment-step" hidden >
+            <div class="payment-step" id="payment-step"  >
                 <div class="total-box" id="total-payment">
                     <span>Valor total</span>
                     <strong id="payment-amount">$100.000</strong>
@@ -102,7 +102,8 @@ redirect_from:
                 <div class="payment-options">
                     <button type="button" class="payment-option transfer-option" id="show-transfer"><span class="bank-icon" aria-hidden="true">🏛️</span>Transferencia</button>
                     <a class="payment-option mercado-option" id="mercado-payment" href="{{ site.payment_links.brigadista.sena }}" data-full-url="{{ site.payment_links.brigadista.curso_completo }}" data-deposit-url="{{ site.payment_links.brigadista.sena }}" target="_blank" rel="noopener noreferrer"><img class="mercado-logo" src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg" alt="" width="180" height="73"><span id="mercado-payment-label">3 cuotas sin interés</span></a>
-                    <a class="payment-option cuotas-option" id="whatsapp-payment" data-full-url="{{ site.whatsapp_links.brigadista.cuotas }}" data-deposit-url="{{ site.whatsapp_links.brigadista.sena }}" href="{{ site.whatsapp_links.brigadista.cuotas }}" target="_blank" rel="noopener noreferrer"><img src="/assets/whatsapp-icon.svg" alt="" width="28" height="28"><span id="whatsapp-payment-label">Cuotas sin tarjeta</span></a>
+                    <a class="payment-option gocuotas-option" id="gocuotas-payment" href="{{ site.payment_links.brigadista.gocuotas }}" target="_blank" rel="noopener noreferrer"><img class="gocuotas-logo" src="/assets/gocuotaslogo.png" alt="GoCuotas"><span>3 cuotas sin tarjeta</span></a>
+                    <a class="payment-option cuotas-option" id="whatsapp-payment" data-full-url="{{ site.whatsapp_links.brigadista.cuotas }}" data-deposit-url="{{ site.whatsapp_links.brigadista.sena }}" href="{{ site.whatsapp_links.brigadista.cuotas }}" target="_blank" rel="noopener noreferrer"><img class="whatsapp-logo" src="/assets/whatsapp-icon.svg" alt="" width="42" height="42"><span id="whatsapp-payment-label">Otras opciones de cuotas sin tarjeta</span></a>
                 </div>
                 <p class="payment-help"><em>Si tenés dificultades no dudes en contactarnos vía WhatsApp <a href="{{ site.whatsapp_links.brigadista.dificultades }}" target="_blank" rel="noopener noreferrer">haciendo click aquí</a>.</em></p>
 

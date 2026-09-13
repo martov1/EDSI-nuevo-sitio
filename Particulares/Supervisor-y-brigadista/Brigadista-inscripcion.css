@@ -168,7 +168,7 @@
   justify-content: center;
   box-sizing: border-box;
   width: 100%;
-  min-height: 50px;
+  min-height: 97px;
   padding: 12px 20px;
   border: 0;
   border-radius: 5px;
@@ -304,12 +304,36 @@
 .mercado-option:hover {
   background: #0089c8;
 }
+.gocuotas-option {
+  gap: 6px;
+  background: #e85586;
+  color: #fff;
+}
+.gocuotas-option:hover {
+  background: #d84775;
+  color: #fff;
+}
+.payment-option.is-hidden {
+  display: none;
+}
+.gocuotas-logo {
+  display: block;
+  width: min(100%, 150px);
+  height: 42px;
+  object-fit: contain;
+}
 .cuotas-option {
   gap: 8px;
   background: #25d366;
 }
 .cuotas-option:hover {
   background: #1da851;
+}
+.whatsapp-logo {
+  display: block;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 .payment-help {
   margin: 12px 0 0;
