@@ -1,14 +1,15 @@
+# Identidad del sitio
 title: EDSI - Escuela de Seguridad Industrial
 description: Capacitación en seguridad industrial, combate de incendios, brigadas, autoelevadores (Res. 960/2015) y primeros auxilios. Cursos presenciales para empresas y virtuales para particulares en Buenos Aires.
-
 url: "https://www.edsi.com.ar"
 baseurl: ""
 
+# Idioma, región y formato de las URLs
 lang: es_AR
 locale: es_AR
 permalink: pretty
 
-# Build settings
+# Procesamiento y compilación
 markdown: kramdown
 highlighter: rouge
 
@@ -20,7 +21,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-redirect-from
 
-# SEO plugin settings (opcional pero útil)
+# SEO y redes sociales
 author: EDSI
 
 social:
@@ -30,7 +31,7 @@ social:
     - https://www.instagram.com/edsi.ar/
     - https://www.linkedin.com/company/escuela-de-seguridad-industrial/?viewAsMember=true
 
-# Excluir cosas del build
+# Archivos y carpetas que Jekyll no debe incluir en el build
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -38,16 +39,21 @@ exclude:
   - vendor
   - README.md
 
-whatsapp_phone: "5491170616594"
-whatsapp_message: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios."
+# Datos de contacto
 email: "info@edsi.com.ar"
 email_subject: "Consulta sobre servicios de capacitación - WEB"
 email_subject_particular: "Consulta sobre servicios de capacitación - WEB - Particular"
 email_subject_empresa: "Consulta sobre servicios de capacitación - WEB - Empresa"
 
+# WhatsApp: configuración general
+whatsapp_phone: "5491170616594"
+whatsapp_message: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios."
+
+# WhatsApp: consultas de particulares
 whatsapp_message_particular: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios, Soy un particular."
 whatsapp_message_particular_brigadista: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información sobre el *curso de Supervisor y Brigadista contra incendios para particulares*"
 
+# WhatsApp: consultas de empresas
 whatsapp_message_empresa: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios. Soy una empresa."
 whatsapp_message_empresa_incendio: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación contra incendios*. Soy una empresa."
 whatsapp_message_empresa_autoelevadores: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación para autoelevadores*. Soy una empresa."
