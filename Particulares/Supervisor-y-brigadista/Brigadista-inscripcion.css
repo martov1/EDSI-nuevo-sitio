@@ -223,6 +223,51 @@
   font-size: 1.8rem;
   color: var(--accent-red);
 }
+.payment-type-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  border: 0;
+}
+.payment-type-group legend {
+  grid-column: 1 / -1;
+  margin-bottom: 2px;
+  color: var(--primary-dark);
+  font-weight: bold;
+}
+.payment-type {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 76px;
+  padding: 14px 16px;
+  border: 2px solid #cbd3d8;
+  border-radius: 5px;
+  background: #fff;
+  color: var(--primary-dark);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.payment-type span {
+  color: var(--accent-red);
+  font-weight: bold;
+}
+.payment-type.is-selected {
+  border-color: var(--accent-red);
+  background: #fff8f7;
+  box-shadow: 0 0 0 1px var(--accent-red);
+}
+.deposit-note {
+  margin: -8px 0 24px;
+  padding: 14px 16px;
+  border-left: 5px solid #f0ad4e;
+  background: #fff3cd;
+  color: #594a22;
+  line-height: 1.5;
+}
 .payment-prompt {
   margin-bottom: 12px;
   font-weight: bold;
@@ -249,6 +294,9 @@
   width: 180px;
   height: 73px;
   object-fit: contain;
+}
+.mercado-option span {
+  display: block;
 }
 .transfer-option:hover {
   background: #253d54;
@@ -324,6 +372,13 @@
 .receipt-instructions a {
   color: var(--primary-dark);
   font-weight: bold;
+}
+
+@media (max-width: 640px) {
+  .payment-type-group,
+  .payment-options {
+    grid-template-columns: 1fr;
+  }
 }
 
 .description-box {

@@ -53,6 +53,22 @@ whatsapp_message: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un aseso
 whatsapp_message_particular: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios, Soy un particular."
 whatsapp_message_particular_brigadista: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información sobre el *curso de Supervisor y Brigadista contra incendios para particulares*"
 
+# Links de pago
+payment_links:
+  brigadista:
+    curso_completo: "https://mpago.li/1cH2YJ8"
+    sena: "https://mpago.la/1JRwirf"
+    "fecha segunda cuota": "10/10/2026"
+
+# WhatsApp: links del flujo de inscripción de brigadista
+whatsapp_links:
+  brigadista:
+    cuotas: "https://wa.me/5491170616594?text=Hola%2C%20quiero%20consultar%20por%20cuotas%20sin%20tarjeta%20para%20el%20curso%20Supervisor%20y%20Brigadista%20contra%20incendios"
+    sena: "https://wa.me/5491170616594?text=Hola%2C%20tengo%20una%20consulta%20sobre%20la%20se%C3%B1a%20para%20el%20curso%20Supervisor%20y%20Brigadista%20contra%20incendios"
+    dificultades: "https://wa.me/5491170616594?text=%C2%BFDificultades%3F%20%C2%A1Contactanos%21"
+    comprobante_pago: "https://wa.me/5491170616594?text=Comprobante%20de%20pago%20-%20Supervisor%20y%20brigadista"
+    comprobante_sena: "https://wa.me/5491170616594?text=Comprobante%20de%20se%C3%B1a%20-%20Supervisor%20y%20brigadista"
+
 # WhatsApp: consultas de empresas
 whatsapp_message_empresa: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información de sus servicios. Soy una empresa."
 whatsapp_message_empresa_incendio: "¡Hola!, Vi su *sitio web* y me gustaría hablar con un asesor para obtener mas información acerca de *capacitación contra incendios*. Soy una empresa."

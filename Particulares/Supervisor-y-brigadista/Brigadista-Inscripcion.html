@@ -81,33 +81,44 @@ redirect_from:
                 <button type="submit" class="btn-next" id="show-payment">Siguiente</button>
             </form>
 
-            <div class="payment-step" id="payment-step" hidden >
+            <div class="payment-step" id="payment-step"  >
                 <div class="total-box" id="total-payment">
                     <span>Total a abonar</span>
-                    <strong>$100.000</strong>
+                    <strong id="payment-amount">$100.000</strong>
                 </div>
-                <p class="payment-prompt">Elegí cómo querés realizar el pago:</p>
+                <fieldset class="payment-type-group">
+                    <legend>Elegí cómo querés reservar tu lugar:</legend>
+                    <button type="button" class="payment-type is-selected" id="full-payment" aria-pressed="true">
+                        <strong>Abonar el curso completo</strong>
+                        <span>$100.000</span>
+                    </button>
+                    <button type="button" class="payment-type" id="deposit-payment" aria-pressed="false">
+                        <strong>Reservar mi lugar mediante una seña</strong>
+                        <span>$30.000</span>
+                    </button>
+                </fieldset>
+                <p class="deposit-note" id="deposit-note" hidden>El pago de la seña garantiza el cupo, el monto restante deberá ser abonado antes del {{ site.payment_links.brigadista["fecha segunda cuota"] }} para poder continuar cursando.</p>
+                <p class="payment-prompt">Elegí el medio de pago:</p>
                 <div class="payment-options">
                     <button type="button" class="payment-option transfer-option" id="show-transfer"><span class="bank-icon" aria-hidden="true">🏛️</span>Transferencia</button>
-                    <a class="payment-option mercado-option" href="https://mpago.li/1cH2YJ8" target="_blank" rel="noopener noreferrer"><img class="mercado-logo" src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg" alt="" width="180" height="73">3 cuotas sin interés</a>
-                    <a class="payment-option cuotas-option" href="https://wa.me/{{ site.whatsapp_phone }}?text=Hola%2C%20quiero%20consultar%20por%20cuotas%20sin%20tarjeta%20para%20el%20curso%20Supervisor%20y%20Brigadista%20contra%20incendios" target="_blank" rel="noopener noreferrer"><img src="/assets/whatsapp-icon.svg" alt="" width="28" height="28">Cuotas sin tarjeta</a>
+                    <a class="payment-option mercado-option" id="mercado-payment" href="{{ site.payment_links.brigadista.sena }}" data-full-url="{{ site.payment_links.brigadista.curso_completo }}" data-deposit-url="{{ site.payment_links.brigadista.sena }}" target="_blank" rel="noopener noreferrer"><img class="mercado-logo" src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg" alt="" width="180" height="73"><span id="mercado-payment-label">3 cuotas sin interés</span></a>
+                    <a class="payment-option cuotas-option" id="whatsapp-payment" data-full-url="{{ site.whatsapp_links.brigadista.cuotas }}" data-deposit-url="{{ site.whatsapp_links.brigadista.sena }}" href="{{ site.whatsapp_links.brigadista.cuotas }}" target="_blank" rel="noopener noreferrer"><img src="/assets/whatsapp-icon.svg" alt="" width="28" height="28"><span id="whatsapp-payment-label">Cuotas sin tarjeta</span></a>
                 </div>
-                <p class="payment-help"><em>Si tenés dificultades no dudes en contactarnos vía WhatsApp <a href="https://wa.me/{{ site.whatsapp_phone }}?text=%C2%BFDificultades%3F%20%C2%A1Contactanos%21" target="_blank" rel="noopener noreferrer">haciendo click aquí</a>.</em></p>
+                <p class="payment-help"><em>Si tenés dificultades no dudes en contactarnos vía WhatsApp <a href="{{ site.whatsapp_links.brigadista.dificultades }}" target="_blank" rel="noopener noreferrer">haciendo click aquí</a>.</em></p>
 
                 <div class="transfer-details" id="transfer-details" hidden>
                     <h3>Datos para la transferencia</h3>
                     <p><strong>Alias:</strong> edsi.capacitacion</p>
                     <p><strong>CBU:</strong> 0000003100055294771202</p>
-                    <p><strong>Titular:</strong> Joaquin Brandan</p>
                     <p><strong>CUIT:</strong> 20-37124156-7</p>
-                    <a class="receipt-button" href="https://wa.me/{{ site.whatsapp_phone }}?text=Comprobante%20de%20pago%20-%20Supervisor%20y%20brigadista" target="_blank" rel="noopener noreferrer">
+                    <a class="receipt-button" id="receipt-button" data-full-url="{{ site.whatsapp_links.brigadista.comprobante_pago }}" data-deposit-url="{{ site.whatsapp_links.brigadista.comprobante_sena }}" href="{{ site.whatsapp_links.brigadista.comprobante_pago }}" target="_blank" rel="noopener noreferrer">
                         <img src="/assets/whatsapp-icon.svg" alt="" width="20" height="20">
                         Enviar comprobante
                     </a>
                     <p class="receipt-instructions">
                         Enviá el comprobante por WhatsApp usando el botón o por correo electrónico a
                         <a href="mailto:info@edsi.com.ar?subject=Comprobante%20de%20pago%20-%20Supervisor%20y%20brigadista">info@edsi.com.ar</a>
-                        con el asunto <strong>“comprobante de pago - Supervisor y brigadista”</strong>.
+                        con el asunto <strong id="receipt-subject">“comprobante de pago - Supervisor y brigadista”</strong>.
                     </p>
                 </div>
             </div>
