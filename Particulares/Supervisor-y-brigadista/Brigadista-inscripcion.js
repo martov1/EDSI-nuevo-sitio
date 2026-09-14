@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function showPaymentStep() {
     form.hidden = true;
     paymentStep.hidden = false;
-    scrollToElement(totalPayment);
+    scrollToElement(totalPayment, "start");
   }
 
   // Actualiza enlaces, textos y avisos según la modalidad elegida.
