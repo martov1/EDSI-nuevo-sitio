@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const fullPaymentButton = document.getElementById("full-payment");
   const depositPaymentButton = document.getElementById("deposit-payment");
   const depositNote = document.getElementById("deposit-note");
+  const paymentOptions = document.querySelector(".payment-options");
   const mercadoPayment = document.getElementById("mercado-payment");
   const mercadoPaymentLabel = document.getElementById("mercado-payment-label");
   const gocuotasPayment = document.getElementById("gocuotas-payment");
@@ -50,13 +51,34 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
+  // El desplazamiento automático solo acompaña la lectura en modo vertical.
+  function isPortraitOrientation() {
+    return window.matchMedia("(orientation: portrait)").matches;
+  }
+
+  // Desplaza un elemento después de actualizar el contenido visible.
+  function scrollToElement(element, block = "center") {
+    if (!isPortraitOrientation()) {
+      return;
+    }
+
+    requestAnimationFrame(function () {
+      element.scrollIntoView({ behavior: "smooth", block });
+    });
+  }
+
+  // Lleva a la persona al destino relevante para la modalidad elegida.
+  function scrollToPaymentDestination(isDeposit) {
+    const target = isDeposit ? depositNote : paymentOptions;
+    const position = isDeposit ? "start" : "center";
+    scrollToElement(target, position);
+  }
+
   // Reemplaza el formulario por las alternativas de pago después del envío.
   function showPaymentStep() {
     form.hidden = true;
     paymentStep.hidden = false;
-    requestAnimationFrame(function () {
-      totalPayment.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
+    scrollToElement(totalPayment);
   }
 
   // Actualiza enlaces, textos y avisos según la modalidad elegida.
@@ -84,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     depositNote.hidden = !isDeposit;
     fullPaymentButton.setAttribute("aria-pressed", String(!isDeposit));
     depositPaymentButton.setAttribute("aria-pressed", String(isDeposit));
+    scrollToPaymentDestination(isDeposit);
   }
 
   // Valida nuevamente la confirmación mientras la persona escribe.
