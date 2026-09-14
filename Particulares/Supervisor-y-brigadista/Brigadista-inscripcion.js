@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Desplaza un elemento después de actualizar el contenido visible.
-  function scrollToElement(element, block = "center") {
-    if (!isPortraitOrientation()) {
+  function scrollToElement(element, block = "center", portraitOnly = true) {
+    if (portraitOnly && !isPortraitOrientation()) {
       return;
     }
 
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function showPaymentStep() {
     form.hidden = true;
     paymentStep.hidden = false;
-    scrollToElement(totalPayment, "start");
+    scrollToElement(totalPayment, "start", false);
   }
 
   // Actualiza enlaces, textos y avisos según la modalidad elegida.
