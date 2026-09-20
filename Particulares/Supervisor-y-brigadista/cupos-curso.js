@@ -64,10 +64,7 @@ async function obtenerEstadoCupos({
     };
 
     if (elementoDestino) {
-      elementoDestino.textContent =
-        typeof formatearTexto === "function"
-          ? formatearTexto(resultadoFallback)
-          : `hasta ${capacidadMaxima} participantes`;
+      elementoDestino.textContent = `Hasta ${capacidadMaxima} participantes.`;
     }
 
     return resultadoFallback;
@@ -169,7 +166,7 @@ async function obtenerEstadoCupos({
       elementoDestino.textContent =
         typeof formatearTexto === "function"
           ? formatearTexto(resultadoFallback)
-          : `hasta ${capacidadMaxima} participantes`;
+          : `Hasta ${capacidadMaxima} participantes`;
     }
 
     return resultadoFallback;
