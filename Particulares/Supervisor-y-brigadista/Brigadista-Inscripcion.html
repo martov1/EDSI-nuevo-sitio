@@ -81,7 +81,7 @@ redirect_from:
                 <button type="submit" class="btn-next" id="show-payment">Siguiente</button>
             </form>
 
-            <div class="payment-step" id="payment-step"  >
+            <div class="payment-step" id="payment-step" hidden >
                 <div class="total-box" id="total-payment">
                     <span>Valor total</span>
                     <strong id="payment-amount">$100.000</strong>
@@ -94,7 +94,7 @@ redirect_from:
                 <fieldset class="payment-type-group">
                     <legend>Elegí cómo querés reservar tu lugar:</legend>
                     <button type="button" class="payment-type is-selected" id="full-payment" aria-pressed="true">
-                        <strong>Abonar el curso completo</strong>
+                        <strong>Abonar el curso completo (Contado o cuotas)</strong>
                         <span>$100.000</span>
                     </button>
                     <button type="button" class="payment-type" id="deposit-payment" aria-pressed="false">
