@@ -1,4 +1,5 @@
 :root {
+  /* Colores compartidos por la pagina del curso */
   --primary-dark: #1a2a3a;
   --accent-red: #e74c3c;
   --bg-light: #f4f6f8;
@@ -6,11 +7,13 @@
 }
 
 .course-page {
+  /* Contenedor principal de la pagina */
   padding: 40px 20px;
   background: #fff;
 }
 
 .hero-course {
+  /* Portada con imagen, contraste y acento lateral */
   background:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
     url("../..//assets/brigadista-contra-incendios.jpg");
@@ -29,6 +32,7 @@
   line-height: 1.2;
 }
 .hero-tags {
+  /* Etiquetas de modalidad y estado de inscripcion */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -54,12 +58,14 @@
   text-transform: uppercase;
 }
 .grid-container {
+  /* Contenido principal junto a la ficha lateral */
   display: grid;
   grid-template-columns: 1fr 350px;
   gap: 40px;
 }
 
 .section-card {
+  /* Separacion visual entre bloques de informacion */
   margin-bottom: 40px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 20px;
@@ -77,6 +83,7 @@
 }
 
 .description-box {
+  /* Texto introductorio del curso */
   line-height: 1.6;
   color: #444;
   margin-bottom: 30px;
@@ -86,6 +93,7 @@
 }
 
 .cronograma-section {
+  /* Fechas y modalidad de cursada */
   margin-bottom: 20px;
 }
 .cronograma-list {
@@ -104,6 +112,7 @@
 }
 
 .highlights-list {
+  /* Lista destacada de competencias */
   background: #fff8f7;
   border: 1px solid #ffe4e1;
   padding: 20px;
@@ -128,6 +137,7 @@
 }
 
 .temario-clase {
+  /* Bloque individual de cada clase del programa */
   background: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
@@ -162,6 +172,7 @@
 }
 
 .sidebar-info {
+  /* Ficha lateral fija con datos y llamados a la accion */
   background: var(--bg-light);
   padding: 25px;
   border-radius: 8px;
@@ -182,10 +193,12 @@
 }
 
 .inscription-box {
+  /* Acciones de contacto e inscripcion */
   margin-top: 25px;
   text-align: center;
 }
 .btn-payment {
+  /* Boton principal de inscripcion */
   background: #009ee3;
   color: white;
   padding: 12px;
@@ -207,6 +220,7 @@
   box-shadow: 0 6px 18px rgba(0, 158, 227, 0.28);
 }
 .btn-primary {
+  /* Boton secundario de contacto por WhatsApp */
   background: #25d366;
   color: white;
   padding: 12px;
@@ -233,6 +247,7 @@
 }
 
 .note-box {
+  /* Aclaracion importante para bomberos voluntarios */
   background: #fff3cd;
   border: 1px solid #ffeeba;
   padding: 15px;
@@ -243,12 +258,219 @@
 }
 
 .eval-box {
+  /* Informacion sobre evaluacion y certificacion */
   background: #e3f2fd;
   padding: 25px;
   border-radius: 8px;
   border-left: 6px solid #1976d2;
 }
+.reviews-section {
+  /* Seccion de opiniones de cursantes */
+  padding-top: 10px;
+}
+.reviews-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.reviews-heading h2 {
+  margin-bottom: 0;
+}
+.section-kicker {
+  display: block;
+  color: var(--accent-red);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.reviews-score {
+  color: #e3a008;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+.reviews-carousel {
+  /* Oculta el contenido que queda fuera de la pagina activa */
+  position: relative;
+  overflow: hidden;
+}
+.reviews-viewport {
+  /* Ventana visible del carrusel */
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+}
+.reviews-track {
+  /* Fila que se desplaza entre las tres paginas */
+  box-sizing: border-box;
+  display: flex;
+  min-width: 0;
+  transition: transform 0.35s ease;
+  width: 100%;
+}
+.reviews-slide {
+  /* Cada pagina contiene cuatro opiniones, excepto la ultima */
+  box-sizing: border-box;
+  display: grid;
+  flex: 0 0 100%;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+}
+.reviews-toggle {
+  /* Radios invisibles que controlan el carrusel sin JavaScript */
+  height: 1px;
+  left: -100px;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: -100px;
+  width: 1px;
+}
+#reviews-page-1:checked ~ .reviews-viewport .reviews-track {
+  /* Primera pagina */
+  transform: translateX(0);
+}
+#reviews-page-2:checked ~ .reviews-viewport .reviews-track {
+  /* Segunda pagina */
+  transform: translateX(-100%);
+}
+#reviews-page-3:checked ~ .reviews-viewport .reviews-track {
+  /* Tercera pagina */
+  transform: translateX(-200%);
+}
+#reviews-page-4:checked ~ .reviews-viewport .reviews-track {
+  /* Cuarta pagina */
+  transform: translateX(-300%);
+}
+#reviews-page-5:checked ~ .reviews-viewport .reviews-track {
+  /* Quinta pagina */
+  transform: translateX(-400%);
+}
+#reviews-page-6:checked ~ .reviews-viewport .reviews-track {
+  /* Sexta pagina */
+  transform: translateX(-500%);
+}
+.review-card {
+  /* Tarjeta individual de una opinion */
+  background: #fffaf8;
+  border: 1px solid #f1dfda;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 18px;
+}
+.review-card-header {
+  /* Identidad del cursante */
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.review-avatar {
+  /* Inicial del nombre del cursante */
+  align-items: center;
+  background: var(--primary-dark);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  flex: 0 0 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+.review-card-header div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.review-card-header span:not(.review-avatar) {
+  color: #777;
+  font-size: 0.75rem;
+}
+.review-card p {
+  color: #444;
+  flex: 1;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0 0 16px;
+  overflow-wrap: anywhere;
+}
+.review-card .review-no-comment {
+  color: #777;
+  font-style: italic;
+}
+.review-rating {
+  /* Resultado de la valoracion */
+  color: var(--accent-red);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+.reviews-controls {
+  /* Controles fijos, fuera del area desplazable */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.reviews-controls-page {
+  /* Solo se muestra el control de la pagina activa */
+  align-items: center;
+  display: none;
+  gap: 16px;
+}
+#reviews-page-1:checked ~ .reviews-controls .reviews-controls-page-1,
+#reviews-page-2:checked ~ .reviews-controls .reviews-controls-page-2,
+#reviews-page-3:checked ~ .reviews-controls .reviews-controls-page-3,
+#reviews-page-4:checked ~ .reviews-controls .reviews-controls-page-4,
+#reviews-page-5:checked ~ .reviews-controls .reviews-controls-page-5,
+#reviews-page-6:checked ~ .reviews-controls .reviews-controls-page-6 {
+  display: flex;
+}
+.reviews-arrow {
+  /* Flechas de navegacion del carrusel */
+  align-items: center;
+  background: var(--primary-dark);
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.1rem;
+  height: 34px;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  width: 34px;
+}
+.reviews-arrow:hover {
+  background: var(--accent-red);
+}
+.reviews-arrow-disabled {
+  cursor: default;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.reviews-page {
+  /* Indicador de pagina activa */
+  color: var(--primary-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-width: 34px;
+  text-align: center;
+}
 .qr-mock {
+  /* Espacio reservado para una vista previa de codigo QR */
   width: 80px;
   height: 80px;
   background: #eee;
@@ -263,6 +485,7 @@
 }
 
 @media (max-width: 992px) {
+  /* Ajustes para tablet y pantallas medianas */
   .grid-container {
     display: grid; /* Asegura que mantenga el comportamiento de grid */
     grid-template-columns: 1fr;
@@ -279,5 +502,18 @@
 
   .sidebar {
     order: 1; /* Sube al primer lugar */
+  }
+
+  .reviews-slide {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  /* Ajustes para telefonos */
+  .reviews-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 }
