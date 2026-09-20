@@ -132,7 +132,7 @@ async function obtenerEstadoCupos({
     }).length;
 
     // 8) Calculamos cuántos cupos quedan.
-    const cuposDisponibles = Math.max(0, capacidadMaxima - confirmados);
+    const cuposDisponibles = Math.max(1, capacidadMaxima - confirmados);
 
     // 9) Armamos el resultado final que se devuelve a quien llame la función.
     const resultado = {
