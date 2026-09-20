@@ -356,10 +356,6 @@
   /* Quinta pagina */
   transform: translateX(-400%);
 }
-#reviews-page-6:checked ~ .reviews-viewport .reviews-track {
-  /* Sexta pagina */
-  transform: translateX(-500%);
-}
 .review-card {
   /* Tarjeta individual de una opinion */
   background: #fffaf8;
