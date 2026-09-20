@@ -338,7 +338,7 @@ redirect_from:
                     <div class="info-row"><strong>Horario:</strong> <span>19:00 a 22:00 hs</span></div>
                     <div class="info-row"><strong>Duración:</strong> <span>15 Horas (5 clases)</span></div>
                     <div class="info-row"><strong>Modalidad:</strong> <span>Sincrónica (En vivo)</span></div>
-                    <div class="info-row"><strong>Capacidad:</strong> <span>Máx. 15 alumnos</span></div>
+                    <div class="info-row"><strong>Cupos:</strong> <span id="cupos-disponibles">Cargando...</span></div>
                     <div class="info-row"><strong>Plataforma:</strong> <span>Google Classroom y Meet</span></div>
                     <div class="info-row"><strong>Costo:</strong> <span>$100.000</span></div>
                     
@@ -356,6 +356,20 @@ redirect_from:
         </div>
 
     </main>
+    </script>
+    <script src="/Particulares/Supervisor-y-brigadista/cupos-curso.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cuposEl = document.getElementById("cupos-disponibles");
+
+        if (!cuposEl) return;
+
+        obtenerEstadoCupos({
+          elementoDestino: cuposEl,
+          formatearTexto: ({ cuposDisponibles }) =>
+            `${cuposDisponibles} disponibles`,
+        });
+      });
     </script>
 </body>
 </html>

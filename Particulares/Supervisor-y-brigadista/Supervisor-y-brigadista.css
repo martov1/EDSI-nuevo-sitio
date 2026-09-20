@@ -192,6 +192,11 @@
   color: var(--primary-dark);
 }
 
+#cupos-disponibles {
+  color: rgb(231, 76, 60);
+  font-weight: bold;
+}
+
 .inscription-box {
   /* Acciones de contacto e inscripcion */
   margin-top: 25px;
