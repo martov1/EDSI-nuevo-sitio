@@ -14,6 +14,7 @@
 const CUPOS_CONFIG = {
   spreadsheetId: "1rIE5dT2raFRLX7lyB_Qi-8IOVoq0cvr4slU7fDrJREs",
   capacidadMaxima: 15,
+  inscripcionesAbiertas: true,
 };
 
 /*********************************************************************
@@ -41,6 +42,8 @@ async function obtenerEstadoCupos({
   spreadsheetId = CUPOS_CONFIG.spreadsheetId,
   // Cantidad máxima de personas que puede haber en el curso.
   capacidadMaxima = CUPOS_CONFIG.capacidadMaxima,
+  // Define si se debe consultar la planilla o mostrar el fallback.
+  inscripcionesAbiertas = CUPOS_CONFIG.inscripcionesAbiertas,
   // Nombre de la columna que indica si la reserva está confirmada.
   nombreColumna = "Reserva confirmada",
   // Elemento del DOM donde se va a mostrar el texto final.
@@ -48,6 +51,25 @@ async function obtenerEstadoCupos({
   // Función opcional para formatear el mensaje final.
   formatearTexto = null,
 } = {}) {
+  // Si las inscripciones están cerradas, mostramos el fallback configurado
+  // sin hacer una consulta innecesaria a la planilla.
+  if (!inscripcionesAbiertas) {
+    const resultadoFallback = {
+      confirmados: 0,
+      cuposDisponibles: capacidadMaxima,
+      totalInscriptos: 0,
+    };
+
+    if (elementoDestino) {
+      elementoDestino.textContent =
+        typeof formatearTexto === "function"
+          ? formatearTexto(resultadoFallback)
+          : `hasta ${capacidadMaxima} participantes`;
+    }
+
+    return resultadoFallback;
+  }
+
   // URL pública para consultar la planilla en formato JSON.
   const jsonUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`;
 
