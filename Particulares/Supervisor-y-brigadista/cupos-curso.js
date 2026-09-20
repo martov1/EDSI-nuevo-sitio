@@ -1,3 +1,6 @@
+---
+---
+
 /*********************************************************************
  * CUPOS DEL CURSO
  *
@@ -8,13 +11,13 @@
 /*********************************************************************
  * CONFIGURACIÓN
  *
- * Acá se define el ID de la planilla y la capacidad máxima del curso.
- * Si cambias de curso, solo tenés que ajustar estos valores.
+ * Los valores propios del curso se leen desde _config.yml y Jekyll los
+ * inserta al generar este archivo JavaScript.
  *********************************************************************/
 const CUPOS_CONFIG = {
-  spreadsheetId: "1rIE5dT2raFRLX7lyB_Qi-8IOVoq0cvr4slU7fDrJREs",
-  capacidadMaxima: 15,
-  inscripcionesAbiertas: true,
+  spreadsheetId: {{ site.cupos_brigadista.spreadsheet_id | jsonify }},
+  capacidadMaxima: {{ site.cupos_brigadista.capacidad_maxima }},
+  inscripcionesAbiertas: {{ site.cupos_brigadista.inscripciones_abiertas | jsonify }},
 };
 
 /*********************************************************************
