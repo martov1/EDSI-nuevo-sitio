@@ -227,9 +227,8 @@
   color: var(--accent-red);
 }
 .availability-note {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+  display: grid;
+  gap: 4px;
   max-width: 620px;
   margin: -6px 0 24px;
   padding: 11px 14px;
@@ -238,9 +237,23 @@
   color: var(--primary-dark);
   line-height: 1.45;
 }
-.availability-note strong {
+.availability-title {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
   color: var(--accent-red);
-  white-space: nowrap;
+  text-transform: uppercase;
+}
+.availability-count {
+  color: var(--primary-dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.availability-number {
+  color: rgb(231, 76, 60);
+}
+.availability-note p {
+  margin: 2px 0 0;
+  color: #5d6870;
 }
 .payment-type-group {
   display: grid;

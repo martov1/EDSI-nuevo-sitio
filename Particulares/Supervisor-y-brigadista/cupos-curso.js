@@ -1,3 +1,6 @@
+---
+---
+
 /*********************************************************************
  * CUPOS DEL CURSO
  *
@@ -8,12 +11,13 @@
 /*********************************************************************
  * CONFIGURACIÓN
  *
- * Acá se define el ID de la planilla y la capacidad máxima del curso.
- * Si cambias de curso, solo tenés que ajustar estos valores.
+ * Los valores propios del curso se leen desde _config.yml y Jekyll los
+ * inserta al generar este archivo JavaScript.
  *********************************************************************/
 const CUPOS_CONFIG = {
-  spreadsheetId: "1rIE5dT2raFRLX7lyB_Qi-8IOVoq0cvr4slU7fDrJREs",
-  capacidadMaxima: 15,
+  spreadsheetId: {{ site.cupos_brigadista.spreadsheet_id | jsonify }},
+  capacidadMaxima: {{ site.cupos_brigadista.capacidad_maxima }},
+  inscripcionesAbiertas: {{ site.cupos_brigadista.inscripciones_abiertas | jsonify }},
 };
 
 /*********************************************************************
@@ -41,6 +45,8 @@ async function obtenerEstadoCupos({
   spreadsheetId = CUPOS_CONFIG.spreadsheetId,
   // Cantidad máxima de personas que puede haber en el curso.
   capacidadMaxima = CUPOS_CONFIG.capacidadMaxima,
+  // Define si se debe consultar la planilla o mostrar el fallback.
+  inscripcionesAbiertas = CUPOS_CONFIG.inscripcionesAbiertas,
   // Nombre de la columna que indica si la reserva está confirmada.
   nombreColumna = "Reserva confirmada",
   // Elemento del DOM donde se va a mostrar el texto final.
@@ -48,6 +54,22 @@ async function obtenerEstadoCupos({
   // Función opcional para formatear el mensaje final.
   formatearTexto = null,
 } = {}) {
+  // Si las inscripciones están cerradas, mostramos el fallback configurado
+  // sin hacer una consulta innecesaria a la planilla.
+  if (!inscripcionesAbiertas) {
+    const resultadoFallback = {
+      confirmados: 0,
+      cuposDisponibles: capacidadMaxima,
+      totalInscriptos: 0,
+    };
+
+    if (elementoDestino) {
+      elementoDestino.textContent = `Hasta ${capacidadMaxima} participantes.`;
+    }
+
+    return resultadoFallback;
+  }
+
   // URL pública para consultar la planilla en formato JSON.
   const jsonUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`;
 
@@ -107,7 +129,7 @@ async function obtenerEstadoCupos({
     }).length;
 
     // 8) Calculamos cuántos cupos quedan.
-    const cuposDisponibles = Math.max(0, capacidadMaxima - confirmados);
+    const cuposDisponibles = Math.max(1, capacidadMaxima - confirmados);
 
     // 9) Armamos el resultado final que se devuelve a quien llame la función.
     const resultado = {
@@ -144,7 +166,7 @@ async function obtenerEstadoCupos({
       elementoDestino.textContent =
         typeof formatearTexto === "function"
           ? formatearTexto(resultadoFallback)
-          : `hasta ${capacidadMaxima} participantes`;
+          : `Hasta ${capacidadMaxima} participantes`;
     }
 
     return resultadoFallback;

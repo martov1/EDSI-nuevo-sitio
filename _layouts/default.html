@@ -95,8 +95,8 @@
     {% include header.html %} {{ content }} {% include footer.html %} {% include
     email-flotante.html %} {% include whatsapp-flotante.html %}
     <script src="{{ site.baseurl }}/script.js"></script>
-    {% if page.js %}
-    <script src="{{ site.baseurl }}{{ page.js }}"></script>
-    {% endif %}
+    {% if page.js %} {% for script in page.js %}
+    <script src="{{ site.baseurl }}{{ script }}"></script>
+    {% endfor %} {% endif %}
   </body>
 </html>

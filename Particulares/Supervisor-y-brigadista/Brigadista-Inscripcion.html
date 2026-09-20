@@ -4,7 +4,9 @@ title: "Supervisor y Brigadista contra Incendios"
 description: "Curso virtual sincrónico de 15 horas para formarte como brigadista o supervisor de emergencias. Ideal para encargados, profesionales de seguridad e higiene y líderes de brigada."
 image: /assets/brigadista-contra-incendios.jpg
 css: /Particulares/Supervisor-y-brigadista/Brigadista-inscripcion.css
-js: /Particulares/Supervisor-y-brigadista/Brigadista-inscripcion.js
+js:
+    - /Particulares/Supervisor-y-brigadista/Brigadista-inscripcion.js
+    - /Particulares/Supervisor-y-brigadista/cupos-curso.js
 redirect_from:
   - /capacitaciones/particulares/brigadista-contra-incendios
   - /Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista.html
@@ -88,8 +90,9 @@ redirect_from:
                     
                 </div>
                 <div class="availability-note" role="status">
-                    <strong>Cupos limitados</strong>
-                    <span>Reservá tu lugar abonando el curso completo o haciendo una seña.</span>
+                    <strong class="availability-title">Cupos limitados</strong>
+                    <span class="availability-count" id="cupos-inscripcion">Cargando cupos...</span>
+                    <p>Reservá tu lugar abonando el curso completo o haciendo una seña.</p>
                 </div>
                 <fieldset class="payment-type-group">
                     <legend>Elegí cómo querés reservar tu lugar:</legend>
@@ -143,5 +146,24 @@ redirect_from:
         </div>
 
     </main>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const cuposInscripcionEl = document.getElementById("cupos-inscripcion");
+
+                if (!cuposInscripcionEl) return;
+
+                obtenerEstadoCupos({
+                    elementoDestino: cuposInscripcionEl,
+                }).then(({ confirmados, cuposDisponibles }) => {
+                    cuposInscripcionEl.innerHTML =
+                        `Quedan <strong class="availability-number">${cuposDisponibles}</strong> cupos de un total de <strong class="availability-number">${CUPOS_CONFIG.capacidadMaxima}</strong>.`;
+
+                    const porcentajeOcupacion =
+                        confirmados / CUPOS_CONFIG.capacidadMaxima;
+
+                    cuposInscripcionEl.hidden = porcentajeOcupacion < 0.2;
+                });
+            });
+        </script>
 </body>
 </html>

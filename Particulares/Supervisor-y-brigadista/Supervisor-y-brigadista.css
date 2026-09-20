@@ -224,6 +224,20 @@
   transform: translateY(0) scale(1.02);
   box-shadow: 0 6px 18px rgba(0, 158, 227, 0.28);
 }
+.enrollment-cta-disabled,
+.enrollment-cta-disabled:hover {
+  appearance: none;
+  background-color: #9aa0a6;
+  border: 0;
+  box-sizing: border-box;
+  box-shadow: none;
+  cursor: not-allowed;
+  font: inherit;
+  opacity: 0.85;
+  text-align: center;
+  transform: none;
+  width: 100%;
+}
 .btn-primary {
   /* Boton secundario de contacto por WhatsApp */
   background: #25d366;
