@@ -80,7 +80,7 @@ js:
       <section class="section-card cronograma-section">
         <h2>Cronograma</h2>
         <ul class="cronograma-list">
-          <li>Una clase de 3 horas. Próxima fecha a confirmar.</li>
+          <li>Una clase de 3 horas. Inicio: {{ site.primera_respuesta_incendios.cursada.fecha_inicio }}.</li>
         </ul>
       </section>
 
@@ -127,10 +127,12 @@ js:
     <aside class="sidebar">
       <div class="sidebar-info">
         <div class="info-row">
-          <strong>Inicio:</strong> <span>Próxima fecha a confirmar</span>
+          <strong>Inicio:</strong>
+          <span>{{ site.primera_respuesta_incendios.cursada.fecha_inicio }}</span>
         </div>
         <div class="info-row">
-          <strong>Horario:</strong> <span>A confirmar</span>
+          <strong>Horario:</strong>
+          <span>{{ site.primera_respuesta_incendios.cursada.horario }}</span>
         </div>
         <div class="info-row">
           <strong>Duración:</strong> <span>3 horas (1 clase)</span>

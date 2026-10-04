@@ -61,7 +61,7 @@ redirect_from:
                     <p>Para personas interesadas en <b>cursar de forma asincrónica</b> por motivos laborales, las grabaciones y materiales se encontrarán disponibles en la plataforma.</p>
 
                     <ul class="cronograma-list">
-                        <li>Clase 1 - jueves 08/10/2026</li>
+                        <li>Clase 1 - {{ site.brigadista.cursada.fecha_inicio }}</li>
                         <li>Clase 2 - jueves 15/10/2026</li>
                         <li>Clase 3 - jueves 22/10/2026</li>
                         <li>Clase 4 - jueves 29/10/2026</li>
@@ -328,8 +328,8 @@ redirect_from:
 
             <aside class="sidebar">
                 <div class="sidebar-info">
-                    <div class="info-row"><strong>Inicio:</strong> <span>Jueves 08 de Octubre 2026</span></div>
-                    <div class="info-row"><strong>Horario:</strong> <span>19:00 a 22:00 hs</span></div>
+                    <div class="info-row"><strong>Inicio:</strong> <span>{{ site.brigadista.cursada.fecha_inicio }}</span></div>
+                    <div class="info-row"><strong>Horario:</strong> <span>{{ site.brigadista.cursada.horario }}</span></div>
                     <div class="info-row"><strong>Duración:</strong> <span>15 Horas (5 clases)</span></div>
                     <div class="info-row"><strong>Modalidad:</strong> <span>Sincrónica (En vivo)</span></div>
                     <div class="info-row"><strong>Cupos:</strong> <span id="cupos-disponibles">Cargando...</span></div>

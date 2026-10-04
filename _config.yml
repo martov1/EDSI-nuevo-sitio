@@ -66,6 +66,10 @@ whatsapp_message_empresa_extintores: "¡Hola!, Vi su *sitio web* y me gustaría 
 #############################################
 
 brigadista:
+  cursada:
+    fecha_inicio: "Jueves 08 de Octubre 2026"
+    horario: "19:00 a 22:00 hs"
+
   cupos:
     spreadsheet_id: "1rIE5dT2raFRLX7lyB_Qi-8IOVoq0cvr4slU7fDrJREs"
     capacidad_maxima: 15
@@ -97,10 +101,14 @@ brigadista:
 
 # Mantener los datos de este curso separados de los del curso de brigadista.
 primera_respuesta_incendios:
+  cursada:
+    fecha_inicio: "Próxima fecha a confirmar"
+    horario: "A confirmar"
+
   cupos:
     spreadsheet_id: "1UJdUbG9ZcS3eA2bn03s3EC8Y6LsGZUrFFy57PrO4YBU"
     capacidad_maxima: 4
-    inscripciones_abiertas: true
+    inscripciones_abiertas: false
 
   pagos:
     habilitar_sena: false
