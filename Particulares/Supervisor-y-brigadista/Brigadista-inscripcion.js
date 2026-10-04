@@ -37,15 +37,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Consulta el estado y actualiza el resumen de cupos de esta página.
   const cuposInscripcionEl = document.getElementById("cupos-inscripcion");
 
+  // Pone los textos en el html de los cupos que quedan
   if (cuposInscripcionEl) {
     obtenerEstadoCupos(CUPOS_CONFIG).then(
       ({ confirmados, cuposDisponibles }) => {
-        cuposInscripcionEl.innerHTML =
-          `Quedan <strong class="availability-number">${cuposDisponibles}</strong> cupos de un total de <strong class="availability-number">${CUPOS_CONFIG.capacidadMaxima}</strong>.`;
+        cuposInscripcionEl.innerHTML = `Quedan <strong class="availability-number">${cuposDisponibles}</strong> cupos de un total de <strong class="availability-number">${CUPOS_CONFIG.capacidadMaxima}</strong>.`;
 
         // Oculta el aviso hasta que se haya ocupado al menos el 20% del curso.
-        const porcentajeOcupacion =
-          confirmados / CUPOS_CONFIG.capacidadMaxima;
+        const porcentajeOcupacion = confirmados / CUPOS_CONFIG.capacidadMaxima;
 
         cuposInscripcionEl.hidden = porcentajeOcupacion < 0.2;
       },
