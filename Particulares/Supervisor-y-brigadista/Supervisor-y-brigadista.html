@@ -4,6 +4,9 @@ title: "Supervisor y Brigadista contra Incendios"
 description: "Curso virtual sincrónico de 15 horas para formarte como brigadista o supervisor de emergencias. Ideal para encargados, profesionales de seguridad e higiene y líderes de brigada."
 image: /assets/brigadista-contra-incendios.jpg
 css: /Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista.css
+js:
+  - /Particulares/funciones.js
+  - /Particulares/Supervisor-y-brigadista/supervisor-y-brigadista.js
 redirect_from:
   - /capacitaciones/particulares/brigadista-contra-incendios
   - /Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista.html
@@ -353,20 +356,5 @@ redirect_from:
         </div>
 
     </main>
-    </script>
-    <script src="/Particulares/Supervisor-y-brigadista/cupos-curso.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const cuposEl = document.getElementById("cupos-disponibles");
-
-        if (!cuposEl) return;
-
-        obtenerEstadoCupos({
-          elementoDestino: cuposEl,
-          formatearTexto: ({ cuposDisponibles }) =>
-            `${cuposDisponibles} vacantes disponibles`,
-        });
-      });
-    </script>
 </body>
 </html>

@@ -34,6 +34,24 @@ const PAYMENT_TYPES = {
  * todos los listeners y validaciones del formulario.
  *********************************************************************/
 document.addEventListener("DOMContentLoaded", function () {
+  // Consulta el estado y actualiza el resumen de cupos de esta página.
+  const cuposInscripcionEl = document.getElementById("cupos-inscripcion");
+
+  if (cuposInscripcionEl) {
+    obtenerEstadoCupos(CUPOS_CONFIG).then(
+      ({ confirmados, cuposDisponibles }) => {
+        cuposInscripcionEl.innerHTML =
+          `Quedan <strong class="availability-number">${cuposDisponibles}</strong> cupos de un total de <strong class="availability-number">${CUPOS_CONFIG.capacidadMaxima}</strong>.`;
+
+        // Oculta el aviso hasta que se haya ocupado al menos el 20% del curso.
+        const porcentajeOcupacion =
+          confirmados / CUPOS_CONFIG.capacidadMaxima;
+
+        cuposInscripcionEl.hidden = porcentajeOcupacion < 0.2;
+      },
+    );
+  }
+
   /*******************************************************************
    * 1) ELEMENTOS DEL DOM
    *
@@ -74,35 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     phoneConfirmation.setCustomValidity(
       phonesMatch ? "" : "Los teléfonos no coinciden.",
     );
-  }
-
-  /*******************************************************************
-   * 3) NAVEGACIÓN Y SCROLL
-   *
-   * Propósito: detecta si la pantalla está en orientación vertical.
-   * Inputs: no recibe parámetros.
-   * Output: devuelve true si la orientación es portrait, false en caso contrario.
-   *******************************************************************/
-  function isPortraitOrientation() {
-    return window.matchMedia("(orientation: portrait)").matches;
-  }
-
-  /*******************************************************************
-   * Propósito: desplaza la vista suavemente hacia un bloque específico.
-   * Inputs:
-   *   - element: nodo del DOM a visualizar
-   *   - block: posición del scroll ("start", "center", "end")
-   *   - portraitOnly: si es true, solo hace scroll en modo vertical
-   * Output: ejecuta scrollIntoView con comportamiento suave.
-   *******************************************************************/
-  function scrollToElement(element, block = "center", portraitOnly = true) {
-    if (portraitOnly && !isPortraitOrientation()) {
-      return;
-    }
-
-    requestAnimationFrame(function () {
-      element.scrollIntoView({ behavior: "smooth", block });
-    });
   }
 
   /*******************************************************************

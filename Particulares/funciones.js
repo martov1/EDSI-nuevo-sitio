@@ -1,73 +1,56 @@
----
----
-
 /*********************************************************************
- * CUPOS DEL CURSO
- *
- * Este archivo se reutiliza en distintas páginas para mostrar cuántos
- * cupos quedan disponibles según la planilla pública del curso.
+ * FUNCIONES REUTILIZABLES PARA CURSOS PARTICULARES
  *********************************************************************/
 
 /*********************************************************************
- * CONFIGURACIÓN
- *
- * Los valores propios del curso se leen desde _config.yml y Jekyll los
- * inserta al generar este archivo JavaScript.
+ * Devuelve true si la pantalla está en orientación vertical.
  *********************************************************************/
-const CUPOS_CONFIG = {
-  spreadsheetId: {{ site.cupos_brigadista.spreadsheet_id | jsonify }},
-  capacidadMaxima: {{ site.cupos_brigadista.capacidad_maxima }},
-  inscripcionesAbiertas: {{ site.cupos_brigadista.inscripciones_abiertas | jsonify }},
-};
+function isPortraitOrientation() {
+  return window.matchMedia("(orientation: portrait)").matches;
+}
 
 /*********************************************************************
- * FUNCION PRINCIPAL: obtenerEstadoCupos
+ * Desplaza suavemente la página hasta un elemento.
  *
- * Qué devuelve:
- * - un objeto con este formato:
- *   {
- *     confirmados: 12,
- *     cuposDisponibles: 3,
- *     totalInscriptos: 15
- *   }
+ * portraitOnly limita el desplazamiento a pantallas en orientación vertical.
+ *********************************************************************/
+function scrollToElement(element, block = "center", portraitOnly = true) {
+  if (portraitOnly && !isPortraitOrientation()) {
+    return;
+  }
+
+  requestAnimationFrame(function () {
+    element.scrollIntoView({ behavior: "smooth", block });
+  });
+}
+
+/*********************************************************************
+ * FUNCION: obtenerEstadoCupos
  *
- * Flujo:
- * 1) toma el ID de la planilla y arma la URL pública de Google Sheets
- * 2) hace fetch a esa URL
- * 3) convierte la respuesta gviz en un array de objetos
- * 4) cuenta cuántos registros tienen "Reserva confirmada" en "si" o "sí"
- * 5) resta esa cantidad a la capacidad máxima
- * 6) devuelve ese objeto y, si se pasa un elemento del DOM,
- *    actualiza ese texto con la cantidad disponible
+ * Recibe la configuración de un curso y devuelve:
+ * {
+ *   confirmados: 12,
+ *   cuposDisponibles: 3,
+ *   totalInscriptos: 15
+ * }
  *********************************************************************/
 async function obtenerEstadoCupos({
   // ID público de la planilla de Google Sheets.
-  spreadsheetId = CUPOS_CONFIG.spreadsheetId,
+  spreadsheetId,
   // Cantidad máxima de personas que puede haber en el curso.
-  capacidadMaxima = CUPOS_CONFIG.capacidadMaxima,
+  capacidadMaxima,
   // Define si se debe consultar la planilla o mostrar el fallback.
-  inscripcionesAbiertas = CUPOS_CONFIG.inscripcionesAbiertas,
+  inscripcionesAbiertas,
   // Nombre de la columna que indica si la reserva está confirmada.
   nombreColumna = "Reserva confirmada",
-  // Elemento del DOM donde se va a mostrar el texto final.
-  elementoDestino = null,
-  // Función opcional para formatear el mensaje final.
-  formatearTexto = null,
 } = {}) {
-  // Si las inscripciones están cerradas, mostramos el fallback configurado
-  // sin hacer una consulta innecesaria a la planilla.
+  // Si las inscripciones están cerradas, devolvemos el estado sin consultar la planilla.
   if (!inscripcionesAbiertas) {
-    const resultadoFallback = {
+    return {
       confirmados: 0,
       cuposDisponibles: capacidadMaxima,
       totalInscriptos: 0,
     };
-
-    if (elementoDestino) {
-      elementoDestino.textContent = `Hasta ${capacidadMaxima} participantes.`;
-    }
-
-    return resultadoFallback;
   }
 
   // URL pública para consultar la planilla en formato JSON.
@@ -141,34 +124,15 @@ async function obtenerEstadoCupos({
     // Log útil para depurar en consola mientras carga la página.
     console.log("Cupos del curso:", resultado);
 
-    // 10) Si nos pasaron un elemento del DOM, actualizamos el texto visible.
-    if (elementoDestino) {
-      const texto =
-        typeof formatearTexto === "function"
-          ? formatearTexto(resultado)
-          : `${cuposDisponibles} cupos disponibles`;
-
-      elementoDestino.textContent = texto;
-    }
-
     return resultado;
   } catch (error) {
     // En caso de error, mostramos en consola y devolvemos un estado conservador.
     console.error("Error al obtener los datos de la planilla:", error);
 
-    const resultadoFallback = {
+    return {
       confirmados: 0,
       cuposDisponibles: capacidadMaxima,
       totalInscriptos: 0,
     };
-
-    if (elementoDestino) {
-      elementoDestino.textContent =
-        typeof formatearTexto === "function"
-          ? formatearTexto(resultadoFallback)
-          : `Hasta ${capacidadMaxima} participantes`;
-    }
-
-    return resultadoFallback;
   }
 }

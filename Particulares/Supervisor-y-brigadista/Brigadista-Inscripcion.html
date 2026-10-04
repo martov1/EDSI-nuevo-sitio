@@ -5,8 +5,9 @@ description: "Curso virtual sincrónico de 15 horas para formarte como brigadist
 image: /assets/brigadista-contra-incendios.jpg
 css: /Particulares/Supervisor-y-brigadista/Brigadista-inscripcion.css
 js:
+    - /Particulares/funciones.js
+    - /Particulares/Supervisor-y-brigadista/supervisor-y-brigadista.js
     - /Particulares/Supervisor-y-brigadista/Brigadista-inscripcion.js
-    - /Particulares/Supervisor-y-brigadista/cupos-curso.js
 redirect_from:
   - /capacitaciones/particulares/brigadista-contra-incendios
   - /Particulares/Supervisor-y-brigadista/Supervisor-y-brigadista.html
@@ -150,24 +151,5 @@ redirect_from:
         </div>
 
     </main>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const cuposInscripcionEl = document.getElementById("cupos-inscripcion");
-
-                if (!cuposInscripcionEl) return;
-
-                obtenerEstadoCupos({
-                    elementoDestino: cuposInscripcionEl,
-                }).then(({ confirmados, cuposDisponibles }) => {
-                    cuposInscripcionEl.innerHTML =
-                        `Quedan <strong class="availability-number">${cuposDisponibles}</strong> cupos de un total de <strong class="availability-number">${CUPOS_CONFIG.capacidadMaxima}</strong>.`;
-
-                    const porcentajeOcupacion =
-                        confirmados / CUPOS_CONFIG.capacidadMaxima;
-
-                    cuposInscripcionEl.hidden = porcentajeOcupacion < 0.2;
-                });
-            });
-        </script>
 </body>
 </html>
