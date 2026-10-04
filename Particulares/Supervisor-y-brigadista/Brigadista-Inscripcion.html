@@ -83,10 +83,10 @@ redirect_from:
                 <button type="submit" class="btn-next" id="show-payment">Siguiente</button>
             </form>
 
-            <div class="payment-step" id="payment-step"  >
+            <div class="payment-step" id="payment-step" hidden >
                 <div class="total-box" id="total-payment">
                     <span>Valor total</span>
-                    <strong id="payment-amount">$100.000</strong>
+                    <strong id="payment-amount">{{ site.payment_links.brigadista["valor que figura en curso completo"] }}</strong>
                     
                 </div>
                 <div class="availability-note" role="status">
@@ -102,11 +102,11 @@ redirect_from:
                     <legend>Elegí cómo querés reservar tu lugar:</legend>
                     <button type="button" class="payment-type is-selected" id="full-payment" aria-pressed="true">
                         <strong>Abonar el curso completo (Contado o cuotas)</strong>
-                        <span>$100.000</span>
+                        <span>{{ site.payment_links.brigadista["valor que figura en curso completo"] }}</span>
                     </button>
                     <button type="button" class="payment-type" id="deposit-payment" aria-pressed="false" {% unless site.payment_links.brigadista.habilitar_sena_brigadista %}hidden{% endunless %}>
                         <strong>Reservar mi lugar mediante una seña</strong>
-                        <span>$30.000</span>
+                        <span>{{ site.payment_links.brigadista["valor que figura en la seña"] }}</span>
                     </button>
                 </fieldset>
                 <p class="deposit-note" id="deposit-note" hidden>El pago de la seña garantiza el cupo, el monto restante deberá ser abonado antes del {{ site.payment_links.brigadista["fecha segunda cuota"] }} para poder continuar cursando.</p>
