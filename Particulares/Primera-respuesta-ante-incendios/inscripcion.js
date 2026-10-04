@@ -10,12 +10,12 @@ const FORM_CONFIG = {
 const PAYMENT_TYPES = {
   full: {
     mercadoLabel: "Mercado Pago",
-    whatsappLabel: "Consultar cuotas",
+    whatsappLabel: "Realizar una consulta",
     receiptSubject: "comprobante de pago - Primera respuesta ante incendios",
   },
   deposit: {
     mercadoLabel: "Pagar seña con Mercado Pago",
-    whatsappLabel: "Consultar por la seña",
+    whatsappLabel: "Realizar una consulta",
     receiptSubject: "comprobante de seña - Primera respuesta ante incendios",
   },
 };
@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const paymentOptions = document.querySelector(".payment-options");
   const mercadoPayment = document.getElementById("mercado-payment");
   const mercadoPaymentLabel = document.getElementById("mercado-payment-label");
-  const gocuotasPayment = document.getElementById("gocuotas-payment");
   const whatsappPayment = document.getElementById("whatsapp-payment");
   const whatsappPaymentLabel = document.getElementById(
     "whatsapp-payment-label",
@@ -84,8 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
     whatsappPayment.href = isDeposit
       ? whatsappPayment.dataset.depositUrl
       : whatsappPayment.dataset.fullUrl;
-    gocuotasPayment.hidden = isDeposit;
-    gocuotasPayment.classList.toggle("is-hidden", isDeposit);
     receiptButton.href = isDeposit
       ? receiptButton.dataset.depositUrl
       : receiptButton.dataset.fullUrl;

@@ -339,24 +339,6 @@
 .mercado-option:hover {
   background: #0089c8;
 }
-.gocuotas-option {
-  gap: 6px;
-  background: #e85586;
-  color: #fff;
-}
-.gocuotas-option:hover {
-  background: #d84775;
-  color: #fff;
-}
-.payment-option.is-hidden {
-  display: none;
-}
-.gocuotas-logo {
-  display: block;
-  width: min(100%, 150px);
-  height: 42px;
-  object-fit: contain;
-}
 .cuotas-option {
   gap: 8px;
   background: #25d366;
@@ -543,6 +525,11 @@
 }
 .info-row strong {
   color: var(--primary-dark);
+}
+
+#cupos-disponibles {
+  color: rgb(231, 76, 60);
+  font-weight: bold;
 }
 
 .inscription-box {
