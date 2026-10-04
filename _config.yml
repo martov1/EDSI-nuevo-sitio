@@ -86,6 +86,8 @@ whatsapp_links:
 # Links de pago
 payment_links:
   brigadista:
+    # Define si se ofrece la opción de reservar el curso mediante una seña.
+    habilitar_sena_brigadista: true
     curso_completo: "https://mpago.li/1cH2YJ8"
     gocuotas: "https://www.gocuotas.com/payment_link/checkouts/185037?verification=92518.5&order_amount=100000.0"
     sena: "https://mpago.la/1JRwirf"
