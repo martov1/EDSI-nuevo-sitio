@@ -106,7 +106,7 @@ primera_respuesta_incendios:
     capacidad_maxima: 4
     inscripciones_abiertas: true
   inscripcion:
-    script_url: "https://script.google.com/macros/s/AKfycbxVSO8uHWJXFvsD-gHofdU8oRZyE2HONb8Y-r0T_Gk-bySshZf_BZVEQ2g13VMoJ19C/exec"
+    script_url: "https://script.google.com/macros/s/AKfycbzmWxO-av5r4iDO9Afigq5Y3rcaHcyoUv0SPJk571Aft8GrgWca8hoZCXUWuDQXVOCI/exec"
   whatsapp:
     contacto: "https://wa.me/5491170616594?text=Hola%2C%20quiero%20consultar%20por%20el%20curso%20Primera%20respuesta%20ante%20incendios"
     consulta: "https://wa.me/5491170616594?text=Hola%2C%20quiero%20realizar%20una%20consulta%20sobre%20el%20curso%20Primera%20respuesta%20ante%20incendios"

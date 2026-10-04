@@ -11,100 +11,265 @@ js:
 ---
 
 <main class="course-page container">
-    <div class="hero-course">
-        <div class="hero-tags">
-            <span class="tag-sincronico">Virtual sincrónico</span>
-            <span class="tag-incripcion-abierta">Primera respuesta ante incendios</span>
-        </div>
-        <h1>Inscripción al curso</h1>
+  <div class="hero-course">
+    <div class="hero-tags">
+      <span class="tag-sincronico">Virtual sincrónico</span>
+      <span class="tag-incripcion-abierta">¡Inscripciones abiertas!</span>
     </div>
+    <h1>Inscripción al curso</h1>
+  </div>
 
-    {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
-    <section class="section-card enrollment-section" id="inscripcion">
-        <h2>Primera respuesta ante incendios</h2>
-        <p>Completá el formulario para reservar tu lugar. Al finalizar, seleccioná el medio de pago que prefieras.</p>
+  {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
+  <section class="section-card enrollment-section" id="inscripcion">
+    <h2>Primera respuesta ante incendios</h2>
+    <p>
+      Completá el formulario para reservar tu lugar. Al finalizar, seleccioná el
+      medio de pago que prefieras.
+    </p>
 
-        <form class="enrollment-form" id="enrollment-form">
-            <input type="hidden" name="curso" value="Primera respuesta ante incendios">
-            <div class="form-fields">
-                <div class="form-field">
-                    <label for="nombre">Nombre <span aria-hidden="true">*</span></label>
-                    <input type="text" id="nombre" name="nombre" autocomplete="given-name" required>
-                </div>
-                <div class="form-field">
-                    <label for="apellido">Apellido <span aria-hidden="true">*</span></label>
-                    <input type="text" id="apellido" name="apellido" autocomplete="family-name" required>
-                </div>
-                <div class="form-field">
-                    <label for="dni">DNI <span aria-hidden="true">*</span></label>
-                    <input type="text" id="dni" name="dni" inputmode="numeric" autocomplete="off" required>
-                </div>
-                <div class="form-field">
-                    <label for="email">Correo electrónico <span aria-hidden="true">*</span></label>
-                    <input type="email" id="email" name="email" autocomplete="email" required>
-                </div>
-                <div class="form-field">
-                    <label for="telefono">Teléfono de contacto <span aria-hidden="true">*</span></label>
-                    <input type="tel" id="telefono" name="telefono" autocomplete="tel" required>
-                </div>
-                <div class="form-field">
-                    <label for="telefono-confirmacion">Confirme teléfono <span aria-hidden="true">*</span></label>
-                    <input type="tel" id="telefono-confirmacion" name="telefono-confirmacion" autocomplete="tel" required>
-                </div>
-            </div>
-            <fieldset class="choice-group">
-                <legend>¿Tiene experiencia o conocimientos previos en prevención o lucha contra incendios? <span aria-hidden="true">*</span></legend>
-                <label><input type="radio" name="experiencia" value="si" required> Sí</label>
-                <label><input type="radio" name="experiencia" value="no"> No</label>
-            </fieldset>
-            <button type="submit" class="btn-next" id="show-payment">Siguiente</button>
-        </form>
-
-        <div class="payment-step" id="payment-step" hidden>
-            <div class="total-box" id="total-payment">
-                <span>Valor total</span>
-                <strong id="payment-amount">{{ site.primera_respuesta_incendios.pagos.valor_curso_completo }}</strong>
-            </div>
-            <div class="availability-note" role="status">
-                <strong class="availability-title">Cupos limitados</strong>
-                <span class="availability-count" id="cupos-inscripcion">Cargando cupos...</span>
-                <p>Reservá tu lugar abonando el curso completo.</p>
-            </div>
-            <fieldset class="payment-type-group">
-                <legend>Elegí cómo querés reservar tu lugar:</legend>
-                <button type="button" class="payment-type is-selected" id="full-payment" aria-pressed="true">
-                    <strong>Abonar el curso completo</strong>
-                    <span>{{ site.primera_respuesta_incendios.pagos.valor_curso_completo }}</span>
-                </button>
-                <button type="button" class="payment-type" id="deposit-payment" aria-pressed="false" {% unless site.primera_respuesta_incendios.pagos.habilitar_sena %}hidden{% endunless %}>
-                    <strong>Reservar mi lugar mediante una seña</strong>
-                    <span>{{ site.primera_respuesta_incendios.pagos.valor_sena }}</span>
-                </button>
-            </fieldset>
-            <p class="deposit-note" id="deposit-note" hidden>El pago de la seña garantiza el cupo. El monto restante deberá ser abonado antes del {{ site.primera_respuesta_incendios.pagos.fecha_segunda_cuota }}.</p>
-            <p class="payment-prompt">Elegí el medio de pago:</p>
-            <div class="payment-options">
-                <button type="button" class="payment-option transfer-option" id="show-transfer"><span class="bank-icon" aria-hidden="true">🏛️</span>Transferencia</button>
-                <a class="payment-option mercado-option" id="mercado-payment" href="{{ site.primera_respuesta_incendios.pagos.curso_completo }}" data-full-url="{{ site.primera_respuesta_incendios.pagos.curso_completo }}" data-deposit-url="{{ site.primera_respuesta_incendios.pagos.sena }}" target="_blank" rel="noopener noreferrer"><img class="mercado-logo" src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg" alt="" width="180" height="73"><span id="mercado-payment-label">Mercado Pago</span></a>
-                <a class="payment-option cuotas-option" id="whatsapp-payment" data-full-url="{{ site.primera_respuesta_incendios.whatsapp.consulta }}" data-deposit-url="{{ site.primera_respuesta_incendios.whatsapp.consulta }}" href="{{ site.primera_respuesta_incendios.whatsapp.consulta }}" target="_blank" rel="noopener noreferrer"><img class="whatsapp-logo" src="/assets/whatsapp-icon.svg" alt="" width="42" height="42"><span id="whatsapp-payment-label">Realizar una consulta</span></a>
-            </div>
-            <p class="payment-help"><em>Si tenés dificultades, <a href="{{ site.primera_respuesta_incendios.whatsapp.dificultades }}" target="_blank" rel="noopener noreferrer">contactanos por WhatsApp</a>.</em></p>
-            <div class="transfer-details" id="transfer-details" hidden>
-                <h3>Datos para la transferencia</h3>
-                <p><strong>Alias:</strong> edsi.capacitacion</p>
-                <p><strong>CBU:</strong> 0000003100055294771202</p>
-                <p><strong>CUIT:</strong> 20-37124156-7</p>
-                <a class="receipt-button" id="receipt-button" data-full-url="{{ site.primera_respuesta_incendios.whatsapp.comprobante_pago }}" data-deposit-url="{{ site.primera_respuesta_incendios.whatsapp.comprobante_pago }}" href="{{ site.primera_respuesta_incendios.whatsapp.comprobante_pago }}" target="_blank" rel="noopener noreferrer">
-                    <img src="/assets/whatsapp-icon.svg" alt="" width="20" height="20">Enviar comprobante
-                </a>
-                <p class="receipt-instructions">Enviá el comprobante por WhatsApp o por correo a <a href="mailto:info@edsi.com.ar?subject=Comprobante%20de%20pago%20-%20Primera%20respuesta%20ante%20incendios">info@edsi.com.ar</a>, con el asunto <strong id="receipt-subject">comprobante de pago - Primera respuesta ante incendios</strong>.</p>
-            </div>
+    <form class="enrollment-form" id="enrollment-form">
+      <input
+        type="hidden"
+        name="curso"
+        value="Primera respuesta ante incendios"
+      />
+      <div class="form-fields">
+        <div class="form-field">
+          <label for="nombre">Nombre <span aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            autocomplete="given-name"
+            required
+          />
         </div>
-    </section>
-    {% else %}
-    <section class="section-card enrollment-section">
-        <h2>Inscripciones próximamente</h2>
-        <p>Estamos preparando la próxima edición. <a href="{{ site.primera_respuesta_incendios.whatsapp.contacto }}" target="_blank" rel="noopener noreferrer">Consultanos por WhatsApp</a> para recibir información.</p>
-    </section>
-    {% endif %}
+        <div class="form-field">
+          <label for="apellido"
+            >Apellido <span aria-hidden="true">*</span></label
+          >
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            autocomplete="family-name"
+            required
+          />
+        </div>
+        <div class="form-field">
+          <label for="dni">DNI <span aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="dni"
+            name="dni"
+            inputmode="numeric"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div class="form-field">
+          <label for="email"
+            >Correo electrónico <span aria-hidden="true">*</span></label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+        <div class="form-field">
+          <label for="telefono"
+            >Teléfono de contacto <span aria-hidden="true">*</span></label
+          >
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            autocomplete="tel"
+            required
+          />
+        </div>
+        <div class="form-field">
+          <label for="telefono-confirmacion"
+            >Confirme teléfono <span aria-hidden="true">*</span></label
+          >
+          <input
+            type="tel"
+            id="telefono-confirmacion"
+            name="telefono-confirmacion"
+            autocomplete="tel"
+            required
+          />
+        </div>
+      </div>
+      <fieldset class="choice-group">
+        <legend>
+          ¿Tiene experiencia o conocimientos previos en prevención o lucha
+          contra incendios? <span aria-hidden="true">*</span>
+        </legend>
+        <label
+          ><input type="radio" name="experiencia" value="si" required />
+          Sí</label
+        >
+        <label><input type="radio" name="experiencia" value="no" /> No</label>
+      </fieldset>
+      <button type="submit" class="btn-next" id="show-payment">
+        Siguiente
+      </button>
+    </form>
+
+    <div class="payment-step" id="payment-step" hidden>
+      <div class="total-box" id="total-payment">
+        <span>Valor total</span>
+        <strong id="payment-amount"
+          >{{ site.primera_respuesta_incendios.pagos.valor_curso_completo
+          }}</strong
+        >
+      </div>
+      <div class="availability-note" role="status">
+        <strong class="availability-title">Cupos limitados</strong>
+        <span class="availability-count" id="cupos-inscripcion"
+          >Cargando cupos...</span
+        >
+        <p>Reservá tu lugar abonando el curso completo.</p>
+      </div>
+      <fieldset class="payment-type-group">
+        <legend>Elegí cómo querés reservar tu lugar:</legend>
+        <button
+          type="button"
+          class="payment-type is-selected"
+          id="full-payment"
+          aria-pressed="true"
+        >
+          <strong>Abonar el curso completo</strong>
+          <span
+            >{{ site.primera_respuesta_incendios.pagos.valor_curso_completo
+            }}</span
+          >
+        </button>
+        <button
+          type="button"
+          class="payment-type"
+          id="deposit-payment"
+          aria-pressed="false"
+          {%
+          unless
+          site.primera_respuesta_incendios.pagos.habilitar_sena
+          %}hidden{%
+          endunless
+          %}
+        >
+          <strong>Reservar mi lugar mediante una seña</strong>
+          <span>{{ site.primera_respuesta_incendios.pagos.valor_sena }}</span>
+        </button>
+      </fieldset>
+      <p class="deposit-note" id="deposit-note" hidden>
+        El pago de la seña garantiza el cupo. El monto restante deberá ser
+        abonado antes del {{
+        site.primera_respuesta_incendios.pagos.fecha_segunda_cuota }}.
+      </p>
+      <p class="payment-prompt">Elegí el medio de pago:</p>
+      <div class="payment-options">
+        <button
+          type="button"
+          class="payment-option transfer-option"
+          id="show-transfer"
+        >
+          <span class="bank-icon" aria-hidden="true">🏛️</span>Transferencia
+        </button>
+        <a
+          class="payment-option mercado-option"
+          id="mercado-payment"
+          href="{{ site.primera_respuesta_incendios.pagos.curso_completo }}"
+          data-full-url="{{ site.primera_respuesta_incendios.pagos.curso_completo }}"
+          data-deposit-url="{{ site.primera_respuesta_incendios.pagos.sena }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><img
+            class="mercado-logo"
+            src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg"
+            alt=""
+            width="180"
+            height="73"
+          /><span id="mercado-payment-label">Mercado Pago</span></a
+        >
+        <a
+          class="payment-option cuotas-option"
+          id="whatsapp-payment"
+          data-full-url="{{ site.primera_respuesta_incendios.whatsapp.consulta }}"
+          data-deposit-url="{{ site.primera_respuesta_incendios.whatsapp.consulta }}"
+          href="{{ site.primera_respuesta_incendios.whatsapp.consulta }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><img
+            class="whatsapp-logo"
+            src="/assets/whatsapp-icon.svg"
+            alt=""
+            width="42"
+            height="42"
+          /><span id="whatsapp-payment-label">Realizar una consulta</span></a
+        >
+      </div>
+      <p class="payment-help">
+        <em
+          >Si tenés dificultades,
+          <a
+            href="{{ site.primera_respuesta_incendios.whatsapp.dificultades }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            >contactanos por WhatsApp</a
+          >.</em
+        >
+      </p>
+      <div class="transfer-details" id="transfer-details" hidden>
+        <h3>Datos para la transferencia</h3>
+        <p><strong>Alias:</strong> edsi.capacitacion</p>
+        <p><strong>CBU:</strong> 0000003100055294771202</p>
+        <p><strong>CUIT:</strong> 20-37124156-7</p>
+        <a
+          class="receipt-button"
+          id="receipt-button"
+          data-full-url="{{ site.primera_respuesta_incendios.whatsapp.comprobante_pago }}"
+          data-deposit-url="{{ site.primera_respuesta_incendios.whatsapp.comprobante_pago }}"
+          href="{{ site.primera_respuesta_incendios.whatsapp.comprobante_pago }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/assets/whatsapp-icon.svg"
+            alt=""
+            width="20"
+            height="20"
+          />Enviar comprobante
+        </a>
+        <p class="receipt-instructions">
+          Enviá el comprobante por WhatsApp o por correo a
+          <a
+            href="mailto:info@edsi.com.ar?subject=Comprobante%20de%20pago%20-%20Primera%20respuesta%20ante%20incendios"
+            >info@edsi.com.ar</a
+          >, con el asunto
+          <strong id="receipt-subject"
+            >comprobante de pago - Primera respuesta ante incendios</strong
+          >.
+        </p>
+      </div>
+    </div>
+  </section>
+  {% else %}
+  <section class="section-card enrollment-section">
+    <h2>Inscripciones próximamente</h2>
+    <p>
+      Estamos preparando la próxima edición.
+      <a
+        href="{{ site.primera_respuesta_incendios.whatsapp.contacto }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Consultanos por WhatsApp</a
+      >
+      para recibir información.
+    </p>
+  </section>
+  {% endif %}
 </main>
