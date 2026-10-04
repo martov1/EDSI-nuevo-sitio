@@ -1,0 +1,124 @@
+---
+layout: default
+title: "Primera respuesta ante incendios"
+description: "Clase virtual sincrónica de 3 horas para hogares y pequeños comercios: uso de extintores, pérdidas de gas, riesgos eléctricos y respuesta inicial segura."
+image: /assets/brigadista-contra-incendios.jpg
+css: /Particulares/Primera-respuesta-ante-incendios/primera-respuesta-ante-incendios.css
+js:
+  - /Particulares/funciones.js
+  - /Particulares/Primera-respuesta-ante-incendios/primera-respuesta-ante-incendios.js
+---
+
+<main class="course-page container">
+    <div class="hero-course">
+        <div class="hero-tags">
+            <span class="tag-sincronico">Virtual sincrónico</span>
+            {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
+            <span class="tag-incripcion-abierta">¡Inscripciones abiertas!</span>
+            {% else %}
+            <span class="tag-incripcion-abierta">Próximamente</span>
+            {% endif %}
+        </div>
+        <h1>Primera respuesta ante incendios</h1>
+        <p>Herramientas prácticas para actuar con seguridad ante una emergencia en el hogar o en un pequeño comercio.</p>
+    </div>
+
+    <div class="grid-container">
+        <div class="main-content">
+            <section class="section-card">
+                <h2>Descripción</h2>
+                <p>Una clase de 3 horas orientada a hogares y dueños de pequeños comercios. Aprendé a reconocer riesgos, utilizar un extintor cuando las condiciones sean seguras y tomar las primeras medidas mientras llega el servicio de bomberos.</p>
+                <p>La capacitación aborda pérdidas de gas de red y de garrafa, incendios de origen eléctrico, prevención de riesgos eléctricos y cómo asistir ante una electrocución sin exponerte a un peligro adicional.</p>
+            </section>
+
+            <section class="section-card">
+                <h2>Competencias a adquirir</h2>
+                <div class="highlights-list">
+                    <ul>
+                        <li>Reconocer cuándo es seguro intentar usar un extintor y cuándo evacuar y pedir ayuda.</li>
+                        <li>Seleccionar y operar un extintor portátil con una técnica básica y segura.</li>
+                        <li>Identificar las primeras acciones ante pérdidas de gas de red o de garrafa.</li>
+                        <li>Reconocer riesgos de incendios eléctricos y prevenir accidentes eléctricos.</li>
+                        <li>Actuar inicialmente ante una electrocución sin tocar a la persona hasta eliminar el riesgo eléctrico de forma segura.</li>
+                        <li>Dar aviso a emergencias, evacuar y comunicar información útil antes del arribo de bomberos.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <h2>Destinatarios</h2>
+                <p>Personas interesadas en mejorar la seguridad de su hogar o pequeño comercio. No se requieren conocimientos previos.</p>
+            </section>
+
+            <section class="section-card cronograma-section">
+                <h2>Cronograma</h2>
+                <ul class="cronograma-list">
+                    <li>Una clase de 3 horas. Próxima fecha a confirmar.</li>
+                </ul>
+            </section>
+
+            <section class="section-card">
+                <h2>Programa de la clase</h2>
+                <div class="temario-clase">
+                    <h4>Primera respuesta ante incendios y emergencias en el hogar</h4>
+                    <ul>
+                        <li>Cómo pedir ayuda y qué información transmitir a bomberos.</li>
+                        <li>Riesgos iniciales de incendio y criterios para evacuar sin demora.</li>
+                        <li>Tipos de extintores, selección y práctica de uso seguro.</li>
+                        <li>Pérdidas de gas de red y de garrafa: detección, acciones iniciales y conductas que se deben evitar.</li>
+                        <li>Incendios eléctricos, prevención de riesgos eléctricos y corte seguro del suministro cuando sea posible.</li>
+                        <li>Electrocución: cómo protegerse, pedir ayuda y asistir sin entrar en contacto con una fuente eléctrica activa.</li>
+                        <li>Prioridades de actuación y preparación del lugar para el arribo de bomberos.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <h2>Inscripción y medios de pago</h2>
+                {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
+                <p>Completá tus datos en el formulario para reservar tu lugar.</p>
+                <a href="{{ site.baseurl }}/Particulares/Primera-respuesta-ante-incendios/Inscripcion/#inscripcion" class="btn-payment enrollment-cta">
+                    <img src="/assets/inscripcion.svg" alt="Inscripción" width="30" height="30" style="vertical-align:middle; margin-right:8px;">
+                    ¡Inscribirme ahora!
+                </a>
+                {% else %}
+                <p>Las inscripciones todavía no están abiertas. Contactanos para consultar por próximas fechas.</p>
+                <button type="button" class="btn-payment enrollment-cta enrollment-cta-disabled" disabled>
+                    <img src="/assets/inscripcion.svg" alt="" width="30" height="30" style="vertical-align:middle; margin-right:8px;">
+                    Inscripciones próximamente
+                </button>
+                {% endif %}
+            </section>
+        </div>
+
+        <aside class="sidebar">
+            <div class="sidebar-info">
+                <div class="info-row"><strong>Inicio:</strong> <span>Próxima fecha a confirmar</span></div>
+                <div class="info-row"><strong>Horario:</strong> <span>A confirmar</span></div>
+                <div class="info-row"><strong>Duración:</strong> <span>3 horas (1 clase)</span></div>
+                <div class="info-row"><strong>Modalidad:</strong> <span>Sincrónica (en vivo)</span></div>
+                <div class="info-row"><strong>Cupos:</strong> <span id="cupos-disponibles">Cargando...</span></div>
+                <div class="info-row"><strong>Plataforma:</strong> <span>A confirmar</span></div>
+                <div class="info-row"><strong>Destinatarios:</strong> <span>Hogares y pequeños comercios</span></div>
+                <div class="info-row"><strong>Costo:</strong> <span>{{ site.primera_respuesta_incendios.pagos.valor_curso_completo }}</span></div>
+                <div class="inscription-box">
+                    <a href="{{ site.primera_respuesta_incendios.whatsapp.contacto }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <img src="/assets/whatsapp-icon.svg" alt="" width="18" height="18" style="vertical-align:middle; margin-right:8px;">
+                        Consultar por WhatsApp
+                    </a>
+                    {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
+                    <a href="{{ site.baseurl }}/Particulares/Primera-respuesta-ante-incendios/Inscripcion/#inscripcion" class="btn-payment">
+                        <img src="/assets/inscripcion.svg" alt="Inscripción" width="30" height="30" style="vertical-align:middle; margin-right:8px;">
+                        ¡Inscribirme ahora!
+                    </a>
+                    {% else %}
+                    <button type="button" class="btn-payment enrollment-cta-disabled" disabled>
+                        <img src="/assets/inscripcion.svg" alt="" width="30" height="30" style="vertical-align:middle; margin-right:8px;">
+                        Inscripciones próximamente
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>

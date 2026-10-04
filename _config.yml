@@ -94,3 +94,29 @@ payment_links:
     gocuotas: "https://www.gocuotas.com/payment_link/checkouts/185037?verification=92518.5&order_amount=100000.0"
     sena: "https://mpago.la/1JRwirf"
     "fecha segunda cuota": "10/10/2026"
+
+#############################################
+# CONFIGURACION CURSO PRIMERA RESPUESTA ANTE INCENDIOS
+#############################################
+
+# Mantener los datos de este curso separados de los del curso de brigadista.
+primera_respuesta_incendios:
+  cupos:
+    spreadsheet_id: "1UJdUbG9ZcS3eA2bn03s3EC8Y6LsGZUrFFy57PrO4YBU"
+    capacidad_maxima: 25
+    inscripciones_abiertas: true
+  inscripcion:
+    script_url: "https://script.google.com/macros/s/AKfycbxVSO8uHWJXFvsD-gHofdU8oRZyE2HONb8Y-r0T_Gk-bySshZf_BZVEQ2g13VMoJ19C/exec"
+  whatsapp:
+    contacto: "https://wa.me/5491170616594?text=Hola%2C%20quiero%20consultar%20por%20el%20curso%20Primera%20respuesta%20ante%20incendios"
+    cuotas: "https://wa.me/5491170616594?text=Hola%2C%20quiero%20consultar%20por%20cuotas%20para%20el%20curso%20Primera%20respuesta%20ante%20incendios"
+    dificultades: "https://wa.me/5491170616594?text=%C2%BFDificultades%3F%20%C2%A1Contactanos%21"
+    comprobante_pago: "https://wa.me/5491170616594?text=Comprobante%20de%20pago%20-%20Primera%20respuesta%20ante%20incendios"
+  pagos:
+    habilitar_sena: false
+    valor_sena: "A confirmar"
+    valor_curso_completo: "$25000"
+    curso_completo: "https://mpago.la/1Fyyk3h"
+    gocuotas: ""
+    sena: ""
+    fecha_segunda_cuota: ""
