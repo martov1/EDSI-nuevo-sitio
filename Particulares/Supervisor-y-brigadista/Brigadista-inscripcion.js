@@ -1,3 +1,6 @@
+---
+---
+
 /*********************************************************************
  * CONFIGURACIÓN GENERAL DEL FLUJO DE INSCRIPCIÓN
  *
@@ -5,8 +8,7 @@
  * por toda la experiencia de inscripción y pago.
  *********************************************************************/
 const FORM_CONFIG = {
-  scriptUrl:
-    "https://script.google.com/macros/s/AKfycbzCyeYd_4ihk1vBgRFfh7ieiGCq6M5ACUTggDm6O0RhuqbjHY2X57Z2qO77JbzmdY1r/exec",
+  scriptUrl: {{ site.brigadista.inscripcion.script_url | jsonify }},
   errorMessage:
     "No se pudo crear el formulario. Por favor, intentá nuevamente.",
   companyPhone: "11 7061-6594",

@@ -3,9 +3,7 @@ layout: null
 permalink: /whatsapp/
 ---
 
-{% assign full_msg = site.whatsapp_message_particular_brigadista | url_encode %}
-{% assign wa_url = "https://wa.me/" | append: site.whatsapp_phone | append:
-"?text=" | append: full_msg %}
+{% assign wa_url = site.brigadista.whatsapp.contacto %}
 <!doctype html>
 <html lang="es">
   <head>

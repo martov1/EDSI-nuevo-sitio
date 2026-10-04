@@ -8,9 +8,9 @@
  * inserta al generar este archivo JavaScript.
  *********************************************************************/
 const CUPOS_CONFIG = {
-  spreadsheetId: {{ site.cupos_brigadista.spreadsheet_id | jsonify }},
-  capacidadMaxima: {{ site.cupos_brigadista.capacidad_maxima }},
-  inscripcionesAbiertas: {{ site.cupos_brigadista.inscripciones_abiertas | jsonify }},
+  spreadsheetId: {{ site.brigadista.cupos.spreadsheet_id | jsonify }},
+  capacidadMaxima: {{ site.brigadista.cupos.capacidad_maxima }},
+  inscripcionesAbiertas: {{ site.brigadista.cupos.inscripciones_abiertas | jsonify }},
 };
 
 // La página del curso muestra las vacantes una vez obtenido el estado.

@@ -87,13 +87,13 @@ redirect_from:
             <div class="payment-step" id="payment-step" hidden >
                 <div class="total-box" id="total-payment">
                     <span>Valor total</span>
-                    <strong id="payment-amount">{{ site.payment_links.brigadista["valor que figura en curso completo"] }}</strong>
+                    <strong id="payment-amount">{{ site.brigadista.pagos.valor_curso_completo }}</strong>
                     
                 </div>
                 <div class="availability-note" role="status">
                     <strong class="availability-title">Cupos limitados</strong>
                     <span class="availability-count" id="cupos-inscripcion">Cargando cupos...</span>
-                    {% if site.payment_links.brigadista.habilitar_sena_brigadista %}
+                    {% if site.brigadista.pagos.habilitar_sena %}
                     <p>Reservá tu lugar abonando el curso completo o haciendo una seña.</p>
                     {% else %}
                     <p>Reservá tu lugar abonando el curso completo.</p>
@@ -103,29 +103,29 @@ redirect_from:
                     <legend>Elegí cómo querés reservar tu lugar:</legend>
                     <button type="button" class="payment-type is-selected" id="full-payment" aria-pressed="true">
                         <strong>Abonar el curso completo (Contado o cuotas)</strong>
-                        <span>{{ site.payment_links.brigadista["valor que figura en curso completo"] }}</span>
+                        <span>{{ site.brigadista.pagos.valor_curso_completo }}</span>
                     </button>
-                    <button type="button" class="payment-type" id="deposit-payment" aria-pressed="false" {% unless site.payment_links.brigadista.habilitar_sena_brigadista %}hidden{% endunless %}>
+                    <button type="button" class="payment-type" id="deposit-payment" aria-pressed="false" {% unless site.brigadista.pagos.habilitar_sena %}hidden{% endunless %}>
                         <strong>Reservar mi lugar mediante una seña</strong>
-                        <span>{{ site.payment_links.brigadista["valor que figura en la seña"] }}</span>
+                        <span>{{ site.brigadista.pagos.valor_sena }}</span>
                     </button>
                 </fieldset>
-                <p class="deposit-note" id="deposit-note" hidden>El pago de la seña garantiza el cupo, el monto restante deberá ser abonado antes del {{ site.payment_links.brigadista["fecha segunda cuota"] }} para poder continuar cursando.</p>
+                <p class="deposit-note" id="deposit-note" hidden>El pago de la seña garantiza el cupo, el monto restante deberá ser abonado antes del {{ site.brigadista.pagos.fecha_segunda_cuota }} para poder continuar cursando.</p>
                 <p class="payment-prompt">Elegí el medio de pago:</p>
                 <div class="payment-options">
                     <button type="button" class="payment-option transfer-option" id="show-transfer"><span class="bank-icon" aria-hidden="true">🏛️</span>Transferencia</button>
-                    <a class="payment-option mercado-option" id="mercado-payment" href="{{ site.payment_links.brigadista.curso_completo }}" data-full-url="{{ site.payment_links.brigadista.curso_completo }}" data-deposit-url="{{ site.payment_links.brigadista.sena }}" target="_blank" rel="noopener noreferrer"><img class="mercado-logo" src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg" alt="" width="180" height="73"><span id="mercado-payment-label">3 cuotas sin interés</span></a>
-                    <a class="payment-option gocuotas-option" id="gocuotas-payment" href="{{ site.payment_links.brigadista.gocuotas }}" target="_blank" rel="noopener noreferrer"><img class="gocuotas-logo" src="/assets/gocuotaslogo.png" alt="GoCuotas"><span>3 cuotas sin tarjeta sin interes</span></a>
-                    <a class="payment-option cuotas-option" id="whatsapp-payment" data-full-url="{{ site.whatsapp_links.brigadista.cuotas }}" data-deposit-url="{{ site.whatsapp_links.brigadista.sena }}" href="{{ site.whatsapp_links.brigadista.cuotas }}" target="_blank" rel="noopener noreferrer"><img class="whatsapp-logo" src="/assets/whatsapp-icon.svg" alt="" width="42" height="42"><span id="whatsapp-payment-label">Otras opciones de cuotas sin tarjeta</span></a>
+                    <a class="payment-option mercado-option" id="mercado-payment" href="{{ site.brigadista.pagos.curso_completo }}" data-full-url="{{ site.brigadista.pagos.curso_completo }}" data-deposit-url="{{ site.brigadista.pagos.sena }}" target="_blank" rel="noopener noreferrer"><img class="mercado-logo" src="/assets/MP_RGB_HANDSHAKE_color_horizontal.svg" alt="" width="180" height="73"><span id="mercado-payment-label">3 cuotas sin interés</span></a>
+                    <a class="payment-option gocuotas-option" id="gocuotas-payment" href="{{ site.brigadista.pagos.gocuotas }}" target="_blank" rel="noopener noreferrer"><img class="gocuotas-logo" src="/assets/gocuotaslogo.png" alt="GoCuotas"><span>3 cuotas sin tarjeta sin interes</span></a>
+                    <a class="payment-option cuotas-option" id="whatsapp-payment" data-full-url="{{ site.brigadista.whatsapp.consulta }}" data-deposit-url="{{ site.brigadista.whatsapp.sena }}" href="{{ site.brigadista.whatsapp.consulta }}" target="_blank" rel="noopener noreferrer"><img class="whatsapp-logo" src="/assets/whatsapp-icon.svg" alt="" width="42" height="42"><span id="whatsapp-payment-label">Otras opciones de cuotas sin tarjeta</span></a>
                 </div>
-                <p class="payment-help"><em>Si tenés dificultades no dudes en contactarnos vía WhatsApp <a href="{{ site.whatsapp_links.brigadista.dificultades }}" target="_blank" rel="noopener noreferrer">haciendo click aquí</a>.</em></p>
+                <p class="payment-help"><em>Si tenés dificultades no dudes en contactarnos vía WhatsApp <a href="{{ site.brigadista.whatsapp.dificultades }}" target="_blank" rel="noopener noreferrer">haciendo click aquí</a>.</em></p>
 
                 <div class="transfer-details" id="transfer-details" hidden>
                     <h3>Datos para la transferencia</h3>
                     <p><strong>Alias:</strong> edsi.capacitacion</p>
                     <p><strong>CBU:</strong> 0000003100055294771202</p>
                     <p><strong>CUIT:</strong> 20-37124156-7</p>
-                    <a class="receipt-button" id="receipt-button" data-full-url="{{ site.whatsapp_links.brigadista.comprobante_pago }}" data-deposit-url="{{ site.whatsapp_links.brigadista.comprobante_sena }}" href="{{ site.whatsapp_links.brigadista.comprobante_pago }}" target="_blank" rel="noopener noreferrer">
+                    <a class="receipt-button" id="receipt-button" data-full-url="{{ site.brigadista.whatsapp.comprobante_pago }}" data-deposit-url="{{ site.brigadista.whatsapp.comprobante_sena }}" href="{{ site.brigadista.whatsapp.comprobante_pago }}" target="_blank" rel="noopener noreferrer">
                         <img src="/assets/whatsapp-icon.svg" alt="" width="20" height="20">
                         Enviar comprobante
                     </a>
