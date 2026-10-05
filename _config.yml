@@ -118,7 +118,7 @@ primera_respuesta_incendios:
   cupos:
     spreadsheet_id: "1UJdUbG9ZcS3eA2bn03s3EC8Y6LsGZUrFFy57PrO4YBU"
     capacidad_maxima: 32
-    inscripciones_abiertas: false
+    inscripciones_abiertas: true
 
   pagos:
     habilitar_sena: false
