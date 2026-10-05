@@ -80,7 +80,7 @@ brigadista:
   cupos:
     spreadsheet_id: "1rIE5dT2raFRLX7lyB_Qi-8IOVoq0cvr4slU7fDrJREs"
     capacidad_maxima: 15
-    inscripciones_abiertas: true
+    inscripciones_abiertas: false
 
   pagos:
     habilitar_sena: false
