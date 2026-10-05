@@ -82,10 +82,9 @@ js:
       <section class="section-card cronograma-section">
         <h2>Cronograma</h2>
         <ul class="cronograma-list">
-          <li>
-            Una clase de 3 horas. Inicio: {{
-            site.primera_respuesta_incendios.cursada.fecha_inicio }}.
-          </li>
+          {% for item in site.primera_respuesta_incendios.cursada.cronograma %}
+          <li>{{ item }}</li>
+          {% endfor %}
         </ul>
       </section>
 
@@ -138,8 +137,12 @@ js:
           >
         </div>
         <div class="info-row">
-          <strong>Horario:</strong>
-          <span>{{ site.primera_respuesta_incendios.cursada.horario }}</span>
+          <strong>Horarios:</strong>
+          <span>
+            {% for horario in site.primera_respuesta_incendios.cursada.horarios %}
+            {{ horario }}{% unless forloop.last %}<br />{% endunless %}
+            {% endfor %}
+          </span>
         </div>
         <div class="info-row">
           <strong>Duración:</strong> <span>3 horas (1 clase)</span>
