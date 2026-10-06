@@ -96,7 +96,7 @@ redirect_from:
                 </div>
                 <div class="availability-note" role="status">
                     <strong class="availability-title">Cupos limitados</strong>
-                    <span class="availability-count" id="cupos-inscripcion">Cargando cupos...</span>
+                    <span class="availability-count{% if site.brigadista.cupos["mostrar-cupo-lleno"] %} availability-count-full{% endif %}" id="cupos-inscripcion">{% if site.brigadista.cupos["mostrar-cupo-lleno"] %}CUPOS AGOTADOS{% else %}Cargando cupos...{% endif %}</span>
                     {% if site.brigadista.pagos.habilitar_sena %}
                     <p>Reservá tu lugar abonando el curso completo o haciendo una seña.</p>
                     {% else %}

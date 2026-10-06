@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Consulta el estado y actualiza el resumen de cupos de la inscripción.
   const cuposInscripcionEl = document.getElementById("cupos-inscripcion");
 
-  if (cuposInscripcionEl) {
+  if (cuposInscripcionEl && !CUPOS_CONFIG.mostrarCupoLleno) {
     obtenerEstadoCupos(CUPOS_CONFIG).then(
       ({ confirmados, cuposDisponibles }) => {
         cuposInscripcionEl.innerHTML = `Quedan <strong class="availability-number">${cuposDisponibles}</strong> cupos de un total de <strong class="availability-number">${CUPOS_CONFIG.capacidadMaxima}</strong>.`;

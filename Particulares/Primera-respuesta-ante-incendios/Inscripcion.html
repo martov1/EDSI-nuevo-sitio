@@ -130,8 +130,10 @@ js:
       </div>
       <div class="availability-note" role="status">
         <strong class="availability-title">Cupos limitados</strong>
-        <span class="availability-count" id="cupos-inscripcion"
-          >Cargando cupos...</span
+        <span
+          class="availability-count{% if site.primera_respuesta_incendios.cupos["mostrar-cupo-lleno"] %} availability-count-full{% endif %}"
+          id="cupos-inscripcion"
+          >{% if site.primera_respuesta_incendios.cupos["mostrar-cupo-lleno"] %}CUPOS AGOTADOS{% else %}Cargando cupos...{% endif %}</span
         >
         <p>Reservá tu lugar abonando el curso completo.</p>
       </div>

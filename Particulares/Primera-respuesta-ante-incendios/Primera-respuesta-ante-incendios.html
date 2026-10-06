@@ -13,7 +13,9 @@ js:
   <div class="hero-course">
     <div class="hero-tags">
       <span class="tag-sincronico">Virtual sincrónico</span>
-      {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
+      {% if site.primera_respuesta_incendios.cupos["mostrar-cupo-lleno"] %}
+      <span class="tag-cupo-lleno">CUPOS AGOTADOS</span>
+      {% elsif site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
       <span class="tag-incripcion-abierta">¡Inscripciones abiertas!</span>
       {% else %}
       <span class="tag-inscripcion-proximamente">Próximamente</span>
@@ -152,7 +154,7 @@ js:
         </div>
         <div class="info-row">
           <strong>Cupos:</strong>
-          <span id="cupos-disponibles">Cargando...</span>
+          <span id="cupos-disponibles">{% if site.primera_respuesta_incendios.cupos["mostrar-cupo-lleno"] %}CUPOS AGOTADOS{% else %}Cargando...{% endif %}</span>
         </div>
         <div class="info-row">
           <strong>Plataforma:</strong> <span>Google Classroom y Meet</span>

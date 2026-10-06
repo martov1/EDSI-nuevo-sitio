@@ -21,7 +21,9 @@ redirect_from:
             <div class="curso-card">
                 <img src="/assets/primera-respuesta.jpg" alt="Primera respuesta ante incendios">
                 <div>
-                    {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
+                    {% if site.primera_respuesta_incendios.cupos["mostrar-cupo-lleno"] %}
+                    <span class="inscription-status inscription-status-full">CUPOS AGOTADOS</span>
+                    {% elsif site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
                     <span class="inscription-status">Inscripción abierta</span>
                     {% else %}
                     <span class="inscription-status inscription-status-upcoming">Próximamente</span>
@@ -35,7 +37,9 @@ redirect_from:
             <div class="curso-card">
                 <img src="/assets/brigadista-contra-incendios.jpg" alt="Introducción a la prevención de incendios">
                 <div>
-                    {% if site.brigadista.cupos.inscripciones_abiertas %}
+                    {% if site.brigadista.cupos["mostrar-cupo-lleno"] %}
+                    <span class="inscription-status inscription-status-full">CUPOS AGOTADOS</span>
+                    {% elsif site.brigadista.cupos.inscripciones_abiertas %}
                     <span class="inscription-status">Inscripción abierta</span>
                     {% else %}
                     <span class="inscription-status inscription-status-upcoming">Próximamente</span>

@@ -260,6 +260,10 @@
 .availability-number {
   color: rgb(231, 76, 60);
 }
+.availability-count-full {
+  color: var(--accent-red);
+  font-weight: bold;
+}
 .availability-note p {
   margin: 2px 0 0;
   color: #5d6870;

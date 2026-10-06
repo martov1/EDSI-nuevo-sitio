@@ -81,6 +81,7 @@ brigadista:
     spreadsheet_id: "1rIE5dT2raFRLX7lyB_Qi-8IOVoq0cvr4slU7fDrJREs"
     capacidad_maxima: 20
     inscripciones_abiertas: false
+    mostrar-cupo-lleno: true
 
   pagos:
     habilitar_sena: false
@@ -119,6 +120,7 @@ primera_respuesta_incendios:
     spreadsheet_id: "1UJdUbG9ZcS3eA2bn03s3EC8Y6LsGZUrFFy57PrO4YBU"
     capacidad_maxima: 32
     inscripciones_abiertas: true
+    mostrar-cupo-lleno: false
 
   pagos:
     habilitar_sena: false

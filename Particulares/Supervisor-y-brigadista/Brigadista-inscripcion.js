@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cuposInscripcionEl = document.getElementById("cupos-inscripcion");
 
   // Pone los textos en el html de los cupos que quedan
-  if (cuposInscripcionEl) {
+  if (cuposInscripcionEl && !CUPOS_CONFIG.mostrarCupoLleno) {
     obtenerEstadoCupos(CUPOS_CONFIG).then(
       ({ confirmados, cuposDisponibles }) => {
         cuposInscripcionEl.innerHTML = `Quedan <strong class="availability-number">${cuposDisponibles}</strong> cupos de un total de <strong class="availability-number">${CUPOS_CONFIG.capacidadMaxima}</strong>.`;

@@ -18,7 +18,9 @@ redirect_from:
         <div class="hero-course">
             <div class="hero-tags">
                 <span class="tag-sincronico">Virtual Sincrónico</span>
-                {% if site.brigadista.cupos.inscripciones_abiertas %}
+                {% if site.brigadista.cupos["mostrar-cupo-lleno"] %}
+                <span class="tag-cupo-lleno">CUPOS AGOTADOS</span>
+                {% elsif site.brigadista.cupos.inscripciones_abiertas %}
                 <span class="tag-incripcion-abierta">¡Inscripciones abiertas!</span>
                 {% else %}
                 <span class="tag-inscripcion-proximamente">Próximamente</span>
@@ -341,7 +343,7 @@ redirect_from:
                     </div>
                     <div class="info-row"><strong>Duración:</strong> <span>15 Horas (5 clases)</span></div>
                     <div class="info-row"><strong>Modalidad:</strong> <span>Sincrónica (En vivo)</span></div>
-                    <div class="info-row"><strong>Cupos:</strong> <span id="cupos-disponibles">Cargando...</span></div>
+                    <div class="info-row"><strong>Cupos:</strong> <span id="cupos-disponibles">{% if site.brigadista.cupos["mostrar-cupo-lleno"] %}CUPOS AGOTADOS{% else %}Cargando...{% endif %}</span></div>
                     <div class="info-row"><strong>Plataforma:</strong> <span>Google Classroom y Meet</span></div>
                     <div class="info-row"><strong>Costo:</strong> <span>{{ site.brigadista.pagos.valor_curso_completo }}</span></div>
                     
