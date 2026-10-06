@@ -109,13 +109,14 @@ js:
         </a>
         {% else %}
         <p>
-          Las inscripciones todavía no están abiertas. Contactanos para
-          consultar por próximas fechas.
+          Las inscripciones están cerradas. Anotate a la lista de espera para
+          recibir novedades sobre próximas fechas.
         </p>
-        <button
-          type="button"
-          class="btn-payment enrollment-cta enrollment-cta-disabled"
-          disabled
+        <a
+          href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-payment enrollment-cta enrollment-cta-waitlist"
         >
           <img
             src="/assets/inscripcion.svg"
@@ -124,8 +125,8 @@ js:
             height="30"
             style="vertical-align: middle; margin-right: 8px"
           />
-          Inscripciones próximamente
-        </button>
+          Anotarme a lista de espera
+        </a>
         {% endif %}
       </section>
     </div>
@@ -201,10 +202,11 @@ js:
             ¡Inscribirme ahora!
           </a>
           {% else %}
-          <button
-            type="button"
-            class="btn-payment enrollment-cta-disabled"
-            disabled
+          <a
+            href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-payment enrollment-cta-waitlist"
           >
             <img
               src="/assets/inscripcion.svg"
@@ -213,8 +215,8 @@ js:
               height="30"
               style="vertical-align: middle; margin-right: 8px"
             />
-            Inscripciones próximamente
-          </button>
+            Anotarme a lista de espera
+          </a>
           {% endif %}
         </div>
       </div>

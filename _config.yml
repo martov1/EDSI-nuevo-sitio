@@ -82,6 +82,7 @@ brigadista:
     capacidad_maxima: 20
     inscripciones_abiertas: false
     mostrar-cupo-lleno: true
+    lista_espera_url: "https://docs.google.com/forms/d/1vwfwxOaQEalC5_Fptah1RSoFxVQztxksaZ6oJGMRVeY"
 
   pagos:
     habilitar_sena: false
@@ -121,6 +122,7 @@ primera_respuesta_incendios:
     capacidad_maxima: 32
     inscripciones_abiertas: true
     mostrar-cupo-lleno: false
+    lista_espera_url: ""
 
   pagos:
     habilitar_sena: false

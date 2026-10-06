@@ -83,17 +83,18 @@ redirect_from:
                 <section class="section-card">
                     <h2>Inscripción y Medios de pago</h2>
                     
-                    <p>Completá tus datos en el formulario. Una vez enviado, vas a poder elegir entre transferencia bancaria, Mercado Pago o contactarnos por WhatsApp si necesitás ayuda.</p>
                     {% if site.brigadista.cupos.inscripciones_abiertas %}
+                        <p>Completá tus datos en el formulario. Una vez enviado, vas a poder elegir entre transferencia bancaria, Mercado Pago o contactarnos por WhatsApp si necesitás ayuda.</p>
                         <a href="{{ site.baseurl }}/Particulares/Supervisor-y-brigadista/Brigadista-Inscripcion/#inscripcion" class="btn-payment enrollment-cta">
                             <img src="/assets/inscripcion.svg" alt="Inscripción" width="30" height="30" style="vertical-align:middle; margin-right:8px;">
                             ¡Inscribirme ahora!
                         </a>
                     {% else %}
-                        <button type="button" class="btn-payment enrollment-cta enrollment-cta-disabled" disabled>
+                        <p>Las inscripciones están cerradas. Anotate a la lista de espera para recibir novedades sobre próximas fechas.</p>
+                        <a href="{{ site.brigadista.cupos.lista_espera_url }}" target="_blank" rel="noopener noreferrer" class="btn-payment enrollment-cta enrollment-cta-waitlist">
                             <img src="/assets/inscripcion.svg" alt="" width="30" height="30" style="vertical-align:middle; margin-right:8px;">
-                            Inscripciones cerradas
-                        </button>
+                            Anotarme a lista de espera
+                        </a>
                     {% endif %}
                 </section>
                 <section class="section-card">
@@ -355,9 +356,9 @@ redirect_from:
                                 <img src="/assets/inscripcion.svg" alt="Inscripción" width="30" height="30" style="vertical-align:middle; margin-right:8px;">¡Inscribirme ahora!
                             </a>
                         {% else %}
-                            <button type="button" class="btn-payment enrollment-cta-disabled" disabled>
-                                <img src="/assets/inscripcion.svg" alt="" width="30" height="30" style="vertical-align:middle; margin-right:8px;">Inscripciones cerradas
-                            </button>
+                            <a href="{{ site.brigadista.cupos.lista_espera_url }}" target="_blank" rel="noopener noreferrer" class="btn-payment enrollment-cta-waitlist">
+                                <img src="/assets/inscripcion.svg" alt="" width="30" height="30" style="vertical-align:middle; margin-right:8px;">Anotarme a lista de espera
+                            </a>
                         {% endif %}
                     </div>
                     

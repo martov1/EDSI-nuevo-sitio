@@ -599,6 +599,18 @@
   transform: none;
   width: 100%;
 }
+.enrollment-cta-waitlist,
+.enrollment-cta-waitlist:hover {
+  background-color: #e67e22;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
+.enrollment-cta-waitlist:hover {
+  background-color: #d35400;
+  box-shadow: 0 6px 18px rgba(230, 126, 34, 0.28);
+}
 .enrollment-cta {
   max-width: 280px;
   margin-top: 20px;
