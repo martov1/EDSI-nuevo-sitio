@@ -20,6 +20,9 @@ js:
       {% else %}
       <span class="tag-inscripcion-proximamente">Próximamente</span>
       {% endif %}
+      {% if site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+      <span class="tag-lista-espera">Anotate a la lista de espera</span>
+      {% endif %}
     </div>
     <h1>Primera respuesta ante incendios</h1>
     <p>
@@ -107,11 +110,43 @@ js:
           />
           ¡Inscribirme ahora!
         </a>
-        {% else %}
+        {% elsif site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
         <p>
           Las inscripciones están cerradas. Anotate a la lista de espera para
           recibir novedades sobre próximas fechas.
         </p>
+        <a
+          href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-payment enrollment-cta enrollment-cta-waitlist"
+        >
+          <img
+            src="/assets/inscripcion.svg"
+            alt=""
+            width="30"
+            height="30"
+            style="vertical-align: middle; margin-right: 8px"
+          />
+          Anotarme a lista de espera
+        </a>
+        {% else %}
+        <button
+          type="button"
+          class="btn-payment enrollment-cta enrollment-cta-disabled"
+          disabled
+        >
+          <img
+            src="/assets/inscripcion.svg"
+            alt=""
+            width="30"
+            height="30"
+            style="vertical-align: middle; margin-right: 8px"
+          />
+          Inscripciones próximamente
+        </button>
+        {% endif %}
+        {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas and site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
         <a
           href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
           target="_blank"
@@ -201,7 +236,39 @@ js:
             />
             ¡Inscribirme ahora!
           </a>
+          {% elsif site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+          <a
+            href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-payment enrollment-cta-waitlist"
+          >
+            <img
+              src="/assets/inscripcion.svg"
+              alt=""
+              width="30"
+              height="30"
+              style="vertical-align: middle; margin-right: 8px"
+            />
+            Anotarme a lista de espera
+          </a>
           {% else %}
+          <button
+            type="button"
+            class="btn-payment enrollment-cta-disabled"
+            disabled
+          >
+            <img
+              src="/assets/inscripcion.svg"
+              alt=""
+              width="30"
+              height="30"
+              style="vertical-align: middle; margin-right: 8px"
+            />
+            Inscripciones próximamente
+          </button>
+          {% endif %}
+          {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas and site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
           <a
             href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
             target="_blank"

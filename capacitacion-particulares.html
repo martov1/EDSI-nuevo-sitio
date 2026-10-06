@@ -28,6 +28,9 @@ redirect_from:
                     {% else %}
                     <span class="inscription-status inscription-status-upcoming">Próximamente</span>
                     {% endif %}
+                    {% if site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+                    <span class="inscription-status inscription-status-waitlist">Anotate a la lista de espera</span>
+                    {% endif %}
                     <h3>Primera respuesta ante incendios</br>[ Virtual sincrónico 3hs ]</h3>
                     <p>Una clase práctica para hogares y pequeños comercios: uso de extintores, pérdidas de gas, riesgos eléctricos y primeras acciones seguras antes del arribo de bomberos.</p>
                 </div>
@@ -43,6 +46,9 @@ redirect_from:
                     <span class="inscription-status">Inscripción abierta</span>
                     {% else %}
                     <span class="inscription-status inscription-status-upcoming">Próximamente</span>
+                    {% endif %}
+                    {% if site.brigadista.cupos.lista_de_espera_habilitada %}
+                    <span class="inscription-status inscription-status-waitlist">Anotate a la lista de espera</span>
                     {% endif %}
                     <h3>Supervisor y brigadista contra incendios
  </br>[ Virtual sincrónico 15hs ]</h3>

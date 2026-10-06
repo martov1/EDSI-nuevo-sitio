@@ -75,6 +75,15 @@
   font-size: 0.8rem;
   text-transform: uppercase;
 }
+.tag-lista-espera {
+  background: #e67e22;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
 .grid-container {
   /* Contenido principal junto a la ficha lateral */
   display: grid;
