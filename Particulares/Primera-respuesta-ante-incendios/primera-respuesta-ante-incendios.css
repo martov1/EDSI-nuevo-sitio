@@ -53,6 +53,15 @@
   font-size: 0.8rem;
   text-transform: uppercase;
 }
+.tag-inscripcion-proximamente {
+  background: #e67e22;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 350px;

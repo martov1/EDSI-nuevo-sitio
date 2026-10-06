@@ -19,7 +19,11 @@ redirect_from:
         <div class="hero-course">
             <div class="hero-tags">
                 <span class="tag-sincronico">Virtual Sincrónico</span>
+                {% if site.brigadista.cupos.inscripciones_abiertas %}
                 <span class="tag-incripcion-abierta">¡Inscripciones abiertas!</span>
+                {% else %}
+                <span class="tag-inscripcion-proximamente">Próximamente</span>
+                {% endif %}
             </div>
             <h1>Supervisor y Brigadista contra incendios</h1>
         </div>

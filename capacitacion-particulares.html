@@ -24,7 +24,7 @@ redirect_from:
                     {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas %}
                     <span class="inscription-status">Inscripción abierta</span>
                     {% else %}
-                    <span class="inscription-status">Próximamente</span>
+                    <span class="inscription-status inscription-status-upcoming">Próximamente</span>
                     {% endif %}
                     <h3>Primera respuesta ante incendios</br>[ Virtual sincrónico 3hs ]</h3>
                     <p>Una clase práctica para hogares y pequeños comercios: uso de extintores, pérdidas de gas, riesgos eléctricos y primeras acciones seguras antes del arribo de bomberos.</p>
@@ -35,7 +35,11 @@ redirect_from:
             <div class="curso-card">
                 <img src="/assets/brigadista-contra-incendios.jpg" alt="Introducción a la prevención de incendios">
                 <div>
+                    {% if site.brigadista.cupos.inscripciones_abiertas %}
                     <span class="inscription-status">Inscripción abierta</span>
+                    {% else %}
+                    <span class="inscription-status inscription-status-upcoming">Próximamente</span>
+                    {% endif %}
                     <h3>Supervisor y brigadista contra incendios
  </br>[ Virtual sincrónico 15hs ]</h3>
                     <p>Brinda herramientas claras para prevenir riesgos, detectar señales de alarma y actuar con criterio y organización ante un incendio, en entornos residenciales, comerciales e industriales, ya sea como brigadista, capitán de brigada o jefe de emergencias.</p>
