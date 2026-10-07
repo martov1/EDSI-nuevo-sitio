@@ -19,8 +19,8 @@ js:
       <span class="tag-incripcion-abierta">¡Inscripciones abiertas!</span>
       {% else %}
       <span class="tag-inscripcion-proximamente">Próximamente</span>
-      {% endif %}
-      {% if site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+      {% endif %} {% if
+      site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
       <span class="tag-lista-espera">Anotate a la lista de espera</span>
       {% endif %}
     </div>
@@ -56,20 +56,17 @@ js:
         <h2>Competencias a adquirir</h2>
         <div class="highlights-list">
           <ul>
-            <li>Comunicación eficaz con bomberos.</li>
+            <li>Activar eficazmente los sistemas de emergencia públicos.</li>
             <li>
               Primeras acciones ante incendios y contención inicial del daño.
             </li>
-            <li>Selección, uso, control y mantenimiento de extintores.</li>
-            <li>
-              Pérdidas de gas de red y de garrafa: identificación y corte del
-              suministro.
-            </li>
+            <li>Uso y control de extintores.</li>
+            <li>Supervivencia en entornos con humo.</li>
+            <li>Que hacer ante pérdidas de gas de red y de garrafas.</li>
             <li>
               Prevención de incendios eléctricos y corte del suministro en casas
               y edificios.
             </li>
-            <li>Actuación inicial ante electrocuciones.</li>
             <li>Incendios en cocinas, termotanques y estufas.</li>
             <li>Riesgos de monóxido de carbono.</li>
           </ul>
@@ -110,7 +107,8 @@ js:
           />
           ¡Inscribirme ahora!
         </a>
-        {% elsif site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+        {% elsif
+        site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
         <p>
           Las inscripciones están cerradas. Anotate a la lista de espera para
           recibir novedades sobre próximas fechas.
@@ -145,8 +143,9 @@ js:
           />
           Inscripciones próximamente
         </button>
-        {% endif %}
-        {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas and site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+        {% endif %} {% if
+        site.primera_respuesta_incendios.cupos.inscripciones_abiertas and
+        site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
         <a
           href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
           target="_blank"
@@ -177,9 +176,9 @@ js:
         <div class="info-row">
           <strong>Horarios:</strong>
           <span>
-            {% for horario in site.primera_respuesta_incendios.cursada.horarios %}
-            {{ horario }}{% unless forloop.last %}<br />{% endunless %}
-            {% endfor %}
+            {% for horario in site.primera_respuesta_incendios.cursada.horarios
+            %} {{ horario }}{% unless forloop.last %}<br />{% endunless %} {%
+            endfor %}
           </span>
         </div>
         <div class="info-row">
@@ -190,7 +189,10 @@ js:
         </div>
         <div class="info-row">
           <strong>Cupos:</strong>
-          <span id="cupos-disponibles">{% if site.primera_respuesta_incendios.cupos["mostrar-cupo-lleno"] %}CUPOS AGOTADOS{% else %}Cargando...{% endif %}</span>
+          <span id="cupos-disponibles"
+            >{% if site.primera_respuesta_incendios.cupos["mostrar-cupo-lleno"]
+            %}CUPOS AGOTADOS{% else %}Cargando...{% endif %}</span
+          >
         </div>
         <div class="info-row">
           <strong>Plataforma:</strong> <span>Google Classroom y Meet</span>
@@ -236,7 +238,8 @@ js:
             />
             ¡Inscribirme ahora!
           </a>
-          {% elsif site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+          {% elsif
+          site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
           <a
             href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
             target="_blank"
@@ -267,8 +270,9 @@ js:
             />
             Inscripciones próximamente
           </button>
-          {% endif %}
-          {% if site.primera_respuesta_incendios.cupos.inscripciones_abiertas and site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
+          {% endif %} {% if
+          site.primera_respuesta_incendios.cupos.inscripciones_abiertas and
+          site.primera_respuesta_incendios.cupos.lista_de_espera_habilitada %}
           <a
             href="{{ site.primera_respuesta_incendios.cupos.lista_espera_url }}"
             target="_blank"
