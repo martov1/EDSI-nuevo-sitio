@@ -155,21 +155,63 @@ function setupMenuListeners() {
  *
  * Evento EngagedReader
  *
- * Dispara una vez por usuario después de 10 segundos con la página visible
- * y enfocada, siempre que haya alcanzado al menos el 50% de profundidad.
+ * Dispara una vez por usuario al acumular 10 segundos activos y alcanzar
+ * al menos el 50% de profundidad dentro de una ventana de una hora.
  */
 
 (function () {
+  // Requisitos del evento y clave para compartir el seguimiento entre páginas.
   const activeTimeRequired = 10000;
+  const trackingWindow = 60 * 60 * 1000;
+  const stateKey = "engaged_reader_state";
 
+  // Si ya se disparó, no vuelve a enviarse en este navegador.
   if (localStorage.getItem("engaged_reader_fired")) return;
 
-  let activeTime = 0;
+  // Estado persistente: inicio de la ventana, tiempo activo y profundidad alcanzada.
+  function createState(startedAt = Date.now()) {
+    return {
+      startedAt,
+      activeTime: 0,
+      hasReachedScrollDepth: false,
+    };
+  }
+
+  // Recupera el progreso entre páginas si todavía está dentro de la hora.
+  function loadState() {
+    const savedState = localStorage.getItem(stateKey);
+    if (savedState) {
+      try {
+        const parsedState = JSON.parse(savedState);
+        if (
+          Number.isFinite(parsedState.startedAt) &&
+          Number.isFinite(parsedState.activeTime) &&
+          typeof parsedState.hasReachedScrollDepth === "boolean" &&
+          Date.now() >= parsedState.startedAt &&
+          Date.now() - parsedState.startedAt < trackingWindow
+        ) {
+          return parsedState;
+        }
+      } catch (error) {
+        if (!(error instanceof SyntaxError)) throw error;
+        console.warn("Estado de EngagedReader inválido; se reinicia el seguimiento.");
+      }
+    }
+    return createState();
+  }
+
+  // activeSince marca el inicio del tramo activo de esta página.
+  let state = loadState();
   let activeSince = null;
   let timer = null;
   let fired = false;
-  let hasReachedScrollDepth = false;
 
+  // Persiste el acumulado y el avance para continuar en otra página.
+  function saveState() {
+    localStorage.setItem(stateKey, JSON.stringify(state));
+  }
+
+  // Considera activa la página solo si está visible y tiene el foco.
   function isPageActive() {
     return (
       document.visibilityState === "visible" &&
@@ -177,16 +219,41 @@ function setupMenuListeners() {
     );
   }
 
+  // Al vencer la hora, comienza una ventana nueva y descarta el progreso previo.
+  function resetExpiredWindow() {
+    const now = Date.now();
+    if (now - state.startedAt < trackingWindow) return;
+
+    state = createState(now);
+    activeSince = isPageActive() ? now : null;
+    saveState();
+  }
+
+  // Suma el tramo activo actual antes de pausar o salir de la página.
+  function pauseActiveTime() {
+    if (activeSince !== null) {
+      state.activeTime += Date.now() - activeSince;
+      activeSince = null;
+    }
+    clearTimeout(timer);
+    timer = null;
+    saveState();
+  }
+
+  // Envía el evento solo si se cumplieron el tiempo y la profundidad requeridos.
   function fireEngagedReader() {
+    resetExpiredWindow();
     if (
       fired ||
-      !hasReachedScrollDepth ||
+      !state.hasReachedScrollDepth ||
       !isPageActive() ||
-      activeTime + (Date.now() - activeSince) < activeTimeRequired
+      state.activeTime + (activeSince === null ? 0 : Date.now() - activeSince) <
+        activeTimeRequired
     ) {
       return;
     }
 
+    // Si el Pixel todavía no está listo, vuelve a intentar en un segundo.
     if (typeof window.fbq !== "function") {
       timer = setTimeout(fireEngagedReader, 1000);
       return;
@@ -196,20 +263,18 @@ function setupMenuListeners() {
       content_name: window.location.pathname,
     });
     localStorage.setItem("engaged_reader_fired", "1");
+    localStorage.removeItem(stateKey);
     fired = true;
     console.log("Evento EngagedReader disparado");
   }
 
+  // Inicia, pausa o programa el contador según el estado visible y el foco.
   function updateActiveTime() {
     if (fired) return;
+    resetExpiredWindow();
 
     if (!isPageActive()) {
-      if (activeSince !== null) {
-        activeTime += Date.now() - activeSince;
-        activeSince = null;
-      }
-      clearTimeout(timer);
-      timer = null;
+      pauseActiveTime();
       return;
     }
 
@@ -217,8 +282,9 @@ function setupMenuListeners() {
       activeSince = Date.now();
     }
 
+    // Incluye el tramo activo actual sin esperar a que se pause.
     const remaining =
-      activeTimeRequired - activeTime - (Date.now() - activeSince);
+      activeTimeRequired - state.activeTime - (Date.now() - activeSince);
 
     if (remaining <= 0) {
       fireEngagedReader();
@@ -228,22 +294,32 @@ function setupMenuListeners() {
     }
   }
 
+  // Guarda el requisito de profundidad al alcanzar el 50% de la página.
   window.addEventListener(
     "scroll",
     function () {
+      resetExpiredWindow();
       const scrollPercent =
         ((window.scrollY + window.innerHeight) /
           document.documentElement.scrollHeight) *
         100;
-      if (scrollPercent >= 50) {
-        hasReachedScrollDepth = true;
+      if (scrollPercent >= 50 && !state.hasReachedScrollDepth) {
+        state.hasReachedScrollDepth = true;
+        saveState();
       }
       fireEngagedReader();
+      updateActiveTime();
     },
     { passive: true },
   );
+
+  // Actualiza o pausa el contador al cambiar visibilidad, foco o página.
   document.addEventListener("visibilitychange", updateActiveTime);
   window.addEventListener("focus", updateActiveTime);
-  window.addEventListener("blur", updateActiveTime);
+  window.addEventListener("blur", pauseActiveTime);
+  window.addEventListener("pagehide", pauseActiveTime);
+  window.addEventListener("pageshow", updateActiveTime);
+
+  // Comienza a contar inmediatamente si la página ya está activa.
   updateActiveTime();
 })();
