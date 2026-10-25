@@ -144,3 +144,106 @@ function setupMenuListeners() {
     menu.addEventListener("transitionend", handleTransitionEnd);
   });
 }
+
+/**
+ * ------------------------------------------------------------------------
+ * Eventos de META PIXEL
+ * ------------------------------------------------------------------------
+ */
+
+/**
+ *
+ * Evento EngagedReader
+ *
+ * Dispara una vez por usuario después de 10 segundos con la página visible
+ * y enfocada, siempre que haya alcanzado al menos el 50% de profundidad.
+ */
+
+(function () {
+  const activeTimeRequired = 10000;
+
+  if (localStorage.getItem("engaged_reader_fired")) return;
+
+  let activeTime = 0;
+  let activeSince = null;
+  let timer = null;
+  let fired = false;
+  let hasReachedScrollDepth = false;
+
+  function isPageActive() {
+    return (
+      document.visibilityState === "visible" &&
+      document.hasFocus()
+    );
+  }
+
+  function fireEngagedReader() {
+    if (
+      fired ||
+      !hasReachedScrollDepth ||
+      !isPageActive() ||
+      activeTime + (Date.now() - activeSince) < activeTimeRequired
+    ) {
+      return;
+    }
+
+    if (typeof window.fbq !== "function") {
+      timer = setTimeout(fireEngagedReader, 1000);
+      return;
+    }
+
+    window.fbq("trackCustom", "EngagedReader", {
+      content_name: window.location.pathname,
+    });
+    localStorage.setItem("engaged_reader_fired", "1");
+    fired = true;
+    console.log("Evento EngagedReader disparado");
+  }
+
+  function updateActiveTime() {
+    if (fired) return;
+
+    if (!isPageActive()) {
+      if (activeSince !== null) {
+        activeTime += Date.now() - activeSince;
+        activeSince = null;
+      }
+      clearTimeout(timer);
+      timer = null;
+      return;
+    }
+
+    if (activeSince === null) {
+      activeSince = Date.now();
+    }
+
+    const remaining =
+      activeTimeRequired - activeTime - (Date.now() - activeSince);
+
+    if (remaining <= 0) {
+      fireEngagedReader();
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(updateActiveTime, remaining);
+    }
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      const scrollPercent =
+        ((window.scrollY + window.innerHeight) /
+          document.documentElement.scrollHeight) *
+        100;
+      if (scrollPercent >= 50) {
+        hasReachedScrollDepth = true;
+      }
+      fireEngagedReader();
+    },
+    { passive: true },
+  );
+  document.addEventListener("visibilitychange", updateActiveTime);
+  window.addEventListener("focus", updateActiveTime);
+  window.addEventListener("blur", updateActiveTime);
+  updateActiveTime();
+})();
