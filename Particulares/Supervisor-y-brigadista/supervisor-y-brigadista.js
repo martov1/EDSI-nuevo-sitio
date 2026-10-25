@@ -26,3 +26,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+/**
+ * ------------------------------------------------------------------------
+ * Eventos de META PIXEL
+ * ------------------------------------------------------------------------
+ */
+
+/**
+ * 
+ * Evento EngagedReader 
+ * 
+ * Dispara una vez por usuario cuando:
+ * el usuario hace scroll más del 50% de la página o llega al final, o bien 
+ * recorre la página más de 10 segundos y hace scroll.
+ */
+
+(function() {
+  // Evita disparar más de una vez por usuario
+  if (localStorage.getItem('engaged_reader_fired')) return;
+
+  let hasScrolled = false;
+  let fired = false;
+
+  function fireEngagedReader() {
+    if (fired) return;
+    fired = true;
+    localStorage.setItem('engaged_reader_fired', '1');
+    
+    // Dispara evento personalizado al Pixel
+    fbq('trackCustom', 'EngagedReader', {
+      content_name: window.location.pathname
+    });
+    console.log('Evento EngagedReader disparado');
+  }
+
+  // 1. Detecta si hizo scroll
+  window.addEventListener('scroll', function() {
+    hasScrolled = true;
+    // Calcula % de scroll
+    let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+    
+    // Condición A: scrolleó más del 50% o llegó al final
+    if (scrollPercent > 50) {
+      fireEngagedReader();
+    }
+  }, {passive: true});
+
+  // 2. Condición B: más de 10 segundos + hizo scroll
+  setTimeout(function() {
+    if (hasScrolled) {
+      fireEngagedReader();
+    }
+  }, 10000);
+})();
