@@ -81,7 +81,7 @@ brigadista:
     spreadsheet_id: "1rIE5dT2raFRLX7lyB_Qi-8IOVoq0cvr4slU7fDrJREs"
     capacidad_maxima: 20
     inscripciones_abiertas: false
-    mostrar-cupo-lleno: true
+    mostrar-cupo-lleno: false
     lista_de_espera_habilitada: true
     lista_espera_url: "https://docs.google.com/forms/d/1vwfwxOaQEalC5_Fptah1RSoFxVQztxksaZ6oJGMRVeY"
 
