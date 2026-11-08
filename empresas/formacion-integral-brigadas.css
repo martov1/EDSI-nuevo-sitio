@@ -13,7 +13,8 @@
 .hero-course {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
     background-size: cover;
-    background-position: center;
+    background-position: center 18%;
+    background-repeat: no-repeat;
     color: white;
     padding: 60px 20px;
     border-radius: 8px;
