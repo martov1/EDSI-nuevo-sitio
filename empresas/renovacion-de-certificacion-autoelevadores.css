@@ -24,7 +24,7 @@
 .temario-clase ol li { margin-bottom:10px; line-height:1.6 }
 .section-card ul { list-style-type: disc; margin-left: 1.1rem; }
 .temario-clase ol li::marker { color: var(--accent-red); font-weight:700 }
-.sidebar-info { background: var(--bg-light); padding:25px; border-radius:8px; position:sticky; top:100px; border:1px solid #e0e0e0 }
+.sidebar-info { background: var(--bg-light); padding:25px; border-radius:8px; position:sticky; top:10px; border:1px solid #e0e0e0 }
 .info-row { display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #ddd }
 .inscription-box { margin-top:25px; text-align:center }
 .btn-payment { background:#009ee3; color:white; padding:12px; border-radius:5px; display:block; margin-top:10px; font-weight:bold; text-decoration:none }

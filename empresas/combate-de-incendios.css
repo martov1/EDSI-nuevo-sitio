@@ -84,7 +84,7 @@
 .description-box ul li { margin-bottom: 8px; padding-right: 14px; }
 .description-box ul li::marker { color: var(--accent-red); }
 
-.sidebar-info { background: var(--bg-light); padding: 25px; border-radius: 8px; position: sticky; top: 100px; border: 1px solid #e0e0e0; }
+.sidebar-info { background: var(--bg-light); padding: 25px; border-radius: 8px; position: sticky; top: 10px; border: 1px solid #e0e0e0; }
 .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #ddd; font-size: 0.95rem; }
 .info-row strong { color: var(--primary-dark); }
 
