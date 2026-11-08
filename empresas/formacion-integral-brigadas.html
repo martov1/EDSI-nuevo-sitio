@@ -4,6 +4,8 @@ title: "Formación Integral de Brigadas de Emergencia para Empresas"
 description: "Capacitación continua anual para brigadas, personalizada según los riesgos y la operación de cada planta industrial. Incluye visita inicial y diseño del plan de capacitación."
 image: /assets/brigada.jpg
 css: /empresas/formacion-integral-brigadas.css
+js:
+  - /empresas/formacion-integral-brigadas.js
 redirect_from:
   - /empresas/formacion-integral-brigadas.html
 ---
@@ -142,6 +144,7 @@ redirect_from:
           <a
             href="https://wa.me/{{ site.whatsapp_phone }}?text={{ site.whatsapp_message_empresa_incendio | url_encode }}"
             target="_blank"
+            rel="noopener noreferrer"
             class="btn-whatsapp"
             ><img
               src="/assets/whatsapp-icon.svg"
@@ -149,7 +152,7 @@ redirect_from:
               width="18"
               height="18"
               style="vertical-align: middle; margin-right: 8px"
-            />Consultar</a
+            />Solicitar información</a
           >
           <a
             href="mailto:{{ site.email }}?subject={{ site.email_subject_empresa | uri_escape }}"
@@ -165,4 +168,85 @@ redirect_from:
       </div>
     </aside>
   </div>
+
+  <section
+    class="section-card brigade-gallery"
+    aria-labelledby="brigade-gallery-title"
+  >
+    <div class="brigade-gallery-header">
+      <div>
+        <span class="brigade-gallery-kicker">En acción</span>
+        <h2 id="brigade-gallery-title">Así se vive la formación</h2>
+      </div>
+      <div class="brigade-gallery-controls">
+        <span
+          class="brigade-gallery-count"
+          data-gallery-count
+          aria-live="polite"
+        >
+          <span data-gallery-current>01</span> / 16
+        </span>
+        <button
+          class="brigade-gallery-button"
+          type="button"
+          aria-label="Ver fotos anteriores"
+          aria-controls="brigade-gallery-track"
+          data-gallery-previous
+          disabled
+        >
+          <span aria-hidden="true">&larr;</span>
+        </button>
+        <button
+          class="brigade-gallery-button"
+          type="button"
+          aria-label="Ver fotos siguientes"
+          aria-controls="brigade-gallery-track"
+          data-gallery-next
+        >
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+    </div>
+    <ul class="brigade-gallery-track" id="brigade-gallery-track">
+      {% for photo in (1..16) %}
+      <li class="brigade-gallery-slide">
+        <img
+          src="/assets/slider%20fotos%20de%20brigada/{{ photo }}.jpg"
+          alt="Actividad de formación para brigadas de emergencia, imagen {{ photo }}"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+        />
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="brigade-cta" aria-labelledby="brigade-cta-title">
+    <div class="brigade-cta-copy">
+      <span class="brigade-gallery-kicker">Asesoramiento para empresas</span>
+      <h2 id="brigade-cta-title">
+        Un programa de formación acorde a su organización
+      </h2>
+      <p>
+        Nuestro equipo puede coordinar un relevamiento inicial y elaborar una
+        propuesta de capacitación en función de los riesgos y las necesidades
+        operativas de su planta.
+      </p>
+    </div>
+    <div class="brigade-cta-actions">
+      <a
+        href="https://wa.me/{{ site.whatsapp_phone }}?text={{ site.whatsapp_message_empresa_incendio | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="brigade-cta-primary"
+        >Solicitar asesoramiento</a
+      >
+      <a
+        href="mailto:{{ site.email }}?subject={{ site.email_subject_empresa | uri_escape }}"
+        class="brigade-cta-secondary"
+        >Contactar por email</a
+      >
+    </div>
+  </section>
 </main>
