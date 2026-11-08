@@ -361,13 +361,27 @@ a {
   text-transform: uppercase;
   margin-bottom: 10px;
 }
-.badge-teorico {
+.badge-teorico,
+.badge-integral {
   background: #e3f2fd;
   color: #1976d2;
+  border: 1px solid #bbdefb;
 }
-.badge-practico {
+.badge-practico,
+.badge-incendio {
   background: #fff3e0;
-  color: #f57c00;
+  color: #ef6c00;
+  border: 1px solid #ffcc80;
+}
+.badge-especializacion {
+  background: #fdecea;
+  color: #b93a2f;
+  border: 1px solid #f4b4ab;
+}
+.badge-renovacion {
+  background: #f3e5f5;
+  color: #7b1fa2;
+  border: 1px solid #ce93d8;
 }
 
 .cta-box {
