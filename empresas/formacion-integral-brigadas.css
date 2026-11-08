@@ -144,22 +144,35 @@
 .brigade-gallery-controls {
     display: flex;
     flex: 0 0 auto;
-    gap: 8px;
+}
+
+.brigade-gallery-stage {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    align-items: center;
+    gap: 14px;
 }
 
 .brigade-gallery-button {
     display: grid;
     width: 48px;
     height: 48px;
+    padding: 0;
     place-items: center;
+    align-content: center;
+    justify-content: center;
     border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
     cursor: pointer;
-    font-size: 1.25rem;
-    line-height: 1;
     transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.brigade-gallery-button svg {
+    display: block;
+    width: 20px;
+    height: 20px;
 }
 
 .brigade-gallery-button:hover:not(:disabled) {
@@ -183,13 +196,17 @@
     align-items: flex-start;
     gap: 18px;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
     height: auto;
-    margin: 0 -4px;
+    margin: 0;
     padding: 4px 4px 14px;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
     scrollbar-width: none;
     list-style: none;
     transition: height 260ms ease;
@@ -344,12 +361,18 @@
     }
 
     .brigade-gallery-controls {
-        padding-top: 20px;
+        align-self: flex-start;
     }
 
     .brigade-gallery-button {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .brigade-gallery-stage {
+        grid-template-columns: 36px minmax(0, 1fr) 36px;
+        gap: 6px;
     }
 
     .brigade-gallery-slide {

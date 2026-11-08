@@ -186,40 +186,71 @@ redirect_from:
         >
           <span data-gallery-current>01</span> / 16
         </span>
-        <button
-          class="brigade-gallery-button"
-          type="button"
-          aria-label="Ver fotos anteriores"
-          aria-controls="brigade-gallery-track"
-          data-gallery-previous
-          disabled
-        >
-          <span aria-hidden="true">&larr;</span>
-        </button>
-        <button
-          class="brigade-gallery-button"
-          type="button"
-          aria-label="Ver fotos siguientes"
-          aria-controls="brigade-gallery-track"
-          data-gallery-next
-        >
-          <span aria-hidden="true">&rarr;</span>
-        </button>
       </div>
     </div>
-    <ul class="brigade-gallery-track" id="brigade-gallery-track">
-      {% for photo in (1..16) %}
-      <li class="brigade-gallery-slide">
-        <img
-          src="/assets/slider%20fotos%20de%20brigada/{{ photo }}.jpg"
-          alt="Actividad de formación para brigadas de emergencia, imagen {{ photo }}"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
-        />
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="brigade-gallery-stage">
+      <button
+        class="brigade-gallery-button"
+        type="button"
+        aria-label="Ver fotos anteriores"
+        aria-controls="brigade-gallery-track"
+        data-gallery-previous
+        disabled
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+        >
+          <path
+            d="M19 12H5m0 0 7 7m-7-7 7-7"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <ul class="brigade-gallery-track" id="brigade-gallery-track">
+        {% for photo in (1..16) %}
+        <li class="brigade-gallery-slide">
+          <img
+            src="/assets/slider%20fotos%20de%20brigada/{{ photo }}.jpg"
+            alt="Actividad de formación para brigadas de emergencia, imagen {{ photo }}"
+            draggable="false"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+          />
+        </li>
+        {% endfor %}
+      </ul>
+      <button
+        class="brigade-gallery-button"
+        type="button"
+        aria-label="Ver fotos siguientes"
+        aria-controls="brigade-gallery-track"
+        data-gallery-next
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+        >
+          <path
+            d="M5 12h14m0 0-7-7m7 7-7 7"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
   </section>
 
   <section class="brigade-cta" aria-labelledby="brigade-cta-title">
