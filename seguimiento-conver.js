@@ -2,8 +2,6 @@
   const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbzJpD52mws24tAyjoCjzkZl8WBJ6h7YLBpAoWo2DbBDklRgXUN0lC3fouYtgZ3ZbzEiOw/exec";
   const STORAGE_KEY = "edsi_contact_attribution";
-  const SAVE_TIMEOUT_MS = 2000;
-  const pendingLinks = new WeakSet();
 
   function readStorage(key) {
     try {
@@ -198,41 +196,16 @@
       });
     }
 
-    let timeoutId;
-    const timeout = new Promise((resolve) => {
-      timeoutId = window.setTimeout(resolve, SAVE_TIMEOUT_MS);
-    });
-    const saveRequest = fetch(WEB_APP_URL, {
+    const body = JSON.stringify(payload);
+    fetch(WEB_APP_URL, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=UTF-8" },
-      body: JSON.stringify(payload),
+      body,
       keepalive: true,
     }).catch((error) => {
       console.error("No se pudo registrar la atribución en Apps Script.", error);
     });
-
-    return Promise.race([saveRequest, timeout]).finally(() =>
-      window.clearTimeout(timeoutId),
-    );
-  }
-
-  function navigateToContact(anchor) {
-    const target = anchor.getAttribute("target");
-    const opensNewTab = target && target.toLowerCase() === "_blank";
-    const pendingWindow = opensNewTab
-      ? window.open("about:blank", "_blank")
-      : null;
-
-    if (pendingWindow) pendingWindow.opener = null;
-
-    return function () {
-      if (pendingWindow && !pendingWindow.closed) {
-        pendingWindow.location.replace(anchor.href);
-      } else {
-        window.location.assign(anchor.href);
-      }
-    };
   }
 
   const pageState = getPageStateForThisVisit();
@@ -259,16 +232,12 @@
       const contactType = getContactType(anchor);
       if (!contactType) return;
 
-      event.preventDefault();
-      if (pendingLinks.has(anchor)) return;
-      pendingLinks.add(anchor);
-
-      const navigate = navigateToContact(anchor);
-      const payload = buildPayload(pageState, contactType);
-      trackContact(contactType, anchor, payload).finally(() => {
-        pendingLinks.delete(anchor);
-        navigate();
-      });
+      try {
+        const payload = buildPayload(pageState, contactType);
+        trackContact(contactType, anchor, payload);
+      } catch (error) {
+        console.error("No se pudo preparar el registro de atribución.", error);
+      }
     },
     true,
   );
