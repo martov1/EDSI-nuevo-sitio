@@ -42,6 +42,14 @@
   const STORAGE_KEY = "edsi_contact_attribution";
 
   /**
+   * Genera un código alfanumérico corto basado en la fecha y hora exacta (Timestamp).
+   */
+  function generarTicketID() {
+    const ahora = new Date().getTime();
+    return ahora.toString(36).toUpperCase();
+  }
+
+  /**
    * Lee un valor de localStorage.
    * Si el navegador bloquea el almacenamiento (por privacidad, modo privado
    * u otra política), registra el error y devuelve null para que el sitio
@@ -242,7 +250,7 @@
    * grupo de anuncios/conjunto/anuncio se dejan vacíos porque el navegador
    * no puede deducirlos de forma fiable si no vienen en parámetros propios.
    */
-  function buildPayload(state, contactType) {
+  function buildPayload(state, contactType, ticketId) {
     const touch = state.lastTouch || {
       gclid: "",
       fbclid: "",
@@ -259,6 +267,7 @@
       (touch.fbclid ? "Meta_Ads_Fbclid" : "Sin Campaña");
 
     return {
+      ticket_id: ticketId, // <--- Aquí se envía el ID generado en el cliente
       tipo_contacto: contactType,
       origen_ultimo_clic: touch.origin,
       campaña_principal: campaign,
@@ -371,9 +380,24 @@
       if (!contactType) return;
 
       try {
-        // Registrar el intento de contacto. No se llama preventDefault ni se
-        // cambia el href: el navegador sigue la navegación nativa en paralelo.
-        const payload = buildPayload(pageState, contactType);
+        const ticketId = generarTicketID();
+
+        // Si es un enlace de WhatsApp, inyecta el ticket en el texto del mensaje
+        if (contactType === "whatsapp") {
+          const urlObj = new URL(anchor.href);
+          let textParam = urlObj.searchParams.get("text") || "";
+          const sufijo = ` Nº de consulta: ${ticketId}`;
+          if (!textParam.includes(ticketId)) {
+            urlObj.searchParams.set(
+              "text",
+              textParam ? `${textParam} ${sufijo}` : sufijo,
+            );
+            anchor.href = urlObj.toString();
+          }
+        }
+
+        // Registrar el intento de contacto con el ID generado en el cliente.
+        const payload = buildPayload(pageState, contactType, ticketId);
         trackContact(contactType, anchor, payload);
       } catch (error) {
         // Un fallo al preparar/emitir el tracking no debe impedir que el
