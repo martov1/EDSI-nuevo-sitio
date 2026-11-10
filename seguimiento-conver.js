@@ -267,7 +267,7 @@
       (touch.fbclid ? "Meta_Ads_Fbclid" : "Sin Campaña");
 
     return {
-      ticket_id: ticketId, // <--- Aquí se envía el ID generado en el cliente
+      ticket_id: ticketId,
       tipo_contacto: contactType,
       origen_ultimo_clic: touch.origin,
       campaña_principal: campaign,
@@ -393,6 +393,21 @@
               textParam ? `${textParam} ${sufijo}` : sufijo,
             );
             anchor.href = urlObj.toString();
+          }
+        }
+
+        // Si es un enlace de correo (mailto:), inyecta el ticket en el asunto (subject)
+        if (contactType === "email") {
+          const urlObj = new URL(anchor.href);
+          let subjectParam = urlObj.searchParams.get("subject") || "";
+          const sufijo = `Nº de consulta: ${ticketId}`;
+          if (!subjectParam.includes(ticketId)) {
+            const nuevoAsunto = subjectParam
+              ? `${subjectParam} - ${sufijo}`
+              : sufijo;
+            // Forzamos el uso de %20 en lugar de + para que Thunderbird lo interprete bien
+            urlObj.searchParams.set("subject", nuevoAsunto);
+            anchor.href = urlObj.toString().replace(/\+/g, "%20");
           }
         }
 
