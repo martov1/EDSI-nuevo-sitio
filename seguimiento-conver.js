@@ -265,7 +265,10 @@
 
       const navigate = navigateToContact(anchor);
       const payload = buildPayload(pageState, contactType);
-      trackContact(contactType, anchor, payload).finally(navigate);
+      trackContact(contactType, anchor, payload).finally(() => {
+        pendingLinks.delete(anchor);
+        navigate();
+      });
     },
     true,
   );
