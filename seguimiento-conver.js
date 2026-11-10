@@ -51,7 +51,10 @@
     try {
       return window.localStorage.getItem(key);
     } catch (error) {
-      console.warn("No se pudo leer el almacenamiento local de atribución.", error);
+      console.warn(
+        "No se pudo leer el almacenamiento local de atribución.",
+        error,
+      );
       return null;
     }
   }
@@ -65,7 +68,10 @@
     try {
       window.localStorage.setItem(key, value);
     } catch (error) {
-      console.warn("No se pudo guardar la atribución en este navegador.", error);
+      console.warn(
+        "No se pudo guardar la atribución en este navegador.",
+        error,
+      );
     }
   }
 
@@ -103,10 +109,14 @@
             return parsedState;
           }
         }
-        console.warn("Estado de atribución inválido; se reinicia el seguimiento.");
+        console.warn(
+          "Estado de atribución inválido; se reinicia el seguimiento.",
+        );
       } catch (error) {
         if (!(error instanceof SyntaxError)) throw error;
-        console.warn("Estado de atribución inválido; se reinicia el seguimiento.");
+        console.warn(
+          "Estado de atribución inválido; se reinicia el seguimiento.",
+        );
       }
     }
 
@@ -254,8 +264,7 @@
       campaña_principal: campaign,
       gclid: touch.gclid,
       google_campaign:
-        touch.utmMedium.toLowerCase() === "cpc" &&
-        touch.origin === "Google Ads"
+        touch.utmMedium.toLowerCase() === "cpc" && touch.origin === "Google Ads"
           ? touch.utmCampaign
           : "",
       google_adgroup: "",
@@ -320,7 +329,10 @@
     }).catch((error) => {
       // Solo se puede informar de errores locales de red; no se puede leer una
       // respuesta de Apps Script porque la solicitud está en modo no-cors.
-      console.error("No se pudo registrar la atribución en Apps Script.", error);
+      console.error(
+        "No se pudo registrar la atribución en Apps Script.",
+        error,
+      );
     });
   }
 
