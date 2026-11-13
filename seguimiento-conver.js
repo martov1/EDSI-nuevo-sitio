@@ -101,6 +101,10 @@
             (parsedState.lastTouch &&
               typeof parsedState.lastTouch === "object" &&
               typeof parsedState.lastTouch.gclid === "string" &&
+              (parsedState.lastTouch.gadCampaignId === undefined ||
+                typeof parsedState.lastTouch.gadCampaignId === "string") &&
+              (parsedState.lastTouch.utmAdgroup === undefined ||
+                typeof parsedState.lastTouch.utmAdgroup === "string") &&
               typeof parsedState.lastTouch.fbclid === "string" &&
               typeof parsedState.lastTouch.utmCampaign === "string" &&
               typeof parsedState.lastTouch.utmMedium === "string" &&
@@ -146,6 +150,8 @@
     const params = new URLSearchParams(window.location.search);
     const touch = {
       gclid: params.get("gclid") || "",
+      gadCampaignId: params.get("gad_campaignid") || "",
+      utmAdgroup: params.get("utm_adgroup") || "",
       fbclid: params.get("fbclid") || "",
       utmCampaign: params.get("utm_campaign") || "",
       utmMedium: params.get("utm_medium") || "",
@@ -161,7 +167,11 @@
     const medium = touch.utmMedium.toLowerCase();
     let origin = touch.utmSource || "Directo / Orgánico";
 
-    if (touch.gclid || (source === "google" && medium === "cpc")) {
+    if (
+      touch.gclid ||
+      touch.gadCampaignId ||
+      (source === "google" && medium === "cpc")
+    ) {
       origin = "Google Ads";
     } else if (
       touch.fbclid ||
@@ -247,12 +257,14 @@
    * Incluye el tipo de contacto, el último origen/campaña persistido,
    * identificadores Google/Meta disponibles, cantidad de páginas vistas,
    * primera página visitada y URL donde ocurrió el clic. Algunos campos de
-   * grupo de anuncios/conjunto/anuncio se dejan vacíos porque el navegador
-   * no puede deducirlos de forma fiable si no vienen en parámetros propios.
+   * grupo de anuncios/conjunto/anuncio solo se incluyen si llegan en
+   * parámetros propios de la URL; no se pueden deducir del gclid.
    */
   function buildPayload(state, contactType, ticketId) {
     const touch = state.lastTouch || {
       gclid: "",
+      gadCampaignId: "",
+      utmAdgroup: "",
       fbclid: "",
       utmCampaign: "",
       utmMedium: "",
@@ -273,10 +285,10 @@
       campaña_principal: campaign,
       gclid: touch.gclid,
       google_campaign:
-        touch.utmMedium.toLowerCase() === "cpc" && touch.origin === "Google Ads"
-          ? touch.utmCampaign
+        touch.origin === "Google Ads"
+          ? touch.gadCampaignId || touch.utmCampaign
           : "",
-      google_adgroup: "",
+      google_adgroup: touch.utmAdgroup || "",
       google_keyword: touch.utmTerm,
       fbclid: touch.fbclid,
       fbp: getCookie("_fbp"),
