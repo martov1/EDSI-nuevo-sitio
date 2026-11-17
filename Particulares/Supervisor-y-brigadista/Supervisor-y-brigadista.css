@@ -315,12 +315,15 @@
   color: #856404;
 }
 
-.eval-box {
-  /* Informacion sobre evaluacion y certificacion */
+.eval-box,
+.audience-notice {
   background: #e3f2fd;
   padding: 25px;
   border-radius: 8px;
   border-left: 6px solid #1976d2;
+}
+.audience-notice {
+  margin-bottom: 20px;
 }
 .reviews-section {
   /* Seccion de opiniones de cursantes */

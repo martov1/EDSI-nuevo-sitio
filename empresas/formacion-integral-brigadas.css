@@ -93,7 +93,9 @@
 .btn-payment { background: #009ee3; color: white; padding: 12px; border-radius: 5px; display: block; margin-top: 10px; font-weight: bold; text-decoration: none; transition: opacity 0.3s; }
 .btn-whatsapp { background: #25d366; color: white; padding: 12px; border-radius: 5px; display: block; font-weight: bold; text-decoration: none; }
 
-.eval-box { background: #e3f2fd; padding: 25px; border-radius: 8px; border-left: 6px solid #1976d2; }
+.eval-box,
+.audience-notice { background: #e3f2fd; padding: 25px; border-radius: 8px; border-left: 6px solid #1976d2; }
+.audience-notice { margin-bottom: 24px; }
 
 .brigade-gallery {
     margin-top: 32px;
