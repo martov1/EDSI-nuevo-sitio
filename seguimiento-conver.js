@@ -358,25 +358,20 @@
   }
 
   /**
-   * Asocia el ticket de contacto con la grabación/sesión actual de Clarity.
-   * Se usa el ticket como identificador personalizado de usuario y de sesión.
+   * Etiqueta la grabación/sesión actual de Clarity con el ticket de contacto.
    */
   function trackClarityTicket(ticketId) {
     if (typeof window.clarity !== "function") {
       console.warn(
-        "Microsoft Clarity no está disponible; no se pudo asociar el ticket.",
+        "Microsoft Clarity no está disponible; no se pudo etiquetar el ticket.",
       );
       return;
     }
 
     try {
-      Promise.resolve(window.clarity("identify", ticketId, ticketId)).catch(
-        (error) => {
-          console.warn("Clarity no pudo asociar el ticket.", error);
-        },
-      );
+      window.clarity("set", "ticket_id", ticketId);
     } catch (error) {
-      console.warn("No se pudo enviar el ticket a Clarity.", error);
+      console.warn("No se pudo etiquetar el ticket en Clarity.", error);
     }
   }
 
