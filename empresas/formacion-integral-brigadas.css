@@ -453,6 +453,34 @@
 @media (max-width: 992px) { .grid-container { grid-template-columns: 1fr; } .sidebar-info { position: static; } .main-content { order: 2; } .sidebar { order: 1; } }
 
 @media (max-width: 700px) {
+    .legal-tooltip::after,
+    .legal-tooltip-content {
+        position: fixed;
+        top: 50%;
+        top: 50dvh;
+        right: auto;
+        bottom: auto;
+        left: 50%;
+        width: calc(100vw - 32px);
+        max-width: 560px;
+        max-height: calc(100vh - 32px);
+        max-height: calc(100dvh - 32px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        transform: translate(-50%, calc(-50% + 4px));
+    }
+
+    .legal-tooltip::after {
+        pointer-events: auto;
+    }
+
+    .legal-tooltip:hover::after,
+    .legal-tooltip:focus-visible::after,
+    .legal-tooltip-rich:hover .legal-tooltip-content,
+    .legal-tooltip-rich:focus-visible .legal-tooltip-content {
+        transform: translate(-50%, -50%);
+    }
+
     .brigade-cta {
         align-items: stretch;
         flex-direction: column;
