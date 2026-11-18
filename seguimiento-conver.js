@@ -357,6 +357,29 @@
     });
   }
 
+  /**
+   * Asocia el ticket de contacto con la grabación/sesión actual de Clarity.
+   * Se usa el ticket como identificador personalizado de usuario y de sesión.
+   */
+  function trackClarityTicket(ticketId) {
+    if (typeof window.clarity !== "function") {
+      console.warn(
+        "Microsoft Clarity no está disponible; no se pudo asociar el ticket.",
+      );
+      return;
+    }
+
+    try {
+      Promise.resolve(window.clarity("identify", ticketId, ticketId)).catch(
+        (error) => {
+          console.warn("Clarity no pudo asociar el ticket.", error);
+        },
+      );
+    } catch (error) {
+      console.warn("No se pudo enviar el ticket a Clarity.", error);
+    }
+  }
+
   // Actualiza el estado una vez por carga de este archivo/página.
   const pageState = getPageStateForThisVisit();
 
@@ -393,6 +416,7 @@
 
       try {
         const ticketId = generarTicketID();
+        trackClarityTicket(ticketId);
 
         // Si es un enlace de WhatsApp, inyecta el ticket en el texto del mensaje
         if (contactType === "whatsapp") {
