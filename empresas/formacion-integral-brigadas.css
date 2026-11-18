@@ -187,6 +187,23 @@
 .inscription-box { margin-top: 25px; text-align: center; }
 .btn-payment { background: #009ee3; color: white; padding: 12px; border-radius: 5px; display: block; margin-top: 10px; font-weight: bold; text-decoration: none; transition: opacity 0.3s; }
 .btn-whatsapp { background: #25d366; color: white; padding: 12px; border-radius: 5px; display: block; font-weight: bold; text-decoration: none; }
+.inscription-box .btn-whatsapp,
+.inscription-box .btn-payment {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.inscription-box .btn-whatsapp img,
+.inscription-box .btn-payment img {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    margin-right: 0;
+    transform: translateY(-50%);
+}
 
 .eval-box,
 .audience-notice { background: #e3f2fd; padding: 25px; border-radius: 8px; border-left: 6px solid #1976d2; }
