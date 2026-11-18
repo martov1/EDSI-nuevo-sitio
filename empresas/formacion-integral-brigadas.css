@@ -73,6 +73,101 @@
 .description-box { line-height: 1.7; color: #444; margin-bottom: 30px; }
 .description-box p { margin-bottom: 15px; }
 
+.legal-link {
+    color: #1976d2;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 180ms ease;
+}
+
+.legal-link:hover,
+.legal-link:focus-visible {
+    color: #0d4f91;
+}
+
+.legal-tooltip {
+    position: relative;
+}
+
+.legal-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    z-index: 20;
+    width: min(420px, calc(100vw - 40px));
+    padding: 12px 14px;
+    border-radius: 6px;
+    background: #1a2a3a;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.45;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+.legal-tooltip:hover::after,
+.legal-tooltip:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.legal-tooltip-wide::after {
+    width: min(560px, calc(100vw - 40px));
+    max-height: min(420px, 70vh);
+    overflow-y: auto;
+}
+
+.legal-tooltip-rich::after {
+    content: none;
+}
+
+.legal-tooltip-content {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    z-index: 20;
+    width: min(560px, calc(100vw - 40px));
+    padding-bottom: 10px;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, 4px);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+}
+
+.legal-tooltip-panel {
+    display: block;
+    max-height: min(420px, 70vh);
+    overflow-y: auto;
+    padding: 12px 14px;
+    border-radius: 6px;
+    background: #1a2a3a;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.45;
+    text-align: left;
+    white-space: normal;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+.legal-tooltip-rich:hover .legal-tooltip-content,
+.legal-tooltip-rich:focus-visible .legal-tooltip-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
 .temario-clase { background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border-color); }
 .temario-clase ol { padding-left: 20px; }
 .temario-clase ol li { margin-bottom: 10px; line-height: 1.6; }
