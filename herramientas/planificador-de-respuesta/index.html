@@ -480,6 +480,8 @@
       let pixelsPerMeter = null;
       let isDrawing = false;
       let drawingLine = null;
+      let scaleStartPlaced = false;
+      let scaleSecondPointStarted = false;
       let startX = 0;
       let startY = 0;
 
@@ -755,11 +757,17 @@
           ];
         } else if (currentMode === "scale") {
           title = "Fijar Escala";
-          instructions = [
-            "Arrastra sobre una distancia conocida del plano.",
-            "Ingresa cuántos metros representa esa distancia.",
-            "Pulsa Escape para cancelar.",
-          ];
+          instructions = scaleStartPlaced
+            ? [
+                "Haz clic en el segundo punto de una distancia conocida.",
+                "Luego ingresa cuántos metros representa esa distancia.",
+                "Pulsa Escape para cancelar.",
+              ]
+            : [
+                "Haz clic en el primer punto de una distancia conocida.",
+                "Haz clic en el segundo punto para completar la línea.",
+                "Pulsa Escape para cancelar.",
+              ];
         } else if (currentMode === "attack_line") {
           title = "Línea de Ataque";
           if (placingNozzle) {
@@ -818,6 +826,14 @@
         if (currentMode === "stamp" && stampGhost) {
           canvas.remove(stampGhost);
           stampGhost = null;
+        }
+
+        if (currentMode === "scale" && mode !== "scale") {
+          if (drawingLine) canvas.remove(drawingLine);
+          drawingLine = null;
+          isDrawing = false;
+          scaleStartPlaced = false;
+          scaleSecondPointStarted = false;
         }
 
         currentMode = mode;
@@ -892,6 +908,14 @@
         }
 
         const pointer = canvas.getPointer(opt.e);
+
+        if (currentMode === "scale" && scaleStartPlaced) {
+          isDrawing = true;
+          scaleSecondPointStarted = true;
+          drawingLine.set({ x2: pointer.x, y2: pointer.y });
+          canvas.renderAll();
+          return;
+        }
 
         if (currentMode === "stamp") {
           if (stampGhost) {
@@ -1099,6 +1123,11 @@
           evented: false,
         });
         canvas.add(drawingLine);
+
+        if (currentMode === "scale") {
+          scaleStartPlaced = true;
+          updateToolHelp();
+        }
       });
 
       canvas.on("mouse:move", function (opt) {
@@ -1329,12 +1358,13 @@
           return;
         }
 
-        if (!isDrawing) return;
-
-        if (drawingLine && currentMode === "scale") {
+        if (drawingLine && currentMode === "scale" && scaleStartPlaced) {
           drawingLine.set({ x2: pointer.x, y2: pointer.y });
           canvas.renderAll();
+          return;
         }
+
+        if (!isDrawing) return;
       });
 
       // --- MANEJO DE MODALES ---
@@ -1361,6 +1391,8 @@
           document.getElementById("custom-modal").classList.add("hidden");
           confirmBtn.onclick = null;
           cancelBtn.onclick = null;
+          scaleStartPlaced = false;
+          scaleSecondPointStarted = false;
         };
 
         confirmBtn.onclick = () => {
@@ -1975,6 +2007,30 @@
           return;
         }
 
+        if (currentMode === "scale") {
+          if (!isDrawing) return;
+          isDrawing = false;
+
+          if (!scaleSecondPointStarted) return;
+          scaleSecondPointStarted = false;
+
+          if (!drawingLine) return;
+
+          const pointer = canvas.getPointer(opt.e);
+          const lengthPx = Math.hypot(pointer.x - startX, pointer.y - startY);
+
+          if (lengthPx > 5) {
+            openScaleModal(lengthPx, drawingLine);
+          } else {
+            canvas.remove(drawingLine);
+            drawingLine = null;
+            scaleStartPlaced = false;
+            setMode("select");
+          }
+          drawingLine = null;
+          return;
+        }
+
         if (!isDrawing) return;
         isDrawing = false;
 
@@ -1984,14 +2040,6 @@
         // Calcular longitud en píxeles usando hipotenusa directa con el puntero
         const lengthPx = Math.hypot(pointer.x - startX, pointer.y - startY);
 
-        if (currentMode === "scale") {
-          if (lengthPx > 5) {
-            openScaleModal(lengthPx, drawingLine);
-          } else {
-            canvas.remove(drawingLine);
-            setMode("select");
-          }
-        }
         drawingLine = null;
       });
 
@@ -2196,11 +2244,22 @@
             } else {
               setMode("select");
             }
-          } else if (currentMode === "scale" && isDrawing) {
+          } else if (currentMode === "scale") {
             isDrawing = false;
             if (drawingLine) canvas.remove(drawingLine);
             drawingLine = null;
-            setMode("select");
+            scaleStartPlaced = false;
+            scaleSecondPointStarted = false;
+
+            if (
+              !document
+                .getElementById("modal-content-scale")
+                .classList.contains("hidden")
+            ) {
+              document.getElementById("scale-cancel").click();
+            } else {
+              setMode("select");
+            }
           }
 
           // Cerrar cualquier modal abierto
