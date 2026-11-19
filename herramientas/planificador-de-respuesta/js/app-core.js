@@ -1,9 +1,9 @@
 /**
  * Misión: inicializar el lienzo y mantener el estado compartido del planificador.
  * Responsabilidades: historial/deshacer, carga del plano, zoom y paneo,
- * ayuda contextual y creación/normalización de etiquetas de medición.
+ * ayuda contextual y rótulos de las flechas de dirección.
  * Funciones principales: showMessage, saveHistory, undo, resizeCanvas,
- * loadFabricBackground, updateToolHelp y utilidades de etiquetas/medición.
+ * loadFabricBackground, updateToolHelp y utilidades de etiquetas direccionales.
  */
 
 // --- ESTADO DE LA APLICACIÓN ---
@@ -527,64 +527,3 @@ function clearMeasurementPreview() {
   measurementStart = null;
 }
 
-/**
- * Convierte una longitud en píxeles a metros con formato regional.
- * @param {number} distancePx Longitud medida sobre el lienzo.
- * @returns {string} Medida formateada en metros.
- */
-function formatMeasurement(distancePx) {
-  const meters = distancePx / pixelsPerMeter;
-  return `${meters.toLocaleString("es-AR", {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 2,
-  })} m`;
-}
-
-/** Calcula cuánto reducir los adornos de una medición corta. */
-function measurementStyleScale(length) {
-  return Math.min(1, Math.max(0.05, length / 50));
-}
-
-/**
- * Crea una etiqueta de medición centrada, no interactiva y con fondo translúcido.
- * @param {string} text Texto de la etiqueta.
- * @param {string} color Color del texto.
- * @param {number} left Coordenada horizontal.
- * @param {number} top Coordenada vertical.
- * @returns {fabric.Text} Etiqueta lista para añadir al lienzo.
- */
-function createMeasurementLabel(text, color, left, top) {
-  return new fabric.Text(text, {
-    left,
-    top,
-    originX: "center",
-    originY: "center",
-    fontSize: 14,
-    fontFamily: "Arial",
-    fontWeight: "bold",
-    fill: color,
-    backgroundColor: measurementLabelBackground,
-    padding: 5,
-    selectable: false,
-    evented: false,
-    objectCaching: false,
-  });
-}
-
-const measurementLabelBackground = "rgba(255, 255, 255, 0.8)";
-
-/** Aplica a mediciones guardadas el fondo translúcido y elimina sombras antiguas. */
-function normalizeMeasurementLabelStyles() {
-  canvas.getObjects().forEach((object) => {
-    if (object.type !== "text" || typeof object.text !== "string") return;
-    const isRadiusLabel = object.text.startsWith("Radio:");
-    const isDistanceLabel =
-      object.fill === "#1a73e8" && /^[\d.,]+ m$/.test(object.text);
-    if (isRadiusLabel || isDistanceLabel) {
-      object.set({
-        backgroundColor: measurementLabelBackground,
-        shadow: null,
-      });
-    }
-  });
-}

@@ -1,6 +1,69 @@
 /**
  * Herramientas para dibujar, actualizar y confirmar mediciones de distancia y radio.
+ * También crea y normaliza sus etiquetas, que se reutilizan en zonificación.
  */
+
+const measurementLabelBackground = "rgba(255, 255, 255, 0.8)";
+
+/**
+ * Convierte una longitud en píxeles a metros con formato regional.
+ * @param {number} distancePx Longitud medida sobre el lienzo.
+ * @returns {string} Medida formateada en metros.
+ */
+function formatMeasurement(distancePx) {
+  const meters = distancePx / pixelsPerMeter;
+  return `${meters.toLocaleString("es-AR", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 2,
+  })} m`;
+}
+
+/** Calcula cuánto reducir los adornos de una medición corta. */
+function measurementStyleScale(length) {
+  return Math.min(1, Math.max(0.05, length / 50));
+}
+
+/**
+ * Crea una etiqueta centrada, no interactiva y con fondo translúcido.
+ * @param {string} text Texto de la etiqueta.
+ * @param {string} color Color del texto.
+ * @param {number} left Coordenada horizontal.
+ * @param {number} top Coordenada vertical.
+ * @returns {fabric.Text} Etiqueta lista para añadir al lienzo.
+ */
+function createMeasurementLabel(text, color, left, top) {
+  return new fabric.Text(text, {
+    left,
+    top,
+    originX: "center",
+    originY: "center",
+    fontSize: 14,
+    fontFamily: "Arial",
+    fontWeight: "bold",
+    fill: color,
+    backgroundColor: measurementLabelBackground,
+    padding: 5,
+    selectable: false,
+    evented: false,
+    objectCaching: false,
+  });
+}
+
+/** Aplica a etiquetas restauradas el fondo translúcido y elimina sombras antiguas. */
+function normalizeMeasurementLabelStyles() {
+  canvas.getObjects().forEach((object) => {
+    if (object.type !== "text" || typeof object.text !== "string") return;
+    const isRadiusLabel = object.text.startsWith("Radio:");
+    const isDistanceLabel =
+      object.fill === "#1a73e8" && /^[\d.,]+ m$/.test(object.text);
+    if (isRadiusLabel || isDistanceLabel) {
+      object.set({
+        backgroundColor: measurementLabelBackground,
+        shadow: null,
+      });
+    }
+  });
+}
 
 /** Orienta y ubica una etiqueta de medida sin invertir su texto. */
 function positionMeasurementLabel(label, text, start, end, length) {
