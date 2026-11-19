@@ -465,6 +465,7 @@
       let placingConeLength = false;
       let placingConeWidth = false;
       let waterConeObject = null;
+      let waterJetObject = null;
       let coneTipX = 0;
       let coneTipY = 0;
       let coneBaseAngleRad = 0;
@@ -827,20 +828,36 @@
               objectCaching: false, // Desactivar caché temporalmente para redibujo fluido
             });
 
-            waterConeObject.set(
-              "fill",
-              new fabric.Gradient({
-                type: "linear",
-                gradientUnits: "percentage",
-                coords: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                colorStops: [
-                  { offset: 0, color: "rgba(56, 189, 248, 0.85)" },
-                  { offset: 1, color: "rgba(56, 189, 248, 0.05)" },
-                ],
-              }),
-            );
+            const waterConeGradient = new fabric.Gradient({
+              type: "linear",
+              gradientUnits: "percentage",
+              coords: { x1: 0, y1: 0, x2: 0, y2: 1 },
+              colorStops: [
+                { offset: 0, color: "rgba(56, 189, 248, 0.85)" },
+                { offset: 1, color: "rgba(56, 189, 248, 0.05)" },
+              ],
+            });
+            waterConeObject.set("fill", waterConeGradient);
+
+            waterJetObject = new fabric.Rect({
+              left: coneTipX,
+              top: coneTipY,
+              width: Math.max(pixelsPerMeter * 0.2, 1),
+              height: waterConeObject.height,
+              angle: waterConeObject.angle,
+              originX: "center",
+              originY: "top",
+              stroke: "rgba(2, 132, 199, 0.8)",
+              strokeWidth: 2,
+              selectable: false,
+              evented: false,
+              objectCaching: false,
+              visible: false,
+            });
+            waterJetObject.set("fill", waterConeGradient);
 
             canvas.add(waterConeObject);
+            canvas.add(waterJetObject);
             // Asegurar que la lanza quede por encima del agua
             canvas.bringToFront(nozzleObject);
 
@@ -876,6 +893,9 @@
                 evented: true,
                 objectCaching: false, // CRÍTICO: Mantener en false para que no desaparezca al hacer zoom out
               });
+            }
+            if (waterJetObject) {
+              waterJetObject.set({ selectable: true, evented: true });
             }
             if (nozzleObject) {
               nozzleObject.set({ selectable: true, evented: true });
@@ -1019,6 +1039,7 @@
             if (length < 10) length = 10; // Evitar tamaños negativos/invisibles
 
             waterConeObject.set({ height: length });
+            if (waterJetObject) waterJetObject.set({ height: length });
 
             if (coneLengthText) {
               let lengthMeters = (length / pixelsPerMeter).toFixed(1);
@@ -1040,10 +1061,24 @@
             const dirY = Math.sin(coneBaseAngleRad);
 
             // Distancia de un punto a una línea (la recta central del chorro)
-            let halfWidth = Math.abs(dy * dirX - dx * dirY);
-            if (halfWidth < 5) halfWidth = 5;
+            const halfWidth = Math.abs(dy * dirX - dx * dirY);
+            const fullJetThreshold = pixelsPerMeter * 0.1;
+            const fullJetWidth = Math.max(
+              halfWidth * 2,
+              pixelsPerMeter * 0.02,
+              1,
+            );
 
-            waterConeObject.set({ width: halfWidth * 2 });
+            waterConeObject.set({
+              width: Math.max(halfWidth * 2, 1),
+              visible: halfWidth > fullJetThreshold,
+            });
+            if (waterJetObject) {
+              waterJetObject.set({
+                width: fullJetWidth,
+                visible: halfWidth <= fullJetThreshold,
+              });
+            }
             canvas.renderAll();
             return;
           }
@@ -2006,8 +2041,10 @@
               placingConeLength = false;
               placingConeWidth = false;
               if (waterConeObject) canvas.remove(waterConeObject);
+              if (waterJetObject) canvas.remove(waterJetObject);
               if (coneLengthText) canvas.remove(coneLengthText);
               waterConeObject = null;
+              waterJetObject = null;
               coneLengthText = null;
               setMode("select");
             } else {
