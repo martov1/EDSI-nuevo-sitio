@@ -93,9 +93,15 @@
           </h2>
           <label
             id="upload-image-label"
-            class="flex items-center justify-center w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 border border-gray-600 rounded cursor-pointer transition text-sm"
+            class="flex items-center justify-between w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 border border-gray-600 rounded cursor-pointer transition text-sm"
           >
             <span>Cargar Imagen / PDF</span>
+            <span
+              id="upload-image-check"
+              class="hidden text-lg font-bold leading-none text-green-400"
+              aria-label="Plano cargado"
+              >✓</span
+            >
             <input
               type="file"
               id="upload-image"
@@ -103,6 +109,18 @@
               accept="image/png, image/jpeg, image/jpg, application/pdf"
             />
           </label>
+          <button
+            id="btn-scale"
+            class="tool-btn mt-2 flex w-full items-center justify-between rounded border border-gray-600 bg-gray-700 px-3 py-2 text-left text-sm transition hover:bg-gray-600"
+          >
+            <span>📏 Fijar Escala</span>
+            <span
+              id="scale-check"
+              class="hidden text-lg font-bold leading-none text-green-400"
+              aria-label="Escala definida"
+              >✓</span
+            >
+          </button>
         </section>
 
         <!-- Herramientas -->
@@ -124,12 +142,6 @@
               class="tool-btn w-full text-left px-3 py-2 rounded bg-gray-700 border border-gray-600 hover:bg-gray-600 text-sm transition"
             >
               ✋ Mover Plano
-            </button>
-            <button
-              id="btn-scale"
-              class="tool-btn w-full text-left px-3 py-2 rounded bg-gray-700 border border-gray-600 hover:bg-gray-600 text-sm transition"
-            >
-              📏 Fijar Escala
             </button>
             <button
               id="btn-attack"
@@ -521,6 +533,14 @@
       let stampGhost = null;
 
       // --- INICIALIZACIÓN DE FABRIC.JS ---
+      fabric.Object.prototype.set({
+        borderColor: "#7c3aed",
+        cornerColor: "#2563eb",
+        cornerStrokeColor: "#ffffff",
+        transparentCorners: false,
+        cornerSize: 14,
+      });
+
       const canvas = new fabric.Canvas("main-canvas", {
         selection: true,
         preserveObjectStacking: true, // Mantiene el orden de capas al seleccionar
@@ -604,6 +624,7 @@
             canvas.setViewportTransform(currentVPT);
             canvas.renderAll();
             isUndoing = false;
+            updateToolHelp();
           });
         }
       }
@@ -655,6 +676,10 @@
       // Función auxiliar para cargar imagen base64 o URL al canvas
       function loadFabricBackground(dataUrl) {
         fabric.Image.fromURL(dataUrl, function (img) {
+          pixelsPerMeter = null;
+          document.getElementById("scale-info").innerHTML =
+            "Escala no definida";
+
           // Escalar imagen para que encaje en el canvas
           const scaleX = canvas.width / img.width;
           const scaleY = canvas.height / img.height;
@@ -734,15 +759,22 @@
           .getElementById("upload-image-label")
           .classList.toggle("attention-pulse", !hasPlan);
         document
+          .getElementById("upload-image-check")
+          .classList.toggle("hidden", !hasPlan);
+        document
           .getElementById("btn-scale")
           .classList.toggle("attention-pulse", hasPlan && !pixelsPerMeter);
+        document
+          .getElementById("scale-check")
+          .classList.toggle("hidden", !pixelsPerMeter);
 
         let title = "Seleccionar / Mover";
         let instructions = [
-          "Haz clic en un elemento para seleccionarlo y arrástralo para moverlo.",
-          "Arrastra sobre un área vacía para seleccionar varios elementos.",
-          "Haz doble clic en un cuadro de texto para editarlo.",
-          "Supr elimina la selección; Ctrl+Z deshace la última acción.",
+          `<span aria-hidden="true">🖱️</span> <strong>Rueda presionada + arrastrar:</strong> mueve el plano.`,
+          `<span aria-hidden="true">🖱️</span> <strong>Girar la rueda:</strong> modifica el zoom.`,
+          `<span aria-hidden="true">🖱️</span> <strong>Clic izquierdo:</strong> selecciona; arrastra un elemento para moverlo.`,
+          `<kbd class="rounded border border-gray-500 px-1">Supr</kbd> borra los elementos seleccionados.`,
+          `<kbd class="rounded border border-gray-500 px-1">Ctrl</kbd> + <kbd class="rounded border border-gray-500 px-1">Z</kbd> deshace la última acción.`,
         ];
 
         if (!canvas.backgroundImage) {
@@ -2131,12 +2163,26 @@
         startStamping(group);
       }
 
-      // --- ÍCONOS (Emojis) ---
+      // --- ÍCONOS ---
       const iconos = [
         { emoji: "🔥", name: "Fuego" },
         { emoji: "💨", name: "Fuga de Gas" },
-        { emoji: "🌬️", name: "Viento" },
-        { emoji: "🔺", name: "Propagación" },
+        {
+          svg: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" aria-hidden="true">
+            <path d="M1 10h51V2l11 14-11 14V22H1z" fill="#2563eb" stroke="#1e3a8a" stroke-width="1.5" stroke-linejoin="round"/>
+            <text x="29" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">viento</text>
+          </svg>`,
+          baseSize: 64,
+          name: "Viento",
+        },
+        {
+          svg: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" aria-hidden="true">
+            <path d="M1 10h51V2l11 14-11 14V22H1z" fill="#dc2626" stroke="#7f1d1d" stroke-width="1.5" stroke-linejoin="round"/>
+            <text x="29" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">propagación</text>
+          </svg>`,
+          baseSize: 64,
+          name: "Propagación",
+        },
         { emoji: "📦", name: "Pallet" },
         { emoji: "⚙️", name: "Máquina" },
       ];
@@ -2145,10 +2191,15 @@
       iconos.forEach((ic) => {
         const btn = document.createElement("button");
         btn.className =
-          "p-2 bg-gray-700 rounded border border-gray-600 hover:bg-gray-600 transition flex flex-col items-center justify-center";
+          "p-1 bg-gray-700 rounded border border-gray-600 hover:bg-gray-600 transition flex flex-col items-center justify-center";
         const symbol = document.createElement("span");
-        symbol.className = "text-2xl leading-none";
-        symbol.textContent = ic.emoji;
+        symbol.className =
+          `flex h-8 ${ic.svg ? "w-16" : "w-8"} items-center justify-center text-2xl leading-none`;
+        if (ic.svg) {
+          symbol.innerHTML = ic.svg;
+        } else {
+          symbol.textContent = ic.emoji;
+        }
         btn.appendChild(symbol);
 
         const label = document.createElement("span");
@@ -2157,6 +2208,24 @@
         btn.appendChild(label);
         btn.title = ic.name;
         btn.onclick = () => {
+          if (ic.svg) {
+            fabric.loadSVGFromString(ic.svg, (objects, options) => {
+              const svgObject = fabric.util.groupSVGElements(
+                objects,
+                options,
+              );
+              svgObject.set({ originX: "center", originY: "center" });
+
+              if (pixelsPerMeter) {
+                const scale = pixelsPerMeter / (ic.baseSize || 32);
+                svgObject.set({ scaleX: scale, scaleY: scale });
+              }
+
+              startStamping(svgObject);
+            });
+            return;
+          }
+
           const text = new fabric.Text(ic.emoji, {
             fontSize: 32,
             originX: "center",
@@ -2199,8 +2268,8 @@
           fontFamily: "Inter",
           fill: "#000000",
           backgroundColor: "rgba(255, 255, 255, 0.85)",
-          borderColor: "#000000",
-          cornerColor: "#3182ce",
+          borderColor: "#7c3aed",
+          cornerColor: "#2563eb",
           padding: 10,
           textAlign: "center",
           originX: "center",
