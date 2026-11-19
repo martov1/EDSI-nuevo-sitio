@@ -48,6 +48,27 @@
         border-color: #3182ce;
         color: white;
       }
+      @keyframes upload-image-pulse {
+        0%,
+        100% {
+          background-color: #374151;
+          border-color: #4b5563;
+        }
+        50% {
+          background-color: #2563eb;
+          border-color: #60a5fa;
+        }
+      }
+      .upload-image-pulse {
+        animation: upload-image-pulse 1.5s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .upload-image-pulse {
+          animation: none;
+          background-color: #2563eb;
+          border-color: #60a5fa;
+        }
+      }
     </style>
   </head>
   <body class="flex h-screen overflow-hidden text-gray-100">
@@ -71,6 +92,7 @@
             1. Plano Base
           </h2>
           <label
+            id="upload-image-label"
             class="flex items-center justify-center w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 border border-gray-600 rounded cursor-pointer transition text-sm"
           >
             <span>Cargar Imagen / PDF</span>
@@ -646,7 +668,10 @@
             opacity: 0.8, // Un poco translúcido para ver mejor los elementos
           });
 
-          canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+          canvas.setBackgroundImage(img, () => {
+            canvas.renderAll();
+            updateToolHelp();
+          });
 
           // Reiniciar historial al cargar nuevo plano
           undoStack = [];
@@ -702,6 +727,10 @@
 
       // --- MANEJO DE MODOS (HERRAMIENTAS) ---
       function updateToolHelp() {
+        document
+          .getElementById("upload-image-label")
+          .classList.toggle("upload-image-pulse", !canvas.backgroundImage);
+
         let title = "Seleccionar / Mover";
         let instructions = [
           "Haz clic en un elemento para seleccionarlo y arrástralo para moverlo.",
@@ -710,7 +739,14 @@
           "Supr elimina la selección; Ctrl+Z deshace la última acción.",
         ];
 
-        if (currentMode === "pan") {
+        if (!canvas.backgroundImage) {
+          title = "Comienza por cargar un plano";
+          instructions = [
+            "Plano nuevo: carga una imagen o PDF en «Cargar Imagen / PDF». Se usará como base para dibujar; después podrás definir la escala.",
+            "Proyecto guardado: «Cargar Proyecto» abre un .json exportado con «Descargar Proyecto» y restaura el plano, la escala y sus elementos.",
+            "Guardado en este navegador: «Planos Recientes» reabre proyectos guardados aquí con «Guardar en Navegador».",
+          ];
+        } else if (currentMode === "pan") {
           title = "Mover Plano";
           instructions = [
             "Arrastra el plano para desplazar la vista.",
