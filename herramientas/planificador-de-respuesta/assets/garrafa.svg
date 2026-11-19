@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Recurso visual de garrafa usado por el menú de íconos del planificador. -->
   <defs>
     <clipPath id="top-dome-clip">
       <path d="M 96 168 A 40 40 0 0 1 136 128 H 376 A 40 40 0 0 1 416 168 Z" />

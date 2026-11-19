@@ -1,4 +1,13 @@
+/**
+ * Misión: construir y atender las acciones de la barra lateral.
+ * Incluye brigadistas, íconos y escalas gráficas para sellar sobre el plano,
+ * además de anotaciones, eliminación de objetos y atajos de teclado.
+ * Funciones principales: addBrigadista, scaleIconToMeters, createScaleBarSvg
+ * y startStamping; los controladores atienden texto, borrado y teclado.
+ */
+
 // --- BRIGADISTAS ---
+// Construye los botones de brigadista a partir de sus datos y enlaza su selección.
 const brigadistas = [
   { id: "1", name: "Pitonero", color: "#e74c3c" }, // Rojo
   { id: "2", name: "2do Pit.", color: "#3498db" }, // Azul
@@ -29,6 +38,10 @@ brigadistas.forEach((b) => {
   brContainer.appendChild(btn);
 });
 
+/**
+ * Crea el símbolo agrupado de un brigadista y prepara su colocación como sello.
+ * @param {{id:string, color:string, textColor?:string}} b Datos visuales del brigadista.
+ */
 function addBrigadista(b) {
   const circle = new fabric.Circle({
     radius: 16,
@@ -63,6 +76,11 @@ function addBrigadista(b) {
 }
 
 // --- ÍCONOS ---
+/**
+ * Ajusta un ícono a sus dimensiones en metros usando la escala actual.
+ * @param {fabric.Object} object Ícono cargado o creado.
+ * @param {{metersLong:number, metersWide:number}} icon Dimensiones reales del ícono.
+ */
 function scaleIconToMeters(object, icon) {
   const pixelsPerUnit = pixelsPerMeter || 32;
   object.set({
@@ -108,6 +126,7 @@ const iconos = [
   { emoji: "⚙️", metersLong: 1, metersWide: 1, name: "Máquina" },
 ];
 
+// Construye botones para SVG y símbolos; cada botón inicia el modo de colocación.
 const icContainer = document.getElementById("icons-container");
 iconos.forEach((ic) => {
   const btn = document.createElement("button");
@@ -176,6 +195,11 @@ const scaleBarOptions = [
   { name: "Escala 25–50–100 m", marks: [0, 25, 50, 100] },
 ];
 
+/**
+ * Genera el dibujo vectorial de una escala gráfica y sus marcas etiquetadas.
+ * @param {{marks:number[], heightScale?:number}} option Marcas y proporciones de la escala.
+ * @returns {string} SVG que Fabric puede cargar como objeto del lienzo.
+ */
 function createScaleBarSvg(option) {
   const basePixelsPerMeter = 32;
   const margin = 12;
@@ -220,6 +244,7 @@ function createScaleBarSvg(option) {
   return parts.join("");
 }
 
+// Crea las opciones de escala gráfica que también pueden colocarse como sellos.
 const scaleOptionsContainer = document.getElementById(
   "scale-options-container",
 );
@@ -266,6 +291,10 @@ scaleBarOptions.forEach((option) => {
 });
 
 // Función unificada para iniciar modo sello (Stamping)
+/**
+ * Añade un objeto como vista previa móvil y activa el modo de colocación.
+ * @param {fabric.Object} fabricObj Objeto que se colocará sobre el plano.
+ */
 function startStamping(fabricObj) {
   setMode("stamp");
   fabricObj.set({
@@ -281,6 +310,7 @@ function startStamping(fabricObj) {
 }
 
 // --- ANOTACIONES (Textos) ---
+// Crea un cuadro de texto editable en el centro del lienzo.
 document.getElementById("btn-text").onclick = () => {
   const textbox = new fabric.Textbox("Doble clic para editar", {
     left: canvas.width / 2,
@@ -306,6 +336,7 @@ document.getElementById("btn-text").onclick = () => {
 };
 
 // --- ELIMINAR OBJETOS ---
+// Elimina la selección actual y recalcula máscaras si se quitó una zona.
 document.getElementById("btn-delete").onclick = () => {
   const activeObjects = canvas.getActiveObjects();
   if (activeObjects.length) {
@@ -322,6 +353,7 @@ document.getElementById("btn-delete").onclick = () => {
 };
 
 // --- TECLAS (Suprimir, Escape, Ctrl+Z) ---
+// Centraliza deshacer, cancelación de modos y eliminación desde el teclado.
 window.addEventListener("keydown", function (e) {
   // Deshacer (Ctrl+Z o Cmd+Z)
   if ((e.ctrlKey || e.metaKey) && e.key === "z") {

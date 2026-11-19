@@ -1,3 +1,12 @@
+/**
+ * Misión: implementar las formas interactivas dibujadas directamente sobre el plano.
+ * Incluye zonificación con prioridad de capas, flechas de dirección y herramientas
+ * de medición; también gestiona sus vistas previas y geometría auxiliar.
+ * Funciones: crear/actualizar/finalizar zonas, flechas y mediciones, y mantener
+ * sus rótulos, selección por borde y recortes de prioridad.
+ */
+
+/** Descarta el perímetro temporal y reinicia el estado del dibujo de zona. */
 function clearZoningDraft() {
   if (zoningPreview) canvas.remove(zoningPreview);
   zoningPreview = null;
@@ -5,6 +14,11 @@ function clearZoningDraft() {
   zoningPathLength = 0;
 }
 
+/**
+ * Obtiene la prioridad de una zona (caliente, templada o fría).
+ * @param {fabric.Object} object Objeto del lienzo que se quiere identificar.
+ * @returns {number|null} Prioridad de la zona o null si el objeto no es una zona.
+ */
 function getZoningPriority(object) {
   if (!object || object.type !== "group" || !object._objects) return null;
   const polygon = object._objects.find(
@@ -29,6 +43,7 @@ function getZoningPriority(object) {
   return colorPriority ?? labelPriority ?? null;
 }
 
+/** Ordena las zonas para que las de mayor prioridad queden visualmente encima. */
 function orderZoningLayers() {
   const zones = canvas
     .getObjects()
@@ -41,11 +56,13 @@ function orderZoningLayers() {
   zones.forEach(({ object }, index) => canvas.moveTo(object, index));
 }
 
+/** Extrae el polígono de relleno del grupo de zona indicado. */
 function getZoningPolygon(object) {
   if (getZoningPriority(object) === null) return null;
   return object._objects.find((child) => child.type === "polygon") ?? null;
 }
 
+/** Convierte los vértices locales de un polígono a coordenadas absolutas del lienzo. */
 function getZoningPolygonWorldPoints(polygon) {
   const transform = polygon.calcTransformMatrix();
   return polygon.points.map((point) =>
@@ -59,7 +76,12 @@ function getZoningPolygonWorldPoints(polygon) {
   );
 }
 
+/**
+ * Permite seleccionar una zona solo cerca de su borde, contemplando zoom y escala.
+ * @param {fabric.Group} zoneGroup Grupo que contiene el polígono de la zona.
+ */
 function installZoningEdgeSelection(zoneGroup) {
+  // Fabric consulta este método para decidir si el puntero alcanzó el borde.
   zoneGroup.containsPoint = function (point) {
     const polygon = getZoningPolygon(this);
     if (!polygon || !point) return false;
@@ -103,6 +125,7 @@ function installZoningEdgeSelection(zoneGroup) {
   };
 }
 
+/** Separa rótulos agrupados de zonas antiguas y vuelve a instalar su selección. */
 function separateZoningLabels() {
   canvas.getObjects().slice().forEach((object) => {
     if (getZoningPriority(object) === null) return;
@@ -125,6 +148,10 @@ function separateZoningLabels() {
   orderZoningLayers();
 }
 
+/**
+ * Recorta el relleno de cada zona donde se superpone una de mayor prioridad.
+ * Actualiza las máscaras después de mover, cargar o borrar zonas.
+ */
 function refreshZoningClips() {
   const zones = canvas
     .getObjects()
@@ -177,12 +204,14 @@ function refreshZoningClips() {
   canvas.requestRenderAll();
 }
 
+// Recalcula las máscaras mientras se mueve una zona para conservar su prioridad.
 canvas.on("object:moving", function (event) {
   if (getZoningPriority(event.target) !== null) {
     refreshZoningClips();
   }
 });
 
+/** Dibuja la vista previa del perímetro de zonificación en curso. */
 function renderZoningPreview() {
   if (zoningPreview) canvas.remove(zoningPreview);
   if (!selectedZoningType || zoningPoints.length < 2) return;
@@ -200,6 +229,7 @@ function renderZoningPreview() {
   canvas.requestRenderAll();
 }
 
+/** Crea el degradado interior translúcido de una zona a partir de su color. */
 function createZoningGradient(color) {
   const [red, green, blue] = color
     .slice(1)
@@ -217,6 +247,7 @@ function createZoningGradient(color) {
   });
 }
 
+/** Coloca el rótulo de zona sobre su borde más largo y lo mantiene legible. */
 function positionZoningLabel(label, start, end) {
   let angle =
     (Math.atan2(end.y - start.y, end.x - start.x) * 180) / Math.PI;
@@ -235,6 +266,7 @@ function positionZoningLabel(label, start, end) {
   });
 }
 
+/** Convierte el trazo en una zona final, agrega su rótulo y guarda el cambio. */
 function finishZoning() {
   if (zoningPreview) canvas.remove(zoningPreview);
   zoningPreview = null;
@@ -285,6 +317,10 @@ function finishZoning() {
   saveHistory();
 }
 
+/**
+ * Incorpora puntos al perímetro y lo cierra al acercarse al punto de inicio.
+ * @param {{x:number, y:number}} point Posición actual del puntero en el lienzo.
+ */
 function updateZoningDrawing(point) {
   if (!zoningPoints.length) return;
   const zoom = canvas.getZoom() || 1;
@@ -311,10 +347,12 @@ function updateZoningDrawing(point) {
   renderZoningPreview();
 }
 
+/** Indica si el modo actual dibuja una flecha de viento o de propagación. */
 function isDirectionalArrowMode(mode = currentMode) {
   return mode === "wind_arrow" || mode === "propagation_arrow";
 }
 
+/** Elimina la flecha provisional y reinicia su estado de dibujo. */
 function clearDirectionalArrowPreview() {
   if (directionalArrowPreview) {
     canvas.remove(directionalArrowPreview);
@@ -326,14 +364,17 @@ function clearDirectionalArrowPreview() {
   directionalArrowWidth = 0;
 }
 
+/** Devuelve el ancho mínimo de flecha para una longitud determinada. */
 function minimumDirectionalArrowWidth(length) {
   return Math.max(16, length * 0.04);
 }
 
+/** Calcula el ancho inicial de flecha proporcional a su longitud. */
 function defaultDirectionalArrowWidth(length) {
   return Math.max(16, Math.min(length * 0.24, 64));
 }
 
+/** Calcula el ancho de flecha a partir de la distancia del puntero a su eje. */
 function directionalArrowWidthAt(point) {
   const dx = directionalArrowEnd.x - directionalArrowStart.x;
   const dy = directionalArrowEnd.y - directionalArrowStart.y;
@@ -346,6 +387,14 @@ function directionalArrowWidthAt(point) {
   return Math.max(minimumDirectionalArrowWidth(length), distance * 2);
 }
 
+/**
+ * Crea la flecha y su rótulo proporcional; puede generar una vista previa.
+ * @param {{x:number, y:number}} start Punto de origen.
+ * @param {{x:number, y:number}} end Punto que determina dirección y longitud.
+ * @param {number} width Ancho de la flecha en píxeles del lienzo.
+ * @param {boolean} preview Si es true, la flecha queda semitransparente y no seleccionable.
+ * @returns {fabric.Group|null} Flecha agrupada o null si su longitud es insuficiente.
+ */
 function createDirectionalArrow(start, end, width, preview = false) {
   const dx = end.x - start.x;
   const dy = end.y - start.y;
@@ -419,6 +468,7 @@ function createDirectionalArrow(start, end, width, preview = false) {
   return group;
 }
 
+/** Sustituye la vista previa por una flecha con la geometría indicada. */
 function updateDirectionalArrowPreview(end, width) {
   if (directionalArrowPreview) {
     canvas.remove(directionalArrowPreview);
@@ -433,6 +483,10 @@ function updateDirectionalArrowPreview(end, width) {
   canvas.requestRenderAll();
 }
 
+/**
+ * Avanza por los clics de origen, dirección/longitud y confirmación del ancho.
+ * @param {{x:number, y:number}} point Posición del clic en el lienzo.
+ */
 function handleDirectionalArrowClick(point) {
   if (!directionalArrowStart) {
     directionalArrowStart = point;
@@ -474,6 +528,7 @@ function handleDirectionalArrowClick(point) {
   saveHistory();
 }
 
+/** Orienta y ubica una etiqueta de medida sin invertir su texto. */
 function positionMeasurementLabel(label, text, start, end, length) {
   let angle =
     Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
@@ -495,6 +550,7 @@ function positionMeasurementLabel(label, text, start, end, length) {
   });
 }
 
+/** Crea los elementos temporales de una medición de distancia. */
 function startDistanceMeasurement(point) {
   measurementStart = point;
   const halo = new fabric.Line([point.x, point.y, point.x, point.y], {
@@ -552,6 +608,7 @@ function startDistanceMeasurement(point) {
   updateDistanceMeasurement(point);
 }
 
+/** Actualiza la línea, sus extremos y su etiqueta durante la medición. */
 function updateDistanceMeasurement(point) {
   if (!measurementStart || !measurementPreview) return;
   const { halo, line, startPoint, endPoint, label } = measurementPreview;
@@ -578,6 +635,7 @@ function updateDistanceMeasurement(point) {
   const directionX = distance ? dx / distance : 0;
   const directionY = distance ? dy / distance : 0;
   const markerEdge = markerRadius + markerStrokeWidth / 2;
+  // Separa los segmentos de los círculos de extremo para que no se superpongan.
   const setTrimmedEndpoints = (segment, strokeWidth) => {
     const trim = markerEdge + strokeWidth / 2;
     const offset = Math.min(trim, distance / 2);
@@ -607,6 +665,7 @@ function updateDistanceMeasurement(point) {
   );
 }
 
+/** Crea los elementos temporales de una medición de radio. */
 function startRadiusMeasurement(point) {
   measurementStart = point;
   const circle = new fabric.Circle({
@@ -659,6 +718,7 @@ function startRadiusMeasurement(point) {
   updateRadiusMeasurement(point);
 }
 
+/** Ajusta el círculo, la línea radial y la etiqueta al movimiento del puntero. */
 function updateRadiusMeasurement(point) {
   if (!measurementStart || !measurementPreview) return;
   const radius = Math.hypot(
@@ -687,6 +747,7 @@ function updateRadiusMeasurement(point) {
   );
 }
 
+/** Confirma una medición, vuelve seleccionables sus objetos y guarda el historial. */
 function finishMeasurement() {
   Object.values(measurementPreview).forEach((object) =>
     object.set({ selectable: true, evented: true }),

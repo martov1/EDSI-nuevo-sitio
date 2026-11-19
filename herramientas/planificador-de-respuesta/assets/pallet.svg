@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <!-- Recurso visual de pallet usado por el menú de íconos del planificador. -->
   <defs>
     <!-- Símbolo reutilizable: grupo de 3 iconos de carga (Arriba, Paraguas, Frágil) -->
     <g id="cargo-icons" stroke="#4D433A" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">

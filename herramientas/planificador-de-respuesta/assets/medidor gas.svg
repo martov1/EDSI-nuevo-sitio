@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Recurso visual de medidor de gas usado por el menú de íconos. -->
   <defs>
     <clipPath id="body-clip">
       <rect x="100" y="152" width="312" height="344" rx="42" />

@@ -1,4 +1,17 @@
+/**
+ * Misión: abrir y controlar los diálogos de configuración y confirmación.
+ * Incluye la calibración de escala, la configuración/continuación de líneas
+ * de ataque y los avisos al usuario.
+ * Funciones: openScaleModal, openAttackSetupModal, openAttackActionModal
+ * y openAlertModal.
+ */
+
 // --- MANEJO DE MODALES ---
+/**
+ * Solicita la distancia real del segmento usado para fijar la escala.
+ * @param {number} lengthPx Longitud dibujada en píxeles.
+ * @param {fabric.Object} lineObj Línea temporal que se debe retirar al cerrar.
+ */
 function openScaleModal(lengthPx, lineObj) {
   document.getElementById("custom-modal").classList.remove("hidden");
   document
@@ -18,6 +31,7 @@ function openScaleModal(lengthPx, lineObj) {
   input.value = "";
   setTimeout(() => input.focus(), 100);
 
+  // Cierra el diálogo y limpia sus manejadores y puntos temporales de escala.
   const close = () => {
     document.getElementById("custom-modal").classList.add("hidden");
     confirmBtn.onclick = null;
@@ -46,6 +60,7 @@ function openScaleModal(lengthPx, lineObj) {
   };
 }
 
+/** Pide la longitud real de cada tramo y activa la herramienta de ataque. */
 function openAttackSetupModal() {
   document.getElementById("custom-modal").classList.remove("hidden");
   document.getElementById("modal-content-scale").classList.add("hidden");
@@ -64,6 +79,7 @@ function openAttackSetupModal() {
   inputLargo.value = "";
   setTimeout(() => inputLargo.focus(), 100);
 
+  // Oculta el diálogo y libera los controladores de sus botones.
   const close = () => {
     document.getElementById("custom-modal").classList.add("hidden");
     document
@@ -87,6 +103,7 @@ function openAttackSetupModal() {
   };
 }
 
+/** Después de completar un tramo, ofrece colocar la lanza o alargarlo. */
 function openAttackActionModal() {
   document.getElementById("custom-modal").classList.remove("hidden");
   document.getElementById("modal-content-scale").classList.add("hidden");
@@ -101,6 +118,7 @@ function openAttackActionModal() {
   const btnLanza = document.getElementById("attack-action-lanza");
   const btnAlargar = document.getElementById("attack-action-alargar");
 
+  // Oculta el diálogo y libera los controladores de las dos acciones.
   const close = () => {
     document.getElementById("custom-modal").classList.add("hidden");
     document
@@ -165,6 +183,10 @@ function openAttackActionModal() {
   };
 }
 
+/** Muestra un mensaje informativo o de error en el diálogo común. */
+/**
+ * @param {string} msg Texto que se mostrará en el diálogo.
+ */
 function openAlertModal(msg) {
   document.getElementById("custom-modal").classList.remove("hidden");
   document.getElementById("modal-content-scale").classList.add("hidden");

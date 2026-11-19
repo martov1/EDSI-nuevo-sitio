@@ -1,3 +1,15 @@
+/**
+ * Misión: coordinar los modos de herramienta con la interfaz y los eventos del lienzo.
+ * Aquí se enlazan los botones y se traducen los clics y movimientos del puntero
+ * en trazos, mediciones, flechas, acciones de línea de ataque y desplazamiento.
+ * Función principal: setMode configura el modo, cursor, selección y vistas previas;
+ * los manejadores del lienzo ejecutan las acciones asociadas a cada modo.
+ */
+
+/**
+ * Cambia de herramienta, cancela sus vistas previas y configura la interacción.
+ * @param {string} mode Identificador del nuevo modo del planificador.
+ */
 function setMode(mode) {
   // Limpiar fantasma de sello si se cambia de modo sin aplicarlo
   if (currentMode === "stamp" && stampGhost) {
@@ -82,6 +94,7 @@ function setMode(mode) {
   }
 }
 
+// Los botones de herramienta activan modos y comprueban requisitos como la escala.
 document.getElementById("btn-select").onclick = () => setMode("select");
 document.getElementById("btn-scale").onclick = () => setMode("scale");
 document.getElementById("btn-measure-distance").onclick = () => {
@@ -136,6 +149,7 @@ document.getElementById("btn-attack").onclick = () => {
 updateToolHelp();
 
 // --- DIBUJO EN CANVAS ---
+// Centraliza el inicio de paneo, dibujo, medición, flechas y colocación de objetos.
 canvas.on("mouse:down", function (opt) {
   var evt = opt.e;
   // El botón central o Alt + arrastrar desplazan la vista en cualquier herramienta.
@@ -410,6 +424,7 @@ canvas.on("mouse:down", function (opt) {
   }
 });
 
+// Actualiza vistas previas y trazos mientras el puntero se mueve por el plano.
 canvas.on("mouse:move", function (opt) {
   var evt = opt.e;
   // Lógica de paneo

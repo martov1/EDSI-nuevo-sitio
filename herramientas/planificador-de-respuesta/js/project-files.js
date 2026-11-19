@@ -1,6 +1,18 @@
+/**
+ * Misión: exportar el plano y guardar/restaurar proyectos.
+ * Incluye exportación a imagen y PDF, serialización JSON y una lista de
+ * proyectos recientes almacenada localmente en el navegador.
+ * Funciones principales: getHighResExportParams, getProjectData y loadProjectData;
+ * los controladores de interfaz gestionan las descargas y el guardado local.
+ */
+
 // --- SISTEMA DE ARCHIVOS Y EXPORTACIÓN ---
 
-// Función auxiliar para calcular el área exacta del plano, su aspect ratio y multiplicador de 300 DPI
+/**
+ * Calcula los límites del contenido y la resolución apropiada para exportarlo.
+ * @returns {{left:number, top:number, width:number, height:number, multiplier:number}}
+ *          Región del lienzo y multiplicador de resolución.
+ */
 function getHighResExportParams() {
   const objects = canvas.getObjects();
   const bg = canvas.backgroundImage;
@@ -63,7 +75,7 @@ function getHighResExportParams() {
   return { left, top, width, height, multiplier };
 }
 
-// 1. Exportar Imagen (Aspect Ratio exacto a 300 DPI)
+// Exporta el contenido visible como PNG, normalizando temporalmente el fondo y la vista.
 document.getElementById("btn-export-img").onclick = () => {
   canvas.discardActiveObject();
   const originalVPT = canvas.viewportTransform.slice();
@@ -108,7 +120,7 @@ document.getElementById("btn-export-img").onclick = () => {
   canvas.renderAll();
 };
 
-// 2. Exportar PDF (Aspect Ratio exacto a 300 DPI)
+// Convierte el plano a PDF con sus proporciones y tamaño físico calculado.
 document.getElementById("btn-export-pdf").onclick = () => {
   canvas.discardActiveObject();
   const originalVPT = canvas.viewportTransform.slice();
@@ -178,7 +190,7 @@ document.getElementById("btn-export-pdf").onclick = () => {
   canvas.renderAll();
 };
 
-// 2. Exportar PDF (Aspect Ratio exacto a 300 DPI)
+// Esta asignación posterior reemplaza el controlador PDF definido más arriba.
 document.getElementById("btn-export-pdf").onclick = () => {
   canvas.discardActiveObject();
   const originalVPT = canvas.viewportTransform.slice();
@@ -238,6 +250,7 @@ document.getElementById("btn-export-pdf").onclick = () => {
 };
 
 // 3. Descargar/Cargar Proyecto (JSON)
+/** Serializa escala y objetos en coordenadas del plano, independientemente del zoom. */
 function getProjectData() {
   // Resetear el viewport asegura que las coordenadas de los objetos se guarden absolutas (arregla el bug de desplazamiento)
   const originalVPT = canvas.viewportTransform.slice();
@@ -261,6 +274,10 @@ function getProjectData() {
   return data;
 }
 
+/**
+ * Restaura un proyecto y normaliza objetos que requieren ajustes tras la carga.
+ * @param {{scale:number|null, canvasData:Object}} data Proyecto previamente serializado.
+ */
 function loadProjectData(data) {
   pixelsPerMeter = data.scale;
   if (pixelsPerMeter) {
@@ -297,6 +314,7 @@ function loadProjectData(data) {
   });
 }
 
+// Descarga una copia JSON del estado actual del planificador.
 document.getElementById("btn-save-file").onclick = () => {
   const data = getProjectData();
   const blob = new Blob([JSON.stringify(data)], {
@@ -308,6 +326,7 @@ document.getElementById("btn-save-file").onclick = () => {
   link.click();
 };
 
+// Lee el JSON elegido por el usuario y lo restaura en el lienzo.
 document
   .getElementById("input-load-file")
   .addEventListener("change", (e) => {
@@ -329,6 +348,7 @@ document
 // 4. Guardar/Cargar en Navegador (LocalForage)
 const RECENTS_KEY = "edsi_recent_plans";
 
+// Abre el diálogo de guardado y agrega el proyecto a la lista local de recientes.
 document.getElementById("btn-save-local").onclick = () => {
   document.getElementById("custom-modal").classList.remove("hidden");
   document
@@ -373,6 +393,7 @@ document.getElementById("btn-save-local").onclick = () => {
   };
 };
 
+// Recupera los proyectos recientes y crea una acción para cargar cada uno.
 document.getElementById("btn-load-local").onclick = async () => {
   document.getElementById("custom-modal").classList.remove("hidden");
   document
@@ -422,6 +443,7 @@ document.getElementById("btn-load-local").onclick = async () => {
   };
 };
 
+// Finaliza el paneo o el trazo de escala cuando se suelta el botón del ratón.
 canvas.on("mouse:up", function (opt) {
   // Finalizar paneo
   if (isDragging) {

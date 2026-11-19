@@ -1,3 +1,11 @@
+/**
+ * Misión: inicializar el lienzo y mantener el estado compartido del planificador.
+ * Responsabilidades: historial/deshacer, carga del plano, zoom y paneo,
+ * ayuda contextual y creación/normalización de etiquetas de medición.
+ * Funciones principales: showMessage, saveHistory, undo, resizeCanvas,
+ * loadFabricBackground, updateToolHelp y utilidades de etiquetas/medición.
+ */
+
 // --- ESTADO DE LA APLICACIÓN ---
 let currentMode = "select"; // 'select', 'scale', 'attack_line', measurement modes, 'stamp'
 let pixelsPerMeter = null;
@@ -75,6 +83,10 @@ const canvas = new fabric.Canvas("main-canvas", {
 });
 
 // Mensaje en pantalla para errores en lugar de alert()
+/**
+ * Muestra un aviso temporal sobre el lienzo.
+ * @param {string} msg Texto que se mostrará al usuario.
+ */
 function showMessage(msg) {
   const tempText = new fabric.Text(msg, {
     left: canvas.width / 2,
@@ -94,6 +106,7 @@ function showMessage(msg) {
 let undoStack = [];
 let isUndoing = false;
 
+/** Guarda escala y contenido del lienzo para poder restaurarlos con Deshacer. */
 function saveHistory() {
   if (isUndoing) return;
   // Guardar con coordenadas absolutas (reset viewport temporal)
@@ -118,6 +131,10 @@ function saveHistory() {
   canvas.setViewportTransform(originalVPT);
 }
 
+/**
+ * Mantiene horizontal y legible el rótulo de una flecha de viento o propagación.
+ * @param {fabric.Object} object Grupo de flecha que se está rotando.
+ */
 function keepDirectionalLabelReadable(object) {
   if (object.type !== "group" || !object._objects) return;
   const label = object._objects.find(
@@ -133,14 +150,17 @@ function keepDirectionalLabelReadable(object) {
   object.setCoords();
 }
 
+/** Normaliza los rótulos de todas las flechas existentes en el lienzo. */
 function normalizeDirectionalLabels() {
   canvas.forEachObject(keepDirectionalLabelReadable);
 }
 
+// Corrige el rótulo inmediatamente durante el giro interactivo de una flecha.
 canvas.on("object:rotating", (event) => {
   if (event.target) keepDirectionalLabelReadable(event.target);
 });
 
+/** Restaura el estado anterior del lienzo sin cambiar el zoom y paneo actuales. */
 function undo() {
   if (undoStack.length > 1) {
     isUndoing = true;
@@ -184,6 +204,7 @@ function undo() {
 }
 
 // Guardar historial al modificar objetos (mover, escalar, rotar)
+// Si cambia una zona, también se recalculan sus recortes de prioridad.
 canvas.on("object:modified", function (event) {
   if (getZoningPriority(event.target) !== null) {
     refreshZoningClips();
@@ -192,6 +213,7 @@ canvas.on("object:modified", function (event) {
 });
 
 // Ajustar canvas al contenedor
+/** Ajusta el tamaño del lienzo al espacio disponible y registra el estado inicial. */
 function resizeCanvas() {
   const wrapper = document.getElementById("canvas-wrapper");
   canvas.setWidth(wrapper.clientWidth - 40);
@@ -203,6 +225,7 @@ window.addEventListener("resize", resizeCanvas);
 window.onload = resizeCanvas;
 
 // --- ZOOM Y PANEO ---
+// La rueda acerca o aleja el lienzo alrededor de la posición del puntero.
 canvas.on("mouse:wheel", function (opt) {
   var delta = opt.e.deltaY;
   var zoom = canvas.getZoom();
@@ -214,6 +237,7 @@ canvas.on("mouse:wheel", function (opt) {
   opt.e.stopPropagation();
 });
 
+// Los botones de vista aplican zoom centrado o restauran la escala inicial.
 document.getElementById("btn-zoom-in").onclick = () => {
   let zoom = canvas.getZoom() * 1.2;
   if (zoom > 20) zoom = 20;
@@ -230,7 +254,10 @@ document.getElementById("btn-zoom-reset").onclick = () => {
   canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
 };
 
-// Función auxiliar para cargar imagen base64 o URL al canvas
+/**
+ * Carga una imagen como plano de fondo, centrada y ajustada al lienzo.
+ * @param {string} dataUrl Imagen en formato URL o data URL.
+ */
 function loadFabricBackground(dataUrl) {
   fabric.Image.fromURL(dataUrl, function (img) {
     pixelsPerMeter = null;
@@ -264,6 +291,7 @@ function loadFabricBackground(dataUrl) {
 }
 
 // --- CARGAR IMAGEN O PDF DE PLANO ---
+// Convierte imágenes o la primera página de un PDF en el fondo del lienzo.
 document
   .getElementById("upload-image")
   .addEventListener("change", async function (e) {
@@ -310,6 +338,7 @@ document
   });
 
 // --- MANEJO DE MODOS (HERRAMIENTAS) ---
+/** Actualiza las instrucciones visibles según el plano, la escala y la herramienta. */
 function updateToolHelp() {
   const hasPlan = Boolean(canvas.backgroundImage);
   document
@@ -489,6 +518,7 @@ function updateToolHelp() {
     .join("");
 }
 
+/** Elimina los objetos temporales de medición y reinicia sus puntos de control. */
 function clearMeasurementPreview() {
   if (measurementPreview) {
     Object.values(measurementPreview).forEach((object) =>
@@ -499,6 +529,11 @@ function clearMeasurementPreview() {
   measurementStart = null;
 }
 
+/**
+ * Convierte una longitud en píxeles a metros con formato regional.
+ * @param {number} distancePx Longitud medida sobre el lienzo.
+ * @returns {string} Medida formateada en metros.
+ */
 function formatMeasurement(distancePx) {
   const meters = distancePx / pixelsPerMeter;
   return `${meters.toLocaleString("es-AR", {
@@ -507,10 +542,19 @@ function formatMeasurement(distancePx) {
   })} m`;
 }
 
+/** Calcula cuánto reducir los adornos de una medición corta. */
 function measurementStyleScale(length) {
   return Math.min(1, Math.max(0.05, length / 50));
 }
 
+/**
+ * Crea una etiqueta de medición centrada, no interactiva y con fondo translúcido.
+ * @param {string} text Texto de la etiqueta.
+ * @param {string} color Color del texto.
+ * @param {number} left Coordenada horizontal.
+ * @param {number} top Coordenada vertical.
+ * @returns {fabric.Text} Etiqueta lista para añadir al lienzo.
+ */
 function createMeasurementLabel(text, color, left, top) {
   return new fabric.Text(text, {
     left,
@@ -531,6 +575,7 @@ function createMeasurementLabel(text, color, left, top) {
 
 const measurementLabelBackground = "rgba(255, 255, 255, 0.8)";
 
+/** Aplica a mediciones guardadas el fondo translúcido y elimina sombras antiguas. */
 function normalizeMeasurementLabelStyles() {
   canvas.getObjects().forEach((object) => {
     if (object.type !== "text" || typeof object.text !== "string") return;
