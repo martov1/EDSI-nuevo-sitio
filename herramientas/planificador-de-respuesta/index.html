@@ -886,8 +886,9 @@
         }
 
         document.getElementById("tool-help-title").textContent = title;
-        document.getElementById("tool-help-list").innerHTML =
-          instructions.map((instruction) => `<li>${instruction}</li>`).join("");
+        document.getElementById("tool-help-list").innerHTML = instructions
+          .map((instruction) => `<li>${instruction}</li>`)
+          .join("");
       }
 
       function setMode(mode) {
@@ -2134,7 +2135,8 @@
                 </div>
             `;
         const label = document.createElement("span");
-        label.className = "mt-1 text-center text-[10px] leading-tight text-gray-300";
+        label.className =
+          "mt-1 text-center text-[10px] leading-tight text-gray-300";
         label.textContent = b.name;
         btn.appendChild(label);
         btn.title = b.name;
@@ -2181,8 +2183,16 @@
         { emoji: "💨", name: "Fuga de Gas" },
         {
           svgUrl: "assets/garrafa.svg",
-          baseSize: 512,
+          metersLong: 1,
+          metersWide: 1,
           name: "Garrafa",
+        },
+        {
+          svgUrl: "assets/tanque%20propano.svg",
+          metersLong: 3,
+          metersWide: 3,
+          menuWide: true,
+          name: "Tanque de GLP",
         },
         {
           svg: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" aria-hidden="true">
@@ -2212,13 +2222,12 @@
         btn.className =
           "p-1 bg-gray-700 rounded border border-gray-600 hover:bg-gray-600 transition flex flex-col items-center justify-center";
         const symbol = document.createElement("span");
-        symbol.className =
-          `flex h-8 ${ic.menuWide ? "w-16" : "w-8"} items-center justify-center text-2xl leading-none`;
+        symbol.className = `flex h-8 ${ic.menuWide ? "w-16" : "w-8"} items-center justify-center text-2xl leading-none`;
         if (ic.svgUrl) {
           const image = document.createElement("img");
           image.src = ic.svgUrl;
           image.alt = "";
-          image.className = "h-full w-full object-contain";
+          image.className = `h-full w-full ${ic.menuWide ? "object-fill" : "object-contain"}`;
           symbol.appendChild(image);
         } else if (ic.svg) {
           symbol.innerHTML = ic.svg;
@@ -2228,25 +2237,34 @@
         btn.appendChild(symbol);
 
         const label = document.createElement("span");
-        label.className = "mt-1 text-center text-[10px] leading-tight text-gray-300";
+        label.className =
+          "mt-1 text-center text-[10px] leading-tight text-gray-300";
         label.textContent = ic.name;
         btn.appendChild(label);
         btn.title = ic.name;
         btn.onclick = () => {
           if (ic.svgUrl) {
             fabric.loadSVGFromURL(ic.svgUrl, (objects, options) => {
-              const svgObject = fabric.util.groupSVGElements(
-                objects,
-                options,
-              );
-              const scale = pixelsPerMeter
-                ? pixelsPerMeter / (ic.baseSize || 32)
-                : 1;
+              const svgObject = fabric.util.groupSVGElements(objects, options);
+              let scaleX;
+              let scaleY;
+              if (ic.metersLong && ic.metersWide) {
+                const pixelsPerUnit = pixelsPerMeter || 32;
+                scaleX = (pixelsPerUnit * ic.metersLong) / svgObject.width;
+                scaleY = (pixelsPerUnit * ic.metersWide) / svgObject.height;
+              } else {
+                const baseSize = ic.baseSize || 32;
+                const scale = pixelsPerMeter
+                  ? pixelsPerMeter / baseSize
+                  : 32 / baseSize;
+                scaleX = scale;
+                scaleY = scale;
+              }
               svgObject.set({
                 originX: "center",
                 originY: "center",
-                scaleX: scale,
-                scaleY: scale,
+                scaleX,
+                scaleY,
               });
               startStamping(svgObject);
             });
@@ -2255,10 +2273,7 @@
 
           if (ic.svg) {
             fabric.loadSVGFromString(ic.svg, (objects, options) => {
-              const svgObject = fabric.util.groupSVGElements(
-                objects,
-                options,
-              );
+              const svgObject = fabric.util.groupSVGElements(objects, options);
               svgObject.set({ originX: "center", originY: "center" });
 
               if (pixelsPerMeter) {
@@ -2352,7 +2367,8 @@
         btn.appendChild(preview);
 
         const label = document.createElement("span");
-        label.className = "mt-1 text-center text-[10px] leading-tight text-gray-200";
+        label.className =
+          "mt-1 text-center text-[10px] leading-tight text-gray-200";
         label.textContent = option.name;
         btn.appendChild(label);
 
