@@ -694,6 +694,7 @@
         }
 
         currentMode = mode;
+        canvas.skipTargetFind = mode === "attack_line";
 
         // Actualizar UI de botones
         document
@@ -2008,6 +2009,8 @@
               if (coneLengthText) canvas.remove(coneLengthText);
               waterConeObject = null;
               coneLengthText = null;
+              setMode("select");
+            } else {
               setMode("select");
             }
           } else if (currentMode === "scale" && isDrawing) {
