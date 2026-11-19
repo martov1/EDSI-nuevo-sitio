@@ -302,7 +302,7 @@
       visitas_sitio: state.visits,
       pagina_entrada: state.entryPage,
       pagina_conversion: window.location.href,
-      clarity_url: clarityId, // El backend actual guarda este valor en su columna Clarity_URL.
+      clarity_id: clarityId,
     };
   }
 
