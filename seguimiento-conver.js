@@ -312,13 +312,12 @@
    *
    * - dataLayer: publica contact_conversion para que GTM pueda reaccionar.
    * - Meta Pixel: publica el evento estándar Contact si fbq está instalado.
-   * - Apps Script: hace POST con JSON serializado como texto plano para evitar
-   *   la preflight CORS habitual de application/json.
+   * - Apps Script: encola un POST con sendBeacon y usa fetch keepalive como
+   *   alternativa si el navegador no puede encolarlo.
    *
-   * mode: "no-cors" evita que CORS impida iniciar la solicitud desde el sitio,
-   * pero la respuesta será opaca y no se puede confirmar su procesamiento.
-   * keepalive solicita que el navegador intente completar el POST aunque la
-   * página se cierre inmediatamente después del clic.
+   * El cuerpo se envía como texto plano para evitar la preflight CORS habitual
+   * de application/json. La solicitud se inicia antes de abrir la aplicación
+   * externa, pero el navegador no garantiza la entrega si el sistema la corta.
    */
   function trackContact(contactType, anchor, payload) {
     // Evento personalizado que puede activarse como disparador en GTM.
@@ -341,23 +340,31 @@
       });
     }
 
-    // Inicia el POST en segundo plano. No se espera la respuesta, para que el
-    // enlace de WhatsApp/email conserve su navegación inmediata.
+    // Encola el POST antes de que el enlace abra WhatsApp o Mail.
     const body = JSON.stringify(payload);
-    fetch(WEB_APP_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=UTF-8" },
-      body,
-      keepalive: true,
-    }).catch((error) => {
-      // Solo se puede informar de errores locales de red; no se puede leer una
-      // respuesta de Apps Script porque la solicitud está en modo no-cors.
-      console.error(
-        "No se pudo registrar la atribución en Apps Script.",
-        error,
-      );
-    });
+    let queued = false;
+    if (typeof navigator.sendBeacon === "function") {
+      try {
+        queued = navigator.sendBeacon(WEB_APP_URL, body);
+      } catch (error) {
+        console.warn("No se pudo encolar el beacon de atribución.", error);
+      }
+    }
+
+    if (!queued) {
+      fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        body,
+        keepalive: true,
+      }).catch((error) => {
+        console.error(
+          "No se pudo registrar la atribución en Apps Script.",
+          error,
+        );
+      });
+    }
   }
 
   /**
