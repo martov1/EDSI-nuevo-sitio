@@ -1203,46 +1203,36 @@
 
         const availableLength = Math.max(0, length - 8);
         const labelScale =
-          label.width > 0
-            ? Math.min(1, availableLength / label.width)
-            : 1;
+          label.width > 0 ? Math.min(1, availableLength / label.width) : 1;
         const angleRadians = (angle * Math.PI) / 180;
         const labelOffset = (label.height * labelScale) / 2 + 6;
         label.set({
           scaleX: labelScale,
           scaleY: labelScale,
-          left:
-            (start.x + end.x) / 2 + Math.sin(angleRadians) * labelOffset,
-          top:
-            (start.y + end.y) / 2 - Math.cos(angleRadians) * labelOffset,
+          left: (start.x + end.x) / 2 + Math.sin(angleRadians) * labelOffset,
+          top: (start.y + end.y) / 2 - Math.cos(angleRadians) * labelOffset,
         });
       }
 
       function startDistanceMeasurement(point) {
         measurementStart = point;
-        const halo = new fabric.Line(
-          [point.x, point.y, point.x, point.y],
-          {
-            stroke: "rgba(255, 255, 255, 0.45)",
-            strokeWidth: 6,
-            strokeLineCap: "round",
-            selectable: false,
-            evented: false,
-            objectCaching: false,
-          },
-        );
-        const line = new fabric.Line(
-          [point.x, point.y, point.x, point.y],
-          {
-            stroke: "#4285f4",
-            strokeWidth: 3,
-            strokeDashArray: [3, 5],
-            strokeLineCap: "round",
-            selectable: false,
-            evented: false,
-            objectCaching: false,
-          },
-        );
+        const halo = new fabric.Line([point.x, point.y, point.x, point.y], {
+          stroke: "rgba(255, 255, 255, 0.45)",
+          strokeWidth: 6,
+          strokeLineCap: "round",
+          selectable: false,
+          evented: false,
+          objectCaching: false,
+        });
+        const line = new fabric.Line([point.x, point.y, point.x, point.y], {
+          stroke: "#4285f4",
+          strokeWidth: 3,
+          strokeDashArray: [3, 5],
+          strokeLineCap: "round",
+          selectable: false,
+          evented: false,
+          objectCaching: false,
+        });
         const startPoint = new fabric.Circle({
           left: point.x,
           top: point.y,
@@ -1287,10 +1277,7 @@
         endPoint.set({ left: point.x, top: point.y });
         const dx = point.x - measurementStart.x;
         const dy = point.y - measurementStart.y;
-        const distance = Math.hypot(
-          dx,
-          dy,
-        );
+        const distance = Math.hypot(dx, dy);
         const detailScale = measurementStyleScale(distance);
         const haloWidth = 6 * detailScale;
         const lineWidth = 3 * detailScale;
@@ -1472,9 +1459,7 @@
             .getElementById("btn-measure-distance")
             .classList.add("active");
         if (mode === "measure_radius")
-          document
-            .getElementById("btn-measure-radius")
-            .classList.add("active");
+          document.getElementById("btn-measure-radius").classList.add("active");
         if (mode === "wind_arrow")
           document.getElementById("btn-wind-arrow").classList.add("active");
         if (mode === "propagation_arrow")
@@ -2817,9 +2802,17 @@
       }
 
       // --- ÍCONOS ---
+      function scaleIconToMeters(object, icon) {
+        const pixelsPerUnit = pixelsPerMeter || 32;
+        object.set({
+          scaleX: (pixelsPerUnit * icon.metersLong) / object.width,
+          scaleY: (pixelsPerUnit * icon.metersWide) / object.height,
+        });
+      }
+
       const iconos = [
-        { emoji: "🔥", name: "Fuego" },
-        { emoji: "💨", name: "Fuga de Gas" },
+        { emoji: "🔥", metersLong: 1, metersWide: 1, name: "Fuego" },
+        { emoji: "💨", metersLong: 1, metersWide: 1, name: "Fuga de Gas" },
         {
           svgUrl: "assets/garrafa.svg",
           metersLong: 1,
@@ -2845,8 +2838,13 @@
           menuWide: true,
           name: "Tanque de GLP",
         },
-        { emoji: "📦", name: "Pallet" },
-        { emoji: "⚙️", name: "Máquina" },
+        {
+          svgUrl: "assets/pallet.svg",
+          metersLong: 1.51,
+          metersWide: 1.51,
+          name: "Pallet",
+        },
+        { emoji: "⚙️", metersLong: 1, metersWide: 1, name: "Máquina" },
       ];
 
       const icContainer = document.getElementById("icons-container");
@@ -2879,26 +2877,11 @@
           if (ic.svgUrl) {
             fabric.loadSVGFromURL(ic.svgUrl, (objects, options) => {
               const svgObject = fabric.util.groupSVGElements(objects, options);
-              let scaleX;
-              let scaleY;
-              if (ic.metersLong && ic.metersWide) {
-                const pixelsPerUnit = pixelsPerMeter || 32;
-                scaleX = (pixelsPerUnit * ic.metersLong) / svgObject.width;
-                scaleY = (pixelsPerUnit * ic.metersWide) / svgObject.height;
-              } else {
-                const baseSize = ic.baseSize || 32;
-                const scale = pixelsPerMeter
-                  ? pixelsPerMeter / baseSize
-                  : 32 / baseSize;
-                scaleX = scale;
-                scaleY = scale;
-              }
               svgObject.set({
                 originX: "center",
                 originY: "center",
-                scaleX,
-                scaleY,
               });
+              scaleIconToMeters(svgObject, ic);
               startStamping(svgObject);
             });
             return;
@@ -2908,12 +2891,7 @@
             fabric.loadSVGFromString(ic.svg, (objects, options) => {
               const svgObject = fabric.util.groupSVGElements(objects, options);
               svgObject.set({ originX: "center", originY: "center" });
-
-              if (pixelsPerMeter) {
-                const scale = pixelsPerMeter / (ic.baseSize || 32);
-                svgObject.set({ scaleX: scale, scaleY: scale });
-              }
-
+              scaleIconToMeters(svgObject, ic);
               startStamping(svgObject);
             });
             return;
@@ -2924,13 +2902,7 @@
             originX: "center",
             originY: "center",
           });
-
-          // Si hay escala, ajustar tamaño para que mida 1m (tamaño base aprox 32px)
-          if (pixelsPerMeter) {
-            const scale = pixelsPerMeter / 32;
-            text.set({ scaleX: scale, scaleY: scale });
-          }
-
+          scaleIconToMeters(text, ic);
           startStamping(text);
         };
         icContainer.appendChild(btn);

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <!-- Símbolo reutilizable: grupo de 3 iconos de carga (Arriba, Paraguas, Frágil) -->
+    <g id="cargo-icons" stroke="#4D433A" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Icono 1: Este lado arriba (dos flechas) -->
+      <rect x="0" y="0" width="18" height="22" rx="1" />
+      <line x1="3" y1="18.5" x2="15" y2="18.5" />
+      <line x1="6.5" y1="15.5" x2="6.5" y2="5" />
+      <polyline points="4.2,7.5 6.5,4.8 8.8,7.5" />
+      <line x1="11.5" y1="15.5" x2="11.5" y2="5" />
+      <polyline points="9.2,7.5 11.5,4.8 13.8,7.5" />
+
+      <!-- Icono 2: Manténgase seco (paraguas) -->
+      <rect x="22" y="0" width="18" height="22" rx="1" />
+      <path d="M 24.5 10.5 A 6.5 6.5 0 0 1 37.5 10.5 Z" fill="#4D433A" />
+      <path d="M 31 10.5 V 17.5 A 1.8 1.8 0 0 1 27.5 17.5" />
+      <line x1="31" y1="3" x2="31" y2="4.2" />
+
+      <!-- Icono 3: Frágil (copa) -->
+      <rect x="44" y="0" width="18" height="22" rx="1" />
+      <path d="M 48.5 4.5 H 57.5 L 56.7 10.5 A 3.7 3.7 0 0 1 49.3 10.5 Z" fill="#4D433A" />
+      <line x1="53" y1="14" x2="53" y2="18.5" />
+      <line x1="49.5" y1="18.5" x2="56.5" y2="18.5" />
+    </g>
+  </defs>
+
+  <!-- 1. Sombra proyectada en el suelo -->
+  <polygon points="118,386 64,418 284,522 502,380 465,360" fill="#F0F0F0" />
+
+  <!-- 2. Palé de madera (Tarima) -->
+  <g id="pallet">
+    <!-- Tablas inferiores y estructura interna -->
+    <!-- Tabla inferior izquierda -->
+    <polygon points="103,403 284,504 284,518 103,417" fill="#D8A34E" />
+    <polygon points="103,403 116,396 296,497 284,504" fill="#EBC074" />
+
+    <!-- Travesaños interiores en sombra -->
+    <polygon points="165,422 365,310 385,321 185,433" fill="#C48F3E" />
+    <polygon points="225,456 425,344 445,355 245,467" fill="#C48F3E" />
+
+    <!-- Tacos de apoyo izquierdos -->
+    <!-- Taco trasero izquierdo -->
+    <polygon points="103,383 125,395 125,417 103,405" fill="#D59E49" />
+    <polygon points="125,395 142,385 142,407 125,417" fill="#B57F30" />
+    <!-- Taco central izquierdo -->
+    <polygon points="182,427 205,440 205,462 182,449" fill="#D59E49" />
+    <polygon points="205,440 222,430 222,452 205,462" fill="#B57F30" />
+
+    <!-- Tacos de apoyo derechos -->
+    <!-- Taco central derecho -->
+    <polygon points="376,439 396,428 396,450 376,461" fill="#E6B665" />
+    <polygon points="360,430 376,439 376,461 360,452" fill="#B88335" />
+    <!-- Taco trasero derecho -->
+    <polygon points="478,381 499,369 499,391 478,403" fill="#E6B665" />
+    <polygon points="462,372 478,381 478,403 462,394" fill="#B88335" />
+
+    <!-- Taco frontal central (esquina delantera) -->
+    <polygon points="262,472 284,484 284,518 262,506" fill="#D59E49" />
+    <polygon points="284,484 306,472 306,506 284,518" fill="#E6B665" />
+
+    <!-- Plataforma superior del palé (largueros y listones) -->
+    <!-- Cara superior -->
+    <polygon points="103,371 298.5,261 499,357 284,472" fill="#F3CA7E" />
+    <!-- Ranuras entre listones superiores -->
+    <g stroke="#D29D49" stroke-width="2">
+      <line x1="126" y1="384" x2="322" y2="274" />
+      <line x1="154" y1="399" x2="350" y2="289" />
+      <line x1="182" y1="415" x2="378" y2="305" />
+      <line x1="210" y1="431" x2="406" y2="321" />
+      <line x1="238" y1="446" x2="434" y2="336" />
+      <line x1="264" y1="461" x2="460" y2="351" />
+    </g>
+    <!-- Borde frontal izquierdo del tablero superior -->
+    <polygon points="103,371 284,472 284,485 103,384" fill="#DCAA57" />
+    <!-- Borde frontal derecho del tablero superior -->
+    <polygon points="284,472 499,357 499,370 284,485" fill="#EBBF70" />
+  </g>
+
+  <!-- 3. Bloque de 12 cajas apiladas (3 x 2 x 2) -->
+  <g id="boxes">
+    <!-- Cara superior (iluminada) -->
+    <polygon points="298.5,79.5 471.5,176.5 298.5,273.5 125.5,176.5" fill="#E6C59E" />
+    <!-- Cara frontal izquierda (sombra media) -->
+    <polygon points="125.5,176.5 298.5,273.5 298.5,472.5 125.5,375.5" fill="#D8B789" />
+    <!-- Cara frontal derecha (luz lateral) -->
+    <polygon points="298.5,273.5 471.5,176.5 471.5,375.5 298.5,472.5" fill="#E9C69F" />
+
+    <!-- Cintas adhesivas de sellado (color beige claro) -->
+    <g fill="#F2DAC0" opacity="0.88">
+      <!-- Cinta columna izquierda (arriba + bajada frontal izquierda) -->
+      <polygon points="145.5,187.7 163.5,197.8 336.5,100.8 318.5,90.7" />
+      <polygon points="145.5,187.7 163.5,197.8 163.5,396.8 145.5,386.7" />
+
+      <!-- Cinta columna central (arriba) -->
+      <polygon points="203.2,220.0 221.2,230.1 394.2,133.1 376.2,123.0" />
+
+      <!-- Cinta columna derecha (arriba + bajada frontal izquierda) -->
+      <polygon points="260.8,252.4 278.8,262.5 451.8,165.5 433.8,155.4" />
+      <polygon points="260.8,252.4 278.8,262.5 278.8,461.5 260.8,451.4" />
+    </g>
+
+    <!-- Líneas de unión y bordes entre las 12 cajas -->
+    <g stroke="#FAF0E4" stroke-width="1.6" fill="none">
+      <!-- Aristas principales del bloque -->
+      <polyline points="125.5,176.5 298.5,273.5 471.5,176.5" />
+      <line x1="298.5" y1="273.5" x2="298.5" y2="472.5" />
+
+      <!-- División horizontal entre nivel superior e inferior -->
+      <polyline points="125.5,276.0 298.5,373.0 471.5,276.0" />
+
+      <!-- Divisiones de las 3 columnas en cara izquierda y techo -->
+      <polyline points="183.2,308.8 183.2,208.8 356.2,111.8" />
+      <polyline points="240.8,341.2 240.8,241.2 413.8,144.2" />
+      <line x1="183.2" y1="308.8" x2="183.2" y2="407.8" />
+      <line x1="240.8" y1="341.2" x2="240.8" y2="440.2" />
+
+      <!-- División de las 2 columnas en cara derecha y techo -->
+      <polyline points="413.8,308.3 413.8,208.8 240.8,111.8" />
+      <line x1="413.8" y1="308.3" x2="413.8" y2="407.8" />
+    </g>
+
+    <!-- Contorno sutil exterior del bloque de cajas -->
+    <polygon points="298.5,79.5 471.5,176.5 471.5,375.5 298.5,472.5 125.5,375.5 125.5,176.5" fill="none" stroke="#C9A378" stroke-width="1.2" />
+  </g>
+
+  <!-- 4. Iconos de manipulación impresos en las cajas (cara derecha) -->
+  <!-- Caja superior frontal -->
+  <use href="#cargo-icons" transform="translate(342, 326) skewY(-29.3) scale(0.88, 1)" />
+  <!-- Caja inferior frontal -->
+  <use href="#cargo-icons" transform="translate(342, 425.5) skewY(-29.3) scale(0.88, 1)" />
+  <!-- Caja superior trasera -->
+  <use href="#cargo-icons" transform="translate(418, 283.5) skewY(-29.3) scale(0.75, 1)" />
+  <!-- Caja inferior trasera -->
+  <use href="#cargo-icons" transform="translate(418, 383) skewY(-29.3) scale(0.75, 1)" />
+
+  <!-- 5. Zunchos / flejes grises de sujeción -->
+  <g id="straps">
+    <!-- Zuncho 1 (delantero) -->
+    <!-- Tramo superior sobre el techo -->
+    <polygon points="163.5,155.2 172.5,150.1 345.5,247.1 336.5,252.2" fill="#8C9194" />
+    <!-- Remate trasero izquierdo -->
+    <polygon points="163.5,155.2 172.5,150.1 172.5,156.1 163.5,161.2" fill="#6F7477" />
+    <!-- Tramo vertical cara derecha -->
+    <polygon points="336.5,252.2 345.5,247.1 345.5,446.1 336.5,451.2" fill="#7D8285" />
+
+    <!-- Zuncho 2 (trasero) -->
+    <!-- Tramo superior sobre el techo -->
+    <polygon points="251.5,105.8 260.5,100.7 433.5,197.7 424.5,202.8" fill="#8C9194" />
+    <!-- Remate trasero izquierdo -->
+    <polygon points="251.5,105.8 260.5,100.7 260.5,106.7 251.5,111.8" fill="#6F7477" />
+    <!-- Tramo vertical cara derecha -->
+    <polygon points="424.5,202.8 433.5,197.7 433.5,396.7 424.5,401.8" fill="#7D8285" />
+  </g>
+</svg>
