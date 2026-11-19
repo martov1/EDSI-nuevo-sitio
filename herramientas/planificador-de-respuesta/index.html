@@ -150,6 +150,18 @@
               🟡 Medir radio
             </button>
             <button
+              id="btn-wind-arrow"
+              class="tool-btn w-full text-left px-3 py-2 rounded bg-gray-700 border border-gray-600 hover:bg-gray-600 text-sm transition"
+            >
+              💨 Viento
+            </button>
+            <button
+              id="btn-propagation-arrow"
+              class="tool-btn w-full text-left px-3 py-2 rounded bg-gray-700 border border-gray-600 hover:bg-gray-600 text-sm transition"
+            >
+              ➡️ Propagación
+            </button>
+            <button
               id="btn-attack"
               class="tool-btn w-full text-left px-3 py-2 rounded bg-gray-700 border border-gray-600 hover:bg-gray-600 text-sm transition"
             >
@@ -513,6 +525,11 @@
       let startY = 0;
       let measurementStart = null;
       let measurementPreview = null;
+      let directionalArrowStart = null;
+      let directionalArrowEnd = null;
+      let directionalArrowPhase = null;
+      let directionalArrowWidth = 0;
+      let directionalArrowPreview = null;
 
       // Variables para línea de ataque a mano alzada
       let isDrawingHose = false;
@@ -608,6 +625,29 @@
         canvas.setViewportTransform(originalVPT);
       }
 
+      function keepDirectionalLabelReadable(object) {
+        if (object.type !== "group" || !object._objects) return;
+        const label = object._objects.find(
+          (child) =>
+            child.type === "text" &&
+            (child.text === "viento" || child.text === "propagación"),
+        );
+        if (!label) return;
+        const angle = ((object.angle % 360) + 360) % 360;
+        label.set({ angle: angle > 90 && angle < 270 ? 180 : 0 });
+        label.setCoords();
+        object.dirty = true;
+        object.setCoords();
+      }
+
+      function normalizeDirectionalLabels() {
+        canvas.forEachObject(keepDirectionalLabelReadable);
+      }
+
+      canvas.on("object:rotating", (event) => {
+        if (event.target) keepDirectionalLabelReadable(event.target);
+      });
+
       function undo() {
         if (undoStack.length > 1) {
           isUndoing = true;
@@ -639,6 +679,7 @@
               }
             });
             normalizeMeasurementLabelStyles();
+            normalizeDirectionalLabels();
             canvas.setViewportTransform(currentVPT);
             canvas.renderAll();
             isUndoing = false;
@@ -805,6 +846,31 @@
             "Proyecto guardado: «Cargar Proyecto» abre un .json exportado con «Descargar Proyecto» y restaura el plano, la escala y sus elementos.",
             "Guardado en este navegador: «Planos Recientes» reabre proyectos guardados aquí con «Guardar en Navegador».",
           ];
+        } else if (
+          currentMode === "wind_arrow" ||
+          currentMode === "propagation_arrow"
+        ) {
+          title =
+            currentMode === "wind_arrow"
+              ? "Indicar dirección del viento"
+              : "Indicar dirección de propagación";
+          if (directionalArrowPhase === "width") {
+            instructions = [
+              "La dirección y el largo están definidos. Mueve el cursor para ajustar el ancho de la flecha.",
+              "Haz clic para colocarla. Pulsa Escape para cancelar.",
+            ];
+          } else if (directionalArrowPhase === "direction") {
+            instructions = [
+              "El punto inicial está marcado. Haz clic en el segundo punto para indicar la dirección y el largo.",
+              "Pulsa Escape para cancelar.",
+            ];
+          } else {
+            instructions = [
+              "Haz clic en el punto inicial de la flecha.",
+              "Luego indicarás dirección y largo, y ajustarás el ancho antes de colocarla.",
+              "Pulsa Escape para cancelar.",
+            ];
+          }
         } else if (!pixelsPerMeter) {
           title = "Fija la escala del plano";
           if (currentMode === "scale") {
@@ -962,6 +1028,169 @@
             });
           }
         });
+      }
+
+      function isDirectionalArrowMode(mode = currentMode) {
+        return mode === "wind_arrow" || mode === "propagation_arrow";
+      }
+
+      function clearDirectionalArrowPreview() {
+        if (directionalArrowPreview) {
+          canvas.remove(directionalArrowPreview);
+        }
+        directionalArrowPreview = null;
+        directionalArrowStart = null;
+        directionalArrowEnd = null;
+        directionalArrowPhase = null;
+        directionalArrowWidth = 0;
+      }
+
+      function minimumDirectionalArrowWidth(length) {
+        return Math.max(16, length * 0.04);
+      }
+
+      function defaultDirectionalArrowWidth(length) {
+        return Math.max(16, Math.min(length * 0.24, 64));
+      }
+
+      function directionalArrowWidthAt(point) {
+        const dx = directionalArrowEnd.x - directionalArrowStart.x;
+        const dy = directionalArrowEnd.y - directionalArrowStart.y;
+        const length = Math.hypot(dx, dy);
+        const distance =
+          Math.abs(
+            dx * (point.y - directionalArrowStart.y) -
+              dy * (point.x - directionalArrowStart.x),
+          ) / length;
+        return Math.max(minimumDirectionalArrowWidth(length), distance * 2);
+      }
+
+      function createDirectionalArrow(start, end, width, preview = false) {
+        const dx = end.x - start.x;
+        const dy = end.y - start.y;
+        const length = Math.hypot(dx, dy);
+        if (length < 1) return null;
+
+        const centerX = (start.x + end.x) / 2;
+        const centerY = (start.y + end.y) / 2;
+        const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+        const shaftWidth = width * 0.62;
+        const shaftHalfWidth = shaftWidth / 2;
+        const headHalfWidth = width / 2;
+        const headLength = Math.min(length * 0.35, width * 1.25);
+        const startX = -length / 2;
+        const tipX = length / 2;
+        const neckX = tipX - headLength;
+        const points = [
+          { x: startX, y: -shaftHalfWidth },
+          { x: neckX, y: -shaftHalfWidth },
+          { x: neckX, y: -headHalfWidth },
+          { x: tipX, y: 0 },
+          { x: neckX, y: headHalfWidth },
+          { x: neckX, y: shaftHalfWidth },
+          { x: startX, y: shaftHalfWidth },
+        ];
+        const isWind = currentMode === "wind_arrow";
+        const arrow = new fabric.Polygon(points, {
+          left: centerX,
+          top: centerY,
+          originX: "center",
+          originY: "center",
+          fill: isWind ? "#2563eb" : "#dc2626",
+          stroke: isWind ? "#1e3a8a" : "#7f1d1d",
+          strokeWidth: 1.5,
+          strokeLineJoin: "round",
+          selectable: false,
+          evented: false,
+          objectCaching: false,
+        });
+        const label = new fabric.Text(isWind ? "viento" : "propagación", {
+          left: centerX - headLength / 2,
+          top: centerY,
+          originX: "center",
+          originY: "center",
+          fontSize: 16,
+          fontFamily: "Arial",
+          fontWeight: "bold",
+          fill: "#ffffff",
+          selectable: false,
+          evented: false,
+          objectCaching: false,
+        });
+        const labelScale = Math.min(
+          ((length - headLength) * 0.78) / label.width,
+          (shaftWidth * 0.76) / label.height,
+        );
+        label.set({ scaleX: labelScale, scaleY: labelScale });
+
+        const group = new fabric.Group([arrow, label], {
+          left: centerX,
+          top: centerY,
+          originX: "center",
+          originY: "center",
+          angle,
+          opacity: preview ? 0.72 : 1,
+          selectable: !preview,
+          evented: !preview,
+          objectCaching: false,
+        });
+        keepDirectionalLabelReadable(group);
+        return group;
+      }
+
+      function updateDirectionalArrowPreview(end, width) {
+        if (directionalArrowPreview) {
+          canvas.remove(directionalArrowPreview);
+        }
+        directionalArrowPreview = createDirectionalArrow(
+          directionalArrowStart,
+          end,
+          width,
+          true,
+        );
+        if (directionalArrowPreview) canvas.add(directionalArrowPreview);
+        canvas.requestRenderAll();
+      }
+
+      function handleDirectionalArrowClick(point) {
+        if (!directionalArrowStart) {
+          directionalArrowStart = point;
+          directionalArrowPhase = "direction";
+          updateToolHelp();
+          return;
+        }
+
+        if (directionalArrowPhase === "direction") {
+          const length = Math.hypot(
+            point.x - directionalArrowStart.x,
+            point.y - directionalArrowStart.y,
+          );
+          if (length < 5) return;
+
+          directionalArrowEnd = point;
+          directionalArrowWidth = defaultDirectionalArrowWidth(length);
+          directionalArrowPhase = "width";
+          updateDirectionalArrowPreview(
+            directionalArrowEnd,
+            directionalArrowWidth,
+          );
+          updateToolHelp();
+          return;
+        }
+
+        if (directionalArrowPhase !== "width") return;
+        const arrow = createDirectionalArrow(
+          directionalArrowStart,
+          directionalArrowEnd,
+          directionalArrowWidthAt(point),
+        );
+        clearDirectionalArrowPreview();
+        if (!arrow) return;
+        canvas.add(arrow);
+        setMode("select");
+        canvas.setActiveObject(arrow);
+        canvas.requestRenderAll();
+        saveHistory();
       }
 
       function positionMeasurementLabel(label, text, start, end, length) {
@@ -1216,6 +1445,10 @@
           clearMeasurementPreview();
         }
 
+        if (isDirectionalArrowMode() && mode !== currentMode) {
+          clearDirectionalArrowPreview();
+        }
+
         if (currentMode === "scale" && mode !== "scale") {
           if (drawingLine) canvas.remove(drawingLine);
           drawingLine = null;
@@ -1241,6 +1474,12 @@
         if (mode === "measure_radius")
           document
             .getElementById("btn-measure-radius")
+            .classList.add("active");
+        if (mode === "wind_arrow")
+          document.getElementById("btn-wind-arrow").classList.add("active");
+        if (mode === "propagation_arrow")
+          document
+            .getElementById("btn-propagation-arrow")
             .classList.add("active");
         if (mode === "scale")
           document.getElementById("btn-scale").classList.add("active");
@@ -1283,6 +1522,10 @@
         }
         setMode("measure_radius");
       };
+      document.getElementById("btn-wind-arrow").onclick = () =>
+        setMode("wind_arrow");
+      document.getElementById("btn-propagation-arrow").onclick = () =>
+        setMode("propagation_arrow");
       document.getElementById("btn-attack").onclick = () => {
         if (!pixelsPerMeter) {
           openAlertModal(
@@ -1309,6 +1552,11 @@
         }
 
         const pointer = canvas.getPointer(opt.e);
+
+        if (isDirectionalArrowMode()) {
+          if (evt.button === 0) handleDirectionalArrowClick(pointer);
+          return;
+        }
 
         if (
           currentMode === "measure_distance" ||
@@ -1568,6 +1816,30 @@
         }
 
         const pointer = canvas.getPointer(opt.e);
+
+        if (isDirectionalArrowMode()) {
+          if (directionalArrowPhase === "direction") {
+            const length = directionalArrowStart
+              ? Math.hypot(
+                  pointer.x - directionalArrowStart.x,
+                  pointer.y - directionalArrowStart.y,
+                )
+              : 0;
+            if (length > 1) {
+              updateDirectionalArrowPreview(
+                pointer,
+                Math.max(16, Math.min(length * 0.18, 48)),
+              );
+            }
+          } else if (directionalArrowPhase === "width") {
+            directionalArrowWidth = directionalArrowWidthAt(pointer);
+            updateDirectionalArrowPreview(
+              directionalArrowEnd,
+              directionalArrowWidth,
+            );
+          }
+          return;
+        }
 
         if (
           currentMode === "measure_distance" ||
@@ -2288,6 +2560,7 @@
             }
           });
           normalizeMeasurementLabelStyles();
+          normalizeDirectionalLabels();
           canvas.renderAll();
           setMode("select");
           undoStack = []; // Reiniciar historial
@@ -2572,24 +2845,6 @@
           menuWide: true,
           name: "Tanque de GLP",
         },
-        {
-          svg: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" aria-hidden="true">
-            <path d="M1 10h51V2l11 14-11 14V22H1z" fill="#2563eb" stroke="#1e3a8a" stroke-width="1.5" stroke-linejoin="round"/>
-            <text x="29" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">viento</text>
-          </svg>`,
-          baseSize: 64,
-          menuWide: true,
-          name: "Viento",
-        },
-        {
-          svg: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" aria-hidden="true">
-            <path d="M1 10h51V2l11 14-11 14V22H1z" fill="#dc2626" stroke="#7f1d1d" stroke-width="1.5" stroke-linejoin="round"/>
-            <text x="29" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">propagación</text>
-          </svg>`,
-          baseSize: 64,
-          menuWide: true,
-          name: "Propagación",
-        },
         { emoji: "📦", name: "Pallet" },
         { emoji: "⚙️", name: "Máquina" },
       ];
@@ -2843,6 +3098,8 @@
           if (currentMode === "stamp" && stampGhost) {
             canvas.remove(stampGhost);
             stampGhost = null;
+            setMode("select");
+          } else if (isDirectionalArrowMode()) {
             setMode("select");
           } else if (
             currentMode === "measure_distance" ||
