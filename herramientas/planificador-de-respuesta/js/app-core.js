@@ -32,7 +32,7 @@ let zoningPoints = [];
 let zoningPreview = null;
 let zoningPathLength = 0;
 
-// Variables para línea de ataque a mano alzada
+// Estado compartido de la herramienta de línea de ataque; su lógica está en drawing-tools/attack-line.js.
 let isDrawingHose = false;
 let attackLineLengthMeters = 0;
 let attackPolyline = null;

@@ -372,33 +372,7 @@ window.addEventListener("keydown", function (e) {
     ) {
       setMode("select");
     } else if (currentMode === "attack_line") {
-      if (isDrawingHose) {
-        isDrawingHose = false;
-        if (attackPolyline) canvas.remove(attackPolyline);
-        if (remainingLengthText) canvas.remove(remainingLengthText);
-        attackPolyline = null;
-        remainingLengthText = null;
-        setMode("select");
-      } else if (placingNozzle) {
-        placingNozzle = false;
-        if (aimingLine) canvas.remove(aimingLine);
-        if (nozzleObject) canvas.remove(nozzleObject);
-        aimingLine = null;
-        nozzleObject = null;
-        setMode("select");
-      } else if (placingConeLength || placingConeWidth) {
-        placingConeLength = false;
-        placingConeWidth = false;
-        if (waterConeObject) canvas.remove(waterConeObject);
-        if (waterJetObject) canvas.remove(waterJetObject);
-        if (coneLengthText) canvas.remove(coneLengthText);
-        waterConeObject = null;
-        waterJetObject = null;
-        coneLengthText = null;
-        setMode("select");
-      } else {
-        setMode("select");
-      }
+      cancelAttackLine();
     } else if (currentMode === "scale") {
       isDrawing = false;
       if (drawingLine) canvas.remove(drawingLine);

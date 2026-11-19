@@ -123,56 +123,12 @@ function openAttackActionModal() {
   };
 
   btnLanza.onclick = () => {
-    placingNozzle = true;
-    segmentFinished = false;
-    updateToolHelp();
-
-    // Eliminar la última unión ya que allí irá la lanza
-    if (lastUnionObject) {
-      canvas.remove(lastUnionObject);
-      lastUnionObject = null;
-    }
-
-    // Crear Lanza (Triángulo amarillo)
-    const nozzleWidth = pixelsPerMeter ? 1 * pixelsPerMeter : 18;
-    const nozzleHeight = pixelsPerMeter ? 1 * pixelsPerMeter : 24;
-
-    nozzleObject = new fabric.Triangle({
-      left: lastUnionX,
-      top: lastUnionY,
-      width: nozzleWidth,
-      height: nozzleHeight,
-      fill: "#facc15",
-      stroke: "#ca8a04",
-      strokeWidth: 2,
-      originX: "center",
-      originY: "center",
-      selectable: false,
-      evented: false,
-      angle: 0,
-    });
-    canvas.add(nozzleObject);
-
-    aimingLine = new fabric.Line(
-      [lastUnionX, lastUnionY, lastUnionX, lastUnionY],
-      {
-        stroke: "#60a5fa", // blue-400
-        strokeWidth: 2,
-        strokeDashArray: [6, 6],
-        selectable: false,
-        evented: false,
-      },
-    );
-    canvas.add(aimingLine);
-
+    startNozzlePlacement();
     close();
   };
 
   btnAlargar.onclick = () => {
-    segmentFinished = false;
-    lastUnionObject = null; // La unión se queda, pero ya no la rastreamos para borrarla
-    updateToolHelp();
-    // Dejamos en modo attack_line para que el usuario trace un nuevo tramo haciendo clic
+    extendAttackLine();
     close();
   };
 }
