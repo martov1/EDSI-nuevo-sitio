@@ -40,6 +40,7 @@
   // Clave donde se conserva el estado de atribución entre páginas y visitas
   // del mismo navegador. Se guarda como JSON.
   const STORAGE_KEY = "edsi_contact_attribution";
+  let clarityRecordingUrl = "";
 
   /**
    * Genera un código alfanumérico corto basado en la fecha y hora exacta (Timestamp).
@@ -256,11 +257,12 @@
    *
    * Incluye el tipo de contacto, el último origen/campaña persistido,
    * identificadores Google/Meta disponibles, cantidad de páginas vistas,
-   * primera página visitada y URL donde ocurrió el clic. Algunos campos de
+   * primera página visitada, URL donde ocurrió el clic y URL de grabación
+   * de Clarity cuando sus metadatos están disponibles. Algunos campos de
    * grupo de anuncios/conjunto/anuncio solo se incluyen si llegan en
    * parámetros propios de la URL; no se pueden deducir del gclid.
    */
-  function buildPayload(state, contactType, ticketId) {
+  function buildPayload(state, contactType, ticketId, clarityUrl) {
     const touch = state.lastTouch || {
       gclid: "",
       gadCampaignId: "",
@@ -300,6 +302,7 @@
       visitas_sitio: state.visits,
       pagina_entrada: state.entryPage,
       pagina_conversion: window.location.href,
+      clarity_url: clarityUrl,
     };
   }
 
@@ -375,6 +378,81 @@
     }
   }
 
+  /**
+   * Obtiene la URL de reproducción desde los metadatos de Clarity.
+   */
+  function getClarityRecordingUrl() {
+    function waitForClarity() {
+      return new Promise((resolve, reject) => {
+        if (typeof window.clarity === "function") {
+          resolve(window.clarity);
+          return;
+        }
+
+        let attempts = 0;
+        const interval = window.setInterval(() => {
+          attempts += 1;
+          if (typeof window.clarity === "function") {
+            window.clearInterval(interval);
+            resolve(window.clarity);
+          } else if (attempts >= 50) {
+            window.clearInterval(interval);
+            reject(new Error("Microsoft Clarity no se cargó a tiempo."));
+          }
+        }, 200);
+      });
+    }
+
+    return waitForClarity().then(
+      (clarity) =>
+        new Promise((resolve, reject) => {
+          const timeout = window.setTimeout(() => {
+            reject(new Error("Clarity no devolvió los metadatos de grabación."));
+          }, 5000);
+
+          try {
+            clarity("metadata", (metadata) => {
+              window.clearTimeout(timeout);
+              if (
+                !metadata ||
+                typeof metadata.projectId !== "string" ||
+                !metadata.projectId ||
+                typeof metadata.userId !== "string" ||
+                !metadata.userId ||
+                typeof metadata.sessionId !== "string" ||
+                !metadata.sessionId
+              ) {
+                reject(new Error("Clarity devolvió metadatos incompletos."));
+                return;
+              }
+
+              resolve(
+                `https://clarity.microsoft.com/player/${encodeURIComponent(
+                  metadata.projectId,
+                )}/${encodeURIComponent(metadata.userId)}/${encodeURIComponent(
+                  metadata.sessionId,
+                )}`,
+              );
+            });
+          } catch (error) {
+            window.clearTimeout(timeout);
+            reject(error);
+          }
+        }),
+    );
+  }
+
+  getClarityRecordingUrl()
+    .then((url) => {
+      clarityRecordingUrl = url;
+    })
+    .catch((error) => {
+      console.warn(
+        "No se pudo obtener la URL de la grabación de Clarity.",
+        error,
+      );
+    });
+
   // Actualiza el estado una vez por carga de este archivo/página.
   const pageState = getPageStateForThisVisit();
 
@@ -443,7 +521,12 @@
         }
 
         // Registrar el intento de contacto con el ID generado en el cliente.
-        const payload = buildPayload(pageState, contactType, ticketId);
+        const payload = buildPayload(
+          pageState,
+          contactType,
+          ticketId,
+          clarityRecordingUrl,
+        );
         trackContact(contactType, anchor, payload);
       } catch (error) {
         // Un fallo al preparar/emitir el tracking no debe impedir que el
