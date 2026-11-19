@@ -153,8 +153,7 @@ document.getElementById("btn-export-pdf").onclick = () => {
     const pdfHeightMm = (finalPxHeight / 300) * 25.4;
 
     const { jsPDF } = window.jspdf;
-    const orientation =
-      pdfWidthMm > pdfHeightMm ? "landscape" : "portrait";
+    const orientation = pdfWidthMm > pdfHeightMm ? "landscape" : "portrait";
 
     // Crear el PDF con el tamaño y aspect ratio exacto del plano, sin forzar A4
     const pdf = new jsPDF({
@@ -215,8 +214,7 @@ document.getElementById("btn-export-pdf").onclick = () => {
     const pdfHeightMm = (finalPxHeight / 300) * 25.4;
 
     const { jsPDF } = window.jspdf;
-    const orientation =
-      pdfWidthMm > pdfHeightMm ? "landscape" : "portrait";
+    const orientation = pdfWidthMm > pdfHeightMm ? "landscape" : "portrait";
 
     // Crear el PDF con el tamaño y aspect ratio exacto del plano, sin forzar A4
     const pdf = new jsPDF({
@@ -284,8 +282,7 @@ function loadProjectData(data) {
     document.getElementById("scale-info").innerHTML =
       `Escala: <span class="text-blue-400 font-bold">1m = ${pixelsPerMeter.toFixed(1)}px</span>`;
   } else {
-    document.getElementById("scale-info").innerHTML =
-      `Escala no definida`;
+    document.getElementById("scale-info").innerHTML = `Escala no definida`;
   }
 
   // Resetear viewport local antes de inyectar los datos del archivo
@@ -327,23 +324,21 @@ document.getElementById("btn-save-file").onclick = () => {
 };
 
 // Lee el JSON elegido por el usuario y lo restaura en el lienzo.
-document
-  .getElementById("input-load-file")
-  .addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      try {
-        const data = JSON.parse(ev.target.result);
-        loadProjectData(data);
-      } catch (err) {
-        openAlertModal("Error al leer el archivo. Formato inválido.");
-      }
-    };
-    reader.readAsText(file);
-    e.target.value = ""; // Resetear input
-  });
+document.getElementById("input-load-file").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      loadProjectData(data);
+    } catch (err) {
+      openAlertModal("Error al leer el archivo. Formato inválido.");
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = ""; // Resetear input
+});
 
 // 4. Guardar/Cargar en Navegador (LocalForage)
 const RECENTS_KEY = "edsi_recent_plans";
@@ -404,8 +399,7 @@ document.getElementById("btn-load-local").onclick = async () => {
     .classList.remove("hidden");
 
   const listContainer = document.getElementById("recents-list");
-  listContainer.innerHTML =
-    '<p class="text-gray-400 text-sm">Cargando...</p>';
+  listContainer.innerHTML = '<p class="text-gray-400 text-sm">Cargando...</p>';
 
   try {
     const recents = (await localforage.getItem(RECENTS_KEY)) || [];
@@ -501,4 +495,3 @@ canvas.on("mouse:up", function (opt) {
 
   drawingLine = null;
 });
-

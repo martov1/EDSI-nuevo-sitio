@@ -29,8 +29,7 @@ brigadistas.forEach((b) => {
           </div>
       `;
   const label = document.createElement("span");
-  label.className =
-    "mt-1 text-center text-[10px] leading-tight text-gray-300";
+  label.className = "mt-1 text-center text-[10px] leading-tight text-gray-300";
   label.textContent = b.name;
   btn.appendChild(label);
   btn.title = b.name;
@@ -148,8 +147,7 @@ iconos.forEach((ic) => {
   btn.appendChild(symbol);
 
   const label = document.createElement("span");
-  label.className =
-    "mt-1 text-center text-[10px] leading-tight text-gray-300";
+  label.className = "mt-1 text-center text-[10px] leading-tight text-gray-300";
   label.textContent = ic.name;
   btn.appendChild(label);
   btn.title = ic.name;
@@ -262,8 +260,7 @@ scaleBarOptions.forEach((option) => {
   btn.appendChild(preview);
 
   const label = document.createElement("span");
-  label.className =
-    "mt-1 text-center text-[10px] leading-tight text-gray-200";
+  label.className = "mt-1 text-center text-[10px] leading-tight text-gray-200";
   label.textContent = option.name;
   btn.appendChild(label);
 
@@ -271,10 +268,7 @@ scaleBarOptions.forEach((option) => {
     fabric.loadSVGFromString(
       createScaleBarSvg(option),
       (objects, svgOptions) => {
-        const scaleBar = fabric.util.groupSVGElements(
-          objects,
-          svgOptions,
-        );
+        const scaleBar = fabric.util.groupSVGElements(objects, svgOptions);
         const scaleFactor = pixelsPerMeter / 32;
         scaleBar.set({
           originX: "center",
@@ -368,10 +362,7 @@ window.addEventListener("keydown", function (e) {
       canvas.remove(stampGhost);
       stampGhost = null;
       setMode("select");
-    } else if (
-      currentMode === "zoning_color" ||
-      currentMode === "zoning"
-    ) {
+    } else if (currentMode === "zoning_color" || currentMode === "zoning") {
       setMode("select");
     } else if (isDirectionalArrowMode()) {
       setMode("select");
@@ -437,8 +428,7 @@ window.addEventListener("keydown", function (e) {
   // Eliminar (Suprimir / Backspace)
   if (e.key === "Delete" || e.key === "Backspace") {
     // Evitar borrar si estamos editando texto
-    if (canvas.getActiveObject() && canvas.getActiveObject().isEditing)
-      return;
+    if (canvas.getActiveObject() && canvas.getActiveObject().isEditing) return;
 
     const activeObjects = canvas.getActiveObjects();
     if (activeObjects.length) {

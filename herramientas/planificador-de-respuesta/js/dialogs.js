@@ -14,12 +14,8 @@
  */
 function openScaleModal(lengthPx, lineObj) {
   document.getElementById("custom-modal").classList.remove("hidden");
-  document
-    .getElementById("modal-content-scale")
-    .classList.remove("hidden");
-  document
-    .getElementById("modal-content-attack-setup")
-    .classList.add("hidden");
+  document.getElementById("modal-content-scale").classList.remove("hidden");
+  document.getElementById("modal-content-attack-setup").classList.add("hidden");
   document
     .getElementById("modal-content-attack-action")
     .classList.add("hidden");
@@ -107,9 +103,7 @@ function openAttackSetupModal() {
 function openAttackActionModal() {
   document.getElementById("custom-modal").classList.remove("hidden");
   document.getElementById("modal-content-scale").classList.add("hidden");
-  document
-    .getElementById("modal-content-attack-setup")
-    .classList.add("hidden");
+  document.getElementById("modal-content-attack-setup").classList.add("hidden");
   document
     .getElementById("modal-content-attack-action")
     .classList.remove("hidden");
@@ -190,29 +184,18 @@ function openAttackActionModal() {
 function openAlertModal(msg) {
   document.getElementById("custom-modal").classList.remove("hidden");
   document.getElementById("modal-content-scale").classList.add("hidden");
-  document
-    .getElementById("modal-content-attack-setup")
-    .classList.add("hidden");
+  document.getElementById("modal-content-attack-setup").classList.add("hidden");
   document
     .getElementById("modal-content-attack-action")
     .classList.add("hidden");
-  document
-    .getElementById("modal-content-save-local")
-    .classList.add("hidden");
-  document
-    .getElementById("modal-content-load-local")
-    .classList.add("hidden");
-  document
-    .getElementById("modal-content-alert")
-    .classList.remove("hidden");
+  document.getElementById("modal-content-save-local").classList.add("hidden");
+  document.getElementById("modal-content-load-local").classList.add("hidden");
+  document.getElementById("modal-content-alert").classList.remove("hidden");
 
   document.getElementById("alert-message").innerText = msg;
 
   document.getElementById("alert-confirm").onclick = () => {
     document.getElementById("custom-modal").classList.add("hidden");
-    document
-      .getElementById("modal-content-alert")
-      .classList.add("hidden");
+    document.getElementById("modal-content-alert").classList.add("hidden");
   };
 }
-

@@ -21,9 +21,7 @@ function clearZoningDraft() {
  */
 function getZoningPriority(object) {
   if (!object || object.type !== "group" || !object._objects) return null;
-  const polygon = object._objects.find(
-    (child) => child.type === "polygon",
-  );
+  const polygon = object._objects.find((child) => child.type === "polygon");
   const colorPriority = Object.values(zoningTypes).find(
     (zone) =>
       typeof polygon?.stroke === "string" &&
@@ -32,14 +30,11 @@ function getZoningPriority(object) {
   const label = object._objects.find(
     (child) =>
       child.type === "text" &&
-      Object.values(zoningTypes).some(
-        (zone) => zone.label === child.text,
-      ),
+      Object.values(zoningTypes).some((zone) => zone.label === child.text),
   );
-  const labelPriority =
-    Object.values(zoningTypes).find(
-      (zone) => zone.label === label?.text,
-    )?.priority;
+  const labelPriority = Object.values(zoningTypes).find(
+    (zone) => zone.label === label?.text,
+  )?.priority;
   return colorPriority ?? labelPriority ?? null;
 }
 
@@ -94,8 +89,7 @@ function installZoningEdgeSelection(zoneGroup) {
       Math.hypot(transform[2], transform[3]),
     );
     const tolerance =
-      (polygon.strokeWidth * strokeScale) / 2 +
-      8 / (canvas.getZoom() || 1);
+      (polygon.strokeWidth * strokeScale) / 2 + 8 / (canvas.getZoom() || 1);
 
     return vertices.some((start, index) => {
       const end = vertices[(index + 1) % vertices.length];
@@ -116,35 +110,35 @@ function installZoningEdgeSelection(zoneGroup) {
             );
       const closestX = start.x + projection * deltaX;
       const closestY = start.y + projection * deltaY;
-      return Math.hypot(
-        worldPoint.x - closestX,
-        worldPoint.y - closestY,
-      ) <=
-        tolerance;
+      return (
+        Math.hypot(worldPoint.x - closestX, worldPoint.y - closestY) <=
+        tolerance
+      );
     });
   };
 }
 
 /** Separa rótulos agrupados de zonas antiguas y vuelve a instalar su selección. */
 function separateZoningLabels() {
-  canvas.getObjects().slice().forEach((object) => {
-    if (getZoningPriority(object) === null) return;
-    const label = object._objects.find(
-      (child) =>
-        child.type === "text" &&
-        Object.values(zoningTypes).some(
-          (zone) => zone.label === child.text,
-        ),
-    );
+  canvas
+    .getObjects()
+    .slice()
+    .forEach((object) => {
+      if (getZoningPriority(object) === null) return;
+      const label = object._objects.find(
+        (child) =>
+          child.type === "text" &&
+          Object.values(zoningTypes).some((zone) => zone.label === child.text),
+      );
 
-    if (label) {
-      object.removeWithUpdate(label);
-      label.set({ selectable: true, evented: true });
-      canvas.add(label);
-    }
+      if (label) {
+        object.removeWithUpdate(label);
+        label.set({ selectable: true, evented: true });
+        canvas.add(label);
+      }
 
-    installZoningEdgeSelection(object);
-  });
+      installZoningEdgeSelection(object);
+    });
   orderZoningLayers();
 }
 
@@ -249,8 +243,7 @@ function createZoningGradient(color) {
 
 /** Coloca el rótulo de zona sobre su borde más largo y lo mantiene legible. */
 function positionZoningLabel(label, start, end) {
-  let angle =
-    (Math.atan2(end.y - start.y, end.x - start.x) * 180) / Math.PI;
+  let angle = (Math.atan2(end.y - start.y, end.x - start.x) * 180) / Math.PI;
   if (angle > 90) angle -= 180;
   if (angle < -90) angle += 180;
   const angleRadians = (angle * Math.PI) / 180;
@@ -259,10 +252,8 @@ function positionZoningLabel(label, start, end) {
     angle,
     scaleX: 1,
     scaleY: 1,
-    left:
-      (start.x + end.x) / 2 + Math.sin(angleRadians) * offset,
-    top:
-      (start.y + end.y) / 2 - Math.cos(angleRadians) * offset,
+    left: (start.x + end.x) / 2 + Math.sin(angleRadians) * offset,
+    top: (start.y + end.y) / 2 - Math.cos(angleRadians) * offset,
   });
 }
 
@@ -505,10 +496,7 @@ function handleDirectionalArrowClick(point) {
     directionalArrowEnd = point;
     directionalArrowWidth = defaultDirectionalArrowWidth(length);
     directionalArrowPhase = "width";
-    updateDirectionalArrowPreview(
-      directionalArrowEnd,
-      directionalArrowWidth,
-    );
+    updateDirectionalArrowPreview(directionalArrowEnd, directionalArrowWidth);
     updateToolHelp();
     return;
   }
@@ -530,8 +518,7 @@ function handleDirectionalArrowClick(point) {
 
 /** Orienta y ubica una etiqueta de medida sin invertir su texto. */
 function positionMeasurementLabel(label, text, start, end, length) {
-  let angle =
-    Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
+  let angle = Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
   if (angle > 90) angle -= 180;
   if (angle < -90) angle += 180;
 
@@ -602,9 +589,7 @@ function startDistanceMeasurement(point) {
   );
   label.set({ scaleX: 0, scaleY: 0 });
   measurementPreview = { halo, line, startPoint, endPoint, label };
-  Object.values(measurementPreview).forEach((object) =>
-    canvas.add(object),
-  );
+  Object.values(measurementPreview).forEach((object) => canvas.add(object));
   updateDistanceMeasurement(point);
 }
 
@@ -681,17 +666,14 @@ function startRadiusMeasurement(point) {
     evented: false,
     objectCaching: false,
   });
-  const radiusLine = new fabric.Line(
-    [point.x, point.y, point.x, point.y],
-    {
-      stroke: "#eab308",
-      strokeWidth: 2,
-      strokeDashArray: [4, 4],
-      selectable: false,
-      evented: false,
-      objectCaching: false,
-    },
-  );
+  const radiusLine = new fabric.Line([point.x, point.y, point.x, point.y], {
+    stroke: "#eab308",
+    strokeWidth: 2,
+    strokeDashArray: [4, 4],
+    selectable: false,
+    evented: false,
+    objectCaching: false,
+  });
   const centerPoint = new fabric.Circle({
     left: point.x,
     top: point.y,
@@ -712,9 +694,7 @@ function startRadiusMeasurement(point) {
   );
   label.set({ scaleX: 0, scaleY: 0 });
   measurementPreview = { circle, radiusLine, centerPoint, label };
-  Object.values(measurementPreview).forEach((object) =>
-    canvas.add(object),
-  );
+  Object.values(measurementPreview).forEach((object) => canvas.add(object));
   updateRadiusMeasurement(point);
 }
 
@@ -758,4 +738,3 @@ function finishMeasurement() {
   saveHistory();
   setMode("select");
 }
-

@@ -173,8 +173,7 @@ function undo() {
       document.getElementById("scale-info").innerHTML =
         `Escala: <span class="text-blue-400 font-bold">1m = ${pixelsPerMeter.toFixed(1)}px</span>`;
     } else {
-      document.getElementById("scale-info").innerHTML =
-        `Escala no definida`;
+      document.getElementById("scale-info").innerHTML = `Escala no definida`;
     }
 
     // Preservar viewport actual al cargar
@@ -261,8 +260,7 @@ document.getElementById("btn-zoom-reset").onclick = () => {
 function loadFabricBackground(dataUrl) {
   fabric.Image.fromURL(dataUrl, function (img) {
     pixelsPerMeter = null;
-    document.getElementById("scale-info").innerHTML =
-      "Escala no definida";
+    document.getElementById("scale-info").innerHTML = "Escala no definida";
 
     // Escalar imagen para que encaje en el canvas
     const scaleX = canvas.width / img.width;
@@ -590,4 +588,3 @@ function normalizeMeasurementLabelStyles() {
     }
   });
 }
-

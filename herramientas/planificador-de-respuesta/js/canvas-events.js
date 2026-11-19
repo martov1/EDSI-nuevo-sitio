@@ -18,8 +18,7 @@ function setMode(mode) {
   }
 
   if (
-    (currentMode === "measure_distance" ||
-      currentMode === "measure_radius") &&
+    (currentMode === "measure_distance" || currentMode === "measure_radius") &&
     mode !== currentMode
   ) {
     clearMeasurementPreview();
@@ -56,9 +55,7 @@ function setMode(mode) {
   if (mode === "select")
     document.getElementById("btn-select").classList.add("active");
   if (mode === "measure_distance")
-    document
-      .getElementById("btn-measure-distance")
-      .classList.add("active");
+    document.getElementById("btn-measure-distance").classList.add("active");
   if (mode === "measure_radius")
     document.getElementById("btn-measure-radius").classList.add("active");
   if (mode === "zoning_color" || mode === "zoning")
@@ -66,9 +63,7 @@ function setMode(mode) {
   if (mode === "wind_arrow")
     document.getElementById("btn-wind-arrow").classList.add("active");
   if (mode === "propagation_arrow")
-    document
-      .getElementById("btn-propagation-arrow")
-      .classList.add("active");
+    document.getElementById("btn-propagation-arrow").classList.add("active");
   if (mode === "scale")
     document.getElementById("btn-scale").classList.add("active");
   if (mode === "attack_line")
@@ -116,9 +111,7 @@ document.getElementById("btn-zoning").onclick = () => {
     setMode("select");
   } else {
     setMode("zoning_color");
-    document
-      .getElementById("zoning-colors")
-      .classList.remove("hidden");
+    document.getElementById("zoning-colors").classList.remove("hidden");
   }
 };
 document.getElementById("btn-zone-hot").onclick = () => {
@@ -133,8 +126,7 @@ document.getElementById("btn-zone-cold").onclick = () => {
   selectedZoningType = zoningTypes.cold;
   setMode("zoning");
 };
-document.getElementById("btn-wind-arrow").onclick = () =>
-  setMode("wind_arrow");
+document.getElementById("btn-wind-arrow").onclick = () => setMode("wind_arrow");
 document.getElementById("btn-propagation-arrow").onclick = () =>
   setMode("propagation_arrow");
 document.getElementById("btn-attack").onclick = () => {
@@ -180,10 +172,7 @@ canvas.on("mouse:down", function (opt) {
     return;
   }
 
-  if (
-    currentMode === "measure_distance" ||
-    currentMode === "measure_radius"
-  ) {
+  if (currentMode === "measure_distance" || currentMode === "measure_radius") {
     if (evt.button !== 0) return;
 
     if (currentMode === "measure_distance") {
@@ -462,18 +451,12 @@ canvas.on("mouse:move", function (opt) {
       }
     } else if (directionalArrowPhase === "width") {
       directionalArrowWidth = directionalArrowWidthAt(pointer);
-      updateDirectionalArrowPreview(
-        directionalArrowEnd,
-        directionalArrowWidth,
-      );
+      updateDirectionalArrowPreview(directionalArrowEnd, directionalArrowWidth);
     }
     return;
   }
 
-  if (
-    currentMode === "measure_distance" ||
-    currentMode === "measure_radius"
-  ) {
+  if (currentMode === "measure_distance" || currentMode === "measure_radius") {
     if (currentMode === "measure_distance") {
       updateDistanceMeasurement(pointer);
     } else {
@@ -505,15 +488,12 @@ canvas.on("mouse:move", function (opt) {
 
       // Dibujar la línea punteada de guía desde la punta de la lanza
       if (aimingLine) {
-        const nozzleAngleRad =
-          (nozzleObject.angle - 90) * (Math.PI / 180);
+        const nozzleAngleRad = (nozzleObject.angle - 90) * (Math.PI / 180);
         const nozzleHeight = nozzleObject.height * nozzleObject.scaleY;
         const tipX =
-          nozzleObject.left +
-          Math.cos(nozzleAngleRad) * (nozzleHeight / 2);
+          nozzleObject.left + Math.cos(nozzleAngleRad) * (nozzleHeight / 2);
         const tipY =
-          nozzleObject.top +
-          Math.sin(nozzleAngleRad) * (nozzleHeight / 2);
+          nozzleObject.top + Math.sin(nozzleAngleRad) * (nozzleHeight / 2);
         aimingLine.set({
           x1: tipX,
           y1: tipY,
@@ -561,11 +541,7 @@ canvas.on("mouse:move", function (opt) {
       // Distancia de un punto a una línea (la recta central del chorro)
       const halfWidth = Math.abs(dy * dirX - dx * dirY);
       const fullJetThreshold = pixelsPerMeter * 0.1;
-      const fullJetWidth = Math.max(
-        halfWidth * 2,
-        pixelsPerMeter * 0.02,
-        1,
-      );
+      const fullJetWidth = Math.max(halfWidth * 2, pixelsPerMeter * 0.02, 1);
 
       waterConeObject.set({
         width: Math.max(halfWidth * 2, 1),
@@ -591,10 +567,7 @@ canvas.on("mouse:move", function (opt) {
   ) {
     const maxPx = attackLineLengthMeters * pixelsPerMeter;
     const lastPoint = attackPoints[attackPoints.length - 1];
-    const dist = Math.hypot(
-      pointer.x - lastPoint.x,
-      pointer.y - lastPoint.y,
-    );
+    const dist = Math.hypot(pointer.x - lastPoint.x, pointer.y - lastPoint.y);
 
     if (dist === 0) return;
 
@@ -704,4 +677,3 @@ canvas.on("mouse:move", function (opt) {
 
   if (!isDrawing) return;
 });
-
