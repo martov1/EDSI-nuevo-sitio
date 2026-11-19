@@ -271,6 +271,20 @@
       id="canvas-wrapper"
     >
       <canvas id="main-canvas"></canvas>
+      <section
+        id="tool-help"
+        class="absolute bottom-4 right-4 z-20 w-72 max-w-[90%] rounded-lg border border-gray-600 bg-gray-900/95 p-4 text-sm text-white shadow-xl pointer-events-none"
+        role="status"
+        aria-live="polite"
+      >
+        <h2 id="tool-help-title" class="mb-2 font-bold text-blue-300">
+          Seleccionar / Mover
+        </h2>
+        <ul
+          id="tool-help-list"
+          class="list-disc space-y-1 pl-5 text-xs leading-relaxed text-gray-200"
+        ></ul>
+      </section>
     </main>
 
     <!-- Custom Modal UI (Reemplaza a window.prompt) -->
@@ -687,6 +701,82 @@
         });
 
       // --- MANEJO DE MODOS (HERRAMIENTAS) ---
+      function updateToolHelp() {
+        let title = "Seleccionar / Mover";
+        let instructions = [
+          "Haz clic en un elemento para seleccionarlo y arrástralo para moverlo.",
+          "Arrastra sobre un área vacía para seleccionar varios elementos.",
+          "Haz doble clic en un cuadro de texto para editarlo.",
+          "Supr elimina la selección; Ctrl+Z deshace la última acción.",
+        ];
+
+        if (currentMode === "pan") {
+          title = "Mover Plano";
+          instructions = [
+            "Arrastra el plano para desplazar la vista.",
+            "También puedes usar Alt + arrastrar o el botón central del ratón.",
+            "Usa la rueda del ratón para acercar o alejar.",
+          ];
+        } else if (currentMode === "scale") {
+          title = "Fijar Escala";
+          instructions = [
+            "Arrastra sobre una distancia conocida del plano.",
+            "Ingresa cuántos metros representa esa distancia.",
+            "Pulsa Escape para cancelar.",
+          ];
+        } else if (currentMode === "attack_line") {
+          title = "Línea de Ataque";
+          if (placingNozzle) {
+            instructions = [
+              "Mueve el cursor para orientar la lanza.",
+              "Haz clic para fijar su posición y orientación.",
+              "Pulsa Escape para cancelar.",
+            ];
+          } else if (placingConeLength) {
+            instructions = [
+              "Mueve el cursor para definir el alcance del chorro.",
+              "Haz clic para confirmar la longitud.",
+              "Pulsa Escape para cancelar.",
+            ];
+          } else if (placingConeWidth) {
+            instructions = [
+              "Mueve el cursor a un lado del eje para definir el ancho.",
+              "Haz clic para confirmar el cono o chorro pleno.",
+              "Pulsa Escape para cancelar.",
+            ];
+          } else if (isDrawingHose) {
+            instructions = [
+              "Haz clic para iniciar y mueve el cursor para trazar el tramo.",
+              "El tramo finaliza automáticamente al alcanzar la longitud definida.",
+              "Pulsa Escape para cancelar.",
+            ];
+          } else if (segmentFinished) {
+            instructions = [
+              "El tramo está completo.",
+              "Elige alargarlo o colocar la lanza.",
+              "Pulsa Escape para salir de la herramienta.",
+            ];
+          } else {
+            instructions = [
+              "Haz clic en el plano y mueve el cursor para trazar un tramo.",
+              "El tramo se limita a la longitud configurada.",
+              "Pulsa Escape para salir de la herramienta.",
+            ];
+          }
+        } else if (currentMode === "stamp") {
+          title = "Colocar Elemento";
+          instructions = [
+            "Mueve el cursor para ubicar la vista previa.",
+            "Haz clic para colocar el elemento en el plano.",
+            "Pulsa Escape para cancelar.",
+          ];
+        }
+
+        document.getElementById("tool-help-title").textContent = title;
+        document.getElementById("tool-help-list").innerHTML =
+          instructions.map((instruction) => `<li>${instruction}</li>`).join("");
+      }
+
       function setMode(mode) {
         // Limpiar fantasma de sello si se cambia de modo sin aplicarlo
         if (currentMode === "stamp" && stampGhost) {
@@ -696,6 +786,7 @@
 
         currentMode = mode;
         canvas.skipTargetFind = mode === "attack_line";
+        updateToolHelp();
 
         // Actualizar UI de botones
         document
@@ -748,6 +839,7 @@
         }
         openAttackSetupModal();
       };
+      updateToolHelp();
 
       // --- DIBUJO EN CANVAS (Escala y Línea de Ataque) ---
       canvas.on("mouse:down", function (opt) {
@@ -812,6 +904,7 @@
             coneBaseAngleRad = nozzleAngleRad; // Dirección en la que dispara el agua
 
             placingConeLength = true;
+            updateToolHelp();
 
             waterConeObject = new fabric.Triangle({
               left: coneTipX,
@@ -881,6 +974,7 @@
             // 3er Clic: Fijar longitud, pasar a amplitud (ancho)
             placingConeLength = false;
             placingConeWidth = true;
+            updateToolHelp();
             return;
           }
 
@@ -913,6 +1007,7 @@
           if (isDrawingHose) return; // Si ya está dibujando, ignoramos clics adicionales
           isDrawingHose = true;
           segmentFinished = false;
+          updateToolHelp();
           accumulatedLengthPx = 0;
           attackPoints = [{ x: pointer.x, y: pointer.y }];
 
@@ -1111,6 +1206,7 @@
             accumulatedLengthPx = maxPx;
             segmentFinished = true; // Frenar dibujo
             isDrawingHose = false; // Finalizar modo de dibujo continuo
+            updateToolHelp();
             lastUnionX = finalX;
             lastUnionY = finalY;
 
@@ -1318,6 +1414,7 @@
         btnLanza.onclick = () => {
           placingNozzle = true;
           segmentFinished = false;
+          updateToolHelp();
 
           // Eliminar la última unión ya que allí irá la lanza
           if (lastUnionObject) {
@@ -1363,6 +1460,7 @@
         btnAlargar.onclick = () => {
           segmentFinished = false;
           lastUnionObject = null; // La unión se queda, pero ya no la rastreamos para borrarla
+          updateToolHelp();
           // Dejamos en modo attack_line para que el usuario trace un nuevo tramo haciendo clic
           close();
         };
