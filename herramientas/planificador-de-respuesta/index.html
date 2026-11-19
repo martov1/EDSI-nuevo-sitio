@@ -1980,6 +1980,10 @@
                     ${b.id}
                 </div>
             `;
+        const label = document.createElement("span");
+        label.className = "mt-1 text-center text-[10px] leading-tight text-gray-300";
+        label.textContent = b.name;
+        btn.appendChild(label);
         btn.title = b.name;
         btn.onclick = () => addBrigadista(b);
         brContainer.appendChild(btn);
@@ -2032,8 +2036,16 @@
       iconos.forEach((ic) => {
         const btn = document.createElement("button");
         btn.className =
-          "text-2xl p-2 bg-gray-700 rounded border border-gray-600 hover:bg-gray-600 transition flex items-center justify-center";
-        btn.innerText = ic.emoji;
+          "p-2 bg-gray-700 rounded border border-gray-600 hover:bg-gray-600 transition flex flex-col items-center justify-center";
+        const symbol = document.createElement("span");
+        symbol.className = "text-2xl leading-none";
+        symbol.textContent = ic.emoji;
+        btn.appendChild(symbol);
+
+        const label = document.createElement("span");
+        label.className = "mt-1 text-center text-[10px] leading-tight text-gray-300";
+        label.textContent = ic.name;
+        btn.appendChild(label);
         btn.title = ic.name;
         btn.onclick = () => {
           const text = new fabric.Text(ic.emoji, {
