@@ -174,6 +174,15 @@
           <div class="grid grid-cols-3 gap-2" id="icons-container">
             <!-- Botones generados por JS -->
           </div>
+          <div id="scale-icons-container" class="mt-3 hidden">
+            <p class="mb-2 text-[10px] font-semibold uppercase text-gray-400">
+              Escalas gráficas
+            </p>
+            <div
+              id="scale-options-container"
+              class="grid grid-cols-2 gap-2"
+            ></div>
+          </div>
         </section>
 
         <!-- Anotaciones -->
@@ -766,6 +775,9 @@
           .classList.toggle("attention-pulse", hasPlan && !pixelsPerMeter);
         document
           .getElementById("scale-check")
+          .classList.toggle("hidden", !pixelsPerMeter);
+        document
+          .getElementById("scale-icons-container")
           .classList.toggle("hidden", !pixelsPerMeter);
 
         let title = "Seleccionar / Mover";
@@ -2241,6 +2253,97 @@
           startStamping(text);
         };
         icContainer.appendChild(btn);
+      });
+
+      const scaleBarOptions = [
+        { name: "Escala 1–2 m", marks: [0, 1, 2] },
+        { name: "Escala 1–5–10 m", marks: [0, 1, 5, 10] },
+      ];
+
+      function createScaleBarSvg(option) {
+        const basePixelsPerMeter = 32;
+        const margin = 12;
+        const totalMeters = option.marks[option.marks.length - 1];
+        const width = margin * 2 + totalMeters * basePixelsPerMeter;
+        const barTop = 16;
+        const barHeight = 8;
+        const parts = [
+          `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="32" viewBox="0 0 ${width} 32" preserveAspectRatio="none" aria-hidden="true">`,
+        ];
+
+        for (let i = 0; i < option.marks.length - 1; i++) {
+          const x = margin + option.marks[i] * basePixelsPerMeter;
+          const segmentWidth =
+            (option.marks[i + 1] - option.marks[i]) * basePixelsPerMeter;
+          const fill = i % 2 === 0 ? "#ffffff" : "#111827";
+          parts.push(
+            `<rect x="${x}" y="${barTop}" width="${segmentWidth}" height="${barHeight}" fill="${fill}" stroke="#111827" stroke-width="1"/>`,
+          );
+        }
+
+        option.marks.forEach((mark, index) => {
+          const x = margin + mark * basePixelsPerMeter;
+          const anchor =
+            index === 0
+              ? "start"
+              : index === option.marks.length - 1
+                ? "end"
+                : "middle";
+          const label = mark === 0 ? "0" : `${mark}m`;
+          parts.push(
+            `<line x1="${x}" y1="13" x2="${x}" y2="27" stroke="#111827" stroke-width="1.5"/>`,
+          );
+          parts.push(
+            `<text x="${x}" y="10" text-anchor="${anchor}" font-family="Arial, sans-serif" font-size="8" fill="#111827">${label}</text>`,
+          );
+        });
+
+        parts.push("</svg>");
+        return parts.join("");
+      }
+
+      const scaleOptionsContainer = document.getElementById(
+        "scale-options-container",
+      );
+      scaleBarOptions.forEach((option) => {
+        const btn = document.createElement("button");
+        btn.className =
+          "flex min-w-0 flex-col items-center rounded border border-gray-600 bg-gray-700 p-2 transition hover:bg-gray-600";
+        btn.title = option.name;
+
+        const preview = document.createElement("span");
+        preview.className = "flex h-8 w-full items-center";
+        preview.innerHTML = createScaleBarSvg(option);
+        preview.firstElementChild.style.width = "100%";
+        preview.firstElementChild.style.height = "100%";
+        btn.appendChild(preview);
+
+        const label = document.createElement("span");
+        label.className = "mt-1 text-center text-[10px] leading-tight text-gray-200";
+        label.textContent = option.name;
+        btn.appendChild(label);
+
+        btn.onclick = () => {
+          fabric.loadSVGFromString(
+            createScaleBarSvg(option),
+            (objects, svgOptions) => {
+              const scaleBar = fabric.util.groupSVGElements(
+                objects,
+                svgOptions,
+              );
+              const scaleFactor = pixelsPerMeter / 32;
+              scaleBar.set({
+                originX: "center",
+                originY: "center",
+                scaleX: scaleFactor,
+                scaleY: scaleFactor,
+                objectCaching: false,
+              });
+              startStamping(scaleBar);
+            },
+          );
+        };
+        scaleOptionsContainer.appendChild(btn);
       });
 
       // Función unificada para iniciar modo sello (Stamping)
