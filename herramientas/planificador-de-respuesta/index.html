@@ -638,6 +638,7 @@
                 obj.set("objectCaching", false);
               }
             });
+            normalizeMeasurementLabelStyles();
             canvas.setViewportTransform(currentVPT);
             canvas.renderAll();
             isUndoing = false;
@@ -938,17 +939,28 @@
           fontFamily: "Arial",
           fontWeight: "bold",
           fill: color,
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          backgroundColor: measurementLabelBackground,
           padding: 5,
-          shadow: new fabric.Shadow({
-            color: "rgba(0, 0, 0, 0.2)",
-            blur: 3,
-            offsetX: 0,
-            offsetY: 1,
-          }),
           selectable: false,
           evented: false,
           objectCaching: false,
+        });
+      }
+
+      const measurementLabelBackground = "rgba(255, 255, 255, 0.8)";
+
+      function normalizeMeasurementLabelStyles() {
+        canvas.getObjects().forEach((object) => {
+          if (object.type !== "text" || typeof object.text !== "string") return;
+          const isRadiusLabel = object.text.startsWith("Radio:");
+          const isDistanceLabel =
+            object.fill === "#1a73e8" && /^[\d.,]+ m$/.test(object.text);
+          if (isRadiusLabel || isDistanceLabel) {
+            object.set({
+              backgroundColor: measurementLabelBackground,
+              shadow: null,
+            });
+          }
         });
       }
 
@@ -1043,17 +1055,19 @@
       function updateDistanceMeasurement(point) {
         if (!measurementStart || !measurementPreview) return;
         const { halo, line, startPoint, endPoint, label } = measurementPreview;
-        halo.set({ x2: point.x, y2: point.y });
-        line.set({ x2: point.x, y2: point.y });
         endPoint.set({ left: point.x, top: point.y });
+        const dx = point.x - measurementStart.x;
+        const dy = point.y - measurementStart.y;
         const distance = Math.hypot(
-          point.x - measurementStart.x,
-          point.y - measurementStart.y,
+          dx,
+          dy,
         );
         const detailScale = measurementStyleScale(distance);
-        halo.set({ strokeWidth: 6 * detailScale });
+        const haloWidth = 6 * detailScale;
+        const lineWidth = 3 * detailScale;
+        halo.set({ strokeWidth: haloWidth });
         line.set({
-          strokeWidth: 3 * detailScale,
+          strokeWidth: lineWidth,
           strokeDashArray: [3 * detailScale, 5 * detailScale],
         });
         const markerRadius = 5 * detailScale;
@@ -1064,6 +1078,29 @@
             strokeWidth: markerStrokeWidth,
           }),
         );
+        const directionX = distance ? dx / distance : 0;
+        const directionY = distance ? dy / distance : 0;
+        const markerEdge = markerRadius + markerStrokeWidth / 2;
+        const setTrimmedEndpoints = (segment, strokeWidth) => {
+          const trim = markerEdge + strokeWidth / 2;
+          const offset = Math.min(trim, distance / 2);
+          const x1 = measurementStart.x + directionX * offset;
+          const y1 = measurementStart.y + directionY * offset;
+          const x2 = point.x - directionX * offset;
+          const y2 = point.y - directionY * offset;
+          segment.set({
+            x1,
+            y1,
+            x2,
+            y2,
+            left: Math.min(x1, x2) - strokeWidth / 2,
+            top: Math.min(y1, y2) - strokeWidth / 2,
+            visible: distance > trim * 2,
+          });
+          segment.setCoords();
+        };
+        setTrimmedEndpoints(halo, haloWidth);
+        setTrimmedEndpoints(line, lineWidth);
         positionMeasurementLabel(
           label,
           formatMeasurement(distance),
@@ -2250,6 +2287,7 @@
               obj.set("objectCaching", false);
             }
           });
+          normalizeMeasurementLabelStyles();
           canvas.renderAll();
           setMode("select");
           undoStack = []; // Reiniciar historial
