@@ -2305,7 +2305,9 @@
 
       const scaleBarOptions = [
         { name: "Escala 1–2 m", marks: [0, 1, 2] },
-        { name: "Escala 1–5–10 m", marks: [0, 1, 5, 10] },
+        { name: "Escala 1–5–10 m", marks: [0, 1, 5, 10], heightScale: 2 },
+        { name: "Escala 0–10–25–50 m", marks: [0, 10, 25, 50] },
+        { name: "Escala 25–50–100 m", marks: [0, 25, 50, 100] },
       ];
 
       function createScaleBarSvg(option) {
@@ -2313,10 +2315,12 @@
         const margin = 12;
         const totalMeters = option.marks[option.marks.length - 1];
         const width = margin * 2 + totalMeters * basePixelsPerMeter;
-        const barTop = 16;
-        const barHeight = 8;
+        const heightScale = option.heightScale || Math.max(1, totalMeters / 10);
+        const height = 32 * heightScale;
+        const barTop = 16 * heightScale;
+        const barHeight = 8 * heightScale;
         const parts = [
-          `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="32" viewBox="0 0 ${width} 32" preserveAspectRatio="none" aria-hidden="true">`,
+          `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true">`,
         ];
 
         for (let i = 0; i < option.marks.length - 1; i++) {
@@ -2339,10 +2343,10 @@
                 : "middle";
           const label = mark === 0 ? "0" : `${mark}m`;
           parts.push(
-            `<line x1="${x}" y1="13" x2="${x}" y2="27" stroke="#111827" stroke-width="1.5"/>`,
+            `<line x1="${x}" y1="${13 * heightScale}" x2="${x}" y2="${27 * heightScale}" stroke="#111827" stroke-width="${1.5 * heightScale}"/>`,
           );
           parts.push(
-            `<text x="${x}" y="10" text-anchor="${anchor}" font-family="Arial, sans-serif" font-size="8" fill="#111827">${label}</text>`,
+            `<text x="${x}" y="${10 * heightScale}" text-anchor="${anchor}" font-family="Arial, sans-serif" font-size="${8 * heightScale}" fill="#111827">${label}</text>`,
           );
         });
 
