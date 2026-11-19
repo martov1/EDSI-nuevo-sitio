@@ -1,6 +1,7 @@
 /**
  * Herramientas para dibujar, actualizar y confirmar mediciones de distancia y radio.
  * También crea y normaliza sus etiquetas, que se reutilizan en zonificación.
+ * Guía de arquitectura y cambios: ../../GUIA-PROGRAMADOR.md
  */
 
 const measurementLabelBackground = "rgba(255, 255, 255, 0.8)";

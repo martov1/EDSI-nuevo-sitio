@@ -4,6 +4,7 @@
  * además de anotaciones, eliminación de objetos y atajos de teclado.
  * Funciones principales: addBrigadista, scaleIconToMeters, createScaleBarSvg
  * y startStamping; los controladores atienden texto, borrado y teclado.
+ * Guía de arquitectura y cambios: ../GUIA-PROGRAMADOR.md
  */
 
 // --- BRIGADISTAS ---

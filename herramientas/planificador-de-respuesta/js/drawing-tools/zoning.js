@@ -1,5 +1,6 @@
 /**
  * Herramientas de zonificación: perímetros, etiquetas, selección por borde y prioridad visual.
+ * Guía de arquitectura y cambios: ../../GUIA-PROGRAMADOR.md
  */
 
 /** Descarta el perímetro temporal y reinicia el estado del dibujo de zona. */

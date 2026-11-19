@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Guía del proyecto: ../GUIA-PROGRAMADOR.md -->
   <!-- Recurso visual de garrafa usado por el menú de íconos del planificador. -->
   <defs>
     <clipPath id="top-dome-clip">

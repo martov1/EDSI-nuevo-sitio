@@ -2,6 +2,7 @@
  * Misión: actualizar la ayuda contextual y los indicadores de preparación.
  * Las instrucciones reflejan el plano, la escala y la etapa de la herramienta activa.
  * Función principal: updateToolHelp.
+ * Guía de arquitectura y cambios: ../GUIA-PROGRAMADOR.md
  */
 
 /** Actualiza las instrucciones visibles según el plano, la escala y la herramienta. */

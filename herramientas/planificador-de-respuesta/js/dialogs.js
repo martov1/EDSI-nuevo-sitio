@@ -4,6 +4,7 @@
  * de ataque y los avisos al usuario.
  * Funciones: openScaleModal, openAttackSetupModal, openAttackActionModal
  * y openAlertModal.
+ * Guía de arquitectura y cambios: ../GUIA-PROGRAMADOR.md
  */
 
 // --- MANEJO DE MODALES ---

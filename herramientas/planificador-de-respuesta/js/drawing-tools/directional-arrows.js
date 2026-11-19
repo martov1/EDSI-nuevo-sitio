@@ -1,5 +1,6 @@
 /**
  * Herramientas de flechas de viento y propagación, incluidos ancho y rótulo.
+ * Guía de arquitectura y cambios: ../../GUIA-PROGRAMADOR.md
  */
 
 /** Indica si el modo actual dibuja una flecha de viento o de propagación. */

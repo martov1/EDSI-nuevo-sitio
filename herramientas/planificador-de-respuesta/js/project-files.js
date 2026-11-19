@@ -4,6 +4,7 @@
  * proyectos recientes almacenada localmente en el navegador.
  * Funciones principales: getHighResExportParams, getProjectData y loadProjectData;
  * los controladores de interfaz gestionan las descargas y el guardado local.
+ * Guía de arquitectura y cambios: ../GUIA-PROGRAMADOR.md
  */
 
 // --- SISTEMA DE ARCHIVOS Y EXPORTACIÓN ---

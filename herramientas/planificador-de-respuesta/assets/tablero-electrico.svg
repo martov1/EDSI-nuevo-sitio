@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" width="350" height="350">
+  <!-- Guía del proyecto: ../GUIA-PROGRAMADOR.md -->
   <!-- Recurso visual de tablero eléctrico usado por el menú de íconos. -->
   <defs>
     <clipPath id="casing-clip">

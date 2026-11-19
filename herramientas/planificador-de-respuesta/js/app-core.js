@@ -4,6 +4,7 @@
  * y rótulos de las flechas de dirección.
  * Funciones principales: showMessage, saveHistory, undo, resizeCanvas,
  * loadFabricBackground y utilidades de etiquetas direccionales.
+ * Guía de arquitectura y cambios: ../GUIA-PROGRAMADOR.md
  */
 
 // --- ESTADO DE LA APLICACIÓN ---

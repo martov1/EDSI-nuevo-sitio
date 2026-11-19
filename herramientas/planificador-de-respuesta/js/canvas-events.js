@@ -4,6 +4,7 @@
  * en trazos, mediciones, flechas, acciones de línea de ataque y desplazamiento.
  * Función principal: setMode configura el modo, cursor, selección y vistas previas;
  * los manejadores del lienzo ejecutan las acciones asociadas a cada modo.
+ * Guía de arquitectura y cambios: ../GUIA-PROGRAMADOR.md
  */
 
 /**

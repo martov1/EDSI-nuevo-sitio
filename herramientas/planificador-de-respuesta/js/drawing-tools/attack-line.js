@@ -1,6 +1,7 @@
 /**
  * Herramientas para dibujar tramos de ataque, orientar la lanza y definir el chorro.
  * El estado temporal compartido se declara en app-core.js.
+ * Guía de arquitectura y cambios: ../../GUIA-PROGRAMADOR.md
  */
 
 /** Atiende los clics de cada etapa de la línea de ataque. */
