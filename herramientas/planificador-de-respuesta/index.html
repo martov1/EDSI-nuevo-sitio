@@ -138,10 +138,16 @@
               🖱️ Seleccionar / Mover
             </button>
             <button
-              id="btn-pan"
+              id="btn-measure-distance"
               class="tool-btn w-full text-left px-3 py-2 rounded bg-gray-700 border border-gray-600 hover:bg-gray-600 text-sm transition"
             >
-              ✋ Mover Plano
+              📏 Medir distancia
+            </button>
+            <button
+              id="btn-measure-radius"
+              class="tool-btn w-full text-left px-3 py-2 rounded bg-gray-700 border border-gray-600 hover:bg-gray-600 text-sm transition"
+            >
+              🟡 Medir radio
             </button>
             <button
               id="btn-attack"
@@ -231,7 +237,7 @@
             </button>
           </div>
           <p class="text-[10px] text-gray-500 mt-2 text-center leading-tight">
-            Rueda ratón = Zoom<br />Usa 'Mover Plano' o Alt+Clic para desplazar
+            Rueda = zoom<br />Alt+arrastrar o botón central = desplazar la vista
           </p>
         </section>
 
@@ -497,7 +503,7 @@
 
     <script>
       // --- ESTADO DE LA APLICACIÓN ---
-      let currentMode = "select"; // 'select', 'scale', 'attack_line', 'pan', 'stamp'
+      let currentMode = "select"; // 'select', 'scale', 'attack_line', measurement modes, 'stamp'
       let pixelsPerMeter = null;
       let isDrawing = false;
       let drawingLine = null;
@@ -505,6 +511,8 @@
       let scaleSecondPointStarted = false;
       let startX = 0;
       let startY = 0;
+      let measurementStart = null;
+      let measurementPreview = null;
 
       // Variables para línea de ataque a mano alzada
       let isDrawingHose = false;
@@ -782,7 +790,7 @@
 
         let title = "Seleccionar / Mover";
         let instructions = [
-          `<span aria-hidden="true">🖱️</span> <strong>Rueda presionada + arrastrar:</strong> mueve el plano.`,
+          `<span aria-hidden="true">🖱️</span> <strong>Botón central o Alt + arrastrar:</strong> desplaza la vista.`,
           `<span aria-hidden="true">🖱️</span> <strong>Girar la rueda:</strong> modifica el zoom.`,
           `<span aria-hidden="true">🖱️</span> <strong>Clic izquierdo:</strong> selecciona; arrastra un elemento para moverlo.`,
           `<kbd class="rounded border border-gray-500 px-1">Supr</kbd> borra los elementos seleccionados.`,
@@ -817,12 +825,19 @@
               "La escala permite calcular longitudes —como los tramos de ataque— y tamaños reales.",
             ];
           }
-        } else if (currentMode === "pan") {
-          title = "Mover Plano";
+        } else if (currentMode === "measure_distance") {
+          title = "Medir distancia";
           instructions = [
-            "Arrastra el plano para desplazar la vista.",
-            "También puedes usar Alt + arrastrar o el botón central del ratón.",
-            "Usa la rueda del ratón para acercar o alejar.",
+            "Haz clic en el primer punto y mueve el cursor hasta el segundo.",
+            "Haz clic otra vez para fijar la distancia, que se calcula en metros según la escala.",
+            "Pulsa Escape para cancelar.",
+          ];
+        } else if (currentMode === "measure_radius") {
+          title = "Medir radio";
+          instructions = [
+            "Haz clic para marcar el centro del círculo.",
+            "Aleja el cursor para definir el radio; la línea punteada muestra la medida.",
+            "Haz clic para fijar el círculo. Pulsa Escape para cancelar.",
           ];
         } else if (currentMode === "scale") {
           title = "Fijar Escala";
@@ -891,11 +906,255 @@
           .join("");
       }
 
+      function clearMeasurementPreview() {
+        if (measurementPreview) {
+          Object.values(measurementPreview).forEach((object) =>
+            canvas.remove(object),
+          );
+        }
+        measurementPreview = null;
+        measurementStart = null;
+      }
+
+      function formatMeasurement(distancePx) {
+        const meters = distancePx / pixelsPerMeter;
+        return `${meters.toLocaleString("es-AR", {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 2,
+        })} m`;
+      }
+
+      function createMeasurementLabel(text, color, left, top) {
+        return new fabric.Text(text, {
+          left,
+          top,
+          originX: "center",
+          originY: "center",
+          fontSize: 14,
+          fontFamily: "Arial",
+          fontWeight: "bold",
+          fill: color,
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          padding: 5,
+          shadow: new fabric.Shadow({
+            color: "rgba(0, 0, 0, 0.2)",
+            blur: 3,
+            offsetX: 0,
+            offsetY: 1,
+          }),
+          selectable: false,
+          evented: false,
+          objectCaching: false,
+        });
+      }
+
+      function positionMeasurementLabel(label, text, start, end, length) {
+        let angle =
+          Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
+        if (angle > 90) angle -= 180;
+        if (angle < -90) angle += 180;
+
+        label.set({ text, angle });
+
+        const availableLength = Math.max(0, length - 8);
+        const labelScale =
+          label.width > 0
+            ? Math.min(1, availableLength / label.width)
+            : 1;
+        const angleRadians = (angle * Math.PI) / 180;
+        const labelOffset = (label.height * labelScale) / 2 + 6;
+        label.set({
+          scaleX: labelScale,
+          scaleY: labelScale,
+          left:
+            (start.x + end.x) / 2 + Math.sin(angleRadians) * labelOffset,
+          top:
+            (start.y + end.y) / 2 - Math.cos(angleRadians) * labelOffset,
+        });
+      }
+
+      function startDistanceMeasurement(point) {
+        measurementStart = point;
+        const halo = new fabric.Line(
+          [point.x, point.y, point.x, point.y],
+          {
+            stroke: "rgba(255, 255, 255, 0.45)",
+            strokeWidth: 6,
+            strokeLineCap: "round",
+            selectable: false,
+            evented: false,
+            objectCaching: false,
+          },
+        );
+        const line = new fabric.Line(
+          [point.x, point.y, point.x, point.y],
+          {
+            stroke: "#4285f4",
+            strokeWidth: 3,
+            strokeDashArray: [3, 5],
+            strokeLineCap: "round",
+            selectable: false,
+            evented: false,
+            objectCaching: false,
+          },
+        );
+        const startPoint = new fabric.Circle({
+          left: point.x,
+          top: point.y,
+          radius: 5,
+          originX: "center",
+          originY: "center",
+          fill: "rgba(255, 255, 255, 0.45)",
+          stroke: "#4285f4",
+          strokeWidth: 2,
+          selectable: false,
+          evented: false,
+        });
+        const endPoint = new fabric.Circle({
+          left: point.x,
+          top: point.y,
+          radius: 5,
+          originX: "center",
+          originY: "center",
+          fill: "rgba(255, 255, 255, 0.45)",
+          stroke: "#4285f4",
+          strokeWidth: 2,
+          selectable: false,
+          evented: false,
+        });
+        const label = createMeasurementLabel(
+          formatMeasurement(0),
+          "#1a73e8",
+          point.x,
+          point.y,
+        );
+        label.set({ scaleX: 0, scaleY: 0 });
+        measurementPreview = { halo, line, startPoint, endPoint, label };
+        Object.values(measurementPreview).forEach((object) =>
+          canvas.add(object),
+        );
+      }
+
+      function updateDistanceMeasurement(point) {
+        if (!measurementStart || !measurementPreview) return;
+        const { halo, line, startPoint, endPoint, label } = measurementPreview;
+        halo.set({ x2: point.x, y2: point.y });
+        line.set({ x2: point.x, y2: point.y });
+        endPoint.set({ left: point.x, top: point.y });
+        const distance = Math.hypot(
+          point.x - measurementStart.x,
+          point.y - measurementStart.y,
+        );
+        const markerRadius = Math.min(5, distance * 0.1);
+        const markerStrokeWidth = Math.min(2, distance * 0.04);
+        [startPoint, endPoint].forEach((marker) =>
+          marker.set({
+            radius: markerRadius,
+            strokeWidth: markerStrokeWidth,
+          }),
+        );
+        positionMeasurementLabel(
+          label,
+          formatMeasurement(distance),
+          measurementStart,
+          point,
+          distance,
+        );
+      }
+
+      function startRadiusMeasurement(point) {
+        measurementStart = point;
+        const circle = new fabric.Circle({
+          left: point.x,
+          top: point.y,
+          radius: 0,
+          originX: "center",
+          originY: "center",
+          fill: "rgba(255, 255, 255, 0)",
+          stroke: "#facc15",
+          strokeWidth: 3,
+          selectable: false,
+          evented: false,
+          objectCaching: false,
+        });
+        const radiusLine = new fabric.Line(
+          [point.x, point.y, point.x, point.y],
+          {
+            stroke: "#eab308",
+            strokeWidth: 2,
+            strokeDashArray: [4, 4],
+            selectable: false,
+            evented: false,
+            objectCaching: false,
+          },
+        );
+        const centerPoint = new fabric.Circle({
+          left: point.x,
+          top: point.y,
+          radius: 3,
+          originX: "center",
+          originY: "center",
+          fill: "#facc15",
+          stroke: "#ffffff",
+          strokeWidth: 1,
+          selectable: false,
+          evented: false,
+        });
+        const label = createMeasurementLabel(
+          `Radio: ${formatMeasurement(0)}`,
+          "#a16207",
+          point.x,
+          point.y,
+        );
+        label.set({ scaleX: 0, scaleY: 0 });
+        measurementPreview = { circle, radiusLine, centerPoint, label };
+        Object.values(measurementPreview).forEach((object) =>
+          canvas.add(object),
+        );
+      }
+
+      function updateRadiusMeasurement(point) {
+        if (!measurementStart || !measurementPreview) return;
+        const radius = Math.hypot(
+          point.x - measurementStart.x,
+          point.y - measurementStart.y,
+        );
+        const { circle, radiusLine, label } = measurementPreview;
+        circle.set({ radius });
+        radiusLine.set({ x2: point.x, y2: point.y });
+        positionMeasurementLabel(
+          label,
+          `Radio: ${formatMeasurement(radius)}`,
+          measurementStart,
+          point,
+          radius,
+        );
+      }
+
+      function finishMeasurement() {
+        Object.values(measurementPreview).forEach((object) =>
+          object.set({ selectable: true, evented: true }),
+        );
+        measurementPreview = null;
+        measurementStart = null;
+        canvas.requestRenderAll();
+        saveHistory();
+        setMode("select");
+      }
+
       function setMode(mode) {
         // Limpiar fantasma de sello si se cambia de modo sin aplicarlo
         if (currentMode === "stamp" && stampGhost) {
           canvas.remove(stampGhost);
           stampGhost = null;
+        }
+
+        if (
+          (currentMode === "measure_distance" ||
+            currentMode === "measure_radius") &&
+          mode !== currentMode
+        ) {
+          clearMeasurementPreview();
         }
 
         if (currentMode === "scale" && mode !== "scale") {
@@ -916,8 +1175,14 @@
           .forEach((btn) => btn.classList.remove("active"));
         if (mode === "select")
           document.getElementById("btn-select").classList.add("active");
-        if (mode === "pan")
-          document.getElementById("btn-pan").classList.add("active");
+        if (mode === "measure_distance")
+          document
+            .getElementById("btn-measure-distance")
+            .classList.add("active");
+        if (mode === "measure_radius")
+          document
+            .getElementById("btn-measure-radius")
+            .classList.add("active");
         if (mode === "scale")
           document.getElementById("btn-scale").classList.add("active");
         if (mode === "attack_line")
@@ -928,12 +1193,6 @@
           canvas.selection = true;
           canvas.forEachObject((obj) => (obj.selectable = true));
           canvas.defaultCursor = "default";
-        } else if (mode === "pan") {
-          canvas.selection = false;
-          canvas.forEachObject((obj) => (obj.selectable = false));
-          canvas.defaultCursor = "grab";
-          canvas.discardActiveObject();
-          canvas.requestRenderAll();
         } else if (mode === "stamp") {
           canvas.selection = false;
           canvas.forEachObject((obj) => (obj.selectable = false));
@@ -950,8 +1209,21 @@
       }
 
       document.getElementById("btn-select").onclick = () => setMode("select");
-      document.getElementById("btn-pan").onclick = () => setMode("pan");
       document.getElementById("btn-scale").onclick = () => setMode("scale");
+      document.getElementById("btn-measure-distance").onclick = () => {
+        if (!pixelsPerMeter) {
+          openAlertModal("Debe fijar la escala primero para medir distancias.");
+          return;
+        }
+        setMode("measure_distance");
+      };
+      document.getElementById("btn-measure-radius").onclick = () => {
+        if (!pixelsPerMeter) {
+          openAlertModal("Debe fijar la escala primero para medir radios.");
+          return;
+        }
+        setMode("measure_radius");
+      };
       document.getElementById("btn-attack").onclick = () => {
         if (!pixelsPerMeter) {
           openAlertModal(
@@ -963,11 +1235,11 @@
       };
       updateToolHelp();
 
-      // --- DIBUJO EN CANVAS (Escala y Línea de Ataque) ---
+      // --- DIBUJO EN CANVAS ---
       canvas.on("mouse:down", function (opt) {
         var evt = opt.e;
-        // Si se presiona el botón central (rueda), Alt, o estamos en modo Paneo
-        if (evt.button === 1 || evt.altKey === true || currentMode === "pan") {
+        // El botón central o Alt + arrastrar desplazan la vista en cualquier herramienta.
+        if (evt.button === 1 || evt.altKey === true) {
           isDragging = true;
           canvas.selection = false;
           lastPosX = evt.clientX;
@@ -978,6 +1250,29 @@
         }
 
         const pointer = canvas.getPointer(opt.e);
+
+        if (
+          currentMode === "measure_distance" ||
+          currentMode === "measure_radius"
+        ) {
+          if (evt.button !== 0) return;
+
+          if (currentMode === "measure_distance") {
+            if (!measurementStart) {
+              startDistanceMeasurement(pointer);
+            } else {
+              updateDistanceMeasurement(pointer);
+              finishMeasurement();
+            }
+          } else if (!measurementStart) {
+            startRadiusMeasurement(pointer);
+          } else {
+            updateRadiusMeasurement(pointer);
+            finishMeasurement();
+          }
+          canvas.requestRenderAll();
+          return;
+        }
 
         if (currentMode === "scale" && scaleStartPlaced) {
           isDrawing = true;
@@ -1214,6 +1509,19 @@
         }
 
         const pointer = canvas.getPointer(opt.e);
+
+        if (
+          currentMode === "measure_distance" ||
+          currentMode === "measure_radius"
+        ) {
+          if (currentMode === "measure_distance") {
+            updateDistanceMeasurement(pointer);
+          } else {
+            updateRadiusMeasurement(pointer);
+          }
+          canvas.requestRenderAll();
+          return;
+        }
 
         // Mover el fantasma del sello con el ratón
         if (currentMode === "stamp" && stampGhost) {
@@ -2063,8 +2371,6 @@
           if (currentMode === "select") {
             canvas.selection = true;
             canvas.defaultCursor = "default";
-          } else if (currentMode === "pan") {
-            canvas.defaultCursor = "grab";
           } else {
             canvas.defaultCursor = "crosshair";
           }
@@ -2477,6 +2783,11 @@
           if (currentMode === "stamp" && stampGhost) {
             canvas.remove(stampGhost);
             stampGhost = null;
+            setMode("select");
+          } else if (
+            currentMode === "measure_distance" ||
+            currentMode === "measure_radius"
+          ) {
             setMode("select");
           } else if (currentMode === "attack_line") {
             if (isDrawingHose) {
