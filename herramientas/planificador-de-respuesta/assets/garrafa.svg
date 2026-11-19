@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <clipPath id="top-dome-clip">
+      <path d="M 96 168 A 40 40 0 0 1 136 128 H 376 A 40 40 0 0 1 416 168 Z" />
+    </clipPath>
+    <clipPath id="bottom-dome-clip">
+      <path d="M 96 432 A 40 40 0 0 0 136 472 H 376 A 40 40 0 0 0 416 432 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Protector superior y aberturas -->
+  <path d="M 176 14 H 336 V 54 C 316 66 304 90 304 128 H 208 C 208 90 196 66 176 54 Z" fill="#cd2a37" />
+  <line x1="196" y1="14" x2="316" y2="14" stroke="#000000" stroke-width="15" stroke-linecap="round" />
+  <path d="M 176 54 C 196 66 208 90 208 128" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" />
+  <path d="M 336 54 C 316 66 304 90 304 128" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" />
+
+  <!-- Válvula central -->
+  <rect x="240" y="64" width="32" height="64" fill="#b6c4cf" stroke="#000000" stroke-width="15" stroke-linejoin="round" />
+  <line x1="232" y1="64" x2="280" y2="64" stroke="#000000" stroke-width="15" stroke-linecap="round" />
+
+  <!-- Soporte vertical izquierdo -->
+  <rect x="136" y="40" width="40" height="32" fill="#cd2a37" />
+  <rect x="136" y="72" width="40" height="32" fill="#e0656d" />
+  <rect x="136" y="104" width="40" height="24" fill="#cd2a37" />
+  <line x1="136" y1="40" x2="136" y2="128" stroke="#000000" stroke-width="15" />
+  <line x1="176" y1="40" x2="176" y2="128" stroke="#000000" stroke-width="15" />
+
+  <!-- Soporte vertical derecho -->
+  <rect x="336" y="40" width="40" height="32" fill="#cd2a37" />
+  <rect x="336" y="72" width="40" height="32" fill="#e0656d" />
+  <rect x="336" y="104" width="40" height="24" fill="#cd2a37" />
+  <line x1="336" y1="40" x2="336" y2="128" stroke="#000000" stroke-width="15" />
+  <line x1="376" y1="40" x2="376" y2="128" stroke="#000000" stroke-width="15" />
+
+  <!-- Asa superior izquierda -->
+  <rect x="116" y="8" width="80" height="32" rx="12" ry="12" fill="#eb898f" />
+  <path d="M 172 8 H 184 A 12 12 0 0 1 196 20 V 28 A 12 12 0 0 1 184 40 H 172 Z" fill="#cd2a37" />
+  <rect x="116" y="8" width="80" height="32" rx="12" ry="12" fill="none" stroke="#000000" stroke-width="15" />
+
+  <!-- Asa superior derecha -->
+  <rect x="316" y="8" width="80" height="32" rx="12" ry="12" fill="#eb898f" />
+  <path d="M 372 8 H 384 A 12 12 0 0 1 396 20 V 28 A 12 12 0 0 1 384 40 H 372 Z" fill="#cd2a37" />
+  <rect x="316" y="8" width="80" height="32" rx="12" ry="12" fill="none" stroke="#000000" stroke-width="15" />
+
+  <!-- Base inferior -->
+  <path d="M 136 472 H 376 V 488 A 16 16 0 0 1 360 504 H 152 A 16 16 0 0 1 136 488 Z" fill="#cd2a37" />
+  <path d="M 136 472 V 488 A 16 16 0 0 0 152 504 H 360 A 16 16 0 0 0 376 488 V 472" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Cuerpo principal del cilindro -->
+  <path d="M 96 168 A 40 40 0 0 1 136 128 H 376 A 40 40 0 0 1 416 168 V 432 A 40 40 0 0 1 376 472 H 136 A 40 40 0 0 1 96 432 Z" fill="#e0656d" />
+
+  <!-- Sombreado derecho en cúpula superior e inferior -->
+  <g clip-path="url(#top-dome-clip)">
+    <path d="M 356 128 H 416 V 168 H 386 A 40 40 0 0 0 356 128 Z" fill="#d34b54" />
+  </g>
+  <g clip-path="url(#bottom-dome-clip)">
+    <path d="M 356 472 H 416 V 432 H 386 A 40 40 0 0 1 356 472 Z" fill="#d34b54" />
+  </g>
+
+  <!-- Contorno del cuerpo principal -->
+  <path d="M 96 168 A 40 40 0 0 1 136 128 H 376 A 40 40 0 0 1 416 168" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" />
+  <line x1="96" y1="198" x2="96" y2="402" stroke="#000000" stroke-width="15" />
+  <line x1="416" y1="198" x2="416" y2="402" stroke="#000000" stroke-width="15" />
+  <path d="M 96 432 A 40 40 0 0 0 136 472 H 318" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" />
+  <path d="M 352 472 H 376 A 40 40 0 0 0 416 432" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" />
+
+  <!-- Banda horizontal superior -->
+  <rect x="80" y="168" width="352" height="30" rx="12" ry="12" fill="#eb898f" />
+  <path d="M 368 168 H 420 A 12 12 0 0 1 432 180 V 186 A 12 12 0 0 1 420 198 H 92 A 12 12 0 0 1 80 186 V 180 A 12 12 0 0 1 92 168 H 334" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Banda horizontal inferior -->
+  <rect x="80" y="402" width="352" height="30" rx="12" ry="12" fill="#eb898f" />
+  <path d="M 124 432 H 92 A 12 12 0 0 1 80 420 V 414 A 12 12 0 0 1 92 402 H 420 A 12 12 0 0 1 432 414 V 420 A 12 12 0 0 1 420 432 H 156" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Emblema central de llama -->
+  <path d="M 256 232 C 256 232 204 278 204 322 A 52 52 0 0 0 308 322 C 308 278 256 232 256 232 Z" fill="#fed061" stroke="#000000" stroke-width="15" stroke-linejoin="round" />
+  <path d="M 256 296 C 256 296 228 324 228 346 C 228 362 240 374 256 374 C 272 374 284 362 284 346 C 284 324 256 296 256 296 Z" fill="#dd8b36" stroke="#000000" stroke-width="15" stroke-linejoin="round" />
+</svg>

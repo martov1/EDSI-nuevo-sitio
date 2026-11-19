@@ -2180,11 +2180,17 @@
         { emoji: "🔥", name: "Fuego" },
         { emoji: "💨", name: "Fuga de Gas" },
         {
+          svgUrl: "assets/garrafa.svg",
+          baseSize: 512,
+          name: "Garrafa",
+        },
+        {
           svg: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" aria-hidden="true">
             <path d="M1 10h51V2l11 14-11 14V22H1z" fill="#2563eb" stroke="#1e3a8a" stroke-width="1.5" stroke-linejoin="round"/>
             <text x="29" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">viento</text>
           </svg>`,
           baseSize: 64,
+          menuWide: true,
           name: "Viento",
         },
         {
@@ -2193,6 +2199,7 @@
             <text x="29" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">propagación</text>
           </svg>`,
           baseSize: 64,
+          menuWide: true,
           name: "Propagación",
         },
         { emoji: "📦", name: "Pallet" },
@@ -2206,8 +2213,14 @@
           "p-1 bg-gray-700 rounded border border-gray-600 hover:bg-gray-600 transition flex flex-col items-center justify-center";
         const symbol = document.createElement("span");
         symbol.className =
-          `flex h-8 ${ic.svg ? "w-16" : "w-8"} items-center justify-center text-2xl leading-none`;
-        if (ic.svg) {
+          `flex h-8 ${ic.menuWide ? "w-16" : "w-8"} items-center justify-center text-2xl leading-none`;
+        if (ic.svgUrl) {
+          const image = document.createElement("img");
+          image.src = ic.svgUrl;
+          image.alt = "";
+          image.className = "h-full w-full object-contain";
+          symbol.appendChild(image);
+        } else if (ic.svg) {
           symbol.innerHTML = ic.svg;
         } else {
           symbol.textContent = ic.emoji;
@@ -2220,6 +2233,26 @@
         btn.appendChild(label);
         btn.title = ic.name;
         btn.onclick = () => {
+          if (ic.svgUrl) {
+            fabric.loadSVGFromURL(ic.svgUrl, (objects, options) => {
+              const svgObject = fabric.util.groupSVGElements(
+                objects,
+                options,
+              );
+              const scale = pixelsPerMeter
+                ? pixelsPerMeter / (ic.baseSize || 32)
+                : 1;
+              svgObject.set({
+                originX: "center",
+                originY: "center",
+                scaleX: scale,
+                scaleY: scale,
+              });
+              startStamping(svgObject);
+            });
+            return;
+          }
+
           if (ic.svg) {
             fabric.loadSVGFromString(ic.svg, (objects, options) => {
               const svgObject = fabric.util.groupSVGElements(
