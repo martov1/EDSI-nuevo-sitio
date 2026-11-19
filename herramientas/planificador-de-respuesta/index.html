@@ -2154,9 +2154,9 @@
           originY: "center",
         });
 
-        // Si hay escala, ajustar tamaño para que mida 2m (radio 16 = 32px diámetro base)
+        // El diámetro base de 32px equivale a 1m cuando hay escala.
         if (pixelsPerMeter) {
-          const scale = (pixelsPerMeter * 2) / 32;
+          const scale = pixelsPerMeter / 32;
           group.set({ scaleX: scale, scaleY: scale });
         }
 
