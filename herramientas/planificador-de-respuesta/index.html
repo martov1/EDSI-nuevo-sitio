@@ -716,6 +716,7 @@
                 obj.set("objectCaching", false);
               }
             });
+            separateZoningLabels();
             normalizeMeasurementLabelStyles();
             normalizeDirectionalLabels();
             refreshZoningClips();
@@ -1099,6 +1100,14 @@
 
       function getZoningPriority(object) {
         if (!object || object.type !== "group" || !object._objects) return null;
+        const polygon = object._objects.find(
+          (child) => child.type === "polygon",
+        );
+        const colorPriority = Object.values(zoningTypes).find(
+          (zone) =>
+            typeof polygon?.stroke === "string" &&
+            zone.color.toLowerCase() === polygon.stroke.toLowerCase(),
+        )?.priority;
         const label = object._objects.find(
           (child) =>
             child.type === "text" &&
@@ -1106,11 +1115,11 @@
               (zone) => zone.label === child.text,
             ),
         );
-        return (
+        const labelPriority =
           Object.values(zoningTypes).find(
             (zone) => zone.label === label?.text,
-          )?.priority ?? null
-        );
+          )?.priority;
+        return colorPriority ?? labelPriority ?? null;
       }
 
       function orderZoningLayers() {
@@ -1141,6 +1150,72 @@
             transform,
           ),
         );
+      }
+
+      function installZoningEdgeSelection(zoneGroup) {
+        zoneGroup.containsPoint = function (point) {
+          const polygon = getZoningPolygon(this);
+          if (!polygon || !point) return false;
+
+          const worldPoint = canvas.restorePointerVpt(point);
+          const vertices = getZoningPolygonWorldPoints(polygon);
+          const transform = polygon.calcTransformMatrix();
+          const strokeScale = Math.max(
+            Math.hypot(transform[0], transform[1]),
+            Math.hypot(transform[2], transform[3]),
+          );
+          const tolerance =
+            (polygon.strokeWidth * strokeScale) / 2 +
+            8 / (canvas.getZoom() || 1);
+
+          return vertices.some((start, index) => {
+            const end = vertices[(index + 1) % vertices.length];
+            const deltaX = end.x - start.x;
+            const deltaY = end.y - start.y;
+            const lengthSquared = deltaX * deltaX + deltaY * deltaY;
+            const projection =
+              lengthSquared === 0
+                ? 0
+                : Math.max(
+                    0,
+                    Math.min(
+                      1,
+                      ((worldPoint.x - start.x) * deltaX +
+                        (worldPoint.y - start.y) * deltaY) /
+                        lengthSquared,
+                    ),
+                  );
+            const closestX = start.x + projection * deltaX;
+            const closestY = start.y + projection * deltaY;
+            return Math.hypot(
+              worldPoint.x - closestX,
+              worldPoint.y - closestY,
+            ) <=
+              tolerance;
+          });
+        };
+      }
+
+      function separateZoningLabels() {
+        canvas.getObjects().slice().forEach((object) => {
+          if (getZoningPriority(object) === null) return;
+          const label = object._objects.find(
+            (child) =>
+              child.type === "text" &&
+              Object.values(zoningTypes).some(
+                (zone) => zone.label === child.text,
+              ),
+          );
+
+          if (label) {
+            object.removeWithUpdate(label);
+            label.set({ selectable: true, evented: true });
+            canvas.add(label);
+          }
+
+          installZoningEdgeSelection(object);
+        });
+        orderZoningLayers();
       }
 
       function refreshZoningClips() {
@@ -1194,6 +1269,12 @@
 
         canvas.requestRenderAll();
       }
+
+      canvas.on("object:moving", function (event) {
+        if (getZoningPriority(event.target) !== null) {
+          refreshZoningClips();
+        }
+      });
 
       function renderZoningPreview() {
         if (zoningPreview) canvas.remove(zoningPreview);
@@ -1277,17 +1358,18 @@
           }
         }
         positionZoningLabel(label, labelStart, labelEnd);
-        label.set({ selectable: false, evented: false });
+        label.set({ selectable: true, evented: true });
 
-        const zoneGroup = new fabric.Group([polygon, label], {
+        const zoneGroup = new fabric.Group([polygon], {
           originX: "center",
           originY: "center",
           selectable: true,
           evented: true,
           objectCaching: false,
         });
+        installZoningEdgeSelection(zoneGroup);
         clearZoningDraft();
-        canvas.add(zoneGroup);
+        canvas.add(zoneGroup, label);
         orderZoningLayers();
         refreshZoningClips();
         setMode("select");
@@ -2884,6 +2966,7 @@
               obj.set("objectCaching", false);
             }
           });
+          separateZoningLabels();
           normalizeMeasurementLabelStyles();
           normalizeDirectionalLabels();
           refreshZoningClips();
