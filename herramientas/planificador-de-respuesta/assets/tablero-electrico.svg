@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" width="350" height="350">
+  <defs>
+    <clipPath id="casing-clip">
+      <rect x="87.5" y="54" width="181" height="196.5" rx="20" />
+    </clipPath>
+    <clipPath id="door-clip">
+      <rect x="107" y="73.5" width="142" height="157.5" rx="4" />
+    </clipPath>
+    <clipPath id="plaque-clip">
+      <rect x="131.5" y="98" width="93" height="109" rx="4" />
+    </clipPath>
+  </defs>
+
+  <!-- Cables y conectores inferiores -->
+  <g stroke="#08080A" stroke-width="4.5" stroke-linejoin="round">
+    <!-- Cable y conector izquierdo (rojo) -->
+    <rect x="123" y="264" width="17" height="31" rx="2" fill="#827A87" />
+    <rect x="114.5" y="250.5" width="34" height="16" rx="3.5" fill="#F37576" />
+
+    <!-- Cable y conector derecho (azul) -->
+    <rect x="216" y="264" width="17" height="31" rx="2" fill="#827A87" />
+    <rect x="207" y="250.5" width="34.5" height="16" rx="3.5" fill="#AAC2E6" />
+  </g>
+
+  <!-- Carcasa exterior -->
+  <rect x="87.5" y="54" width="181" height="196.5" rx="20" fill="#DFDDE0" />
+  <path d="M 251 54 H 268.5 V 250.5 H 125 C 195 225 245 160 251 54 Z" fill="#BFB9C3" clip-path="url(#casing-clip)" />
+  <rect x="87.5" y="54" width="181" height="196.5" rx="20" fill="none" stroke="#08080A" stroke-width="5" />
+
+  <!-- Puerta interior del tablero -->
+  <rect x="107" y="73.5" width="142" height="157.5" rx="4" fill="#9C979D" />
+  <path d="M 249 116 V 231 H 152 C 198 206 232 168 249 116 Z" fill="#807A84" clip-path="url(#door-clip)" />
+  <rect x="107" y="73.5" width="142" height="157.5" rx="4" fill="none" stroke="#08080A" stroke-width="4.5" />
+
+  <!-- Placa blanca central -->
+  <rect x="131.5" y="98" width="93" height="109" rx="4" fill="#F9F9F9" />
+  <path d="M 224.5 163 V 207 H 184 C 201 195 215 180 224.5 163 Z" fill="#DBDBDD" clip-path="url(#plaque-clip)" />
+  <rect x="131.5" y="98" width="93" height="109" rx="4" fill="none" stroke="#08080A" stroke-width="4.5" />
+
+  <!-- Rayo amarillo -->
+  <polygon points="191.5,113.5 184.5,144.5 203.5,144.5 162.5,191.5 171.5,159.5 152.5,159.5" fill="#F6E07B" stroke="#08080A" stroke-width="4.5" stroke-linejoin="round" />
+
+  <!-- Bisagras laterales izquierdas -->
+  <g fill="#9C979E" stroke="#08080A" stroke-width="4.5" stroke-linejoin="round">
+    <rect x="80.5" y="89.5" width="31" height="40.5" rx="3.5" />
+    <rect x="80.5" y="176" width="31" height="41" rx="3.5" />
+  </g>
+</svg>
