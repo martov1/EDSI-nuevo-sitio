@@ -48,7 +48,7 @@
         border-color: #3182ce;
         color: white;
       }
-      @keyframes upload-image-pulse {
+      @keyframes attention-pulse {
         0%,
         100% {
           background-color: #374151;
@@ -59,11 +59,11 @@
           border-color: #60a5fa;
         }
       }
-      .upload-image-pulse {
-        animation: upload-image-pulse 1.5s ease-in-out infinite;
+      .attention-pulse {
+        animation: attention-pulse 1.5s ease-in-out infinite;
       }
       @media (prefers-reduced-motion: reduce) {
-        .upload-image-pulse {
+        .attention-pulse {
           animation: none;
           background-color: #2563eb;
           border-color: #60a5fa;
@@ -729,9 +729,13 @@
 
       // --- MANEJO DE MODOS (HERRAMIENTAS) ---
       function updateToolHelp() {
+        const hasPlan = Boolean(canvas.backgroundImage);
         document
           .getElementById("upload-image-label")
-          .classList.toggle("upload-image-pulse", !canvas.backgroundImage);
+          .classList.toggle("attention-pulse", !hasPlan);
+        document
+          .getElementById("btn-scale")
+          .classList.toggle("attention-pulse", hasPlan && !pixelsPerMeter);
 
         let title = "Seleccionar / Mover";
         let instructions = [
@@ -748,6 +752,27 @@
             "Proyecto guardado: «Cargar Proyecto» abre un .json exportado con «Descargar Proyecto» y restaura el plano, la escala y sus elementos.",
             "Guardado en este navegador: «Planos Recientes» reabre proyectos guardados aquí con «Guardar en Navegador».",
           ];
+        } else if (!pixelsPerMeter) {
+          title = "Fija la escala del plano";
+          if (currentMode === "scale") {
+            instructions = scaleStartPlaced
+              ? [
+                  "El primer punto está marcado. Haz clic en el segundo extremo de una distancia conocida.",
+                  "Luego ingresa la distancia real en metros.",
+                  "La escala permite calcular longitudes y tamaños reales.",
+                ]
+              : [
+                  "Haz clic en los dos extremos de una distancia conocida y luego ingresa su longitud en metros.",
+                  "Así el sistema convierte las medidas del plano a metros reales.",
+                  "Pulsa Escape para cancelar.",
+                ];
+          } else {
+            instructions = [
+              "Pulsa «Fijar Escala» y marca con dos clics los extremos de una distancia conocida.",
+              "Ingresa la longitud real en metros.",
+              "La escala permite calcular longitudes —como los tramos de ataque— y tamaños reales.",
+            ];
+          }
         } else if (currentMode === "pan") {
           title = "Mover Plano";
           instructions = [
