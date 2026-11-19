@@ -40,7 +40,7 @@
   // Clave donde se conserva el estado de atribución entre páginas y visitas
   // del mismo navegador. Se guarda como JSON.
   const STORAGE_KEY = "edsi_contact_attribution";
-  let clarityRecordingUrl = "";
+  let clarityUserId = "";
 
   /**
    * Genera un código alfanumérico corto basado en la fecha y hora exacta (Timestamp).
@@ -257,12 +257,12 @@
    *
    * Incluye el tipo de contacto, el último origen/campaña persistido,
    * identificadores Google/Meta disponibles, cantidad de páginas vistas,
-   * primera página visitada, URL donde ocurrió el clic y URL de grabación
+   * primera página visitada, URL donde ocurrió el clic y el ID de usuario
    * de Clarity cuando sus metadatos están disponibles. Algunos campos de
    * grupo de anuncios/conjunto/anuncio solo se incluyen si llegan en
    * parámetros propios de la URL; no se pueden deducir del gclid.
    */
-  function buildPayload(state, contactType, ticketId, clarityUrl) {
+  function buildPayload(state, contactType, ticketId, clarityId) {
     const touch = state.lastTouch || {
       gclid: "",
       gadCampaignId: "",
@@ -302,7 +302,7 @@
       visitas_sitio: state.visits,
       pagina_entrada: state.entryPage,
       pagina_conversion: window.location.href,
-      clarity_url: clarityUrl,
+      clarity_url: clarityId, // El backend actual guarda este valor en su columna Clarity_URL.
     };
   }
 
@@ -379,9 +379,9 @@
   }
 
   /**
-   * Obtiene la URL de reproducción desde los metadatos de Clarity.
+   * Obtiene el ID de usuario desde los metadatos de Clarity.
    */
-  function getClarityRecordingUrl() {
+  function getClarityUserId() {
     function waitForClarity() {
       return new Promise((resolve, reject) => {
         if (typeof window.clarity === "function") {
@@ -407,7 +407,7 @@
       (clarity) =>
         new Promise((resolve, reject) => {
           const timeout = window.setTimeout(() => {
-            reject(new Error("Clarity no devolvió los metadatos de grabación."));
+            reject(new Error("Clarity no devolvió los metadatos del usuario."));
           }, 5000);
 
           try {
@@ -415,24 +415,14 @@
               window.clearTimeout(timeout);
               if (
                 !metadata ||
-                typeof metadata.projectId !== "string" ||
-                !metadata.projectId ||
                 typeof metadata.userId !== "string" ||
-                !metadata.userId ||
-                typeof metadata.sessionId !== "string" ||
-                !metadata.sessionId
+                !metadata.userId
               ) {
-                reject(new Error("Clarity devolvió metadatos incompletos."));
+                reject(new Error("Clarity no devolvió un ID de usuario válido."));
                 return;
               }
 
-              resolve(
-                `https://clarity.microsoft.com/player/${encodeURIComponent(
-                  metadata.projectId,
-                )}/${encodeURIComponent(metadata.userId)}/${encodeURIComponent(
-                  metadata.sessionId,
-                )}`,
-              );
+              resolve(metadata.userId);
             });
           } catch (error) {
             window.clearTimeout(timeout);
@@ -442,15 +432,12 @@
     );
   }
 
-  getClarityRecordingUrl()
-    .then((url) => {
-      clarityRecordingUrl = url;
+  getClarityUserId()
+    .then((userId) => {
+      clarityUserId = userId;
     })
     .catch((error) => {
-      console.warn(
-        "No se pudo obtener la URL de la grabación de Clarity.",
-        error,
-      );
+      console.warn("No se pudo obtener el ID de usuario de Clarity.", error);
     });
 
   // Actualiza el estado una vez por carga de este archivo/página.
@@ -525,7 +512,7 @@
           pageState,
           contactType,
           ticketId,
-          clarityRecordingUrl,
+          clarityUserId,
         );
         trackContact(contactType, anchor, payload);
       } catch (error) {
