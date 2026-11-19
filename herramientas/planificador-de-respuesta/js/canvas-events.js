@@ -677,3 +677,53 @@ canvas.on("mouse:move", function (opt) {
 
   if (!isDrawing) return;
 });
+
+// Finaliza el paneo o el trazo de escala cuando se suelta el botón del ratón.
+canvas.on("mouse:up", function (opt) {
+  if (isDragging) {
+    canvas.setViewportTransform(canvas.viewportTransform);
+    isDragging = false;
+
+    if (currentMode === "select") {
+      canvas.selection = true;
+      canvas.defaultCursor = "default";
+    } else {
+      canvas.defaultCursor = "crosshair";
+    }
+    return;
+  }
+
+  if (currentMode === "attack_line") return;
+
+  if (currentMode === "scale") {
+    if (!isDrawing) return;
+    isDrawing = false;
+
+    if (!scaleSecondPointStarted) return;
+    scaleSecondPointStarted = false;
+    if (!drawingLine) return;
+
+    const pointer = canvas.getPointer(opt.e);
+    const lengthPx = Math.hypot(pointer.x - startX, pointer.y - startY);
+
+    if (lengthPx > 5) {
+      openScaleModal(lengthPx, drawingLine);
+    } else {
+      canvas.remove(drawingLine);
+      drawingLine = null;
+      scaleStartPlaced = false;
+      setMode("select");
+    }
+    drawingLine = null;
+    return;
+  }
+
+  if (!isDrawing) return;
+  isDrawing = false;
+
+  if (!drawingLine) return;
+
+  const pointer = canvas.getPointer(opt.e);
+  const lengthPx = Math.hypot(pointer.x - startX, pointer.y - startY);
+  drawingLine = null;
+});
