@@ -924,6 +924,10 @@
         })} m`;
       }
 
+      function measurementStyleScale(length) {
+        return Math.min(1, Math.max(0.05, length / 50));
+      }
+
       function createMeasurementLabel(text, color, left, top) {
         return new fabric.Text(text, {
           left,
@@ -1033,6 +1037,7 @@
         Object.values(measurementPreview).forEach((object) =>
           canvas.add(object),
         );
+        updateDistanceMeasurement(point);
       }
 
       function updateDistanceMeasurement(point) {
@@ -1045,8 +1050,14 @@
           point.x - measurementStart.x,
           point.y - measurementStart.y,
         );
-        const markerRadius = Math.min(5, distance * 0.1);
-        const markerStrokeWidth = Math.min(2, distance * 0.04);
+        const detailScale = measurementStyleScale(distance);
+        halo.set({ strokeWidth: 6 * detailScale });
+        line.set({
+          strokeWidth: 3 * detailScale,
+          strokeDashArray: [3 * detailScale, 5 * detailScale],
+        });
+        const markerRadius = 5 * detailScale;
+        const markerStrokeWidth = 2 * detailScale;
         [startPoint, endPoint].forEach((marker) =>
           marker.set({
             radius: markerRadius,
@@ -1111,6 +1122,7 @@
         Object.values(measurementPreview).forEach((object) =>
           canvas.add(object),
         );
+        updateRadiusMeasurement(point);
       }
 
       function updateRadiusMeasurement(point) {
@@ -1119,9 +1131,19 @@
           point.x - measurementStart.x,
           point.y - measurementStart.y,
         );
-        const { circle, radiusLine, label } = measurementPreview;
-        circle.set({ radius });
-        radiusLine.set({ x2: point.x, y2: point.y });
+        const { circle, radiusLine, centerPoint, label } = measurementPreview;
+        const detailScale = measurementStyleScale(radius);
+        circle.set({ radius, strokeWidth: 3 * detailScale });
+        radiusLine.set({
+          x2: point.x,
+          y2: point.y,
+          strokeWidth: 2 * detailScale,
+          strokeDashArray: [4 * detailScale, 4 * detailScale],
+        });
+        centerPoint.set({
+          radius: 3 * detailScale,
+          strokeWidth: detailScale,
+        });
         positionMeasurementLabel(
           label,
           `Radio: ${formatMeasurement(radius)}`,
