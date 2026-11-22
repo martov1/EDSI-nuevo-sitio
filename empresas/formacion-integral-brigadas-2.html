@@ -1,0 +1,753 @@
+---
+layout: default
+title: "Prototipo de Formación Integral de Brigadas para Empresas"
+description: "Propuesta de capacitación de brigadas de emergencia personalizada para empresas e industrias."
+image: /assets/brigada.jpg
+css: /empresas/formacion-integral-brigadas-2.css
+js:
+  - /empresas/formacion-integral-brigadas-2.js
+---
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    corePlugins: {
+      preflight: false,
+      container: false,
+    },
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ["Open Sans", "sans-serif"],
+        },
+        colors: {
+          edsi: {
+            red: "#e74c3c",
+            redhover: "#c0392b",
+            blue: "#2c3e50",
+            bluehover: "#1a252f",
+            light: "#f8f9fa",
+          },
+        },
+      },
+    },
+  };
+</script>
+<div class="brigades-prototype">
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative bg-edsi-blue py-24 lg:py-32 overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img
+          src="/assets/brigada.jpg"
+          alt="Capacitación de brigadas de emergencia"
+          class="w-full h-full object-cover opacity-40"
+        />
+        <div
+          class="absolute inset-0 bg-edsi-blue bg-opacity-70 mix-blend-multiply"
+        ></div>
+      </div>
+
+      <div
+        class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left"
+      >
+        <span
+          class="inline-block py-1.5 px-4 rounded-full bg-edsi-red text-white text-sm font-bold tracking-wide uppercase mb-6 shadow-lg"
+        >
+          Para Empresas
+        </span>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight"
+        >
+          Capacitación de brigadas de emergencia
+        </h1>
+        <p class="text-xl text-gray-200 mb-8 max-w-2xl font-light">
+          <b class="font-semibold text-white"
+            >Para empresas e industrias - Provincia de Buenos Aires.</b
+          ><br />
+          Programas anuales a medida para garantizar una respuesta efectiva ante
+          incidentes reales en su planta.
+        </p>
+        <div>
+          <a
+            href="#contacto-cta"
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-md text-white bg-edsi-red hover:bg-edsi-redhover shadow-lg transition-all transform hover:-translate-y-1"
+          >
+            Agendar Relevamiento Preliminar
+            <i class="fa-solid fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MAIN CONTENT -->
+    <main class="w-full">
+      <!-- Filosofía EDSI: La palanca del operario -->
+      <section class="py-16 lg:py-24 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div class="flex items-center gap-4 mb-6">
+                <div
+                  class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-edsi-red text-2xl"
+                >
+                  <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-edsi-blue">
+                  Nuestra Filosofía
+                </h2>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4 leading-snug">
+                El operario conoce la planta mejor que nadie.
+                <span class="text-edsi-red"
+                  >Esa es su mayor ventaja táctica.</span
+                >
+              </h3>
+              <div class="prose prose-lg text-gray-600">
+                <p class="mb-4">
+                  Sabemos que su personal puede tener una experiencia nula en
+                  combate de incendios, pero poseen un activo invaluable:
+                  <strong
+                    >el conocimiento absoluto de las instalaciones en las que
+                    trabajan a diario.</strong
+                  >
+                </p>
+                <p class="mb-6">
+                  Nuestra metodología utiliza ese conocimiento como palanca para
+                  superar sus limitaciones técnicas iniciales. No formamos
+                  bomberos genéricos; formamos a sus operarios para que utilicen
+                  su familiaridad con los procesos, los materiales y la
+                  arquitectura del lugar a su favor.
+                </p>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                    <span
+                      >Reconocimiento de riesgos inminentes propios del proceso
+                      productivo.</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                    <span
+                      >Tácticas adaptadas a la arquitectura y ventilación de sus
+                      galpones.</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                    <span
+                      >Uso inteligente de los recursos existentes para frenar la
+                      escalada.</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- REEMPLAZO: Slider de fotos interactivo -->
+            <div
+              class="relative rounded-2xl overflow-hidden shadow-2xl group w-full h-[400px] lg:h-[500px] slider-wrapper bg-gray-200"
+            >
+              <!-- Pista del Slider (Contenedor de imágenes) -->
+              <div
+                id="slider-track"
+                class="flex transition-transform duration-500 ease-in-out h-full w-full"
+              >
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/1.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 1"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/2.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 2"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/3.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 3"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/4.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 4"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/5.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 5"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/6.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 6"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/7.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 7"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/8.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 8"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/9.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 9"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/10.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 10"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/11.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 11"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/12.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 12"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src="/assets/slider%20fotos%20de%20brigada/13.jpg"
+                    alt="Actividad de formación para brigadas de emergencia, imagen 13"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <!-- Capa superpuesta y Texto Inferior (Permanece estático) -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-edsi-blue/90 via-transparent to-transparent pointer-events-none"
+              ></div>
+              <div
+                class="absolute bottom-6 left-6 right-6 text-white pointer-events-none z-10"
+              >
+                <p class="font-bold text-lg">
+                  <i class="fa-solid fa-helmet-safety text-edsi-red mr-2"></i>
+                  Conocimiento transformado en táctica
+                </p>
+                <p class="text-sm opacity-90">
+                  Entrenamiento enfocado en potenciar lo que su personal ya
+                  sabe.
+                </p>
+              </div>
+
+              <!-- Controles del Slider -->
+              <button
+                id="prev-slide"
+                class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-edsi-blue/60 text-white w-10 h-10 rounded-full hover:bg-edsi-red opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 flex items-center justify-center focus:outline-none backdrop-blur-sm"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button
+                id="next-slide"
+                class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-edsi-blue/60 text-white w-10 h-10 rounded-full hover:bg-edsi-red opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 flex items-center justify-center focus:outline-none backdrop-blur-sm"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Instructores con ADN Industrial -->
+      <section
+        class="py-16 bg-white border-b border-gray-200 relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-gray-50 rounded-full opacity-50"
+        ></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-14">
+            <h2 class="text-3xl font-bold text-edsi-blue mb-4">
+              Instructores con ADN Industrial
+            </h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+              El conocimiento generalista de extinción de incendios no es
+              suficiente. Nuestro equipo cuenta con profunda experiencia
+              operativa en la industria para hablar el mismo idioma que sus
+              trabajadores.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Columna 1 -->
+            <div
+              class="p-8 bg-gray-50 rounded-xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-14 h-14 bg-edsi-blue text-white rounded-lg flex items-center justify-center text-2xl mb-6 shadow-md"
+              >
+                <i class="fa-solid fa-industry"></i>
+              </div>
+              <h3 class="text-xl font-bold text-edsi-blue mb-3">
+                Dominio Técnico y Operativo
+              </h3>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                Entendemos de seguridad industrial de manera integral. Conocemos
+                el comportamiento de procesos químicos, calderas, redes
+                neumáticas, instalaciones eléctricas, transformadores y
+                depósitos de gases a presión.
+              </p>
+            </div>
+
+            <!-- Columna 2 -->
+            <div
+              class="p-8 bg-gray-50 rounded-xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 relative"
+            >
+              <div
+                class="absolute top-0 left-0 w-full h-1 bg-edsi-red rounded-t-xl"
+              ></div>
+              <div
+                class="w-14 h-14 bg-edsi-red text-white rounded-lg flex items-center justify-center text-2xl mb-6 shadow-md"
+              >
+                <i class="fa-solid fa-search"></i>
+              </div>
+              <h3 class="text-xl font-bold text-edsi-blue mb-3">
+                Estudio de sus Instalaciones
+              </h3>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                Para poder guiar a su operario, nuestros instructores se
+                familiarizan intensamente con su planta. Relevamos planos,
+                manuales y dinámicas de trabajo para igualar su perspectiva e
+                identificar puntos clave de acción.
+              </p>
+            </div>
+
+            <!-- Columna 3 -->
+            <div
+              class="p-8 bg-gray-50 rounded-xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-14 h-14 bg-edsi-blue text-white rounded-lg flex items-center justify-center text-2xl mb-6 shadow-md"
+              >
+                <i class="fa-solid fa-fire-extinguisher"></i>
+              </div>
+              <h3 class="text-xl font-bold text-edsi-blue mb-3">
+                Experiencia Real en Siniestros
+              </h3>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                Nuestro equipo cuenta con profesionales con más de 10 años de
+                experiencia activa como bomberos voluntarios y técnicos en
+                emergencias médicas, aportando un conocimiento de lucha contra
+                incendios forjado en escenarios reales.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Entrenamiento 100% Situado (Cada planta es diferente) -->
+      <section
+        class="py-16 lg:py-24 bg-edsi-blue relative overflow-hidden text-white"
+      >
+        <div class="absolute inset-0 opacity-10">
+          <div class="w-full h-full brigades-dot-pattern"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-14">
+            <span
+              class="inline-block py-1 px-3 rounded-full bg-edsi-red text-white text-xs font-bold tracking-wider uppercase mb-4 shadow-sm"
+              >Metodología Aplicada</span
+            >
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+              Cada planta es única. Cada capacitación también.
+            </h2>
+            <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+              No dictamos cursos genéricos enlatados porque los riesgos y
+              recursos varían drásticamente. Situamos la formación sobre las
+              condiciones reales y el equipamiento exacto que su equipo tiene a
+              mano.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Arquitectura -->
+            <div
+              class="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+            >
+              <div
+                class="w-14 h-14 bg-edsi-red text-white rounded-lg flex items-center justify-center text-2xl mb-6 shadow-md"
+              >
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Arquitectura y Planos</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                Trabajamos en formato taller sobre los planos reales (A0) de su
+                planta. Analizamos el layout, las vías de escape seguras y
+                determinamos las rutas de ataque más lógicas para la geografía
+                de sus galpones.
+              </p>
+            </div>
+
+            <!-- Plan de Emergencia -->
+            <div
+              class="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 relative"
+            >
+              <div
+                class="absolute top-0 left-0 w-full h-1 bg-edsi-red rounded-t-xl"
+              ></div>
+              <div
+                class="w-14 h-14 bg-edsi-red text-white rounded-lg flex items-center justify-center text-2xl mb-6 shadow-md"
+              >
+                <i class="fa-solid fa-sitemap"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Su Plan de Emergencias</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                Integramos su plan de contingencia corporativo a la
+                capacitación. Potenciamos los roles vigentes asegurando que el
+                entrenamiento sea la extensión práctica de las normativas
+                internas operativas de su empresa.
+              </p>
+            </div>
+
+            <!-- Equipamiento Real -->
+            <div
+              class="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+            >
+              <div
+                class="w-14 h-14 bg-edsi-red text-white rounded-lg flex items-center justify-center text-2xl mb-6 shadow-md"
+              >
+                <i class="fa-solid fa-helmet-safety"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Sus Propios Recursos</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                Es fundamental practicar con lo que realmente se usará en la
+                crisis. Adaptamos las maniobras a los Equipos de Protección
+                (EPP), materiales de combate, mangueras y extintores que ustedes
+                tienen disponibles en la planta.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- El Proceso de Formación (Timeline Visual) -->
+      <section class="py-16 lg:py-24 bg-edsi-light">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-edsi-blue mb-4">
+              El Proceso de Formación
+            </h2>
+            <p class="text-lg text-gray-600">
+              Un programa estructurado para transformar el conocimiento del
+              operario en una unidad de respuesta sólida.
+            </p>
+          </div>
+
+          <div class="timeline-container">
+            <!-- Step 1 -->
+            <div class="relative pl-16 md:pl-24 mb-12 group">
+              <div
+                class="absolute left-0 md:left-3 top-0 w-12 h-12 bg-white border-4 border-edsi-red rounded-full flex items-center justify-center z-10 shadow-md group-hover:scale-110 transition-transform"
+              >
+                <span class="font-bold text-edsi-blue">1</span>
+              </div>
+              <div
+                class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <i
+                    class="fa-solid fa-clipboard-list text-2xl text-gray-400 group-hover:text-edsi-red transition-colors"
+                  ></i>
+                  <h3 class="text-xl font-bold text-edsi-blue">
+                    Relevamiento e Inmersión del Instructor
+                  </h3>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded"
+                    >Régimen: Presencial</span
+                  >
+                </div>
+                <p class="text-gray-600">
+                  Nuestros instructores visitan la planta, analizan los planos y
+                  el plan de emergencias. Esta fase nos permite empaparnos del
+                  entorno, igualar nuestro entendimiento táctico con el de sus
+                  operarios y definir qué palancas utilizar en el entrenamiento.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative pl-16 md:pl-24 mb-12 group">
+              <div
+                class="absolute left-0 md:left-3 top-0 w-12 h-12 bg-white border-4 border-edsi-red rounded-full flex items-center justify-center z-10 shadow-md group-hover:scale-110 transition-transform"
+              >
+                <span class="font-bold text-edsi-blue">2</span>
+              </div>
+              <div
+                class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <i
+                    class="fa-solid fa-calendar-check text-2xl text-gray-400 group-hover:text-edsi-red transition-colors"
+                  ></i>
+                  <h3 class="text-xl font-bold text-edsi-blue">
+                    Plan Anual Situado
+                  </h3>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded"
+                    >Régimen: Consultoría conjunta</span
+                  >
+                </div>
+                <p class="text-gray-600">
+                  Diseñamos de manera conjunta un cronograma que ataca los
+                  riesgos específicos identificados. Adaptamos los horarios a
+                  los turnos rotativos para minimizar el impacto en la
+                  producción.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative pl-16 md:pl-24 mb-12 group">
+              <div
+                class="absolute left-0 md:left-3 top-0 w-12 h-12 bg-white border-4 border-edsi-red rounded-full flex items-center justify-center z-10 shadow-md group-hover:scale-110 transition-transform"
+              >
+                <span class="font-bold text-edsi-blue">3</span>
+              </div>
+              <div
+                class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <i
+                    class="fa-solid fa-chalkboard text-2xl text-gray-400 group-hover:text-edsi-red transition-colors"
+                  ></i>
+                  <h3 class="text-xl font-bold text-edsi-blue">
+                    Módulos Teóricos sobre sus Planos
+                  </h3>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-blue-50 text-edsi-blue border border-blue-100 rounded"
+                    >Régimen: Teórico / Taller</span
+                  >
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-red-50 text-edsi-red border border-red-100 rounded"
+                    ><i class="fa-regular fa-clock mr-1"></i>2h por módulo</span
+                  >
+                </div>
+                <p class="text-gray-600">
+                  Dinámica del fuego y tácticas de combate debatidas de manera
+                  participativa directamente sobre los planos reales de sus
+                  instalaciones y los materiales presentes en su stock.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative pl-16 md:pl-24 mb-12 group">
+              <div
+                class="absolute left-0 md:left-3 top-0 w-12 h-12 bg-white border-4 border-edsi-red rounded-full flex items-center justify-center z-10 shadow-md group-hover:scale-110 transition-transform"
+              >
+                <span class="font-bold text-edsi-blue">4</span>
+              </div>
+              <div
+                class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <i
+                    class="fa-solid fa-helmet-safety text-2xl text-gray-400 group-hover:text-edsi-red transition-colors"
+                  ></i>
+                  <h3 class="text-xl font-bold text-edsi-blue">
+                    Prácticas con Recursos Existentes
+                  </h3>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-blue-50 text-edsi-blue border border-blue-100 rounded"
+                    >Régimen: Práctico sin fuego vivo</span
+                  >
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-red-50 text-edsi-red border border-red-100 rounded"
+                    ><i class="fa-regular fa-clock mr-1"></i>2h por
+                    simulacro</span
+                  >
+                </div>
+                <p class="text-gray-600">
+                  Ejercicios de despliegue simulado usando exclusivamente lo que
+                  los operarios tendrán a mano en una emergencia: extintores,
+                  Equipos de Respiración y líneas de ataque locales.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="relative pl-16 md:pl-24 group">
+              <div
+                class="absolute left-0 md:left-3 top-0 w-12 h-12 bg-edsi-blue border-4 border-edsi-blue rounded-full flex items-center justify-center z-10 shadow-md"
+              >
+                <i class="fa-solid fa-fire text-white"></i>
+              </div>
+              <div
+                class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <i
+                    class="fa-solid fa-fire-extinguisher text-2xl text-gray-400 group-hover:text-edsi-blue transition-colors"
+                  ></i>
+                  <h3 class="text-xl font-bold text-edsi-blue">
+                    Práctica con Fuego Real
+                  </h3>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-blue-50 text-edsi-blue border border-blue-100 rounded"
+                    >Régimen: Práctico con fuego real</span
+                  >
+                  <span
+                    class="text-xs font-semibold px-2 py-1 bg-red-50 text-edsi-red border border-red-100 rounded"
+                    ><i class="fa-regular fa-clock mr-1"></i>6h (Jornada
+                    intensiva)</span
+                  >
+                </div>
+                <p class="text-gray-600">
+                  Simulacros de extinción a escala real para forjar confianza
+                  técnica en un ambiente seguro pero exigente, integrando todo
+                  lo aprendido en el entorno productivo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Marco Normativo -->
+      <section class="py-16 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-edsi-blue mb-4">
+              Marco Normativo y Cumplimiento
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Nuestros programas aseguran que su empresa cumpla estrictamente
+              con la legislación vigente y estándares internacionales de
+              seguridad.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="p-6 bg-gray-50 rounded-lg border border-gray-100 text-center hover:border-edsi-red transition-colors"
+            >
+              <i class="fa-solid fa-gavel text-3xl text-edsi-blue mb-3"></i>
+              <h4 class="font-bold text-gray-800 mb-2">Ley N.º 19.587</h4>
+              <p class="text-sm text-gray-600">
+                Higiene y Seguridad en el Trabajo en la República Argentina.
+              </p>
+            </div>
+            <div
+              class="p-6 bg-gray-50 rounded-lg border border-gray-100 text-center hover:border-edsi-red transition-colors"
+            >
+              <i
+                class="fa-solid fa-file-contract text-3xl text-edsi-blue mb-3"
+              ></i>
+              <h4 class="font-bold text-gray-800 mb-2">Decreto 351/79</h4>
+              <p class="text-sm text-gray-600">
+                Art. 187 y Cap. 21 relativos a la formación obligatoria.
+              </p>
+            </div>
+            <div
+              class="p-6 bg-gray-50 rounded-lg border border-gray-100 text-center hover:border-edsi-red transition-colors"
+            >
+              <i class="fa-solid fa-city text-3xl text-edsi-blue mb-3"></i>
+              <h4 class="font-bold text-gray-800 mb-2">Ley 5920 CABA</h4>
+              <p class="text-sm text-gray-600">
+                Sistema de Autoprotección para Cdad. Autónoma de Bs. As.
+              </p>
+            </div>
+            <div
+              class="p-6 bg-gray-50 rounded-lg border border-gray-100 text-center hover:border-edsi-red transition-colors"
+            >
+              <i
+                class="fa-solid fa-book text-3xl text-edsi-blue mb-3"
+              ></i>
+              <h4 class="font-bold text-gray-800 mb-2">Norma NFPA 600</h4>
+              <p class="text-sm text-gray-600">
+                Estándares internacionales para brigadas industriales.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. CTA SECTION -->
+      <section
+        id="contacto-cta"
+        class="py-20 bg-edsi-blue relative overflow-hidden"
+      >
+        <div class="absolute inset-0 opacity-10">
+          <div class="w-full h-full brigades-dot-pattern"></div>
+        </div>
+
+        <div
+          class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Un programa de formación diseñado para su realidad operativa
+          </h2>
+          <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+            Evite capacitaciones estándar que no se adaptan a su realidad.
+            Contáctenos hoy para coordinar un relevamiento técnico y diseñar la
+            propuesta que su brigada necesita.
+          </p>
+          <a
+            href="https://wa.me/5491170616594?text=%C2%A1Hola%21%20Deseo%20agendar%20un%20relevamiento%20para%20capacitar%20a%20nuestra%20brigada."
+            target="_blank"
+            class="inline-block bg-edsi-red hover:bg-edsi-redhover text-white font-bold text-lg px-10 py-4 rounded-md shadow-lg transition-transform transform hover:-translate-y-1"
+          >
+            Agendar Relevamiento Preliminar
+          </a>
+        </div>
+      </section>
+    </main>
+
+  </div>

@@ -1,0 +1,48 @@
+.brigades-prototype {
+  color: #1f2937;
+}
+
+.brigades-prototype img {
+  display: block;
+  max-width: 100%;
+}
+
+.brigades-prototype button {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.brigades-dot-pattern {
+  background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+.brigades-prototype .timeline-container {
+  position: relative;
+}
+
+.brigades-prototype .timeline-container::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px;
+  z-index: 0;
+  width: 4px;
+  background-color: #e2e8f0;
+  content: "";
+}
+
+.brigades-prototype .slider-wrapper {
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.brigades-prototype .prose ul {
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .brigades-prototype .timeline-container::before {
+    left: 36px;
+  }
+}
