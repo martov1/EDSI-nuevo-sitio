@@ -1,0 +1,126 @@
+.autoproteccion-page {
+  color: #333;
+  background-color: #fff;
+  font-family: "Open Sans", sans-serif;
+}
+
+.autoproteccion-page .brigades-dot-pattern {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.35) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 24px 24px;
+}
+
+.autoproteccion-page .timeline-container {
+  position: relative;
+}
+
+.autoproteccion-page .timeline-container::before {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 23px;
+  width: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, #e74c3c, #2c3e50);
+  content: "";
+}
+
+.autoproteccion-page .norma-link,
+.autoproteccion-page .norma-link-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+
+.autoproteccion-page .norma-link {
+  color: #c0392b;
+  text-decoration-color: rgba(231, 76, 60, 0.45);
+}
+
+.autoproteccion-page .norma-link:hover {
+  color: #2c3e50;
+  text-decoration-color: #2c3e50;
+}
+
+.autoproteccion-page .norma-link-dark {
+  color: #ff8a7a;
+  text-decoration-color: rgba(255, 138, 122, 0.5);
+}
+
+.autoproteccion-page .norma-link-dark:hover {
+  color: #fff;
+  text-decoration-color: #fff;
+}
+
+.autoproteccion-page .legal-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.autoproteccion-page .legal-card:hover {
+  transform: translateY(-4px);
+  border-color: #e74c3c;
+  box-shadow: 0 12px 24px rgba(44, 62, 80, 0.12);
+}
+
+.autoproteccion-page .legal-card-status {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+}
+
+.autoproteccion-page .legal-card-status-current {
+  border-color: #86efac;
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.autoproteccion-page .legal-card-status-repealed {
+  border-color: #d1d5db;
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.autoproteccion-page .legal-card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: #e74c3c;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.autoproteccion-page .legal-card:hover .legal-card-cta {
+  color: #c0392b;
+}
+
+.autoproteccion-page .filter-btn.active {
+  border-color: #e74c3c;
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .autoproteccion-page .timeline-container::before {
+    left: 35px;
+  }
+}
