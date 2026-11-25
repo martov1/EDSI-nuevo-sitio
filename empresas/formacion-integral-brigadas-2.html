@@ -78,7 +78,10 @@ js:
           class="font-semibold text-white underline decoration-white/50 underline-offset-4 transition-colors hover:text-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           Conocé los cursos para particulares
-          <i class="fa-solid fa-arrow-right ml-1 text-xs" aria-hidden="true"></i>
+          <i
+            class="fa-solid fa-arrow-right ml-1 text-xs"
+            aria-hidden="true"
+          ></i>
         </a>
       </p>
     </div>
@@ -706,13 +709,6 @@ js:
             <p class="text-sm text-gray-600">
               Estándares internacionales para brigadas industriales.
             </p>
-            <span class="legal-card-cta"
-              >Consultar norma
-              <i
-                class="fa-solid fa-arrow-up-right-from-square"
-                aria-hidden="true"
-              ></i
-            ></span>
           </a>
         </div>
       </div>
@@ -738,13 +734,24 @@ js:
           Contáctenos hoy para coordinar un relevamiento y diseñar la propuesta
           que su brigada necesita.
         </p>
-        <a
-          href="https://wa.me/5491170616594?text=%C2%A1Hola%21%20Deseo%20agendar%20un%20relevamiento%20para%20capacitar%20a%20nuestra%20brigada."
-          target="_blank"
-          class="inline-block bg-edsi-red hover:bg-edsi-redhover text-white font-bold text-lg px-10 py-4 rounded-md shadow-lg transition-transform transform hover:-translate-y-1"
-        >
-          Agendar una visita
-        </a>
+        <div class="contact-cta-actions">
+          <a
+            href="https://wa.me/{{ site.whatsapp_phone }}?text={{ site.whatsapp_message_empresa_incendio | url_encode }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-cta-button contact-cta-whatsapp"
+          >
+            <img src="/assets/whatsapp-icon.svg" alt="" aria-hidden="true" />
+            Hable con nosotros
+          </a>
+          <a
+            href="mailto:{{ site.email }}?subject={{ site.email_subject_empresa | uri_escape }}"
+            class="contact-cta-button contact-cta-email"
+          >
+            <img src="/assets/email-icon.svg" alt="" aria-hidden="true" />
+            Enviar consulta por correo electrónico
+          </a>
+        </div>
       </div>
     </section>
   </main>
