@@ -45,10 +45,10 @@
   max-width: 34rem;
   margin: 0 0 1.25rem;
   padding: 0.625rem 1rem;
-  border-left: 4px solid #1976d2;
+  border-left: 3px solid #a8c7dc;
   border-radius: 0.5rem;
-  background-color: #e3f2fd;
-  color: #334155;
+  background-color: #f5f9fc;
+  color: #475569;
   font-size: 0.8125rem;
   line-height: 1.45;
 }
