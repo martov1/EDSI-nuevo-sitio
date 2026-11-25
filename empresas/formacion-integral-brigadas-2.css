@@ -41,6 +41,30 @@
   list-style: none;
 }
 
+.brigades-prototype .audience-notice {
+  max-width: 34rem;
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #1976d2;
+  border-radius: 0.5rem;
+  background-color: #e3f2fd;
+  color: #334155;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.brigades-prototype .audience-notice a {
+  color: #0d4f91;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.brigades-prototype .audience-notice a:hover,
+.brigades-prototype .audience-notice a:focus-visible {
+  color: #083b6b;
+}
+
 .brigades-prototype .legal-card {
   display: block;
   color: inherit;

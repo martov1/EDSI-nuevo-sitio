@@ -71,16 +71,6 @@ js:
           <i class="fa-solid fa-arrow-right ml-2"></i>
         </a>
       </div>
-      <p class="mt-4 text-sm text-gray-300">
-        ¿Buscás capacitación individual?
-        <a
-          href="{{ '/capacitacion-particulares/' | relative_url }}"
-          class="font-semibold text-white underline decoration-white/50 underline-offset-4 transition-colors hover:text-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          Conocé los cursos para particulares
-          <i class="fa-solid fa-arrow-right ml-1 text-xs" aria-hidden="true"></i>
-        </a>
-      </p>
     </div>
   </section>
 
@@ -91,6 +81,14 @@ js:
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
+            <div class="audience-notice">
+              <strong>ATENCIÓN:</strong> Esta página refiere a capacitación
+              <b>para empresas.</b>
+              Si busca formarse de manera particular
+              <a href="{{ '/capacitacion-particulares/' | relative_url }}"
+                >haga click aquí</a
+              >.
+            </div>
             <div class="flex items-center gap-4 mb-6">
               <div
                 class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-edsi-red text-2xl"
