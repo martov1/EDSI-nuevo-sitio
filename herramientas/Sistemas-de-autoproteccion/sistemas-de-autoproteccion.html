@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evolución Ley 5.920 CABA — Autoprotección | EDSI</title>
+  <meta name="description" content="Resumen cronológico, claro y directo de la evolución del Sistema de Autoprotección en CABA con acceso directo a cada PDF.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Open Sans", "sans-serif"] },
+          colors: {
+            edsi: {
+              red: "#e74c3c",
+              redhover: "#c0392b",
+              blue: "#2c3e50",
+              bluehover: "#1a252f",
+              light: "#f8f9fa",
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; font-family: "Open Sans", sans-serif; }
+    .brigades-dot-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+    .timeline-container { position: relative; }
+    .timeline-container::before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 10px;
+      bottom: 10px;
+      width: 3px;
+      background: linear-gradient(to bottom, #e74c3c, #2c3e50);
+    }
+    @media (min-width: 768px) {
+      .timeline-container::before { left: 27px; }
+    }
+    .pdf-link {
+      color: #c0392b;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .pdf-link:hover { color: #2c3e50; }
+    .pdf-link-light {
+      color: #ff998a;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .pdf-link-light:hover { color: #ffffff; }
+    .filter-btn.active {
+      background-color: #e74c3c;
+      color: #ffffff;
+      border-color: #e74c3c;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+
+  <!-- HEADER -->
+  <header class="bg-edsi-blue text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#inicio" class="text-2xl font-extrabold tracking-wide text-white">
+        EDSI <span class="hidden sm:inline font-normal text-base text-gray-200"><span class="text-edsi-red font-bold mx-1">|</span> Escuela de Seguridad Industrial</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-200">
+        <a href="#cronologia" class="hover:text-white transition-colors">Cronología</a>
+        <a href="#pdfs" class="hover:text-white transition-colors">PDFs Oficiales</a>
+        <a href="#contacto-cta" class="bg-edsi-red hover:bg-edsi-redhover text-white px-4 py-2 rounded-md transition-colors">Contacto</a>
+      </nav>
+      <button id="menu-btn" class="md:hidden text-xl text-white focus:outline-none" aria-label="Menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-edsi-bluehover px-4 py-3 space-y-2 text-sm font-semibold text-gray-200 border-t border-white/10">
+      <a href="#cronologia" class="block py-1 hover:text-white" onclick="toggleMenu()">Cronología</a>
+      <a href="#pdfs" class="block py-1 hover:text-white" onclick="toggleMenu()">PDFs Oficiales</a>
+      <a href="#contacto-cta" class="block py-1 text-edsi-red" onclick="toggleMenu()">Contacto</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="relative bg-edsi-blue text-white py-16 lg:py-24 overflow-hidden">
+    <div class="absolute inset-0 opacity-10 brigades-dot-pattern"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+      <p class="text-xs font-bold uppercase tracking-widest text-edsi-red mb-3">CABA • Sistema de Autoprotección</p>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+        Qué cambió en cada etapa de la Ley 5.920
+      </h1>
+      <p class="text-lg text-gray-200 max-w-2xl mb-8 leading-relaxed">
+        De la vieja <a href="https://carlosvicentesanchez.wordpress.com/wp-content/uploads/2016/04/2004-ley-nc2b0-1346-plan-de-evacuacion-v500-bn.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link-light">Ley 1.346 (PDF)</a> a la <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/ley5920.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link-light">Ley 5.920 (PDF)</a>, la reválida por <a href="https://parlamentaria.legislatura.gob.ar/pages/download.aspx?IdDoc=213183" target="_blank" rel="noopener noreferrer" class="pdf-link-light">Ley 6.779 (PDF)</a> y la <a href="https://documentosboletinoficial.buenosaires.gob.ar/publico/ck_PE-DIS-MSEGC-DGDCIV-770-26-7291.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link-light">Disp. 770/26 (PDF)</a>.
+      </p>
+      <a href="#cronologia" class="inline-flex items-center gap-2 bg-edsi-red hover:bg-edsi-redhover text-white font-bold px-7 py-3.5 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
+        Ver línea de tiempo <i class="fa-solid fa-arrow-down text-sm"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- CRONOLOGÍA SINTÉTICA -->
+  <section id="cronologia" class="py-16 bg-edsi-light">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-edsi-blue mb-2">Evolución cronológica</h2>
+        <p class="text-gray-600">Hacé clic en cualquier norma para abrir su PDF oficial.</p>
+      </div>
+
+      <!-- Filtros -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12">
+        <button onclick="filtrar('todas', this)" class="filter-btn active px-4 py-2 rounded-full text-xs font-bold border border-gray-300 bg-white text-edsi-blue cursor-pointer">Todas</button>
+        <button onclick="filtrar('vigente', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-bold border border-gray-300 bg-white text-edsi-blue cursor-pointer">Vigentes</button>
+        <button onclick="filtrar('derogada', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-bold border border-gray-300 bg-white text-edsi-blue cursor-pointer">Derogadas / Anteriores</button>
+      </div>
+
+      <div class="timeline-container space-y-6">
+
+        <!-- Ley 1346 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="derogada">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-gray-300 border-4 border-white shadow flex items-center justify-center text-[10px] font-bold text-gray-700">•</div>
+          <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">2004 • Antecedente</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600">Derogada</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">
+              <a href="https://carlosvicentesanchez.wordpress.com/wp-content/uploads/2016/04/2004-ley-nc2b0-1346-plan-de-evacuacion-v500-bn.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Ley N° 1.346 <i class="fa-regular fa-file-pdf"></i></a>
+            </h3>
+            <p class="text-sm text-gray-600">Creó el viejo Plan de Evacuación y Simulacro con roles fijos. Fue derogada por la <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/ley5920.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Ley N° 5.920 <i class="fa-regular fa-file-pdf text-xs"></i></a>.</p>
+          </div>
+        </div>
+
+        <!-- Ley 5920 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="vigente">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-edsi-red border-4 border-white shadow"></div>
+          <div class="bg-white p-6 rounded-xl border border-gray-100 border-l-4 border-l-edsi-red shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">Sanción 2017 / BOCBA Ene 2018</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-green-100 text-green-800">Vigente</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">
+              <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/ley5920.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Ley N° 5.920 <i class="fa-regular fa-file-pdf"></i></a>
+            </h3>
+            <p class="text-sm text-gray-600">Reemplazó el plan de evacuación por un <strong>Sistema de Autoprotección</strong> integral obligatorio en lugares con afluencia de público y eventos masivos (optativo en vivienda exclusiva). Creó el Registro de Profesionales y fijó un mínimo de 2 simulacros anuales.</p>
+          </div>
+        </div>
+
+        <!-- Decreto 51/18 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="vigente">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-edsi-red border-4 border-white shadow"></div>
+          <div class="bg-white p-6 rounded-xl border border-gray-100 border-l-4 border-l-edsi-red shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">Febrero 2018</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-green-100 text-green-800">Vigente</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">
+              <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/decreto_51_2018.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Decreto N° 51/18 <i class="fa-regular fa-file-pdf"></i></a>
+            </h3>
+            <p class="text-sm text-gray-600">Reglamentó la ley y nombró a la <strong>Dirección General de Defensa Civil (DGDCIV)</strong> como Autoridad de Aplicación, habilitándola a dictar reglas técnicas, clasificar establecimientos y administrar el registro profesional.</p>
+          </div>
+        </div>
+
+        <!-- Disp 1358/18 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="derogada">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-gray-300 border-4 border-white shadow"></div>
+          <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">Febrero 2018</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600">Derogada</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">
+              <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/disposicion_1358_dgdciv_2018.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Disposición N° 1358/DGDCIV/18 <i class="fa-regular fa-file-pdf"></i></a>
+            </h3>
+            <p class="text-sm text-gray-600">Primera norma operativa: creó los <strong>Grupos 1, 2 y 3</strong>, exigió simulación informática en casos complejos del Grupo 3 y fijó los primeros formularios. Derogada en 2023 por la <a href="https://api-restboletinoficial.buenosaires.gob.ar/download/3050539" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 356/23 <i class="fa-regular fa-file-pdf text-xs"></i></a>.</p>
+          </div>
+        </div>
+
+        <!-- Disp 1424/18, 5892/18 y 4113/19 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="vigente">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-edsi-blue border-4 border-white shadow"></div>
+          <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">2018 – 2019 • Procedimientos específicos</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">Complementarias</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">Trámites TAD y Organismos Públicos</h3>
+            <p class="text-sm text-gray-600">
+              La <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/disposicion_1424_dgdciv_2018.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 1424/DGDCIV/18 <i class="fa-regular fa-file-pdf text-xs"></i></a> digitalizó las presentaciones vía TAD, la <a href="https://api-restboletinoficial.buenosaires.gob.ar/download/798181" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 5892/DGDCIV/18 <i class="fa-regular fa-file-pdf text-xs"></i></a> ordenó la evaluación TAD y la <a href="https://api-restboletinoficial.buenosaires.gob.ar/download/1559566" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 4113/DGDCIV/19 <i class="fa-regular fa-file-pdf text-xs"></i></a> reguló la presentación de <strong>Organismos Públicos</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Disp 4200/19, 356/23 y 5120/23 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="derogada">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-gray-300 border-4 border-white shadow"></div>
+          <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">2019 – 2023 • Etapa intermedia</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600">Derogadas</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">
+              <a href="https://documentosboletinoficial.buenosaires.gob.ar/publico/ck_PE-DIS-MJYSGC-DGDCIV-4200-19-5683.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 4200/19 <i class="fa-regular fa-file-pdf text-xs"></i></a>,
+              <a href="https://api-restboletinoficial.buenosaires.gob.ar/download/3050539" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 356/23 <i class="fa-regular fa-file-pdf text-xs"></i></a> y
+              <a href="https://cpic.org.ar/wp-content/uploads/DISPOSICION-N.o-5120-DGDCIV-23.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 5120/23 <i class="fa-regular fa-file-pdf text-xs"></i></a>
+            </h3>
+            <p class="text-sm text-gray-600">Ajustaron vigencias, clasificaron rubros y ordenaron la reinscripción profesional. Todas fueron derogadas en enero de 2025 por la <a href="https://static.cpau.org/.newsite/ejercicio_profesional/codigos/2025/enero/Disposicion_331-DGDCIV-2025_Sistema_de_Autoproteccion.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Disp. 331/DGDCIV/25 <i class="fa-regular fa-file-pdf text-xs"></i></a>.</p>
+          </div>
+        </div>
+
+        <!-- Ley 6779 + Disp 331/25 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="vigente">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-edsi-red border-4 border-white shadow"></div>
+          <div class="bg-white p-6 rounded-xl border border-gray-100 border-l-4 border-l-edsi-red shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">Enero 2025 • Reforma clave</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-green-100 text-green-800">Vigente</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">
+              <a href="https://parlamentaria.legislatura.gob.ar/pages/download.aspx?IdDoc=213183" target="_blank" rel="noopener noreferrer" class="pdf-link">Ley N° 6.779 <i class="fa-regular fa-file-pdf"></i></a> +
+              <a href="https://static.cpau.org/.newsite/ejercicio_profesional/codigos/2025/enero/Disposicion_331-DGDCIV-2025_Sistema_de_Autoproteccion.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Disposición N° 331/DGDCIV/25 <i class="fa-regular fa-file-pdf"></i></a>
+            </h3>
+            <p class="text-sm text-gray-600">Fijó la validez en <strong>2 años</strong> e incorporó la <strong>reválida por declaración jurada</strong> si no cambiaron las condiciones, salvo usos de mayor riesgo (escuelas, hospitales, espectáculos, depósitos de sustancias peligrosas, centros comerciales), que deben presentar un sistema nuevo al vencer.</p>
+          </div>
+        </div>
+
+        <!-- Disp 770/26 -->
+        <div class="hito relative pl-12 md:pl-16" data-tipo="vigente">
+          <div class="absolute left-2 md:left-3.5 top-1 w-6 h-6 rounded-full bg-edsi-blue border-4 border-white shadow"></div>
+          <div class="bg-white p-6 rounded-xl border border-gray-100 border-l-4 border-l-edsi-blue shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-xs font-bold text-gray-500">Enero 2026 • Última modificación</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-green-100 text-green-800">Vigente</span>
+            </div>
+            <h3 class="text-lg font-bold text-edsi-blue mb-2">
+              <a href="https://documentosboletinoficial.buenosaires.gob.ar/publico/ck_PE-DIS-MSEGC-DGDCIV-770-26-7291.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Disposición N° 770/DGDCIV/26 <i class="fa-regular fa-file-pdf"></i></a>
+            </h3>
+            <p class="text-sm text-gray-600"><strong>Eliminó la reinscripción periódica</strong> en el Registro de Profesionales. La inscripción se mantiene vigente mientras no cambien las condiciones declaradas.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PDFS OFICIALES -->
+  <section id="pdfs" class="py-16 bg-white border-t border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl font-bold text-edsi-blue text-center mb-8">Acceso directo a PDFs</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+        <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/ley5920.pdf" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-edsi-blue flex items-center justify-between">
+          <span>Ley N° 5.920</span><i class="fa-regular fa-file-pdf text-edsi-red"></i>
+        </a>
+        <a href="https://parlamentaria.legislatura.gob.ar/pages/download.aspx?IdDoc=213183" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-edsi-blue flex items-center justify-between">
+          <span>Ley N° 6.779</span><i class="fa-regular fa-file-pdf text-edsi-red"></i>
+        </a>
+        <a href="https://static.cpau.org/.newsite/ejercicio_profesional/sistema_de_autoproteccion/decreto_51_2018.pdf" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-edsi-blue flex items-center justify-between">
+          <span>Decreto N° 51/18</span><i class="fa-regular fa-file-pdf text-edsi-red"></i>
+        </a>
+        <a href="https://static.cpau.org/.newsite/ejercicio_profesional/codigos/2026/enero/Disposici%C3%B3n_331-DGDCIV-2025_Sistema_de_Autoprotecci%C3%B3n_2026.pdf" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-edsi-blue flex items-center justify-between">
+          <span>Disp. 331/25 (t.o. 2026)</span><i class="fa-regular fa-file-pdf text-edsi-red"></i>
+        </a>
+        <a href="https://buenosaires.gob.ar/sites/default/files/2026-10/ANEXOIII-B-IF-2025-05133563-GCABA-DGDCIV.pdf" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-edsi-blue flex items-center justify-between">
+          <span>Anexo III B (Reválida)</span><i class="fa-regular fa-file-pdf text-edsi-red"></i>
+        </a>
+        <a href="https://documentosboletinoficial.buenosaires.gob.ar/publico/ck_PE-DIS-MSEGC-DGDCIV-770-26-7291.pdf" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-edsi-blue flex items-center justify-between">
+          <span>Disp. 770/DGDCIV/26</span><i class="fa-regular fa-file-pdf text-edsi-red"></i>
+        </a>
+        <a href="https://api-restboletinoficial.buenosaires.gob.ar/download/3050539" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-gray-600 flex items-center justify-between">
+          <span>Disp. 356/23 (Derogada)</span><i class="fa-regular fa-file-pdf text-gray-400"></i>
+        </a>
+        <a href="https://carlosvicentesanchez.wordpress.com/wp-content/uploads/2016/04/2004-ley-nc2b0-1346-plan-de-evacuacion-v500-bn.pdf" target="_blank" rel="noopener noreferrer" class="p-4 rounded-lg bg-gray-50 border hover:border-edsi-red font-bold text-gray-600 flex items-center justify-between">
+          <span>Ley N° 1.346 (Derogada)</span><i class="fa-regular fa-file-pdf text-gray-400"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contacto-cta" class="py-14 bg-edsi-blue text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 brigades-dot-pattern"></div>
+    <div class="relative z-10 max-w-2xl mx-auto px-4">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-3">Capacitación y simulacros para tu brigada</h2>
+      <p class="text-gray-300 mb-6 text-sm sm:text-base">Entrenamiento práctico adaptado a tu establecimiento y a la normativa de CABA.</p>
+      <a href="https://wa.me/5491170616594?text=%C2%A1Hola%21%20Consulto%20por%20capacitaci%C3%B3n%20y%20simulacros%20Ley%205920." target="_blank" rel="noopener noreferrer" class="inline-block bg-edsi-red hover:bg-edsi-redhover text-white font-bold px-8 py-3.5 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
+        Consultar por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-edsi-bluehover text-white py-10 text-center text-sm">
+    <p class="font-bold text-base">EDSI — Escuela de Seguridad Industrial</p>
+    <p class="text-gray-300 mt-1">San Isidro, Buenos Aires • <a href="mailto:info@edsi.com.ar" class="text-blue-400 hover:underline">info@edsi.com.ar</a></p>
+    <p class="text-xs text-gray-400 mt-6">© 2026 EDSI. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("mobile-menu").classList.toggle("hidden");
+    }
+    document.getElementById("menu-btn").addEventListener("click", toggleMenu);
+
+    function filtrar(tipo, btn) {
+      document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll(".hito").forEach((el) => {
+        el.style.display = tipo === "todas" || el.dataset.tipo === tipo ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
