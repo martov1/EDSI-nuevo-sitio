@@ -41,8 +41,84 @@
   list-style: none;
 }
 
+.brigades-prototype .legal-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.brigades-prototype .legal-card:hover,
+.brigades-prototype .legal-card:focus-within {
+  transform: translateY(-4px);
+  border-color: #e74c3c;
+  background-color: #fff;
+  box-shadow: 0 12px 24px rgba(31, 41, 55, 0.12);
+}
+
+.brigades-prototype .legal-card:focus-within {
+  outline: 3px solid #e74c3c;
+  outline-offset: 3px;
+}
+
+.brigades-prototype .legal-card-icon {
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.brigades-prototype .legal-card:hover .legal-card-icon,
+.brigades-prototype .legal-card:focus-within .legal-card-icon {
+  color: #e74c3c;
+  transform: scale(1.08);
+}
+
+.brigades-prototype .legal-card-cta {
+  display: block;
+  margin-top: 0.75rem;
+  color: #c0392b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brigades-prototype .legal-card-cta:hover,
+.brigades-prototype .legal-card-cta:focus-visible {
+  color: #a93226;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.brigades-prototype .legal-card-cta:focus-visible {
+  outline: 2px solid #e74c3c;
+  outline-offset: 3px;
+}
+
+.brigades-prototype .legal-card-cta i {
+  margin-left: 0.2rem;
+  font-size: 0.7rem;
+}
+
 @media (min-width: 768px) {
   .brigades-prototype .timeline-container::before {
     left: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brigades-prototype .legal-card,
+  .brigades-prototype .legal-card-icon {
+    transition: none;
+  }
+
+  .brigades-prototype .legal-card:hover,
+  .brigades-prototype .legal-card:focus-within,
+  .brigades-prototype .legal-card:hover .legal-card-icon,
+  .brigades-prototype .legal-card:focus-within .legal-card-icon {
+    transform: none;
   }
 }
