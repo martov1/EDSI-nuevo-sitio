@@ -14,7 +14,11 @@
 }
 
 .brigades-dot-pattern {
-  background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0);
+  background-image: radial-gradient(
+    circle at 2px 2px,
+    white 1px,
+    transparent 0
+  );
   background-size: 32px 32px;
 }
 
@@ -218,3 +222,63 @@
     transform: none;
   }
 }
+
+/* =========================================================
+GRÁFICO DE ADN DIAGONAL (Instructores con ADN Industrial)
+========================================================= */
+@keyframes dna-diagonal-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(38deg) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(38.6deg) translateY(-14px);
+  }
+}
+
+.adn-industrial {
+  position: relative;
+  overflow: hidden;
+}
+
+.adn-industrial::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 440px;
+  height: 1850px;
+  background-image: url("../assets/adn.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%) rotate(38deg);
+  animation: dna-diagonal-float 10s ease-in-out infinite;
+  will-change: transform;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 1) 14%,
+    rgba(0, 0, 0, 1) 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 1) 14%,
+    rgba(0, 0, 0, 1) 86%,
+    transparent 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adn-industrial::before {
+    animation: none;
+  }
+}
+/* =========================================================
+FIN GRÁFICO DE ADN DIAGONAL (Instructores con ADN Industrial)
+========================================================= */
